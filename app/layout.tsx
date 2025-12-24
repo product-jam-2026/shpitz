@@ -1,5 +1,4 @@
 import "@/styles/global.css";
-
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Navbar from "@/lib/components/Navbar";
@@ -9,6 +8,11 @@ export const metadata: Metadata = {
   title: "Digital Product Jam Starter Kit",
   description:
     "A starter kit for wiritng code in the Digital Product Jam course.",
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -41,3 +45,5 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
+
+

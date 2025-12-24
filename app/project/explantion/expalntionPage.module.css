@@ -1,0 +1,400 @@
+/* explanationPage.module.css */
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 60px 20px 20px 20px; 
+  background-color: #F3F3F3;
+  min-height: 100vh;
+}
+
+/* מכולת המספרים - השורה כולה */
+.progressBar {
+    display: flex;
+    width: 100%;           /* תופס את כל רוחב המסך הזמין */
+    max-width: 334px;      /* רוחב תואם לכפתורים שמתחת */
+    justify-content: center;
+    align-items: center;
+    gap: 8px;              /* מרווח בין הריבועים לפי העיצוב */
+    margin-bottom: 20px;
+}
+
+/* כל ריבוע מספר בנפרד (ה-Frame בפיגמה) */
+.progressItem {
+    display: flex;
+    flex: 1;               /* גורם לכל ריבוע לתפוס חלק שווה מהשורה */
+    height: 34px;          /* גובה הריבוע */
+    justify-content: center;
+    align-items: center;
+    background: #EBEBEB;   /* צבע הרקע למספרים הלא פעילים */
+    color: #BEBEBE;        /* צבע הטקסט למספרים הלא פעילים */
+    
+    /* פונט */
+    font-family: 'SouthFont', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/* המספר הפעיל (הריבוע הלבן עם הגבול) */
+.progressActive {
+    background: #FFFFFF;   /* רקע לבן לפי התמונה */
+    color: #000000;        /* טקסט שחור מודגש */
+    
+}
+
+/* כותרת השאלה */
+.questionTitle {
+    color: #000;
+    text-align: right;     /* יישור הטקסט לימין לפי העיצוב */
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 1.32px;
+
+  
+    width: 100%;          
+    max-width: 334px;    
+    margin: -25px auto 0;       /* ממרכז את הקונטיינר של הכותרת מול ה-progressBar */
+    padding: 0;            /* מוודא שאין פדינג פנימי שיזיז את הטקסט */
+}
+
+
+.messageCard {
+  display: flex;
+  width: 324px;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 32px; /* הרדיוס הראשי של כל הכרטיס */
+  background: #FFF;
+  overflow: hidden;    /* חשוב מאוד: גורם לחלק האפור להיחתך בדיוק לפי הקימור הלבן */
+  position: relative;
+  margin-top: 30px;
+}
+
+/* החלק האפור בתוך הכרטיס */
+.messageHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;           /* תופס 100% מהרוחב של הכרטיס הלבן (324px) */
+  padding: 20px 0 12px 0;
+  gap: 8px;
+  background: #D9D9D9;
+  
+  /* התאמת הרדיוס לרדיוס של הכרטיס הלבן */
+  border-radius: 32px 32px 0 0; 
+}
+
+/* העיגול הלבן בתוך החלק האפור */
+.avatarCircle {
+  width: 44px;
+  height: 44px;
+  background: #FFF;
+  border-radius: 50%;
+  position: relative;
+}
+
+
+.messageHeader p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.messageTimestamp {
+  color: #808080;
+  font-size: 11px;
+  margin: 5px 0;
+}
+
+/* הבועה החיצונית של ההודעה (ה-SVG) */
+.messageBubbleContainer {
+  position: relative; /* חשוב למיקום הטקסט בתוך ה-SVG */
+  width: 304px;       /* הרוחב המדויק של ה-SVG */
+  height: auto;       /* גובה אוטומטי כדי לשמור על יחס הגודל */
+  margin: 15px 0;     /* מרווח מהשעון ומהכפתורים */
+}
+
+/* הטקסט עצמו שישב בתוך ה-SVG */
+.messageBubbleText {
+  position: absolute; /* ממקם את הטקסט באופן חופשי מעל ה-SVG */
+  top: 15px;         /* ריווח מהקצה העליון של הבועה */
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  
+  /* עיצוב הטקסט */
+  color: #000;
+  font-family: Roboto, sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 1.32px;
+  line-height: 1.6;
+  text-align: right;
+  padding: 0 5px; /* פדינג קטן בתוך הטקסט עצמו */
+}
+
+
+.messageBubbleText a {
+  color: #1a73e8; /* כחול סטנדרטי לקישור */
+  text-decoration: underline;
+  font-family: Roboto, sans-serif;
+  display: block; /* כדי שהקישור יהיה בשורה חדשה */
+  margin-top: 0px;
+}
+
+
+.actionGrid {
+  display: grid;
+  grid-template-columns: 152px 152px; /* רוחב קבוע לכל כפתור */
+  gap: 12px; /* מרווח ביניהם */
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+
+.buttonIcon {
+  width: 20px;
+  height: 100 px;
+  flex-shrink: 0;
+  /* מוודא שהאייקון והטקסט מיושרים יפה באותו קו */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.smallToolButton {
+  display: flex;
+  width: 152px;
+  height: 51px;
+  padding: 10px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* המרווח בין ה-SVG לטקסט "רמז" */
+  
+  border: 1px solid #000;
+  border-right: 3px solid #000;
+  border-bottom: 3px solid #000;
+  background: #D5D5D5;
+  
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #000;
+  cursor: pointer;
+}
+
+/* אפקט לחיצה קטן כדי שירגיש כמו כפתור אמיתי */
+.smallToolButton:active {
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  transform: translate(2px, 2px);
+}
+
+.squareButton {
+  display: flex;
+  width: 152px;
+  height: 138px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  
+  background: #8F8F8F;
+  border: 1px solid #000;
+  border-right: 3px solid #000;
+  border-bottom: 3px solid #000;
+  
+  color: #000;
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* הכפתור הימני ("לדווח") - פינה ימנית תחתונה מעוגלת */
+.squareButton:nth-child(3) {
+  border-radius: 0 0 24px 0;
+}
+
+/* הכפתור השמאלי ("לפתוח") - פינה שמאלית תחתונה מעוגלת */
+.squareButton:nth-child(4) {
+  border-radius: 0 0 0 24px;
+}
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(40, 40, 40, 0.80);
+  display: flex;
+  justify-content: center;
+  /* שינוי כאן: יישור להתחלה במקום למרכז */
+  align-items: flex-start; 
+  /* הוספת מרווח מלמעלה כדי לקבוע כמה גבוה התיבה תהיה */
+  padding-top: 150px; 
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.instructionBox {
+  background-color: #000000;
+  /* הסרנו את top: 25% כי ה-Padding של ה-Overlay שולט בזה עכשיו */
+  width: 280px;
+  padding: 30px 20px;
+  text-align: center;
+  border: 1px solid #444;
+}
+
+/* הכותרת הצהובה/ירוקה "איך משחקים?" */
+.instructionTitle {
+  color: #CCFF00; /* צבע ירוק-צהוב זרחני לפי העיצוב */
+  font-family: 'Reisinger', sans-serif;
+  font-size: 32px;
+  font-weight: 300;
+  margin: 0;
+}
+
+/* הטקסט הלבן/צהוב שמתחת לכותרת */
+.instructionBody {
+  color: #CCFF00;
+  font-size: 18px;
+  font-family: 'Reisinger';
+  font-weight: 300;
+  line-height: 1.3;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* אנימציה למעבר בין השלבים */
+.instructionBoxAnim {
+  animation: fadeInScale 0.4s ease-out;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* עיצוב הטקסט החופשי לשלב 2 */
+.fullTextOverlay {
+  max-width: 320px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.explanationText {
+  color: #CCFF00; /* צבע זרחני לפי העיצוב */
+  font-family: 'Reisinger', sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.3;
+  white-space: pre-line;
+}
+
+/* שכבת לחיצה בלתי נראית */
+.transparentClickLayer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2000;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* קופסת ההסבר של הרמז */
+.hintExplanationBox {
+    position: absolute;
+    bottom: 250px; /* מתאים את הגובה מעל אזור הכפתורים */
+    max-width: 280px;
+    text-align: center;
+    background: transparent;
+    padding: 10px;
+}
+
+
+/* אנימציית כניסה */
+.instructionBoxAnim {
+    animation: fadeInScale 0.4s ease-out;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* הריבוע האפור המאיר - העלינו אותו ל-80px כדי שיתלבש על הכפתורים */
+.highlightSpotlightBox {
+  position: absolute;
+  bottom: 63px; 
+  width: 348px;
+  height: 157px;
+  background-color: #D9D9D9;
+  /* z-index נמוך יותר מהכפתורים אך גבוה מה-Overlay */
+  z-index: 2500; 
+  /* ביטול הפינות המעוגלות */
+  border-radius: 0; 
+}
+
+.highlight {
+  position: relative;
+  /* z-index גבוה יותר מהריבוע האפור כדי להיות מעליו */
+  z-index: 3000 !important; 
+  /* מוודא שהכפתור שומר על הרקע שלו ולא הופך לשקוף */
+  background-color: #8F8F8F !important; 
+}
+
+/* אזור ההסבר */
+.actionsExplanationArea {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 60px;
+  z-index: 2500;
+  pointer-events: none;
+}
+
+/* מיכל החץ היחיד */
+.customArrowsContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 160px; /* מיקום החץ מעל הריבוע המואר */
+}
+
+/* עיצוב החץ - סובבנו אותו ב-180 מעלות מהמקור כדי שיצביע למטה */
+.customArrowSvg {
+  width: 46.596px;
+  height: 93.642px;
+  /* שינינו את הזווית ל-11.5 מעלות (סיבוב של 180 מהמקור) כדי שיצביע למטה */
+  transform: rotate(11.5deg); 
+  flex-shrink: 0;
+}
+
+/* הטקסט המוטה שמאלה */
+.rotatedTextContainer {
+  width: 230.664px;
+  transform: rotate(-6.501deg);
+  margin-bottom: 10px;
+}
+
