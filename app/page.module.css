@@ -1,0 +1,357 @@
+/* Background behind the "phone" */
+.appBg {
+  min-height: 100vh;
+  background-color: #dedede;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Heebo", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  direction: rtl;
+}
+
+/* Phone frame like in the designs */
+.phoneFrame {
+  width: 360px;
+  min-height: 640px;
+  background-color: #ffffff;
+  border-left: 12px solid #4b4b4b;
+  border-right: 12px solid #4b4b4b;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  padding: 18px 18px 22px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------- INTRO SCREEN ---------------- */
+
+.introWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.brandTitle {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+  color: #3b3b3b;
+}
+
+.brandSubtitle {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 40px;
+}
+
+.bigButton {
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 0;
+  padding: 10px 16px;
+  width: 180px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 40px;
+}
+
+.bigButton:hover {
+  background-color: #2563eb;
+}
+
+.footerText {
+  font-size: 11px;
+  color: #555;
+  position: absolute;
+  bottom: 18px;
+}
+
+/* ---------------- GAME TOP BAR ---------------- */
+
+.gameTopBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.gameLights {
+  display: flex;
+  gap: 6px;
+}
+
+.light {
+  width: 28px;
+  height: 10px;
+  border-radius: 4px;
+  background-color: #e5e7eb;
+  border: 1px solid #9ca3af;
+}
+
+.lightRed {
+  background-color: #f87171;
+}
+
+.lightOrange {
+  background-color: #fb923c;
+}
+
+.lightGreen {
+  background-color: #4ade80;
+}
+
+.stepLabel {
+  font-size: 12px;
+  color: #555;
+}
+
+/* ---------------- QUESTION SCREEN ---------------- */
+
+.questionSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.messageCard {
+  border: 2px solid #f97316;
+  padding: 12px;
+  border-radius: 4px;
+  margin-top: 12px;
+  margin-bottom: 24px;
+  background-color: #ffffff;
+}
+
+.messageBody {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #111827;
+}
+
+.buttonsRow {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.answerButton {
+  flex: 1;
+  padding: 10px 8px;
+  border-radius: 0;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.answerReal {
+  background-color: #bbf7d0;
+  color: #166534;
+}
+
+.answerFake {
+  background-color: #fecaca;
+  color: #b91c1c;
+}
+
+/* Image question */
+
+.exampleTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.imagesRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+  margin-top: 6px;
+}
+
+.imageColumn {
+  flex: 1;
+}
+
+.imageLabel {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.imageFrame {
+  border: 1px solid #d4d4d4;
+  background-color: #f5f5f5;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.imageButton {
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  padding: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  cursor: pointer;
+}
+
+/* ---------------- SUMMARY SCREEN ---------------- */
+
+.summaryTop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.yellowCircle {
+  width: 190px;
+  height: 190px;
+  border-radius: 999px;
+  background-color: #fde047;
+  position: relative;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.yellowTextLine1 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.yellowTextLine2 {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.congratsText {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.shareButton {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0;
+  padding: 8px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Tips block like the "טיפים" screen */
+
+.tipsBlock {
+  margin-top: 10px;
+  border-top: 1px solid #d4d4d4;
+  padding-top: 10px;
+}
+
+.tipsTitle {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.tipsCardsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.tipCard {
+  border: 1px solid #d4d4d4;
+  border-radius: 2px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.tipHeader {
+  background-color: #60a5fa;
+  color: white;
+  padding: 6px 10px;
+}
+
+.tipHeaderTitle {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.tipBody {
+  padding: 8px 10px;
+  font-size: 13px;
+  color: #111827;
+}
+
+.tipResultCorrect {
+  margin-top: 6px;
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.tipResultWrong {
+  margin-top: 6px;
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.secondaryButton {
+  width: 100%;
+  border-radius: 0;
+  border: none;
+  background-color: #e5e7eb;
+  padding: 8px 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondaryButton:hover {
+  background-color: #d4d4d4;
+}
+
+@media (max-width: 420px) {
+  .phoneFrame {
+    width: 100%;
+    max-width: 360px;
+  }
+}
+.messageImageWrapper {
+  margin-top: 12px;
+  margin-bottom: 24px;
+  border-radius: 4px;
+  border: 2px solid #f97316;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.messageImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}

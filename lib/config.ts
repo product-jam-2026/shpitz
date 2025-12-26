@@ -2,8 +2,8 @@ export const APP_NAME = "Starter Kit";
 export const COURSE_GITHUB = "https://github.com/product-jam-2025";
 export const COURSE_CREDITS = "Product Jam 2025";
 
-export const DEMOS_ENABLED =
-  process.env.DEMOS_ENABLED === "true" ? true : false;
+export const DEMOS_ENABLED = process.env.DEMOS_ENABLED === "true";
+
 export const DEMOS = [
   {
     title: "Blank",
@@ -41,19 +41,20 @@ export const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD || "";
 export const EMAIL_HOST = process.env.EMAIL_HOST || "";
 export const EMAIL_PORT = process.env.EMAIL_PORT || 587;
 
+// Supabase (public)
 export const PUBLIC_SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 export const PUBLIC_SUPABASE_ANON_KEY =
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+
+// Supabase (server only) - OPTIONAL. Leave empty if you don't use it.
 export const PRIVATE_SUPABASE_SERVICE_KEY =
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+  process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+
+// You only need URL+ANON for reading public data via RLS policy
+export const SUPABASE_ENABLED =
+  Boolean(PUBLIC_SUPABASE_URL) && Boolean(PUBLIC_SUPABASE_ANON_KEY);
+
 export const NEXT_PUBLIC_GOOGLE_CLIENT_ID =
   process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "";
-
-export const SUPABASE_ENABLED =
-  PUBLIC_SUPABASE_URL &&
-  PUBLIC_SUPABASE_ANON_KEY &&
-  PRIVATE_SUPABASE_SERVICE_KEY
-    ? true
-    : false;
 
 export const NASA_API_KEY = process.env.NASA_API_KEY || "";

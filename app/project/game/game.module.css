@@ -1,0 +1,296 @@
+/* רקע כללי */
+/* רקע כללי */
+.screen {
+  min-height: 100vh;
+  background: #F3F3F3;            /* כמו בפיגמה */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 12px 24px;        /* למעלה יש יותר מרווח */
+}
+
+/* "מסגרת טלפון" */
+.phone {
+  width: 360px;
+  max-width: 92vw;
+  position: relative;
+}
+
+
+/* פס התקדמות */
+.progressBar {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+
+.progressItem {
+  flex: 1;
+  height: 34px;                 /* לפי הפיגמה */
+  background: #EBEBEB;          /* אפור */
+  color: #BEBEBE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 400;
+  border-radius: 0;             /* בפיגמה זה מרובע */
+}
+
+.progressActive {
+  background: #FFFFFF;
+  color: #000000;
+  font-weight: 700;
+  border: 1px solid #000;       /* מסגרת קלה */
+}
+
+/* כותרת */
+.questionTitle {
+  margin: -10px 0 14px;         /* קצת עולה למעלה כמו בפיגמה */
+  text-align: right;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 700;
+  color: #000;
+  letter-spacing: 1.32px;
+}
+
+/* כרטיס הודעה */
+.messageCard {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.messageHeader {
+  background: #d9d9d9;
+  padding: 14px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatarCircle {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: #ffffff;
+  opacity: 0.9;
+}
+
+.senderNumber {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 800;
+  color: #121212;
+}
+
+.messageTimestamp {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 12px;
+  color: #6b7280;
+  background: #ffffff;
+}
+
+.messageBubble {
+  margin: 0 auto 14px;
+  width: calc(100% - 40px);
+  background: #f3f3f3;
+  border-radius: 22px;
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.messageText {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.55;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.messageLink {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a73e8;
+  text-decoration: underline;
+}
+
+/* אזור כפתורים — תמיד נראה מסודר */
+.actions {
+  margin-top: 14px;
+  padding-bottom: 18px; /* רווח כדי שלא יידבק לתחתית */
+}
+
+.toolsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.toolButton {
+  height: 51px;
+  border: 1px solid #000;
+  border-right: 3px solid #000;
+  border-bottom: 3px solid #000;
+  background: #D5D5D5;
+  border-radius: 0;
+  font-weight: 700;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.toolButton:active {
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  transform: translate(2px, 2px);
+}
+
+
+.toolIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.mainRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.openBtn,
+.reportBtn {
+  height: 138px;                  /* לפי הפיגמה */
+  border: 1px solid #000;
+  border-right: 3px solid #000;
+  border-bottom: 3px solid #000;
+  font-size: 24px;
+  font-weight: 900;
+  cursor: pointer;
+  border-radius: 0;               /* בסיס */
+}
+
+.openBtn:active,
+.reportBtn:active {
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  transform: translate(2px, 2px);
+}
+
+/* ימין: לפתוח (פינה ימין-למטה עגולה) */
+.openBtn {
+  background: #7EE6A6;            /* ירוק */
+  border-radius: 0 0 24px 0;
+}
+
+/* שמאל: לדווח (פינה שמאל-למטה עגולה) */
+.reportBtn {
+  background: #FF6B6B;            /* אדום */
+  border-radius: 0 0 0 24px;
+}
+
+
+.openBtn {
+  background: #c7f7d5;
+}
+
+.reportBtn {
+  background: #f7c7c7;
+}
+
+/* OVERLAY תוצאה */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(61, 93, 150, 0.55); /* הכחלה כמו במסכים */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 22px 12px;
+  z-index: 9999;
+}
+
+/* כרטיס תוצאה */
+.resultCard {
+  width: 360px;
+  max-width: 92vw;
+  border-radius: 22px;
+  padding: 18px 16px 16px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.successCard {
+  background: #62d26f; /* ירוק */
+  color: #ffffff;
+  position: relative;
+}
+
+/* הכותרת הירוקה */
+.successHeader {
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+
+/* כרטיס כישלון */
+.failCard {
+  background: #ff6b6b; /* אדום */
+  color: #ffffff;
+}
+
+.failTitle {
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.failTipRow {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 10px;
+  align-items: start;
+  text-align: right;
+  margin-bottom: 14px;
+}
+
+.warnIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.failTipText {
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+/* כפתור המשך (לבן עם מסגרת כהה) */
+.continueBtn {
+  width: 100%;
+  height: 54px;
+  border-radius: 14px;
+  border: 2px solid #0f172a;
+  background: #fff7ea;
+  color: #0f172a;
+  font-size: 22px;
+  font-weight: 900;
+}

@@ -1,31 +1,25 @@
-import {
-  PRIVATE_SUPABASE_SERVICE_KEY,
-  PUBLIC_SUPABASE_URL,
-} from "@/lib/config";
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from "@/lib/config";
 
 export const createClient = (cookieStore: ReturnType<typeof cookies>) => {
-  return createServerClient(PUBLIC_SUPABASE_URL, PRIVATE_SUPABASE_SERVICE_KEY, {
+  // אם אחד מהם ריק - זה אומר שה-.env.local לא נטען (או לא עשית restart)
+  if (!PUBLIC_SUPABASE_URL || !PUBLIC_SUPABASE_ANON_KEY) {
+    throw new Error(
+      "Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY. Check your .env.local and restart dev server."
+    );
+  }
+
+  return createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
     cookies: {
       get(name: string) {
         return cookieStore.get(name)?.value;
       },
       set(name: string, value: string, options: CookieOptions) {
-        try {
-          cookieStore.set({ name, value, ...options });
-        } catch (error) {
-          // we can get here when in a server component, and it is
-          // fine as long as we also have supabase middleware in place
-        }
+        cookieStore.set({ name, value, ...options });
       },
       remove(name: string, options: CookieOptions) {
-        try {
-          cookieStore.set({ name, value: "", ...options });
-        } catch (error) {
-          // we can get here when in a server component, and it is
-          // fine as long as we also have supabase middleware in place
-        }
+        cookieStore.set({ name, value: "", ...options });
       },
     },
   });
