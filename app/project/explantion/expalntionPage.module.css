@@ -2,13 +2,16 @@
 
 .container {
   width: 100%;
+  max-width: 430px; /* רוחב מקסימלי של טלפון מודרני */
+  margin: 0 auto;   /* ממרכז את כל האפליקציה בדסקטופ */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  padding: 60px 20px 20px 20px; 
+  padding: 60px 20px 20px 20px;
   background-color: #F3F3F3;
   min-height: 100vh;
+  position: relative; /* חשוב עבור אלמנטים שמשתמשים ב-absolute */
 }
 
 /* מכולת המספרים - השורה כולה */
@@ -229,26 +232,14 @@
 }
 
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(40, 40, 40, 0.80);
-  display: flex;
-  justify-content: center;
-  /* שינוי כאן: יישור להתחלה במקום למרכז */
-  align-items: flex-start; 
-  /* הוספת מרווח מלמעלה כדי לקבוע כמה גבוה התיבה תהיה */
-  padding-top: 150px; 
-  z-index: 1000;
-  cursor: pointer;
-}
+
+
+
+
 
 .instructionBox {
   background-color: #000000;
-  /* הסרנו את top: 25% כי ה-Padding של ה-Overlay שולט בזה עכשיו */
+  
   width: 280px;
   padding: 30px 20px;
   text-align: center;
@@ -268,8 +259,7 @@
 .instructionBody {
   color: #CCFF00;
   font-size: 18px;
-  font-family: 'Reisinger';
-  font-weight: 300;
+  font-family: 'Reisinger', sans-serif;
   line-height: 1.3;
   margin: 0;
   font-weight: 500;
@@ -283,10 +273,7 @@
   width: 100%;
 }
 
-@keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
+
 
 /* עיצוב הטקסט החופשי לשלב 2 */
 .fullTextOverlay {
@@ -299,7 +286,7 @@
   color: #CCFF00; /* צבע זרחני לפי העיצוב */
   font-family: 'Reisinger', sans-serif;
   font-size: 24px;
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.3;
   white-space: pre-line;
 }
@@ -327,39 +314,7 @@
 }
 
 
-/* אנימציית כניסה */
-.instructionBoxAnim {
-    animation: fadeInScale 0.4s ease-out;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
 
-@keyframes fadeInScale {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-/* הריבוע האפור המאיר - העלינו אותו ל-80px כדי שיתלבש על הכפתורים */
-.highlightSpotlightBox {
-  position: absolute;
-  bottom: 63px; 
-  width: 348px;
-  height: 157px;
-  background-color: #D9D9D9;
-  /* z-index נמוך יותר מהכפתורים אך גבוה מה-Overlay */
-  z-index: 2500; 
-  /* ביטול הפינות המעוגלות */
-  border-radius: 0; 
-}
-
-.highlight {
-  position: relative;
-  /* z-index גבוה יותר מהריבוע האפור כדי להיות מעליו */
-  z-index: 3000 !important; 
-  /* מוודא שהכפתור שומר על הרקע שלו ולא הופך לשקוף */
-  background-color: #8F8F8F !important; 
-}
 
 /* אזור ההסבר */
 .actionsExplanationArea {
@@ -379,7 +334,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 160px; /* מיקום החץ מעל הריבוע המואר */
+  margin-bottom: 120px; /* מיקום החץ מעל הריבוע המואר */
 }
 
 /* עיצוב החץ - סובבנו אותו ב-180 מעלות מהמקור כדי שיצביע למטה */
@@ -398,3 +353,460 @@
   margin-bottom: 10px;
 }
 
+
+
+@keyframes stepFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 
+
+.stepAnimation {
+  animation: stepFadeIn 0.3s ease-out forwards;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+/* --- הגדרות בסיס ו-Overlay --- */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(40, 40, 40, 0.80);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    padding-top: 150px; 
+    z-index: 1000;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* --- שלב 4: Spotlight וכפתורים מוארים --- */
+.highlightSpotlightBox {
+    position: absolute;
+    bottom: 10px; 
+    width: 348px;
+    height: 157px;
+    background-color: #D9D9D9;
+    z-index: 2500; 
+    border-radius: 0; 
+    animation: stepFadeIn 0.3s ease-out forwards;
+}
+
+.highlight {
+    position: relative;
+    z-index: 3000 !important; 
+    background-color: #8F8F8F !important; 
+}
+
+
+
+
+
+/* --- שלב 5: פידבק, קונפטי וחיצים חדשים --- */
+
+/* הארת מספר השלב בשורת ההתקדמות */
+.stepHighlight {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    z-index: 4000 !important;
+    position: relative;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+/* מיכל אזור ההסבר לשלב 5 */
+.actionsExplanationArea {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 60px;
+    z-index: 2500;
+    pointer-events: none;
+}
+
+/* חץ 1: חץ עליון בתמונת מראה */
+.arrowTopProgress {
+    position: absolute;
+    top: 15px;
+    left: 235px; 
+    
+    width: 32.021px;
+    height: 93.642px;
+    /* הוספת scaleX(-1) מבצעת היפוך מראה אופקי */
+    transform: rotate(-103.356deg) scaleX(-1); 
+    transform-origin: top center;
+    z-index: 4000;
+    pointer-events: none;
+    animation: bounceTop 1s infinite;
+}
+
+/* חץ 2: חץ תחתון בתמונת מראה */
+.arrowBottomContinue {
+    position: absolute;
+    bottom: 530px; 
+    left: 50%;
+    
+    width: 32.021px; 
+    height: 93.642px;
+    margin-left: -16px; 
+    /* הוספת scaleX(-1) מבצעת היפוך מראה אופקי */
+    transform: scaleX(-1); 
+    
+    z-index: 4000;
+    pointer-events: none;
+    animation: bounceBottom 1s infinite;
+}
+
+/* עדכון האנימציות לשמירה על אפקט המראה בזמן הקפיצה */
+@keyframes bounceTop {
+    0%, 100% { transform: rotate(-103.356deg) scaleX(-1) translateY(0); }
+    50% { transform: rotate(-103.356deg) scaleX(-1) translateY(-10px); }
+}
+
+@keyframes bounceBottom {
+    0%, 100% { transform: scaleX(-1) translateY(0); }
+    50% { transform: scaleX(-1) translateY(10px); }
+}
+
+.feedbackCard {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 220px;
+  background-color: #66E0E0; 
+  
+  border-radius: 40px 40px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 3500;
+  padding: 20px;
+  text-align: center;
+}
+/* זה לחלק של הטקסט בתוך הכפתור המשך */
+.feedbackText {
+  color: #000;
+  font-family: Inter, sans-serif;
+  font-size: 27px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.continueButton {
+  border-radius: 0 0 24px 24px;
+  border-right: 3px solid #000;
+  border-bottom: 3px solid #000;
+  background: #8F8F8F;
+  display: flex;
+  width: 325px;
+  height: 68px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-family: South_v2;
+  font-size: 40px;
+  font-weight: 700;
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.continueButton:active {
+  transform: translateY(2px);
+
+}
+
+/* הארה למספר השלב (הריבוע הלבן ב-ProgressBar) */
+.stepHighlight {
+  position: relative;
+  z-index: 4000 !important;
+  background: #68DCDC !important;
+  border: 2px solid #fdfafa ;
+}
+
+/* אנימציה לחץ שזז בין שלבים */
+.customArrowSvg {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* אנימציית תנועה חלקה */
+}
+
+/* פוזיציה של החץ המצביע למעלה (לשלב 5) */
+.arrowPointingUp {
+  transform: rotate(0deg) translateY(-20px);
+}
+
+
+.rotatedTextStep5 {
+    /* מיקום אבסולוטי ושליטה במרחק מהחץ */
+    position: absolute;
+    top: 10%; 
+    left: 65px; /* הערך שיזיז את הטקסט ימינה לכיוון החץ - התאימי לפי הצורך */
+  
+    
+    /* עיצוב לפי הפיגמה */
+    width: 249.883px;
+    color: var(--color-user, #CCFF00); /* צבע זרחני לפי העיצוב */
+    text-align: center;
+    
+    /* הגדרות פונט וטקסט מדויקות */
+    font-family: "Reisinger";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 26px; /* 108.333% */
+    letter-spacing: 1.44px;
+    
+    /* הטיה ושיכוב */
+    transform: rotate(-7deg);
+    z-index: 4000;
+}
+
+
+/* אזור ההסבר של הרמז */
+/* מיכל ההסבר - משמש כעוגן ימני */
+.hintExplanationArea {
+    position: absolute;
+    bottom: 125px; /* העברנו למעלה כדי שהטקסט יהיה מעל הכפתור */
+    right: 20px;
+    width: 280px;
+    display: flex;
+    flex-direction: column; /* מסדר את האלמנטים בטור */
+    justify-content: flex-end;
+    align-items: center;    /* ממרכז את שניהם אחד מעל השני */
+    z-index: 3000;
+}
+
+/* הטקסט המוטה של הרמז */
+.hintRotatedText {
+    width: 100%;
+    /* הרמת הטקסט בעזרת translateY בנוסף לסיבוב */
+    transform: rotate(-6.5deg) translateY(-15px);
+    margin-bottom: 0; /* ביטול מרווחים מיותרים */
+    color: #CCFF00;
+    font-family: "Reisinger - Michal", sans-serif;
+    font-size: 24px;
+    text-align: center;
+    line-height: 26px;
+    letter-spacing: 1.44px;
+}
+
+/* החץ המצביע על הרמז - כעת ממורכז מתחת לטקסט */
+.arrowToHint {
+    width: 32px;
+    height: 94px;
+    /* היפוך מראה וסיבוב שגורם לו "לצאת" ממרכז הטקסט לכיוון הכפתור */
+    transform: rotate(20deg) scaleX(-1); 
+    margin-top: 0;
+    margin-bottom: -10px;
+    animation: bounceBottom 1s infinite;
+}
+
+
+
+.highlightHint {
+    position: relative;
+    z-index: 3000 !important; /* גבוה יותר מהמלבן האפור */
+    background-color: #D5D5D5 !important; /* שומר על צבע הכפתור המקורי */
+} 
+
+/* חץ מצביע להוראות - מראה מראה לצד השני של הרמז */
+.arrowToInstructions {
+    width: 32px;
+    height: 94px;
+    position: absolute;
+    top: -100px;
+    left: 40px;
+    /* סיבוב החץ למטה כדי שיצביע על הכפתור */
+    transform: rotate(-100deg);
+    z-index: 4000;
+    animation: bounceInstructions 1s infinite;
+}
+
+@keyframes bounceInstructions {
+    0%, 100% { transform: rotate(90deg) translateY(0); }
+    50% { transform: rotate(90deg) translateY(10px); }
+}
+
+
+.instructionsArea {
+    position: absolute;
+    bottom: 220px; /* גובה זהה לשלב הרמז כדי לשמור על עקביות */
+    left: 20px;    /* מיקום בצד שמאל מעל כפתור ההוראות */
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 3000;
+    pointer-events: none;
+}
+/* הטקסט המוטה של ההוראות - מוזז שמאלה */
+.instructionsRotatedText {
+  color: var(--color-user, #CF0);
+  text-align: center;
+  font-family: "Reisinger - Michal";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 28px; /* 116.667% */
+  letter-spacing: 1.44px;
+  width: 230.664px;
+  transform: rotate(4.664deg) translateX(20px);
+}
+.arrowToInstructionsNew {
+    width: 33.527px;
+    height: 93.642px;
+    /* ה-rotate שביקשת (31.023deg) הופך אותו למראה לכיוון שמאל למטה */
+    transform: rotate(31.023deg); 
+    margin-top: -5px;
+    animation: bounceInstructionsNew 1s infinite;
+}
+
+@keyframes bounceInstructionsNew {
+    0%, 100% { transform: rotate(31.023deg) translateY(0); }
+    50% { transform: rotate(31.023deg) translateY(10px); }
+}
+/* מיכל שתופס את כל שטח ה-Overlay למרכוז */
+.finalBoxContainer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 200px; 
+    pointer-events: none;
+}
+
+/* המלבן הלבן */
+.finalInstructionBox {
+    display: flex;
+    width: 334px;
+    height: 132px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-right: 3px solid #000;
+
+    border-bottom: 3px solid #000;
+
+    background: #FFF;
+}
+
+/* הטקסט השחור בפנים */
+.finalText {
+    color: #000;
+
+text-align: center;
+font-family: Inter;
+font-size: 38px;
+font-style: normal;
+font-weight: 400;
+line-height: 48px; /* 106.667% */
+letter-spacing: 2.7px;
+width: 348.502px;
+flex-shrink: 0;
+}
+
+
+
+
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    text-align: center;
+}
+
+/* קוביית האיור */
+.illustrationBox {
+    width: 200px;
+    height: 200px;
+    background-color: #EEEEEE;
+    border: 1px solid #776D6D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.crossContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crossLines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    stroke: #776D6D;
+    stroke-width: 1;
+}
+
+.illustrationText {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000;
+    z-index: 1;
+}
+
+/* טקסט ההסבר */
+.contentWrapper {
+    width: 100%;
+}
+
+.description {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #333;
+    font-weight: 500;
+}
+
+.highlight {
+    font-weight: 800;
+    text-decoration: underline;
+}
+
+/* כפתור "הבנתי" */
+.understandButton {
+    width: 100%;
+    max-width: 280px;
+    height: 60px;
+    background-color: #9E9E9E; /* צבע אפור כמו באיור שלך */
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid #000;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0px 4px 0px #000; /* אפקט לחיצה תלת מימדי */
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.understandButton:active {
+    transform: translateY(2px);
+    box-shadow: 0px 2px 0px #000;
+}

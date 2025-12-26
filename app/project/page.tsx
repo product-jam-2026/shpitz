@@ -1,23 +1,21 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation'; // ייבוא הראוטר
 import styles from "./homePage.module.css";
 
 export default function Index() {
   const [activeDays, setActiveDays] = useState<number[]>([]);
   const [streak, setStreak] = useState(0);
-  const [isFirstVisit, setIsFirstVisit] = useState<boolean | null>(null); // null עד לבדיקה
+  const [isFirstVisit, setIsFirstVisit] = useState<boolean | null>(null);
+  const router = useRouter(); // אתחול הראוטר
 
   useEffect(() => {
     // בדיקת ביקור ראשון
     const hasVisited = localStorage.getItem('hasVisitedBefore');
-    if (!hasVisited) {
-      setIsFirstVisit(true);
-    } else {
-      setIsFirstVisit(false);
-    }
+    setIsFirstVisit(!hasVisited);
 
-    // הלוגיקה הקיימת של הסטריק והימים
+    // לוגיקה של הסטריק
     const today = new Date().getDay();
     const savedDays = JSON.parse(localStorage.getItem('userActivityDays') || '[]');
     const savedStreak = parseInt(localStorage.getItem('userStreak') || '0');
@@ -35,16 +33,14 @@ export default function Index() {
     }
   }, []);
 
-  // פונקציה שתופעל בלחיצה על כפתור "התחל"
   const handleStart = () => {
     if (isFirstVisit) {
-      // כאן נעבור למסך ההוראות
-      console.log("מעבר למסכי הוראות...");
-      // לאחר שהמשתמש יסיים את ההוראות, נריץ:
-      // localStorage.setItem('hasVisitedBefore', 'true');
+      // ניווט לדף ההסבר (הנתיב הוא /project/explantion)
+      router.push('/project/explantion');
     } else {
-      // מעבר ישיר למשחק/אתגר
+      // כאן תוסיפי את הניווט למשחק עצמו בעתיד
       console.log("מעבר ישיר לאתגר...");
+      // router.push('/project/game'); 
     }
   };
 
@@ -61,6 +57,7 @@ export default function Index() {
   );
 }
 
+// --- MobileContent Component ---
 function MobileContent({ activeDays, streak, onStart }: { 
   activeDays: number[], 
   streak: number, 
@@ -78,8 +75,6 @@ function MobileContent({ activeDays, streak, onStart }: {
 
   return (
     <div className="w-full flex flex-col items-center gap-10">
-      
-      {/* 1. החלק של הלוגו (הוחזר לכאן) */}
       <div className="relative w-full aspect-[4/3] bg-[#EEE] border border-gray-300 flex items-center justify-center overflow-hidden">
         <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
           <line x1="0" y1="0" x2="100%" y2="100%" stroke="black" strokeWidth="1" />
@@ -88,18 +83,15 @@ function MobileContent({ activeDays, streak, onStart }: {
         <span className="text-4xl relative z-10 font-bold">לוגו</span>
       </div>
 
-      {/* 2. הכותרת הראשית (משתמשת ב-Module CSS) */}
       <h1 className={styles.mainTitle}>
         האתגר היומי שמחדד אותך לזיהוי הונאות רשת
       </h1>
 
-      {/* 3. מעקב הסטריק והימים */}
       <div className="flex flex-col items-center gap-4">
         <p className={styles.streakText}>
           אתה מתחדד כבר {streak} ימים ברצף!
         </p>
         
-        {/* הימים מסודרים מימין לשמאל */}
         <div className="flex flex-row-reverse gap-3" dir="ltr"> 
           {daysOfWeek.map((day) => (
             <DayIndicator 
@@ -111,17 +103,14 @@ function MobileContent({ activeDays, streak, onStart }: {
         </div>
       </div>
 
-      {/* 4. כפתור ההתחלה המעוצב */}
-      <button className={styles.startButton}>
-        <span className={styles.buttonText}>
-          התחל
-        </span>
+      {/* חיבור הפונקציה לכפתור */}
+      <button className={styles.startButton} onClick={onStart}>
+        <span className={styles.buttonText}>התחל</span>
       </button>
-      
     </div>
   );
 }
-// תיקון סעיף 2: שימוש ב-SVG המקורי בתוך העיגול
+
 function DayIndicator({ letter, filled }: { letter: string; filled: boolean }) {
   return (
     <div className="flex flex-col items-center gap-1 w-[35px]">
