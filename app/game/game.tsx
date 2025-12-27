@@ -4,84 +4,47 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./game.module.css";
 import { useDailyQuestions } from "@/app/hooks/useDailyQuestions";
+import ConfettiEffect from "../ConfettiEffect"; 
 
 type ResultState = "none" | "success" | "fail";
-
-type DbMessage = {
-  id: number;
-  content: string;
-  isTrue: boolean;
-  tips: string | null;
-  Owner: string | null;
-  hint: string | null;
-};
 
 export default function Challenge() {
   const router = useRouter();
   const { questions, loading, error } = useDailyQuestions();
 
-  const [step, setStep] = useState(1); // 1..5
+  const [step, setStep] = useState(1); 
   const [result, setResult] = useState<ResultState>("none");
-  const [correctAnswers, setCorrectAnswers] = useState(0); // Track correct answers
-
+  const [correctAnswers, setCorrectAnswers] = useState(0); 
+  const [answersHistory, setAnswersHistory] = useState<Record<number, ResultState>>({});
   const [showHint, setShowHint] = useState(false);
-  const current = questions ? questions[step - 1] : undefined;
 
-  const tipText = useMemo(() => {
-    return current?.tips ?? "טיפ לא זמין כרגע.";
-  }, [current]);
+  const current = questions ? questions[step - 1] : undefined;
+  const tipText = useMemo(() => current?.tips ?? "טיפ לא זמין כרגע.", [current]);
 
   const handleAnswer = (clickedOpen: boolean) => {
     if (!current) return;
-
     const isCorrect = clickedOpen === current.isTrue;
+    const currentResult: ResultState = isCorrect ? "success" : "fail";
+    setResult(currentResult);
+    setAnswersHistory(prev => ({ ...prev, [step]: currentResult }));
+    if (isCorrect) setCorrectAnswers(prev => prev + 1);
+  };
 
-    setResult(isCorrect ? "success" : "fail");
-    
-    // Increment correct answers counter
-    if (isCorrect) {
-      setCorrectAnswers(prev => prev + 1);
-    }
-  };
-  const handleShowHint = () => {
-  setShowHint(true);
-  };
-  const handleCloseHint = () => {
-  setShowHint(false);
-  };
   const handleContinue = () => {
     setResult("none");
-    if (step < 5) {
-      setStep((s) => s + 1);
-    } else {
-      // Save score to localStorage before navigating
+    if (step < 5) setStep((s) => s + 1);
+    else {
       localStorage.setItem('gameScore', correctAnswers.toString());
       localStorage.setItem('totalQuestions', '5');
-      
-      // Navigate to pre_review page when finished
       router.push('/pre_review');
     }
   };
 
-  // תצוגת טעינה
-  if (loading) {
+  if (loading || error || !current) {
     return (
       <div className={styles.screen}>
         <div className={styles.phone} dir="rtl">
-          <p style={{ textAlign: "center", marginTop: 24 }}>טוען...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // תצוגת שגיאה או אם אין שאלות
-  if (error || !current) {
-    return (
-      <div className={styles.screen}>
-        <div className={styles.phone} dir="rtl">
-          <p style={{ textAlign: "center", marginTop: 24 }}>
-            {error ?? "אין שאלה להצגה (המאגר ריק או שהשליפה נכשלה)"}
-          </p>
+          <p style={{ textAlign: "center", marginTop: 24 }}>{error ?? "טוען..."}</p>
         </div>
       </div>
     );
@@ -89,125 +52,74 @@ export default function Challenge() {
 
   return (
     <div className={styles.screen}>
+      {result === "success" && <ConfettiEffect />}
+
       <div className={styles.phone} dir="rtl">
-        {/* פס התקדמות */}
         <div className={styles.progressBar}>
-          {[1, 2, 3, 4, 5].map((n) => (
-            <div
-              key={n}
-              className={`${styles.progressItem} ${
-                n === step ? styles.progressActive : ""
-              }`}
-            >
-              {n}
-            </div>
-          ))}
+          {[1, 2, 3, 4, 5].map((n) => {
+            let cl = styles.progressItem;
+            if (n === step || answersHistory[n] === "success") cl += ` ${styles.progressActive}`;
+            else if (answersHistory[n] === "fail") cl += ` ${styles.failCard}`;
+            return <div key={n} className={cl}>{n}</div>;
+          })}
         </div>
 
-        {/* כותרת */}
-        <h2 className={styles.questionTitle}>
-          האם הייתם פותחים
-          <br />
-          את הלינק?
-        </h2>
+        <h2 className={styles.questionTitle}>האם הייתם פותחים את הלינק?</h2>
 
-        {/* כרטיס הודעה */}
         <div className={styles.messageCard}>
           <div className={styles.messageHeader}>
             <div className={styles.avatarCircle} />
-            <p dir="ltr" className={styles.senderNumber}>
-              {current.Owner ?? "+972"}
-            </p>
+            <p dir="ltr" className="font-bold text-xs">{current.Owner ?? "+972"}</p>
           </div>
-
           <div className={styles.messageTimestamp}>היום 9:07</div>
-
           <div className={styles.messageBubble}>
             <p className={styles.messageText}>{current.content}</p>
           </div>
         </div>
 
-        {/* כפתורים תחתונים */}
         <div className={styles.actions}>
           <div className={styles.toolsRow}>
-            <button className={styles.toolButton} type="button" onClick={handleShowHint}>
-              <span>רמז</span>
-            </button>
-            <button className={styles.toolButton} type="button">
-              ? הוראות
-            </button>
+            <button className={styles.toolButton} onClick={() => setShowHint(true)}>רמז</button>
+            <button className={styles.toolButton} onClick={() => router.push('/explantion')}>? הוראות</button>
           </div>
-
           <div className={styles.mainRow}>
-            <button
-              className={styles.reportBtn}
-              type="button"
-              onClick={() => handleAnswer(false)}
-            >
-              לדווח
-            </button>
-            <button
-              className={styles.openBtn}
-              type="button"
-              onClick={() => handleAnswer(true)}
-            >
-              לפתוח
-            </button>
+            <button className={styles.reportBtn} onClick={() => handleAnswer(false)}>לדווח</button>
+            <button className={styles.openBtn} onClick={() => handleAnswer(true)}>לפתוח</button>
           </div>
         </div>
+
+        {/* פופ-אפ רמז צף */}
         {showHint && (
-          <div className={styles.hintOverlay} onClick={handleCloseHint}>
+          <div className={styles.hintOverlay} onClick={() => setShowHint(false)}>
             <div className={styles.hintCard} onClick={(e) => e.stopPropagation()}>
-              <div className={styles.hintIcon}>
-                {/* כאן תבוא התמונה של האייקון מהעיצוב */}
-                <img
-                    src="/icons/hint.svg"
-                    alt="רמז"
-                    className={styles.hintIcon}
-                  />
+              <div className={styles.hintContent}>
+                <div className={styles.hintIconContainer}>
+                   <img src="/icons/hint.svg" alt="רמז" className={styles.hintIcon} />
+                </div>
+                <p className={styles.hintText}>
+                  {current.hint || "אין רמז זמין לשאלה זו."}
+                </p>
               </div>
-              <p className={styles.hintText}>
-                {current.hint || "אין רמז זמין לשאלה זו."}
-              </p>
-              <button className={styles.backToGameBtn} onClick={handleCloseHint}>
+              <button className={styles.backToGameBtn} onClick={() => setShowHint(false)}>
                 חזרה למשחק
               </button>
             </div>
           </div>
         )}
-        {/* Overlay תוצאה */}
+
+        {/* פופ-אפ תוצאה (Bottom Sheet) */}
         {result !== "none" && (
-          <div className={styles.overlay} role="dialog" aria-modal="true">
-            <div
-              className={`${styles.resultCard} ${
-                result === "success" ? styles.successCard : styles.failCard
-              }`}
-            >
+          <div className={styles.overlay}>
+            <div className={`${styles.resultCard} ${result === "success" ? styles.successCard : styles.failCard}`}>
               {result === "success" ? (
-                <div className={styles.successHeader}>
-                  כל הכבוד! עניתם נכון
-                  <br />
-                  ותהיו שפיץ!
-                </div>
+                <div className={styles.successHeader}>כל הכבוד, עוד כמה סיבובים<br />ותהיה שפיץ!</div>
               ) : (
                 <>
                   <div className={styles.failTitle}>תשובה לא נכונה</div>
-                  <div className={styles.failTipRow}>
-                    <div className={styles.warnIcon} aria-hidden="true">
-                      ⚠
-                    </div>
-                    <div className={styles.failTipText}>{tipText}</div>
-                  </div>
+                  <div style={{color: 'white', fontWeight: 'bold', fontSize: '16px'}}>{tipText}</div>
                 </>
               )}
-
-              <button
-                className={styles.continueBtn}
-                type="button"
-                onClick={handleContinue}
-              >
-                המשך
-              </button>
+              <button className={styles.continueBtn} onClick={handleContinue}>המשך</button>
             </div>
           </div>
         )}

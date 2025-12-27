@@ -1,99 +1,82 @@
-/* רקע כללי */
-/* רקע כללי */
+/* --- רקע כללי --- */
 .screen {
   min-height: 100vh;
-  background: #F3F3F3;            /* כמו בפיגמה */
+  background: #FFF9EC;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 60px 12px 24px;        /* למעלה יש יותר מרווח */
+  padding: 60px 12px 24px;
+  font-family: 'SouthFont', sans-serif;
 }
 
-/* "מסגרת טלפון" */
 .phone {
   width: 360px;
   max-width: 92vw;
   position: relative;
 }
 
-
-/* פס התקדמות */
+/* --- פס התקדמות --- */
 .progressBar {
   display: flex;
   width: 100%;
-  gap: 8px;
-  margin: 0 0 18px;
+  gap: 10px;
+  margin: 0 0 24px;
+  height: 34px;
 }
 
 .progressItem {
   flex: 1;
-  height: 34px;                 /* לפי הפיגמה */
-  background: #EBEBEB;          /* אפור */
-  color: #BEBEBE;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background: #EBEBEB;
+  color: #BEBEBE;
+  font-family: 'SouthFont', sans-serif;
   font-size: 20px;
-  font-weight: 400;
-  border-radius: 0;             /* בפיגמה זה מרובע */
+  font-weight: 700;
 }
 
 .progressActive {
-  background: #FFFFFF;
-  color: #000000;
-  font-weight: 700;
-  border: 1px solid #000;       /* מסגרת קלה */
+  background: #E0EDFF;
+  color: #114081;
 }
 
-/* כותרת */
+/* --- כותרת השאלה --- */
 .questionTitle {
-  margin: -10px 0 14px;         /* קצת עולה למעלה כמו בפיגמה */
-  text-align: right;
-  font-size: 22px;
-  line-height: 28px;
-  font-weight: 700;
-  color: #000;
-  letter-spacing: 1.32px;
+  margin: 0 0 20px;
+  text-align: center;
+  font-family: 'SouthFont', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: #114081;
+  white-space: nowrap;
 }
 
-/* כרטיס הודעה */
+/* --- כרטיס הודעה --- */
 .messageCard {
   background: #ffffff;
   border-radius: 18px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .messageHeader {
   background: #d9d9d9;
-  padding: 14px 14px 10px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  font-size: 18px; 
+  font-weight: 700;
 }
-
-.avatarCircle {
-  width: 42px;
-  height: 42px;
-  border-radius: 999px;
-  background: #ffffff;
-  opacity: 0.9;
-}
-
-.senderNumber {
+.messageHeader p {
   margin: 0;
-  font-size: 13px;
-  font-weight: 800;
-  color: #121212;
-}
-
-.messageTimestamp {
-  text-align: center;
-  padding: 10px 0;
-  font-size: 12px;
-  color: #6b7280;
-  background: #ffffff;
+  font-size: 22px; /* הגדלתי מברירת המחדל ל-22px */
+  font-weight: 400;
+  color: #000000;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
 }
 
 .messageBubble {
@@ -101,274 +84,207 @@
   width: calc(100% - 40px);
   background: #f3f3f3;
   border-radius: 22px;
-  padding: 18px 16px;
-  text-align: center;
+  padding: 18px;
+  text-align: right;
 }
 
 .messageText {
+  color: #114081;
+  font-family: 'Roboto', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 1.32px;
+  text-align: right;
   margin: 0;
-  font-size: 18px;
-  line-height: 1.55;
-  font-weight: 600;
-  color: #0f172a;
 }
 
-.messageLink {
-  display: inline-block;
-  margin-top: 14px;
-  font-size: 20px;
-  font-weight: 800;
-  color: #1a73e8;
-  text-decoration: underline;
-}
-
-/* אזור כפתורים — תמיד נראה מסודר */
-.actions {
-  margin-top: 14px;
-  padding-bottom: 18px; /* רווח כדי שלא יידבק לתחתית */
-}
-
+/* --- כפתורי עזר --- */
 .toolsRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .toolButton {
   height: 51px;
-  border: 1px solid #000;
-  border-right: 3px solid #000;
-  border-bottom: 3px solid #000;
-  background: #D5D5D5;
-  border-radius: 0;
+  border: 1px solid #114081;
+  border-right: 3px solid #114081;
+  border-bottom: 3px solid #114081;
+  background: #E0EDFF;
+  color: #114081;
+  font-family: 'SouthFont', sans-serif;
   font-weight: 700;
-  font-size: 16px;
-  display: inline-flex;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  cursor: pointer;
 }
 
-.toolButton:active {
-  border-right: 1px solid #000;
-  border-bottom: 1px solid #000;
-  transform: translate(2px, 2px);
-}
-
-
-.toolIcon {
-  width: 20px;
-  height: 20px;
-}
-
+/* --- כפתורי הכרעה --- */
 .mainRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
 }
 
-.openBtn,
-.reportBtn {
-  height: 138px;                  /* לפי הפיגמה */
-  border: 1px solid #000;
-  border-right: 3px solid #000;
-  border-bottom: 3px solid #000;
-  font-size: 24px;
-  font-weight: 900;
+.openBtn, .reportBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 126px;
+  border: none;
   cursor: pointer;
-  border-radius: 0;               /* בסיס */
+  color: white;
+  font-family: 'SouthFont', sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: 2px;
 }
 
-.openBtn:active,
-.reportBtn:active {
-  border-right: 1px solid #000;
-  border-bottom: 1px solid #000;
-  transform: translate(2px, 2px);
-}
-
-/* ימין: לפתוח (פינה ימין-למטה עגולה) */
 .openBtn {
-  background: #7EE6A6;            /* ירוק */
+  background: #FF706E;
+  border-right: 3px solid #114081;
+  border-bottom: 3px solid #114081;
   border-radius: 0 0 24px 0;
 }
 
-/* שמאל: לדווח (פינה שמאל-למטה עגולה) */
 .reportBtn {
-  background: #FF6B6B;            /* אדום */
+  background: #62CD81;
+  border-left: 3px solid #114081;
+  border-bottom: 3px solid #114081;
   border-radius: 0 0 0 24px;
 }
 
-
-.openBtn {
-  background: #c7f7d5;
-}
-
-.reportBtn {
-  background: #f7c7c7;
-}
-
-/* OVERLAY תוצאה */
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(61, 93, 150, 0.55); /* הכחלה כמו במסכים */
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding: 22px 12px;
-  z-index: 9999;
-}
-
-/* כרטיס תוצאה */
-.resultCard {
-  width: 360px;
-  max-width: 92vw;
-  border-radius: 22px;
-  padding: 18px 16px 16px;
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
-  text-align: center;
-}
-
-.successCard {
-  background: #62d26f; /* ירוק */
-  color: #ffffff;
-  position: relative;
-}
-
-/* הכותרת הירוקה */
-.successHeader {
-  font-size: 20px;
-  line-height: 1.25;
-  font-weight: 900;
-  margin-bottom: 14px;
-}
-
-/* כרטיס כישלון */
-.failCard {
-  background: #ff6b6b; /* אדום */
-  color: #ffffff;
-}
-
-.failTitle {
-  font-size: 22px;
-  font-weight: 900;
-  margin-bottom: 10px;
-}
-
-.failTipRow {
-  display: grid;
-  grid-template-columns: 34px 1fr;
-  gap: 10px;
-  align-items: start;
-  text-align: right;
-  margin-bottom: 14px;
-}
-
-.warnIcon {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
-
-.failTipText {
-  font-size: 14px;
-  line-height: 1.45;
-  font-weight: 700;
-}
-
-/* כפתור המשך (לבן עם מסגרת כהה) */
-.continueBtn {
-  width: 100%;
-  height: 54px;
-  border-radius: 14px;
-  border: 2px solid #0f172a;
-  background: #fff7ea;
-  color: #0f172a;
-  font-size: 22px;
-  font-weight: 900;
-}
-
-/* שכבת הרקע הכהה */
+/* --- פופ-אפ רמז (חדש!) --- */
 .hintOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(61, 93, 150, 0.55); /* הכחלה כמו במסכים */
+  background: rgba(17, 64, 129, 0.4);
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  padding: 22px 12px;
-  z-index: 9999;
+  align-items: center;
+  z-index: 10000;
+  padding: 20px;
 }
 
 .hintCard {
+  width: 100%;
+  max-width: 360px;
+  background: #DAEBFF;
+  border-radius: 36px 36px 24px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; 
-  width: 90%; 
-  margin-top: -20px;
-  max-width: 370px; 
-  padding: 40px 25px; 
-  border-radius: 0 36px 0 0;
-  background: #DAEBFF;
-  margin-bottom: 0; 
-  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.08);
-  animation: slideUp 0.3s ease-out;
+  overflow: hidden;
 }
 
-@media (max-width: 420px) {
-  .hintCard {
-    width: 100%;
-    max-width: none;
-    border-radius: 0; /* אופציונלי – נראה כמו bottom sheet */
-  }
+.hintContent {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
 }
-.hintIcon {
-  /* הקטנת האייקון במידת הצורך */
-  height: 50px; 
-  width: auto;
+
+.hintIconContainer {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  background: #C7EE26;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
 }
+
+.hintIcon { width: 50px; height: auto; }
 
 .hintText {
-  color: var(--Dark_blue_text, #114081);
-  font-family: "Narkssim";
-  font-size: 1.1rem; /* הקטנה קלה של הפונט */
-  line-height: 1.4;
+  color: #114081;
   text-align: center;
+  font-family: "Narkissim TRIAL", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: -0.78px;
   margin: 0;
 }
 
 .backToGameBtn {
-  border-radius: 0 0 24px 24px;
-  border-right: 3px solid #114081;
-  border-bottom: 3px solid #114081;
-  background: #FFF9EC;
   display: flex;
-  width: 325px;
-  height: 68px;
-  padding: 10px;
+  width: 100%;
+  height: 63px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  background: #FFF9EC;
+  border: none;
+  border-right: 3px solid #114081;
+  border-bottom: 3px solid #114081;
+  border-radius: 0 0 24px 24px;
   color: #114081;
-  text-align: right;
-  font-family: SouthFont;
-  font-weight: 500;
-  font-size: 24px;
-  font-style: normal;
+  font-family: "SouthFont", sans-serif;
+  font-size: 26px;
   font-weight: 700;
-  line-height: 32px; /* 133.333% */
-  letter-spacing: 0.48px;
+  cursor: pointer;
 }
 
-.backToGameBtn:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0px #7a7a7a;
+/* --- כרטיס תוצאה Bottom Sheet --- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 64, 129, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 9999;
+}
+
+.resultCard {
+  width: 100%;
+  max-width: 393px;
+  min-height: 237px;
+  border-radius: 0 36px 0 0;
+  padding: 30px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  gap: 20px;
+  align-items: center;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.successCard { background: #63CE83; color: #ffffff; }
+.failCard { background: #FF706E; color: #ffffff; }
+
+.successHeader, .failTitle {
+  font-family: 'SouthFont', sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.continueBtn {
+  width: 100%;
+  max-width: 325px;
+  height: 68px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  border: 3px solid #114081;
+  background: #fff7ea;
+  color: #114081;
+  font-family: 'SouthFont', sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  cursor: pointer;
+  margin-top: auto;
 }

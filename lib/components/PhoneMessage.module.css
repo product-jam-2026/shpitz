@@ -1,0 +1,131 @@
+.container {
+  display: flex;
+  width: 324px;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 390px;
+}
+
+.header {
+  display: flex;
+  padding: 8px 0;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 32px 32px 0 0;
+  background: #BFBFBF;
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar {
+  width: 42.254px;
+  height: 42.254px;
+  fill: #FFF9EC;
+}
+
+.phoneNumber {
+  display: flex;
+  align-items: center;
+  gap: 6.667px;
+  color: #114081;
+  text-align: center;
+  font-family: Roboto, -apple-system, Helvetica, sans-serif;
+  font-size: 13.334px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30.002px;
+  letter-spacing: 0.8px;
+}
+
+.messageArea {
+  display: flex;
+  padding: 16px 19px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 0 0 19px 19px;
+  background: #FFF;
+}
+
+.messageContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.timestamp {
+  align-self: stretch;
+  color: #BFBFBF;
+  text-align: center;
+  font-family: Roboto, -apple-system, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.84px;
+}
+
+.messageBubble {
+  display: flex;
+  width: 278px;
+  padding: 16px 8px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: #F3F3F3;
+}
+
+.messageText {
+  flex: 1 0 0;
+  text-align: right;
+  font-family: Roboto, -apple-system, Helvetica, sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 1.32px;
+}
+
+.textNormal {
+  color: #114081;
+}
+
+.textLink {
+  color: #0087E8;
+}
+
+.scrollbar {
+  width: 10.912px;
+  height: 201.85px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.scrollbarTrack {
+  width: 11px;
+  height: 202px;
+  border-radius: 16px;
+  background: #FFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.scrollbarThumb {
+  width: 11px;
+  height: 26px;
+  border-radius: 16px;
+  background: #BFBFBF;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
