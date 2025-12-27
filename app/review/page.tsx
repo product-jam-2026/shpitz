@@ -25,51 +25,52 @@ export default function MessageOnly() {
         if (currentIndex < totalQuestions - 1) {
             setCurrentIndex(prev => prev + 1);
         } else {
-            // Navigate to game when finished
-            console.log("Tutorial completed!");
-            // router.push('/game');
+            // Navigate to finish page when at last question
+            router.push('/finish');
         }
     };
 
     const handleSkip = () => {
-        console.log("Skip clicked!");
-        // router.push('/game');
+        // Navigate to finish page when skip is clicked
+        router.push('/finish');
     };
 
     return (
-        <div className={styles.container} dir="rtl">
-            {/* Section Heading with counter */}
-            <div className={styles.progressBar}>
-                <div className={styles.progressCounter}>{currentIndex + 1}/{totalQuestions}</div>
-                <div className={styles.progressLabel}>לומדים משהו</div>
-            </div>
-
-            {/* כרטיס ההודעה */}
-            <div className={styles.messageCard}>
-                <div className={styles.messageHeader}>
-                    <div className={styles.avatarCircle}></div>
-                    <p dir="ltr" className="font-bold text-xs">
-                        {current.Owner ?? "+972 528886666"}
-                    </p>
+        <div className={styles.pageWrapper}>
+            <div className={styles.container} dir="rtl">
+                {/* Section Heading with counter */}
+                <div className={styles.progressBar}>
+                    <div className={styles.progressCounter}>{currentIndex + 1}/{totalQuestions}</div>
+                    <div className={styles.progressLabel}>לומדים משהו</div>
                 </div>
-                <div className={styles.messageTimestamp}>היום 9:07</div>
-                <div className={styles.messageBubbleContainer}>
-                    <div className={styles.messageBubbleText}>
-                        <p>{current.content}</p>
+
+                {/* כרטיס ההודעה */}
+                <div className={styles.messageCard}>
+                    <div className={styles.messageHeader}>
+                        <div className={styles.avatarCircle}></div>
+                        <p dir="ltr" className="font-bold text-xs">
+                            {current.Owner ?? "+972 528886666"}
+                        </p>
+                    </div>
+                    <div className={styles.messageTimestamp}>היום 9:07</div>
+                    <div className={styles.messageBubbleContainer}>
+                        <div className={styles.messageBubbleText}>
+                            <p>{current.content}</p>
+                        </div>
                     </div>
                 </div>
+
+                {/* טקסט רמז */}
+                <div className={styles.hintText}>
+                    {current.tips ?? "אין רמז זמין"}
+                </div>
+
+                {/* כפתור דלג */}
+                <SkipButton onClick={handleSkip} />
+
+                {/* כפתור הבא */}
+                <NextButton onClick={handleNext} />
             </div>
-
-            {/* טקסט רמז */}
-            <div className={styles.hintText}>
-                {current.tips ?? "אין רמז זמין"}
-            </div>
-
-            {/* כפתור דלג */}
-            <SkipButton onClick={handleSkip} />
-
-            {/* כפתור הבא */}
-            <NextButton onClick={handleNext} />
         </div>
     );
 }
