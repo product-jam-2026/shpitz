@@ -1,13 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./game.module.css";
-// הסרנו את createClient ואת useEffect כי הנתונים מגיעים מה-hook
 import { useDailyQuestions } from "@/app/hooks/useDailyQuestions";
 
 type ResultState = "none" | "success" | "fail";
 
-// מוודאים שהטיפוס תואם למה שחוזר מה-Hook
 type DbMessage = {
   id: number;
   content: string;
@@ -17,13 +16,12 @@ type DbMessage = {
 };
 
 export default function Challenge() {
-  // שימוש ב-Hook הקיים שלך כדי לנהל את המידע
+  const router = useRouter();
   const { questions, loading, error } = useDailyQuestions();
 
   const [step, setStep] = useState(1); // 1..5
   const [result, setResult] = useState<ResultState>("none");
 
-  // חישוב ההודעה הנוכחית מתוך המערך שהגיע מה-Hook
   const current = questions ? questions[step - 1] : undefined;
 
   const tipText = useMemo(() => {
@@ -33,7 +31,6 @@ export default function Challenge() {
   const handleAnswer = (clickedOpen: boolean) => {
     if (!current) return;
 
-    // isTrue = האם ההודעה אמיתית (True -> לפתוח, False -> לדווח)
     const isCorrect = clickedOpen === current.isTrue;
 
     setResult(isCorrect ? "success" : "fail");
@@ -41,7 +38,12 @@ export default function Challenge() {
 
   const handleContinue = () => {
     setResult("none");
-    if (step < 5) setStep((s) => s + 1);
+    if (step < 5) {
+      setStep((s) => s + 1);
+    } else {
+      // Navigate to review page when finished
+      router.push('/review');
+    }
   };
 
   // תצוגת טעינה
