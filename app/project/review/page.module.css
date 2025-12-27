@@ -14,15 +14,33 @@
   position: relative; /* חשוב עבור אלמנטים שמשתמשים ב-absolute */
 }
 
-/* מכולת המספרים - השורה כולה */
+/* שורת התקדמות עליונה */
 .progressBar {
     display: flex;
-    width: 100%;           /* תופס את כל רוחב המסך הזמין */
-    max-width: 334px;      /* רוחב תואם לכפתורים שמתחת */
-    justify-content: center;
+    width: 100%;
+    max-width: 334px;
+    justify-content: flex-start; /* Changed from space-between */
     align-items: center;
-    gap: 8px;              /* מרווח בין הריבועים לפי העיצוב */
+    gap: 8px; /* Small gap between them */
     margin-bottom: 20px;
+}
+
+.progressLabel {
+    background: #FFFFFF;
+    color: #000000;
+    padding: 8px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.progressCounter {
+    background: #FFFFFF;
+    color: #000000;
+    padding: 8px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 /* כל ריבוע מספר בנפרד (ה-Frame בפיגמה) */
@@ -115,23 +133,22 @@
   margin: 5px 0;
 }
 
-/* הבועה החיצונית של ההודעה (ה-SVG) */
+/* הבועה החיצונית של ההודעה */
 .messageBubbleContainer {
-  position: relative; /* חשוב למיקום הטקסט בתוך ה-SVG */
-  width: 304px;       /* הרוחב המדויק של ה-SVG */
-  height: auto;       /* גובה אוטומטי כדי לשמור על יחס הגודל */
-  margin: 15px 0;     /* מרווח מהשעון ומהכפתורים */
+  position: relative;
+  width: 304px;
+  min-height: 80px; /* גובה מינימלי קטן יותר */
+  margin: 15px 0;
+  background: #F3F3F3;
+  border-radius: 20px;
+  padding: 15px 20px; /* פדינג קטן יותר למעלה ולמטה */
+  display: flex;
+  flex-direction: column;
 }
 
-/* הטקסט עצמו שישב בתוך ה-SVG */
+/* הטקסט עצמו */
 .messageBubbleText {
-  position: absolute; /* ממקם את הטקסט באופן חופשי מעל ה-SVG */
-  top: 15px;         /* ריווח מהקצה העליון של הבועה */
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
-  
-  /* עיצוב הטקסט */
+  position: relative;
   color: #000;
   font-family: Roboto, sans-serif;
   font-size: 22px;
@@ -140,16 +157,20 @@
   letter-spacing: 1.32px;
   line-height: 1.6;
   text-align: right;
-  padding: 0 5px; /* פדינג קטן בתוך הטקסט עצמו */
+  word-wrap: break-word;
 }
 
+.messageBubbleText p {
+  margin: 0; /* הסרת המרווח מעל ומתחת לפסקה */
+}
 
 .messageBubbleText a {
-  color: #1a73e8; /* כחול סטנדרטי לקישור */
+  color: #1a73e8;
   text-decoration: underline;
   font-family: Roboto, sans-serif;
-  display: block; /* כדי שהקישור יהיה בשורה חדשה */
-  margin-top: 0px;
+  display: block;
+  margin-top: 8px;
+  word-break: break-all;
 }
 
 /* טקסט רמז */
@@ -247,19 +268,6 @@
 }
 
 
-
-
-
-
-
-.instructionBox {
-  background-color: #000000;
-  
-  width: 280px;
-  padding: 30px 20px;
-  text-align: center;
-  border: 1px solid #444;
-}
 
 /* הכותרת הצהובה/ירוקה "איך משחקים?" */
 .instructionTitle {
@@ -453,66 +461,6 @@
     pointer-events: none;
 }
 
-/* חץ 1: חץ עליון בתמונת מראה */
-.arrowTopProgress {
-    position: absolute;
-    top: 15px;
-    left: 235px; 
-    
-    width: 32.021px;
-    height: 93.642px;
-    /* הוספת scaleX(-1) מבצעת היפוך מראה אופקי */
-    transform: rotate(-103.356deg) scaleX(-1); 
-    transform-origin: top center;
-    z-index: 4000;
-    pointer-events: none;
-    animation: bounceTop 1s infinite;
-}
-
-/* חץ 2: חץ תחתון בתמונת מראה */
-.arrowBottomContinue {
-    position: absolute;
-    bottom: 530px; 
-    left: 50%;
-    
-    width: 32.021px; 
-    height: 93.642px;
-    margin-left: -16px; 
-    /* הוספת scaleX(-1) מבצעת היפוך מראה אופקי */
-    transform: scaleX(-1); 
-    
-    z-index: 4000;
-    pointer-events: none;
-    animation: bounceBottom 1s infinite;
-}
-
-/* עדכון האנימציות לשמירה על אפקט המראה בזמן הקפיצה */
-@keyframes bounceTop {
-    0%, 100% { transform: rotate(-103.356deg) scaleX(-1) translateY(0); }
-    50% { transform: rotate(-103.356deg) scaleX(-1) translateY(-10px); }
-}
-
-@keyframes bounceBottom {
-    0%, 100% { transform: scaleX(-1) translateY(0); }
-    50% { transform: scaleX(-1) translateY(10px); }
-}
-
-.feedbackCard {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 220px;
-  background-color: #66E0E0; 
-  
-  border-radius: 40px 40px 0 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 3500;
-  padding: 20px;
-  text-align: center;
-}
 /* זה לחלק של הטקסט בתוך הכפתור המשך */
 .feedbackText {
   color: #000;
@@ -555,146 +503,6 @@
   border: 2px solid #fdfafa ;
 }
 
-/* אנימציה לחץ שזז בין שלבים */
-.customArrowSvg {
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* אנימציית תנועה חלקה */
-}
-
-/* פוזיציה של החץ המצביע למעלה (לשלב 5) */
-.arrowPointingUp {
-  transform: rotate(0deg) translateY(-20px);
-}
-
-
-.rotatedTextStep5 {
-    /* מיקום אבסולוטי ושליטה במרחק מהחץ */
-    position: absolute;
-    top: 10%; 
-    left: 65px; /* הערך שיזיז את הטקסט ימינה לכיוון החץ - התאימי לפי הצורך */
-  
-    
-    /* עיצוב לפי הפיגמה */
-    width: 249.883px;
-    color: var(--color-user, #CCFF00); /* צבע זרחני לפי העיצוב */
-    text-align: center;
-    
-    /* הגדרות פונט וטקסט מדויקות */
-    font-family: "Reisinger";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 26px; /* 108.333% */
-    letter-spacing: 1.44px;
-    
-    /* הטיה ושיכוב */
-    transform: rotate(-7deg);
-    z-index: 4000;
-}
-
-
-/* אזור ההסבר של הרמז */
-/* מיכל ההסבר - משמש כעוגן ימני */
-.hintExplanationArea {
-    position: absolute;
-    bottom: 125px; /* העברנו למעלה כדי שהטקסט יהיה מעל הכפתור */
-    right: 20px;
-    width: 280px;
-    display: flex;
-    flex-direction: column; /* מסדר את האלמנטים בטור */
-    justify-content: flex-end;
-    align-items: center;    /* ממרכז את שניהם אחד מעל השני */
-    z-index: 3000;
-}
-
-/* הטקסט המוטה של הרמז */
-.hintRotatedText {
-    width: 100%;
-    /* הרמת הטקסט בעזרת translateY בנוסף לסיבוב */
-    transform: rotate(-6.5deg) translateY(-15px);
-    margin-bottom: 0; /* ביטול מרווחים מיותרים */
-    color: #CCFF00;
-    font-family: "Reisinger - Michal", sans-serif;
-    font-size: 24px;
-    text-align: center;
-    line-height: 26px;
-    letter-spacing: 1.44px;
-}
-
-/* החץ המצביע על הרמז - כעת ממורכז מתחת לטקסט */
-.arrowToHint {
-    width: 32px;
-    height: 94px;
-    /* היפוך מראה וסיבוב שגורם לו "לצאת" ממרכז הטקסט לכיוון הכפתור */
-    transform: rotate(20deg) scaleX(-1); 
-    margin-top: 0;
-    margin-bottom: -10px;
-    animation: bounceBottom 1s infinite;
-}
-
-
-
-.highlightHint {
-    position: relative;
-    z-index: 3000 !important; /* גבוה יותר מהמלבן האפור */
-    background-color: #D5D5D5 !important; /* שומר על צבע הכפתור המקורי */
-} 
-
-/* חץ מצביע להוראות - מראה מראה לצד השני של הרמז */
-.arrowToInstructions {
-    width: 32px;
-    height: 94px;
-    position: absolute;
-    top: -100px;
-    left: 40px;
-    /* סיבוב החץ למטה כדי שיצביע על הכפתור */
-    transform: rotate(-100deg);
-    z-index: 4000;
-    animation: bounceInstructions 1s infinite;
-}
-
-@keyframes bounceInstructions {
-    0%, 100% { transform: rotate(90deg) translateY(0); }
-    50% { transform: rotate(90deg) translateY(10px); }
-}
-
-
-.instructionsArea {
-    position: absolute;
-    bottom: 220px; /* גובה זהה לשלב הרמז כדי לשמור על עקביות */
-    left: 20px;    /* מיקום בצד שמאל מעל כפתור ההוראות */
-    width: 280px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 3000;
-    pointer-events: none;
-}
-/* הטקסט המוטה של ההוראות - מוזז שמאלה */
-.instructionsRotatedText {
-  color: var(--color-user, #CF0);
-  text-align: center;
-  font-family: "Reisinger - Michal";
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: 28px; /* 116.667% */
-  letter-spacing: 1.44px;
-  width: 230.664px;
-  transform: rotate(4.664deg) translateX(20px);
-}
-.arrowToInstructionsNew {
-    width: 33.527px;
-    height: 93.642px;
-    /* ה-rotate שביקשת (31.023deg) הופך אותו למראה לכיוון שמאל למטה */
-    transform: rotate(31.023deg); 
-    margin-top: -5px;
-    animation: bounceInstructionsNew 1s infinite;
-}
-
-@keyframes bounceInstructionsNew {
-    0%, 100% { transform: rotate(31.023deg) translateY(0); }
-    50% { transform: rotate(31.023deg) translateY(10px); }
-}
 /* מיכל שתופס את כל שטח ה-Overlay למרכוז */
 .finalBoxContainer {
     position: absolute;
@@ -801,23 +609,3 @@ flex-shrink: 0;
     text-decoration: underline;
 }
 
-/* כפתור "הבנתי" */
-.understandButton {
-    width: 100%;
-    max-width: 280px;
-    height: 60px;
-    background-color: #9E9E9E; /* צבע אפור כמו באיור שלך */
-    color: black;
-    font-size: 1.5rem;
-    font-weight: bold;
-    border: 2px solid #000;
-    border-radius: 12px;
-    cursor: pointer;
-    box-shadow: 0px 4px 0px #000; /* אפקט לחיצה תלת מימדי */
-    transition: transform 0.1s, box-shadow 0.1s;
-}
-
-.understandButton:active {
-    transform: translateY(2px);
-    box-shadow: 0px 2px 0px #000;
-}

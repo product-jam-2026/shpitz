@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import styles from "./game.module.css";
-import { createClient } from "@/lib/supabase/client";
+// הסרנו את createClient ואת useEffect כי הנתונים מגיעים מה-hook
+import { useDailyQuestions } from "@/app/hooks/useDailyQuestions";
 
 type ResultState = "none" | "success" | "fail";
 
+// מוודאים שהטיפוס תואם למה שחוזר מה-Hook
 type DbMessage = {
   id: number;
   content: string;
@@ -15,70 +17,34 @@ type DbMessage = {
 };
 
 export default function Challenge() {
+  // שימוש ב-Hook הקיים שלך כדי לנהל את המידע
+  const { questions, loading, error } = useDailyQuestions();
+
   const [step, setStep] = useState(1); // 1..5
   const [result, setResult] = useState<ResultState>("none");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [questions, setQuestions] = useState<DbMessage[]>([]);
 
-  useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const supabase = createClient();
-
-        // מביאים 5 הודעות. תעדכני פילטרים אם צריך (difficulty/type)
-        const { data, error } = await supabase
-          .from("assets")
-          .select("id, content, isTrue, tips, Owner")
-          .eq("topic", "message")
-          .eq("type", "txt")
-          .order("id", { ascending: true })
-          .limit(5);
-
-        if (error) throw error;
-
-        if (!data || data.length === 0) {
-          setQuestions([]);
-          setError("לא נמצאו הודעות בטבלה assets עם topic=message ו-type=txt.");
-          return;
-        }
-
-        setQuestions(data as DbMessage[]);
-      } catch (e: any) {
-        setError(e?.message ?? "שגיאה בטעינת נתונים");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchQuestions();
-  }, []);
-
-  const current = questions[step - 1];
+  // חישוב ההודעה הנוכחית מתוך המערך שהגיע מה-Hook
+  const current = questions ? questions[step - 1] : undefined;
 
   const tipText = useMemo(() => {
     return current?.tips ?? "טיפ לא זמין כרגע.";
   }, [current]);
 
   const handleAnswer = (clickedOpen: boolean) => {
-  if (!current) return;
+    if (!current) return;
 
-  // isTrue = האם ההודעה אמיתית (True -> לפתוח, False -> לדווח)
-  const isCorrect = clickedOpen === current.isTrue;
+    // isTrue = האם ההודעה אמיתית (True -> לפתוח, False -> לדווח)
+    const isCorrect = clickedOpen === current.isTrue;
 
-  setResult(isCorrect ? "success" : "fail");
-};
-
-
+    setResult(isCorrect ? "success" : "fail");
+  };
 
   const handleContinue = () => {
     setResult("none");
     if (step < 5) setStep((s) => s + 1);
   };
 
+  // תצוגת טעינה
   if (loading) {
     return (
       <div className={styles.screen}>
@@ -89,12 +55,13 @@ export default function Challenge() {
     );
   }
 
+  // תצוגת שגיאה או אם אין שאלות
   if (error || !current) {
     return (
       <div className={styles.screen}>
         <div className={styles.phone} dir="rtl">
           <p style={{ textAlign: "center", marginTop: 24 }}>
-            {error ?? "אין שאלה להצגה"}
+            {error ?? "אין שאלה להצגה (המאגר ריק או שהשליפה נכשלה)"}
           </p>
         </div>
       </div>
