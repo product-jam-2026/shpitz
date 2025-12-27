@@ -20,6 +20,7 @@ type AssetRow = {
   topic: string | null;
   tips: string | null;
   Owner: string | null; // Note: column name is "Owner" (capital O)
+  hint: string | null;
 };
 
 export async function fetchFiveMessageQuestions(
@@ -27,7 +28,7 @@ export async function fetchFiveMessageQuestions(
 ): Promise<MessageQuestion[]> {
   const { data, error } = await supabase
     .from("assets")
-    .select("id, content, isTrue, difficulty, type, topic, tips, Owner")
+    .select("id, content, isTrue, difficulty, type, topic, tips, Owner, hint")
     .eq("topic", "message")
     .eq("type", "txt")
     .order("id", { ascending: true })
@@ -48,5 +49,6 @@ export async function fetchFiveMessageQuestions(
       topic: r.topic,
       tips: r.tips,
       owner: r.Owner,
+      hint: r.hint,
     }));
 }

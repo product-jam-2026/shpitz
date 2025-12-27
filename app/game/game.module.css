@@ -294,3 +294,81 @@
   font-size: 22px;
   font-weight: 900;
 }
+
+/* שכבת הרקע הכהה */
+.hintOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(61, 93, 150, 0.55); /* הכחלה כמו במסכים */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 22px 12px;
+  z-index: 9999;
+}
+
+.hintCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; 
+  width: 90%; 
+  margin-top: -20px;
+  max-width: 370px; 
+  padding: 40px 25px; 
+  border-radius: 0 36px 0 0;
+  background: #DAEBFF;
+  margin-bottom: 0; 
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.08);
+  animation: slideUp 0.3s ease-out;
+}
+
+@media (max-width: 420px) {
+  .hintCard {
+    width: 100%;
+    max-width: none;
+    border-radius: 0; /* אופציונלי – נראה כמו bottom sheet */
+  }
+}
+.hintIcon {
+  /* הקטנת האייקון במידת הצורך */
+  height: 50px; 
+  width: auto;
+}
+
+.hintText {
+  color: var(--Dark_blue_text, #114081);
+  font-family: "Narkssim";
+  font-size: 1.1rem; /* הקטנה קלה של הפונט */
+  line-height: 1.4;
+  text-align: center;
+  margin: 0;
+}
+
+.backToGameBtn {
+  border-radius: 0 0 24px 24px;
+  border-right: 3px solid #114081;
+  border-bottom: 3px solid #114081;
+  background: #FFF9EC;
+  display: flex;
+  width: 325px;
+  height: 68px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #114081;
+  text-align: right;
+  font-family: SouthFont;
+  font-weight: 500;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px; /* 133.333% */
+  letter-spacing: 0.48px;
+}
+
+.backToGameBtn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0px #7a7a7a;
+}

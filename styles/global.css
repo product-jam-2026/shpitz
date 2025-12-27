@@ -105,3 +105,16 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Narkssim'; 
+  src: url('/fonts/Narkissim-Bold-TRIAL.otf') format('opentype'); 
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Narkssim'; 
+  src: url('/fonts/Narkissim-Regular-TRIAL.otf') format('opentype'); 
+  font-weight: 400;
+  font-style: normal;
+}

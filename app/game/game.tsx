@@ -13,6 +13,7 @@ type DbMessage = {
   isTrue: boolean;
   tips: string | null;
   Owner: string | null;
+  hint: string | null;
 };
 
 export default function Challenge() {
@@ -23,6 +24,7 @@ export default function Challenge() {
   const [result, setResult] = useState<ResultState>("none");
   const [correctAnswers, setCorrectAnswers] = useState(0); // Track correct answers
 
+  const [showHint, setShowHint] = useState(false);
   const current = questions ? questions[step - 1] : undefined;
 
   const tipText = useMemo(() => {
@@ -41,7 +43,12 @@ export default function Challenge() {
       setCorrectAnswers(prev => prev + 1);
     }
   };
-
+  const handleShowHint = () => {
+  setShowHint(true);
+  };
+  const handleCloseHint = () => {
+  setShowHint(false);
+  };
   const handleContinue = () => {
     setResult("none");
     if (step < 5) {
@@ -123,7 +130,7 @@ export default function Challenge() {
         {/* כפתורים תחתונים */}
         <div className={styles.actions}>
           <div className={styles.toolsRow}>
-            <button className={styles.toolButton} type="button">
+            <button className={styles.toolButton} type="button" onClick={handleShowHint}>
               <span>רמז</span>
             </button>
             <button className={styles.toolButton} type="button">
@@ -148,7 +155,26 @@ export default function Challenge() {
             </button>
           </div>
         </div>
-
+        {showHint && (
+          <div className={styles.hintOverlay} onClick={handleCloseHint}>
+            <div className={styles.hintCard} onClick={(e) => e.stopPropagation()}>
+              <div className={styles.hintIcon}>
+                {/* כאן תבוא התמונה של האייקון מהעיצוב */}
+                <img
+                    src="/icons/hint.svg"
+                    alt="רמז"
+                    className={styles.hintIcon}
+                  />
+              </div>
+              <p className={styles.hintText}>
+                {current.hint || "אין רמז זמין לשאלה זו."}
+              </p>
+              <button className={styles.backToGameBtn} onClick={handleCloseHint}>
+                חזרה למשחק
+              </button>
+            </div>
+          </div>
+        )}
         {/* Overlay תוצאה */}
         {result !== "none" && (
           <div className={styles.overlay} role="dialog" aria-modal="true">

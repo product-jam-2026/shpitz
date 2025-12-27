@@ -8,6 +8,7 @@ export type DbMessage = {
   isTrue: boolean;
   tips: string | null;
   Owner: string | null;
+  hint: string | null;
 };
 
 // 1. A helper function to generate a number based on today's date string
@@ -56,7 +57,7 @@ export function useDailyQuestions() {
         // If your table is huge, we might need a different strategy, but for <1000 rows this is fine.
         const { data, error } = await supabase
           .from("assets")
-          .select("id, content, isTrue, tips, Owner")
+          .select("id, content, isTrue, tips, Owner, hint")
           .eq("topic", "message")
           .eq("type", "txt");
 
