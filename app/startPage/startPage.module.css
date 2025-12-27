@@ -1,0 +1,98 @@
+.container {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    text-align: center;
+}
+.illustrationBox {
+  width: 200px;
+  height: 200px;
+  background-color: #EEEEEE;
+  border: 1px solid #776D6D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* נחוץ עבור ה-fill של Image */
+  overflow: hidden;   /* שומר שהתמונה לא תצא מהגבולות */
+}
+
+.mainImage {
+  object-fit: cover; /* מבטיח שהתמונה תמלא את הריבוע מבלי להתעוות */
+}
+
+
+.crossContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crossLines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    stroke: #776D6D;
+    stroke-width: 1;
+}
+
+.illustrationText {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000;
+    z-index: 1;
+}
+
+/* טקסט ההסבר */
+.contentWrapper {
+    width: 100%;
+}
+
+.description {
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 23px; /* 104.545% */
+    letter-spacing: 1.32px;
+}
+
+
+
+/* כפתור "הבנתי" */
+.understandButton {
+    border-radius: 0 0 24px 24px;
+    border-right: 3px solid #000;
+
+    border-bottom: 3px solid #000;
+
+    background: #8F8F8F;
+    display: flex;
+    width: 334px;
+    height: 114px;
+    padding: 37px 61px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px; /* 88.889% */
+    letter-spacing: 2.7px;
+}
+
+.understandButton:active {
+    transform: translateY(2px);
+    box-shadow: 0px 2px 0px #000;
+}

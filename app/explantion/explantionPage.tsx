@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styles from "./expalntionPage.module.css";
 // ייבוא קומפוננטת הקונפטי שיצרנו קודם
@@ -52,6 +53,7 @@ const explanationSteps = [
 ];
 
 export default function ChallengeBase() {
+    const router = useRouter();
     const [currentStep, setCurrentStep] = useState(0);
     const [isFinished, setIsFinished] = useState(false);
 
@@ -59,7 +61,7 @@ export default function ChallengeBase() {
         if (currentStep < explanationSteps.length - 1) {
             setCurrentStep(currentStep + 1);
         } else {
-            setIsFinished(true); 
+            router.push('/startPage'); 
         }
     };
 

@@ -40,7 +40,7 @@ export default function Index() {
     } else {
       // כאן תוסיפי את הניווט למשחק עצמו בעתיד
       console.log("מעבר ישיר לאתגר...");
-      // router.push('/game'); 
+      router.push('/startPage'); 
     }
   };
 
