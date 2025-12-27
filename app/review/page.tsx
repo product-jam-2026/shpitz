@@ -27,13 +27,13 @@ export default function MessageOnly() {
         } else {
             // Navigate to game when finished
             console.log("Tutorial completed!");
-            // router.push('/project/game');
+            // router.push('/game');
         }
     };
 
     const handleSkip = () => {
         console.log("Skip clicked!");
-        // router.push('/project/game');
+        // router.push('/game');
     };
 
     return (

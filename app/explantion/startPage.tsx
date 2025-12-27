@@ -10,7 +10,7 @@ export default function ExplanationPage() {
     // סימון שהמשתמש ראה את ההסבר
     localStorage.setItem('hasVisitedBefore', 'true');
     // ניווט חזרה לדף הבית או ישירות לאתגר
-    router.push('/project'); 
+    router.push('/'); 
   };
 
   return (
