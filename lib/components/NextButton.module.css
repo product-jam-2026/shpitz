@@ -1,0 +1,45 @@
+.nextButton {
+  display: flex;
+  width: 325px;
+  height: 114px;
+  padding: 37px 61px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  
+  border-radius: 0 0 16px 16px;
+  border-right: 3px solid #000;
+  border-bottom: 3px solid #000;
+  background: #EEE;
+  
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.nextButton:active {
+  transform: translate(2px, 2px);
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+.nextButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nextButton:disabled:active {
+  transform: none;
+  border-right: 3px solid #000;
+  border-bottom: 3px solid #000;
+}
+
+.buttonText {
+  color: #000;
+  text-align: center;
+  font-family: 'SouthFont', 'South_v2', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: 2.7px;
+}
