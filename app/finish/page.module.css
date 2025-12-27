@@ -1,0 +1,269 @@
+/* page.module.css */
+
+.container {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #5BA3E5 0%, #4A8FD8 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 30px 20px;
+  position: relative;
+}
+
+/* Header text */
+.headerText {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.headerLine1 {
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+.headerLine2 {
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Days of week circles */
+.daysContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.dayCircle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.circleEmpty {
+  background: transparent;
+  border: 3px solid #FFFFFF;
+}
+
+.circleFilled {
+  background: #2C5F8D;
+  border: 3px solid #2C5F8D;
+}
+
+.checkmark {
+  color: #CCFF00;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.dayLabel {
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Achievement badges */
+.badgesContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.badgeActive {
+  opacity: 1;
+}
+
+.badgeInactive {
+  opacity: 0.4;
+}
+
+.badgeImage {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 50%;
+}
+
+.badgeLabel {
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Main character */
+.characterContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  width: 300px;
+  height: 300px;
+}
+
+.characterImage {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.characterText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  width: 100%;
+}
+
+.congratsText {
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Share button */
+.shareButton {
+  width: 240px;
+  height: 68px;
+  background: #F5E6D3;
+  border: none;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  margin-bottom: 30px;
+}
+
+.shareButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.shareButton:active {
+  transform: translateY(0);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.shareText {
+  color: #2C5F8D;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.shareArrow {
+  color: #2C5F8D;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Bottom link */
+.bottomLink {
+  color: #2C5F8D;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: opacity 0.2s ease;
+}
+
+.bottomLink:hover {
+  opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .headerLine1,
+  .headerLine2 {
+    font-size: 20px;
+  }
+
+  .congratsText {
+    font-size: 40px;
+  }
+
+  .shareButton {
+    width: 220px;
+  }
+
+  .shareText {
+    font-size: 28px;
+  }
+
+  .daysContainer {
+    gap: 8px;
+  }
+
+  .circle {
+    width: 35px;
+    height: 35px;
+  }
+
+  .characterContainer {
+    width: 260px;
+    height: 260px;
+  }
+
+  .characterImage {
+    width: 260px;
+    height: 260px;
+  }
+}

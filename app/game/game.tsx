@@ -21,6 +21,7 @@ export default function Challenge() {
 
   const [step, setStep] = useState(1); // 1..5
   const [result, setResult] = useState<ResultState>("none");
+  const [correctAnswers, setCorrectAnswers] = useState(0); // Track correct answers
 
   const current = questions ? questions[step - 1] : undefined;
 
@@ -34,6 +35,11 @@ export default function Challenge() {
     const isCorrect = clickedOpen === current.isTrue;
 
     setResult(isCorrect ? "success" : "fail");
+    
+    // Increment correct answers counter
+    if (isCorrect) {
+      setCorrectAnswers(prev => prev + 1);
+    }
   };
 
   const handleContinue = () => {
@@ -41,8 +47,12 @@ export default function Challenge() {
     if (step < 5) {
       setStep((s) => s + 1);
     } else {
-      // Navigate to review page when finished
-      router.push('/review');
+      // Save score to localStorage before navigating
+      localStorage.setItem('gameScore', correctAnswers.toString());
+      localStorage.setItem('totalQuestions', '5');
+      
+      // Navigate to pre_review page when finished
+      router.push('/pre_review');
     }
   };
 

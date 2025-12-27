@@ -267,17 +267,6 @@
   border-radius: 0 0 0 24px;
 }
 
-
-
-/* הכותרת הצהובה/ירוקה "איך משחקים?" */
-.instructionTitle {
-  color: #CCFF00; /* צבע ירוק-צהוב זרחני לפי העיצוב */
-  font-family: 'Reisinger', sans-serif;
-  font-size: 32px;
-  font-weight: 300;
-  margin: 0;
-}
-
 /* הטקסט הלבן/צהוב שמתחת לכותרת */
 .instructionBody {
   color: #CCFF00;
@@ -337,47 +326,6 @@
 }
 
 
-
-
-/* אזור ההסבר */
-.actionsExplanationArea {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding-bottom: 60px;
-  z-index: 2500;
-  pointer-events: none;
-}
-
-/* מיכל החץ היחיד */
-.customArrowsContainer {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 120px; /* מיקום החץ מעל הריבוע המואר */
-}
-
-/* עיצוב החץ - סובבנו אותו ב-180 מעלות מהמקור כדי שיצביע למטה */
-.customArrowSvg {
-  width: 46.596px;
-  height: 93.642px;
-  /* שינינו את הזווית ל-11.5 מעלות (סיבוב של 180 מהמקור) כדי שיצביע למטה */
-  transform: rotate(11.5deg); 
-  flex-shrink: 0;
-}
-
-/* הטקסט המוטה שמאלה */
-.rotatedTextContainer {
-  width: 230.664px;
-  transform: rotate(-6.501deg);
-  margin-bottom: 10px;
-}
-
-
-
 @keyframes stepFadeIn {
   from {
     opacity: 0;
@@ -434,32 +382,6 @@
 }
 
 
-
-
-
-/* --- שלב 5: פידבק, קונפטי וחיצים חדשים --- */
-
-/* הארת מספר השלב בשורת ההתקדמות */
-.stepHighlight {
-    background: #FFFFFF !important;
-    color: #000000 !important;
-    z-index: 4000 !important;
-    position: relative;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-}
-
-/* מיכל אזור ההסבר לשלב 5 */
-.actionsExplanationArea {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    padding-bottom: 60px;
-    z-index: 2500;
-    pointer-events: none;
-}
 
 /* זה לחלק של הטקסט בתוך הכפתור המשך */
 .feedbackText {

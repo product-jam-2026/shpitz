@@ -1,0 +1,78 @@
+"use client";
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import ReviewButton from "@/lib/components/ReviewButton";
+import styles from './page.module.css';
+import Image from 'next/image';
+
+export default function PreReview() {
+  const router = useRouter();
+  const [score, setScore] = useState(0);
+  const [total, setTotal] = useState(5);
+
+  useEffect(() => {
+    // Get score from localStorage
+    const savedScore = localStorage.getItem('gameScore');
+    const savedTotal = localStorage.getItem('totalQuestions');
+    
+    if (savedScore) setScore(parseInt(savedScore));
+    if (savedTotal) setTotal(parseInt(savedTotal));
+  }, []);
+
+  const handleNext = () => {
+    router.push('./review');
+  };
+
+  // Determine if score is good (more than 3 correct answers)
+  const isGoodScore = score >= 3;
+
+  return (
+    <div className={styles.container} dir="rtl">
+      {/* SVG Image - Different based on score */}
+      <div className={styles.imageContainer}>
+        {isGoodScore ? (
+  <Image 
+    src="/icons/chief.svg" 
+    alt="Success"
+    width={200}
+    height={200}
+  />
+) : (
+  <Image 
+    src="/icons/not_the_sharpest.svg"
+    alt="Try again"
+    width={200}
+    height={200}
+  />
+)}
+      </div>
+
+      {/* Text Content - Different based on score */}
+      <div className={styles.textContent}>
+        {isGoodScore ? (
+          <>
+            <p className={styles.mainText}>
+              כל הכבוד, יצאת שפיץ!
+            </p>
+            <p className={styles.scoreText}>
+              ענית נכון על {score}/{total} שאלות
+            </p>
+          </>
+        ) : (
+          <>
+            <p className={styles.mainText}>
+              לא נורא, פעם הבאה תבוא מחודד יותר!
+            </p>
+            <p className={styles.scoreText}>
+              ענית נכון על {score}/{total} שאלות
+            </p>
+          </>
+        )}
+      </div>
+
+      {/* Button */}
+      <ReviewButton onClick={handleNext} />
+    </div>
+  );
+}
