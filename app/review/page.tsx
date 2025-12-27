@@ -41,7 +41,7 @@ export default function MessageOnly() {
                 {/* Section Heading with counter */}
                 <div className={styles.progressBar}>
                     <div className={styles.progressCounter}>{currentIndex + 1}/{totalQuestions}</div>
-                    <div className={styles.progressLabel}>לומדים משהו</div>
+                    <div className={styles.progressLabel}>סיכום יומי</div>
                 </div>
 
                 {/* כרטיס ההודעה */}
