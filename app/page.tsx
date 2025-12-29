@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'; // ייבוא הראוטר
 import styles from "./homePage.module.css";
-
+import Image from 'next/image';
 export default function Index() {
   const [activeDays, setActiveDays] = useState<number[]>([]);
   const [streak, setStreak] = useState(0);
@@ -74,14 +74,23 @@ function MobileContent({ activeDays, streak, onStart }: {
   ];
 
   return (
-    <div className="w-full flex flex-col items-center gap-10">
-      <div className="relative w-full aspect-[4/3] bg-[#EEE] border border-gray-300 flex items-center justify-center overflow-hidden">
-        <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-          <line x1="0" y1="0" x2="100%" y2="100%" stroke="black" strokeWidth="1" />
-          <line x1="100%" y1="0" x2="0" y2="100%" stroke="black" strokeWidth="1" />
-        </svg>
-        <span className="text-4xl relative z-10 font-bold">לוגו</span>
+    <div className={styles.screen} dir="rtl">
+      <div className="w-full max-w-md">
+      {/* /*<div className="relative w-full aspect-[4/3] bg-[#EEE] border border-gray-300 flex items-center justify-center overflow-hidden"> */}
+        <div className={styles.logoContainer}>
+          <div className={styles.mainIcon}>
+              <Image 
+                src="icons/homePageIcon.svg"
+                alt="homePageLogo"
+                width={400}
+                height={400}
+                priority
+              
+              />
+        </div>
       </div>
+
+     
 
       <h1 className={styles.mainTitle}>
         האתגר היומי שמחדד אותך לזיהוי הונאות רשת
@@ -108,6 +117,8 @@ function MobileContent({ activeDays, streak, onStart }: {
         <span className={styles.buttonText}>התחל</span>
       </button>
     </div>
+  </div>
+  
   );
 }
 
@@ -116,12 +127,19 @@ function DayIndicator({ letter, filled }: { letter: string; filled: boolean }) {
     <div className="flex flex-col items-center gap-1 w-[35px]">
       <div className="w-10 h-10 relative flex items-center justify-center">
         {filled ? (
-          <svg width="40" height="40" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1.83" y="1.83" width="26.34" height="26.34" rx="13.17" stroke="#776D6D" strokeWidth="3.66"/>
-            <path d="M11.0185 24.4996C9.9352 24.2829 8.03934 22.9288 7.49767 21.9537L13.0227 16.3745L12.7519 15.6162L5.2768 14.3161C5.06013 13.2328 5.87264 11.0119 6.63099 10.1453L13.6186 13.6661L13.9436 13.3953L12.8061 5.86603C13.8352 5.37852 16.2186 5.37852 17.2478 5.86603L16.1103 13.5036L16.3811 13.6661L23.3687 10.1453C24.1271 11.0119 24.9396 13.2328 24.7229 14.3161L17.2478 15.6162L16.977 16.3745L22.3937 21.8454C21.9062 22.8746 20.0103 24.2288 18.8187 24.4454L15.2978 17.6745H14.6478L11.0185 24.4996Z" fill="#776D6D"/>
-          </svg>
+         <Image 
+            src="/icons/starDaySvg.svg" 
+            alt="active day" 
+            width={40} 
+            height={40} 
+          />
         ) : (
-          <div className="w-8 h-8 rounded-full border-[3.66px] border-[#D9D9D9]" />
+          <Image 
+            src="/icons/NotActiveDay.svg" 
+            alt="inactive day" 
+            width={40} 
+            height={40} 
+          />
         )}
       </div>
       <span className={styles.dayLetter}>{letter}</span>

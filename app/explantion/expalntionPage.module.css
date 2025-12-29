@@ -4,7 +4,7 @@
 .pageWrapper {
   min-height: 100vh;
   width: 100%;
-  background-color: #F3F3F3;
+  background: var(--Background_color, #FFF9EC);
   display: flex;
   justify-content: center;
 }
@@ -26,48 +26,63 @@
 .progressBar {
     display: flex;
     width: 100%;
-    max-width: 334px;
+    max-width: 400px;
+    padding: 0 12px;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 20px;
+    gap: 10px;
+   
 }
 
 /* כל ריבוע מספר בנפרד (ה-Frame בפיגמה) */
 .progressItem {
     display: flex;
-    flex: 1;
-    height: 34px;
+    width: 80px;
+    height: 30px;
+    padding: 0 24px;
     justify-content: center;
     align-items: center;
-    background: #EBEBEB;
-    color: #BEBEBE;
-    font-family: 'SouthFont', sans-serif;
-    font-size: 20px;
-    font-weight: 400;
+    gap: 10px;
+    align-self: stretch;
+    border: 0 solid var(--Background_color, #FFF9EC);
+    background: var(--Text_messages_scroll, #BFBFBF);
+   
+    
 }
 
 /* המספר הפעיל (הריבוע הלבן עם הגבול) */
 .progressActive {
-    background: #FFFFFF;
-    color: #000000;
+    border: 0 solid var(--wrong_color, #FF706E);
+    background: var(--Light_blue_small_button, #E0EDFF);
+    color: var(--Dark_blue_text, #114081);
+    text-align: center;
+    font-family: SouthFont, sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 32px; /* 160% */
 }
 
 /* כותרת השאלה */
 .questionTitle {
-    color: #000;
-    text-align: right;
-    font-family: 'Inter', sans-serif;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 28px;
-    letter-spacing: 1.32px;
-    width: 100%;          
-    max-width: 334px;    
-    margin: -25px auto 0;
-    padding: 0;
+  color: #114081;
+  font-family: 'SouthFont', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  text-align: center;
+
+
+  /* הפתרון למניעת שבירת שורה: */
+  white-space: nowrap;      /* מונע מהטקסט לרדת שורה */
+  overflow: hidden;         /* מבטיח שאם הטקסט חורג הוא לא יבלוט החוצה */
+  text-overflow: ellipsis;  /* אופציונלי: מוסיף שלוש נקודות אם אין מקום */
+  
+  /* ביטול רוחב קבוע שעלול להגביל */
+  width: 100%; /* או כל ערך שמתאים לעיצוב שלכם */
+  padding-right: -700px;
 }
+
+
 
 .messageCard {
   display: flex;
@@ -104,13 +119,15 @@
 
 .messageHeader p {
   margin: 0;
-  font-size: 12px;
+  font-size: 20px;
   font-weight: bold;
+  color: var(--Dark_blue_text, #114081);
+  font-family: Roboto;
 }
 
 .messageTimestamp {
-  color: #808080;
-  font-size: 11px;
+  color: var(--Text_messages_scroll, #BFBFBF);
+  font-size: 20px;
   margin: 5px 0;
 }
 
@@ -157,186 +174,6 @@
   margin-top: 20px;
 }
 
-.buttonIcon {
-  width: 20px;
-  height: 100px;
-  flex-shrink: 0;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.smallToolButton {
-  display: flex;
-  width: 152px;
-  height: 51px;
-  padding: 10px 12px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid #000;
-  border-right: 3px solid #000;
-  border-bottom: 3px solid #000;
-  background: #D5D5D5;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  color: #000;
-  cursor: pointer;
-}
-
-.smallToolButton:active {
-  border-right: 1px solid #000;
-  border-bottom: 1px solid #000;
-  transform: translate(2px, 2px);
-}
-
-.squareButton {
-  display: flex;
-  width: 152px;
-  height: 138px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
-  background: #8F8F8F;
-  border: 1px solid #000;
-  border-right: 3px solid #000;
-  border-bottom: 3px solid #000;
-  color: #000;
-  font-family: 'Inter', sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.squareButton:nth-child(3) {
-  border-radius: 0 0 24px 0;
-}
-
-.squareButton:nth-child(4) {
-  border-radius: 0 0 0 24px;
-}
-
-.instructionBox {
-  background-color: #000000;
-  width: 280px;
-  padding: 30px 20px;
-  text-align: center;
-  border: 1px solid #444;
-}
-
-.instructionTitle {
-  color: #CCFF00;
-  font-family: 'Reisinger', sans-serif;
-  font-size: 32px;
-  font-weight: 300;
-  margin: 0;
-}
-
-.instructionBody {
-  color: #CCFF00;
-  font-size: 18px;
-  font-family: 'Reisinger', sans-serif;
-  line-height: 1.3;
-  margin: 0;
-  font-weight: 500;
-}
-
-.instructionBoxAnim {
-  animation: fadeInScale 0.4s ease-out;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.fullTextOverlay {
-  max-width: 320px;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.explanationText {
-  color: #CCFF00;
-  font-family: 'Reisinger', sans-serif;
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 1.3;
-  white-space: pre-line;
-}
-
-.transparentClickLayer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 2000;
-    background: transparent;
-    cursor: pointer;
-}
-
-.hintExplanationBox {
-    position: absolute;
-    bottom: 250px;
-    max-width: 280px;
-    text-align: center;
-    background: transparent;
-    padding: 10px;
-}
-
-/* אזור ההסבר */
-.actionsExplanationArea {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding-bottom: 60px;
-  z-index: 2500;
-  pointer-events: none;
-}
-
-.customArrowsContainer {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 120px;
-}
-
-.customArrowSvg {
-  width: 46.596px;
-  height: 93.642px;
-  transform: rotate(11.5deg); 
-  flex-shrink: 0;
-}
-
-.rotatedTextContainer {
-  width: 230.664px;
-  transform: rotate(-6.501deg);
-  margin-bottom: 10px;
-}
-
-@keyframes stepFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-} 
-
-.stepAnimation {
-  animation: stepFadeIn 0.3s ease-out forwards;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
 
 .overlay {
     position: fixed;
@@ -354,61 +191,410 @@
     overflow: hidden;
 }
 
+.buttonIcon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  top: 5px;
+}
+
+.smallToolButton {
+  display: flex;
+  width: 153px;
+  height: 51px;
+  padding: 10px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-right: 3px solid var(--Dark_blue_text, #114081);
+  border-bottom: 3px solid var(--Dark_blue_text, #114081);
+  background: var(--Light_blue_small_button, #E0EDFF);
+  color: var(--Dark_blue_text, #114081);
+  text-align: right;
+  font-family: "SouthFont", sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px; /* 133.333% */
+  letter-spacing: 0.48px;
+}
+
+.smallToolButton:active {
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  transform: translate(2px, 2px);
+}
+
+.squareButton {
+  display: flex;
+  width: 152px;
+  height: 138px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  border: 1px solid #000;
+  border-right: 3px solid #000;
+  border-bottom: 3px solid #000;
+  color: var(--Background_color, #FFF9EC);
+  text-align: center;
+
+  /* big-buttoms */
+  font-family: "SouthFont";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px; /* 100% */
+  letter-spacing: 2px;
+}
+.squareButtonOpen {
+  border-right: 3px solid var(--Dark_blue_text, #114081);
+  border-bottom: 3px solid var(--Dark_blue_text, #114081);
+  background: var(--True_color, #63CE83);
+}
+
+.squareButtonReport {
+  border-right: 3px solid var(--Dark_blue_text, #114081);
+  border-bottom: 3px solid var(--Dark_blue_text, #114081);
+  background: var(--wrong_color, #FF706E);
+}
+.squareButton:nth-child(3) {
+  border-radius: 0 0 24px 0;
+}
+
+.squareButton:nth-child(4) {
+  border-radius: 0 0 0 24px;
+}
+
+
+
+.instructionBox {
+
+  width: 280px;
+  padding: 30px 20px;
+  text-align: center;
+
+}
+
+.instructionTitle {
+  color: #C7EE26;
+  font-family: 'SouthFont';
+  font-size: 35px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.instructionBody {
+  color: #C7EE26;
+  text-align: center;
+  font-family: 'SouthFont';
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px; /* 150% */
+}
+
+.instructionBoxAnim {
+  animation: fadeInScale 0.4s ease-out;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.fullTextOverlay {
+  max-width: 320px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.explanationTextStep1 {
+  color: #C7EE26;
+  font-family: 'SouthFont';
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: pre-line;
+  text-align: center;
+  width: 300px;
+  margin: auto;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+.transparentClickLayer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2000;
+    background: transparent;
+    cursor: pointer;
+}
+
+
 .highlightSpotlightBox {
     position: absolute;
-    bottom: 10px; 
+    bottom: 58px; 
+    left: 50%;
+    transform: translateX(-50%);
     width: 348px;
-    height: 157px;
-    background-color: #D9D9D9;
-    z-index: 2500; 
-    border-radius: 0; 
-    animation: stepFadeIn 0.3s ease-out forwards;
+    height: 150px; 
+    /* שינוי לצבע הרקע המקורי שלך */
+    background-color: #FFF9EC; 
+
+    /* זיהוי מעל ה-Overlay (1000) */
+    z-index: 1100; 
+    pointer-events: none;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* הוספת צל קטן להפרדה מהחושך */
 }
 
 .highlight {
+    z-index: 2000 !important;
+    position: relative !important;
+    /* אופציונלי: וודאי שהבורדר של הכפתור המקורי לא נעלם */
+    border-color: #000 !important;
+    pointer-events: auto !important; 
+}
+
+/* אזור ההסבר */
+.actionsExplanationArea {
+    position: absolute; /* זה יגרום לו להתעלם מה-padding-top ומה-align-items */
+    top: -130px; /* התאמה למיקום הרצוי מתחת לכפתורים */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2500;
+}
+/* הטקסט - נעלה אותו לאזור מרכז המסך */
+.explanationText {
     position: relative;
-    z-index: 3000 !important; 
-    background-color: #8F8F8F !important; 
+    top:450px;
+    /* bottom: -530px; /* שנה לערך שמתאים מעל ההודעה */
+    left: 120px;
+    transform: translateX(-50%);
+    width: 320px;
+    color: #C7EE26;
+    font-family: "SouthFont", sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    text-align: center;
+    z-index: 3001;
+}
+
+/* החץ - נעלה אותו שיהיה מתחת לטקסט */
+.customArrowsContainer {
+    position: absolute;
+    bottom: 420px; /* שנה לערך שמתחת לטקסט */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3001;
+    animation: bounce 1.5s infinite ease-in-out;
+}
+
+.customArrowSvg {
+    width: 46px;
+    height: 93px;
+    transform: rotate(11.5deg); 
+}
+
+
+
+.rotatedTextContainer {
+  
+  width: 230.664px;
+  transform: rotate(-4.664deg);
+  margin-bottom: 10px;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+}
+
+.stepAnimation {
+  animation: stepFadeIn 0.3s ease-out forwards;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+
+
+.feedbackCombinedContainer {
+    position: absolute;
+    bottom: 240px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5005;
+}
+
+.arrowImage {
+    object-fit: contain;
+}
+
+.arrowTopAnimated {
+    width: 60px; 
+    height: 140px;
+    
+    /* סיבוב כדי שיפנה למעלה (אם המקור פונה למטה) */
+    /* אם ה-SVG המקורי פונה ימינה/שמאלה, שנו את המעלות בהתאם */
+    /* transform: rotate(180deg);  */
+    position: relative;
+    left: 50px;
+    top:125px;
+    transform: rotate(210deg) translateX(-20px);
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    z-index: 5006;
+    animation: bounceToProgress 1.5s infinite ease-in-out;
+}
+
+.arrowBottomAnimated {
+    position: relative;
+    top: 100px;
+    width: 32.021px;
+    height: 93.642px;
+    margin-top: 10px;
+    animation: bounceToButton 1.5s infinite ease-in-out;
+}
+@keyframes bounceToProgress {
+    0%, 100% { transform: rotate(-126.1deg) translate(0, 0); }
+    50% { transform: rotate(-126.1deg) translate(-5px, -5px); } /* זז באלכסון לכיוון הבר */
+}
+
+/* אנימציה לחץ התחתון - קפיצה לכיוון הכפתור */
+@keyframes bounceToButton {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+}
+
+.combinedFeedbackText {
+    position: relative;
+    top: 100px;
+    right: 20px;
+    color: #C7EE26;
+    font-family: "SouthFont", sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    text-align: center;
+    max-width: 350px;
+    line-height: 36px;
+    white-space: normal;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.progressBarContainer {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    
+}
+
+.activeHighlightWrapper {
+    z-index: 5001; 
 }
 
 .stepHighlight {
-    background: #FFFFFF !important;
+    background: #63CE83 !important;
     color: #000000 !important;
     z-index: 4000 !important;
     position: relative;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    
 }
 
-/* Arrow pointing to progress bar number 1 */
-.arrowTopProgress {
+.barHighlightBox {
     position: absolute;
-    top: 15px;
-    right: 50%;
-    transform: rotate(-103.356deg) scaleX(-1) translateX(65px);
-    transform-origin: top center;
-    width: 32.021px;
-    height: 93.642px;
-    z-index: 4000;
-    pointer-events: none;
-    animation: bounceTop 1s infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* גודל הקופסה - תתאימי לפי רוחב הבר שלך */
+    width: 95%; 
+    height: 40px; 
+    background: #FFF9EC; 
+    z-index: -1; /* חשוב: שיישב מאחורי המספרים של הבר */
+    border: 2px solid #FFFFFF;
 }
 
-/* Arrow pointing to continue button */
-.arrowBottomContinue {
+
+
+.feedbackCard {
+
+    width: 450px;
+    height: 237px;
+    border-radius: 36px 36px 0 0; 
+    background: var(--True_color, #63CE83); 
     position: absolute;
-    bottom: 530px; 
-    left: 50%; /* Keep centered */
-    width: 32.021px; 
-    height: 93.642px;
-    margin-left: -16px; 
-    transform: scaleX(-1); 
-    z-index: 4000;
-    pointer-events: none;
-    animation: bounceBottom 1s infinite;
+    bottom: -137px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 3500;
+    animation: slideUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.feedbackText {
+  color: #FFF9EC;
+  
+  font-family: "SouthFont", sans-serif;
+  font-size: 23px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+@keyframes slideUp {
+    0% {
+        transform: translate(-50%, 100%); 
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, 0); 
+        opacity: 1;
+    }
+}
+
+.explanationTextStep6{
+  color: #C7EE26;
+  text-align: center;
+  position: relative;
+  right: 25px;
+  top: -40px;
+  /* title-single-game */
+  font-family: "SouthFont", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px; /* 150% */
+  width: 289.6px;
 }
 
 /* Arrow pointing to hint button */
 .arrowToHint {
+    position: relative;
+    top:-40px;
     width: 32px;
     height: 94px;
     transform: rotate(20deg) scaleX(-1); 
@@ -426,18 +612,7 @@
     animation: bounceInstructionsNew 1s infinite;
 }
 
-/* Hint explanation area - position from right instead of left */
-.hintExplanationArea {
-    position: absolute;
-    bottom: 125px;
-    right: 10px; /* Position from right side of container */
-    width: 280px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    z-index: 3000;
-}
+
 
 /* Instructions area - position from left */
 .instructionsArea {
@@ -480,35 +655,29 @@
     50% { transform: translateX(-16px) scaleX(-1) translateY(10px); }
 }
 
-.feedbackCard {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 220px;
-  background-color: #66E0E0; 
-  border-radius: 40px 40px 0 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 3500;
-  padding: 20px;
-  text-align: center;
+
+
+.lottieContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* מאפשר ללחוץ על הכפתור שמתחת לאנימציה */
+    z-index: 0; /* מתחת לטקסט ולכפתור */
+    
 }
 
-.feedbackText {
-  color: #000;
-  font-family: Inter, sans-serif;
-  font-size: 27px;
-  font-weight: 700;
-  margin-bottom: 20px;
+.lottieAnimation {
+    width: 100%;
+    height: 100%;
 }
 
 .continueButton {
   border-radius: 0 0 24px 24px;
-  border-right: 3px solid #000;
-  border-bottom: 3px solid #000;
-  background: #8F8F8F;
+  border-right: 3px solid #114081;
+  border-bottom: 3px solid #114081;
+  background: #FFF9EC;
   display: flex;
   width: 325px;
   height: 68px;
@@ -516,10 +685,10 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  font-family: South_v2;
-  font-size: 40px;
-  font-weight: 700;
-  color: #000;
+  font-family: SouthFont;
+  font-size: 24px;
+  font-weight: 600;
+  color: #114081;
   cursor: pointer;
   transition: transform 0.1s ease;
 }
@@ -528,30 +697,7 @@
   transform: translateY(2px);
 }
 
-.customArrowSvg {
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-.arrowPointingUp {
-  transform: rotate(0deg) translateY(-20px);
-}
-
-.rotatedTextStep5 {
-    position: absolute;
-    top: 25%; /* Changed from 10% - this lowers the text */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, 0) rotate(-7deg); /* Center and rotate */
-    width: 249.883px;
-    color: var(--color-user, #CCFF00);
-    text-align: center;
-    font-family: "Reisinger";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 26px;
-    letter-spacing: 1.44px;
-    z-index: 4000;
-}
 
 .hintExplanationArea {
     position: absolute;
@@ -566,48 +712,16 @@
     z-index: 3000;
 }
 
-.hintRotatedText {
-    width: 100%;
-    transform: rotate(-6.5deg) translateY(-15px);
-    margin-bottom: 0;
-    color: #CCFF00;
-    font-family: "Reisinger - Michal", sans-serif;
-    font-size: 24px;
-    text-align: center;
-    line-height: 26px;
-    letter-spacing: 1.44px;
-}
-
-.arrowToHint {
-    width: 32px;
-    height: 94px;
-    transform: rotate(20deg) scaleX(-1); 
-    margin-top: 0;
-    margin-bottom: -10px;
-    animation: bounceBottom 1s infinite;
-}
-
 .highlightHint {
     position: relative;
-    z-index: 3000 !important;
-    background-color: #D5D5D5 !important;
-} 
-
-.arrowToInstructions {
-    width: 32px;
-    height: 94px;
-    position: absolute;
-    top: -100px;
-    left: 40px;
-    transform: rotate(-100deg);
-    z-index: 4000;
-    animation: bounceInstructions 1s infinite;
+    
+    z-index: 2500 !important; /* גבוה יותר מה-Overlay */
+    background-color: #FFF9EC !important;
+   
+    pointer-events: auto !important; /* מאפשר ללחוץ עליו */
 }
 
-@keyframes bounceInstructions {
-    0%, 100% { transform: rotate(90deg) translateY(0); }
-    50% { transform: rotate(90deg) translateY(10px); }
-}
+
 
 .instructionsArea {
     position: absolute;
@@ -622,20 +736,24 @@
     pointer-events: none;
 }
 
-.instructionsRotatedText {
-    color: var(--color-user, #CF0);
-    text-align: center;
-    font-family: "Reisinger - Michal";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 28px;
-    letter-spacing: 1.44px;
-    width: 230.664px;
-    transform: rotate(4.664deg); /* Removed translateX(20px) */
-}
 
+.explanationText6{
+  position: relative;
+  top: -40px;
+  color: #C7EE26;
+  text-align: center;
+
+  /* title-single-game */
+  font-family: "SouthFont", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px; /* 150% */
+  width: 289.6px;
+}
 .arrowToInstructionsNew {
+    position : relative;
+    top: -50px;
     width: 33.527px;
     height: 93.642px;
     transform: rotate(31.023deg); 
@@ -661,93 +779,40 @@
 
 .finalInstructionBox {
     display: flex;
-    width: 334px;
-    height: 132px;
-    padding: 20px;
+    width: 325px;
+    height: 63px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    border-right: 3px solid #000;
-    border-bottom: 3px solid #000;
-    background: #FFF;
+    border-radius: 0 0 24px 24px;
+    border-right: 3px solid var(--Dark_blue_text, #114081);
+    border-bottom: 3px solid var(--Dark_blue_text, #114081);
+    background: var(--User_color, #C7EE26);
 }
 
 .finalText {
-    color: #000;
-    text-align: center;
-    font-family: Inter;
-    font-size: 38px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 48px;
-    letter-spacing: 2.7px;
-    width: 348.502px;
-    flex-shrink: 0;
+    color: var(--Dark_blue_text, #114081);
+text-align: center;
+font-family: "SouthFont", sans-serif;
+font-size: 24px;
+font-style: normal;
+font-weight: 500;
+line-height: 32px; /* 133.333% */
+letter-spacing: 0.96px;
 }
 
-.illustrationBox {
-    width: 200px;
-    height: 200px;
-    background-color: #EEEEEE;
-    border: 1px solid #776D6D;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+
+.stepAnimation {
+    animation: stepFadeIn 0.4s ease-out forwards;
 }
 
-.crossContainer {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@keyframes stepFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px); /* קפיצה קלה מלמטה למעלה */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.crossLines {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    stroke: #776D6D;
-    stroke-width: 1;
-}
-
-.illustrationText {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #000;
-    z-index: 1;
-}
-
-.contentWrapper {
-    width: 100%;
-}
-
-.description {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    color: #333;
-    font-weight: 500;
-}
-
-.understandButton {
-    width: 100%;
-    max-width: 280px;
-    height: 60px;
-    background-color: #9E9E9E;
-    color: black;
-    font-size: 1.5rem;
-    font-weight: bold;
-    border: 2px solid #000;
-    border-radius: 12px;
-    cursor: pointer;
-    box-shadow: 0px 4px 0px #000;
-    transition: transform 0.1s, box-shadow 0.1s;
-}
-
-.understandButton:active {
-    transform: translateY(2px);
-    box-shadow: 0px 2px 0px #000;
-}

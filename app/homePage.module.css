@@ -1,23 +1,63 @@
 /** @import must precede all other statements */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap");
+.screen {
+  /* מבטיח שהגובה יהיה בדיוק גובה המסך */
+  height: 100vh; 
+  width: 100vw;
+  
+  /* מונע גלילה */
+  overflow: hidden; 
+  
+  /* צבע כחול על הכל */
+  background: #6AABFF; 
+  background: var(--Medium_blue_invert_background, #6AABFF); 
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* עוזר בסידור האלמנטים מלמעלה למטה */
+  
+  padding: 40px 12px; /* הפחתתי מעט כדי שלא יידחס במכשירים קטנים */
+  box-sizing: border-box;
+  position: fixed; /* מבטיח שזה "נדבק" למסך */
+  top: 0;
+  left: 0;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 100px; 
+}
+.mainIcon {
+  /* שליטה על גודל הלוגו ביחס למסך */
+  width: 85vw;       /* הלוגו יתפוס 80% מרוחב המסך */
+  max-width: 450px;  /* אבל לא יהיה גדול יותר מ-400 פיקסלים במחשב */
+  height: auto;      /* שומר על פרופורציות */
+  position: relative;
+  top: 50px;
+  left: 0px;
+  transition: all 0.3s ease; /* אנימציה חלקה כשמשנים גודל */
+}
 .mainTitle {
-  color: #000;
+  color: var(--Dark_blue_text, #114081);
   text-align: center;
-  font-family: 'Inter', sans-serif;
-  font-size: 31px;
+  font-family: 'Narkssim', sans-serif;
+  font-size: 40px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 25px; /* 104.545% */
   padding: 0 16px;
   margin-bottom: 40px; 
 }
 
 .streakText {
-  color: #000;
+  color: var(--Background_color, #FFF9EC);
   text-align: center;
-  font-family: 'Reisinger', sans-serif;
+  font-family: 'SouthFont', sans-serif;
   font-size: 28px;
   font-weight: 600; 
   line-height: 1.2;
@@ -26,7 +66,7 @@
 
 .dayLetter {
   font-family: 'SouthFont', sans-serif; 
-  font-size: 16px; 
+  font-size: 20px; 
   font-weight: 600;
   color: #000;
   text-align: center;
@@ -34,28 +74,18 @@
 }
 
 .startButton {
-
-display: flex;
-width: 377px;
-height: 114px;
-padding: 37px 61px;
-justify-content: center;
-align-items: center;
-gap: 10px;
-  
-
-border-radius: 0 0 24px 24px;
-border-right: 3px solid #000;
-
-border-bottom: 3px solid #000;
-
-background: #8F8F8F; 
-
+  border-radius: 0 0 24px 24px;
+  border-right: 3px solid var(--Dark_blue_text, #114081);
+  border-bottom: 3px solid var(--Dark_blue_text, #114081);
+  background: var(--User_color, #C7EE26);
   display: flex;
-  padding: 37px 61px;
+  width: 350px;
+  height: 126px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  position : relative;
+  left:-35px;
+  top : 20px;
 
   /* אפקטים ללחיצה */
   cursor: pointer;
@@ -68,11 +98,12 @@ background: #8F8F8F;
 }
 
 .buttonText {
-  color: #000;
-  text-align: center;
-  font-family: 'Inter', sans-serif; /* או Reisinger אם תרצי */
-  font-size: 32px; /* גודל מומלץ לפי גובה הכפתור */
+  font-family: 'SouthFont', sans-serif;
+  font-weight: 600;
+  color: var(--Dark_blue_text, #114081);
+  font-size: 50px;
   font-style: normal;
-  font-weight: 700;
-  letter-spacing: 1.9px;
+  font-weight: 500;
+  line-height: 40px; /* 88.889% */
+  letter-spacing: 2.7px;
 }

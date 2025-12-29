@@ -80,7 +80,7 @@ export default function Challenge() {
         <div className={styles.actions}>
           <div className={styles.toolsRow}>
             <button className={styles.toolButton} onClick={() => setShowHint(true)}>רמז</button>
-            <button className={styles.toolButton} onClick={() => router.push('/explantion')}>? הוראות</button>
+            <button className={styles.toolButton} onClick={() => router.push('/explantion?from=game')}>? הוראות</button>
           </div>
           <div className={styles.mainRow}>
             <button className={styles.reportBtn} onClick={() => handleAnswer(false)}>לדווח</button>

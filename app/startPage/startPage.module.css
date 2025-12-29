@@ -10,8 +10,7 @@
 .illustrationBox {
   width: 200px;
   height: 200px;
-  background-color: #EEEEEE;
-  border: 1px solid #776D6D;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,18 +50,19 @@
 
 /* טקסט ההסבר */
 .contentWrapper {
-    width: 100%;
+    width: 375px;
 }
 
 .description {
-    color: #000;
+    color: var(--Dark_blue_text, #114081);
     text-align: center;
-    font-family: Inter;
-    font-size: 22px;
+
+    font-family: "Narkssim", sans-serif;
+    font-size: 30px;
     font-style: normal;
-    font-weight: 700;
-    line-height: 23px; /* 104.545% */
-    letter-spacing: 1.32px;
+    font-weight: 600;
+    line-height: 36px;
+    letter-spacing: -0.78px;
 }
 
 
@@ -70,26 +70,26 @@
 /* כפתור "הבנתי" */
 .understandButton {
     border-radius: 0 0 24px 24px;
-    border-right: 3px solid #000;
-
-    border-bottom: 3px solid #000;
-
-    background: #8F8F8F;
+    border-right: 3px solid var(--Dark_blue_text, #114081);
+    border-bottom: 3px solid var(--Dark_blue_text, #114081);
+    background: var(--Background_color, #FFF9EC);
     display: flex;
-    width: 334px;
-    height: 114px;
+    width: 375px;
+    height: 126px;
     padding: 37px 61px;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    color: #000;
+    color: var(--Dark_blue_text, #114081);
     text-align: center;
-    font-family: Inter;
-    font-size: 45px;
+
+    /* big-buttoms */
+    font-family: SouthFont, sans-serif;
+    font-size: 40px;
     font-style: normal;
-    font-weight: 400;
-    line-height: 40px; /* 88.889% */
-    letter-spacing: 2.7px;
+    font-weight: 500;
+    line-height: 40px; /* 100% */
+    letter-spacing: 2px;
 }
 
 .understandButton:active {

@@ -9,7 +9,7 @@ export default function StartPage() {
 
   // ברגע שתהיה לך תמונה, פשוט תשני את זה לכתובת הקובץ (למשל: "/images/hero.png")
   // כרגע זה null ולכן יוצג ה-Placeholder
-  const imageUrl = null; 
+  const imageUrl = "icons/gotItIcon.svg"; 
 
   const handleFinish = () => {
     localStorage.setItem('hasVisitedBefore', 'true');
@@ -17,7 +17,7 @@ export default function StartPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F3F3F3] flex flex-col items-center justify-center p-6" dir="rtl">
+    <div className="min-h-screen bg-[#6AABFF] flex flex-col items-center justify-center p-6" dir="rtl">
       <div className={styles.container}>
         
         {/* אזור התמונה / איור */}
@@ -46,7 +46,7 @@ export default function StartPage() {
         {/* טקסט ההסבר */}
         <div className={styles.contentWrapper}>
           <p className={styles.description}>
-            תוצג לפניכם הודעת טקסט, חשבו האם היא <span className={styles.highlight}>אמיתית</span> או <span className={styles.highlight}>הונאה</span> ולאחר מכן בחרו האם הייתם פותחים את הלינק או מדווחים.
+           תוצג לפניכם הודעת טקסט, חשבו האם היא אמיתית או הונאה ולאחר מכן בחרו האם הייתם פותחים את הלינק או מדווחים.
           </p>
         </div>
 
