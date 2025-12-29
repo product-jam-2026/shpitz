@@ -1,5 +1,8 @@
 /* page.module.css */
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap");
+
 .pageWrapper {
   min-height: 100vh;
   width: 100%;
@@ -10,15 +13,40 @@
 
 .container {
   width: 100%;
-  max-width: 430px; /* רוחב מקסימלי של טלפון מודרני */
-  margin: 0 auto;   /* ממרכז את כל האפליקציה בדסקטופ */
+  max-width: 430px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   padding: 60px 20px 20px 20px;
   min-height: 100vh;
-  position: relative; /* חשוב עבור אלמנטים שמשתמשים ב-absolute */
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  justify-content: space-between; /* This will push buttons to bottom */
+}
+
+/* Wrapper for content that should stay together at top */
+.contentArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+/* Wrapper for buttons that should stay at bottom */
+.buttonArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  flex-shrink: 0;
+  padding-bottom: 10px;
 }
 
 /* שורת התקדמות עליונה */
@@ -26,99 +54,91 @@
     display: flex;
     width: 100%;
     max-width: 334px;
-    justify-content: flex-start; /* Changed from space-between */
+    justify-content: flex-start;
     align-items: center;
-    gap: 8px; /* Small gap between them */
+    gap: 8px;
     margin-bottom: 0px;
 }
 
 .progressLabel {
     background: #FFFFFF;
-    color: #000000;
+    color: var(--background-transparency, rgba(35, 44, 57, 0.90));
     padding: 8px 16px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'South_v2', -apple-system, Roboto, Helvetica, sans-serif;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 0.8px;
 }
 
 .progressCounter {
     background: #FFFFFF;
-    color: #000000;
+    color: var(--background-transparency, rgba(35, 44, 57, 0.90));
     padding: 8px 16px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'South_v2', 'South_v2', -apple-system, Roboto, Helvetica, sans-serif;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 0.8px;
 }
 
-/* כל ריבוע מספר בנפרד (ה-Frame בפיגמה) */
 .progressItem {
     display: flex;
-    flex: 1;               /* גורם לכל ריבוע לתפוס חלק שווה מהשורה */
-    height: 34px;          /* גובה הריבוע */
+    flex: 1;
+    height: 34px;
     justify-content: center;
     align-items: center;
-    background: #EBEBEB;   /* צבע הרקע למספרים הלא פעילים */
-    color: #BEBEBE;        /* צבע הטקסט למספרים הלא פעילים */
-    
-    /* פונט */
-    font-family: 'SouthFont', sans-serif;
+    background: #EBEBEB;
+    color: #BEBEBE;
+    font-family: 'South_v2', 'South_v2', -apple-system, Roboto, Helvetica, sans-serif;
     font-size: 20px;
     font-weight: 400;
 }
 
-/* המספר הפעיל (הריבוע הלבן עם הגבול) */
 .progressActive {
-    background: #FFFFFF;   /* רקע לבן לפי התמונה */
-    color: #000000;        /* טקסט שחור מודגש */
-    
+    background: #FFFFFF;
+    color: #000000;
 }
 
 /* כותרת השאלה */
 .questionTitle {
     color: #000;
-    text-align: right;     /* יישור הטקסט לימין לפי העיצוב */
+    text-align: right;
     font-family: 'Inter', sans-serif;
     font-size: 22px;
     font-style: normal;
     font-weight: 700;
     line-height: 28px;
     letter-spacing: 1.32px;
-
-  
     width: 100%;          
     max-width: 334px;    
-    margin: -25px auto 0;       /* ממרכז את הקונטיינר של הכותרת מול ה-progressBar */
-    padding: 0;            /* מוודא שאין פדינג פנימי שיזיז את הטקסט */
+    margin: -25px auto 0;
+    padding: 0;
 }
-
 
 .messageCard {
   display: flex;
   width: 324px;
   flex-direction: column;
   align-items: center;
-  border-radius: 32px; /* הרדיוס הראשי של כל הכרטיס */
+  border-radius: 32px;
   background: #FFF;
-  overflow: hidden;    /* חשוב מאוד: גורם לחלק האפור להיחתך בדיוק לפי הקימור הלבן */
+  overflow: hidden;
   position: relative;
   margin-top: 5px;
 }
 
-/* החלק האפור בתוך הכרטיס */
 .messageHeader {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;           /* תופס 100% מהרוחב של הכרטיס הלבן (324px) */
+  width: 100%;
   padding: 20px 0 12px 0;
   gap: 8px;
   background: #D9D9D9;
-  
-  /* התאמת הרדיוס לרדיוס של הכרטיס הלבן */
   border-radius: 32px 32px 0 0; 
 }
 
-/* העיגול הלבן בתוך החלק האפור */
 .avatarCircle {
   width: 44px;
   height: 44px;
@@ -126,7 +146,6 @@
   border-radius: 50%;
   position: relative;
 }
-
 
 .messageHeader p {
   margin: 0;
@@ -140,20 +159,47 @@
   margin: 5px 0;
 }
 
-/* הבועה החיצונית של ההודעה */
 .messageBubbleContainer {
   position: relative;
   width: 304px;
-  min-height: 80px; /* גובה מינימלי קטן יותר */
+  min-height: 80px;
+  max-height: 350px; /* Increased max height even more */
   margin: 15px 0;
   background: #F3F3F3;
   border-radius: 20px;
-  padding: 15px 20px; /* פדינג קטן יותר למעלה ולמטה */
+  padding: 15px 20px;
+  padding-right: 12px; /* Add space for scrollbar */
   display: flex;
   flex-direction: column;
+  overflow-y: scroll; /* Changed from auto to scroll - always shows scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: #888 #E0E0E0;
+  scrollbar-gutter: stable; /* Reserve space for scrollbar */
 }
 
-/* הטקסט עצמו */
+.messageBubbleContainer::-webkit-scrollbar {
+  width: 10px; /* Made scrollbar even wider */
+  display: block; /* Always show */
+  -webkit-appearance: none;
+}
+
+.messageBubbleContainer::-webkit-scrollbar-track {
+  background: #D0D0D0;
+  border-radius: 20px;
+  margin: 5px 0;
+}
+
+.messageBubbleContainer::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+  border: 2px solid #F3F3F3; /* Add border for better visibility */
+  min-height: 40px; /* Ensure thumb is always visible */
+}
+
+.messageBubbleContainer::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
 .messageBubbleText {
   position: relative;
   color: #000;
@@ -168,7 +214,7 @@
 }
 
 .messageBubbleText p {
-  margin: 0; /* הסרת המרווח מעל ומתחת לפסקה */
+  margin: 0;
 }
 
 .messageBubbleText a {
@@ -180,9 +226,9 @@
   word-break: break-all;
 }
 
-/* טקסט רמז */
 .hintText {
   width: 324px;
+  max-height: 180px; /* Increased significantly from 120px */
   color: #FFF;
   text-align: right;
   font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
@@ -193,24 +239,42 @@
   letter-spacing: 1.32px;
   white-space: pre-line;
   margin: 5px 0;
+  overflow-y: auto;
+  padding-left: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #FFFFFF #5BA3E5;
 }
 
+.hintText::-webkit-scrollbar {
+  width: 6px;
+}
+
+.hintText::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.hintText::-webkit-scrollbar-thumb {
+  background: #FFFFFF;
+  border-radius: 3px;
+}
+
+.hintText::-webkit-scrollbar-thumb:hover {
+  background: #E0E0E0;
+}
 
 .actionGrid {
   display: grid;
-  grid-template-columns: 152px 152px; /* רוחב קבוע לכל כפתור */
-  gap: 12px; /* מרווח ביניהם */
+  grid-template-columns: 152px 152px;
+  gap: 12px;
   justify-content: center;
   width: 100%;
   margin-top: 20px;
 }
 
-
 .buttonIcon {
   width: 20px;
-  height: 100 px;
+  height: 100px;
   flex-shrink: 0;
-  /* מוודא שהאייקון והטקסט מיושרים יפה באותו קו */
   display: inline-block;
   vertical-align: middle;
 }
@@ -222,13 +286,11 @@
   padding: 10px 12px;
   justify-content: center;
   align-items: center;
-  gap: 10px; /* המרווח בין ה-SVG לטקסט "רמז" */
-  
+  gap: 10px;
   border: 1px solid #000;
   border-right: 3px solid #000;
   border-bottom: 3px solid #000;
   background: #D5D5D5;
-  
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 16px;
@@ -236,7 +298,6 @@
   cursor: pointer;
 }
 
-/* אפקט לחיצה קטן כדי שירגיש כמו כפתור אמיתי */
 .smallToolButton:active {
   border-right: 1px solid #000;
   border-bottom: 1px solid #000;
@@ -251,12 +312,10 @@
   justify-content: center;
   align-items: center;
   gap: 32px;
-  
   background: #8F8F8F;
   border: 1px solid #000;
   border-right: 3px solid #000;
   border-bottom: 3px solid #000;
-  
   color: #000;
   font-family: 'Inter', sans-serif;
   font-size: 24px;
@@ -264,17 +323,14 @@
   cursor: pointer;
 }
 
-/* הכפתור הימני ("לדווח") - פינה ימנית תחתונה מעוגלת */
 .squareButton:nth-child(3) {
   border-radius: 0 0 24px 0;
 }
 
-/* הכפתור השמאלי ("לפתוח") - פינה שמאלית תחתונה מעוגלת */
 .squareButton:nth-child(4) {
   border-radius: 0 0 0 24px;
 }
 
-/* הטקסט הלבן/צהוב שמתחת לכותרת */
 .instructionBody {
   color: #CCFF00;
   font-size: 18px;
@@ -284,7 +340,6 @@
   font-weight: 500;
 }
 
-/* אנימציה למעבר בין השלבים */
 .instructionBoxAnim {
   animation: fadeInScale 0.4s ease-out;
   display: flex;
@@ -292,9 +347,6 @@
   width: 100%;
 }
 
-
-
-/* עיצוב הטקסט החופשי לשלב 2 */
 .fullTextOverlay {
   max-width: 320px;
   text-align: center;
@@ -302,7 +354,7 @@
 }
 
 .explanationText {
-  color: #CCFF00; /* צבע זרחני לפי העיצוב */
+  color: #CCFF00;
   font-family: 'Reisinger', sans-serif;
   font-size: 24px;
   font-weight: 500;
@@ -310,7 +362,6 @@
   white-space: pre-line;
 }
 
-/* שכבת לחיצה בלתי נראית */
 .transparentClickLayer {
     position: fixed;
     top: 0;
@@ -322,16 +373,14 @@
     cursor: pointer;
 }
 
-/* קופסת ההסבר של הרמז */
 .hintExplanationBox {
     position: absolute;
-    bottom: 250px; /* מתאים את הגובה מעל אזור הכפתורים */
+    bottom: 250px;
     max-width: 280px;
     text-align: center;
     background: transparent;
     padding: 10px;
 }
-
 
 @keyframes stepFadeIn {
   from {
@@ -353,7 +402,7 @@
   align-items: center;
   position: relative;
 }
-/* --- הגדרות בסיס ו-Overlay --- */
+
 .overlay {
     position: fixed;
     top: 0;
@@ -370,7 +419,6 @@
     overflow: hidden;
 }
 
-/* --- שלב 4: Spotlight וכפתורים מוארים --- */
 .highlightSpotlightBox {
     position: absolute;
     bottom: 10px; 
@@ -388,9 +436,6 @@
     background-color: #8F8F8F !important; 
 }
 
-
-
-/* זה לחלק של הטקסט בתוך הכפתור המשך */
 .feedbackText {
   color: #000;
   font-family: Inter, sans-serif;
@@ -421,18 +466,15 @@
 
 .continueButton:active {
   transform: translateY(2px);
-
 }
 
-/* הארה למספר השלב (הריבוע הלבן ב-ProgressBar) */
 .stepHighlight {
   position: relative;
   z-index: 4000 !important;
   background: #68DCDC !important;
-  border: 2px solid #fdfafa ;
+  border: 2px solid #fdfafa;
 }
 
-/* מיכל שתופס את כל שטח ה-Overlay למרכוז */
 .finalBoxContainer {
     position: absolute;
     inset: 0;
@@ -443,7 +485,6 @@
     pointer-events: none;
 }
 
-/* המלבן הלבן */
 .finalInstructionBox {
     display: flex;
     width: 334px;
@@ -453,38 +494,23 @@
     align-items: center;
     gap: 10px;
     border-right: 3px solid #000;
-
     border-bottom: 3px solid #000;
-
     background: #FFF;
 }
 
-/* הטקסט השחור בפנים */
 .finalText {
     color: #000;
-
-text-align: center;
-font-family: Inter;
-font-size: 38px;
-font-style: normal;
-font-weight: 400;
-line-height: 48px; /* 106.667% */
-letter-spacing: 2.7px;
-width: 348.502px;
-flex-shrink: 0;
-}
-
-.container {
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
     text-align: center;
+    font-family: Inter;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 48px;
+    letter-spacing: 2.7px;
+    width: 348.502px;
+    flex-shrink: 0;
 }
 
-/* קוביית האיור */
 .illustrationBox {
     width: 200px;
     height: 200px;
@@ -521,7 +547,6 @@ flex-shrink: 0;
     z-index: 1;
 }
 
-/* טקסט ההסבר */
 .contentWrapper {
     width: 100%;
 }
@@ -533,8 +558,300 @@ flex-shrink: 0;
     font-weight: 500;
 }
 
-.highlight {
-    font-weight: 800;
-    text-decoration: underline;
+/* ============================
+   RESPONSIVE MEDIA QUERIES
+   ============================ */
+
+/* For iPhone 12/13/14 standard size (390x844) and similar */
+@media (max-height: 844px) and (min-height: 701px) {
+  .container {
+    padding: 50px 18px 18px 18px;
+    gap: 8px;
+  }
+  
+  .messageCard {
+    width: 92%;
+    max-width: 310px;
+  }
+  
+  .messageBubbleContainer {
+    width: 92%;
+    max-height: 280px; /* Increased significantly */
+    margin: 12px 0;
+    padding: 14px 18px;
+    padding-right: 10px;
+  }
+  
+  .messageBubbleContainer::-webkit-scrollbar {
+    width: 9px;
+  }
+  
+  .hintText {
+    width: 92%;
+    max-width: 310px;
+    font-size: 20px;
+    line-height: 22px;
+    max-height: 150px; /* Increased from 100px */
+  }
+  
+  .actionGrid {
+    gap: 10px;
+    margin-top: 12px;
+    grid-template-columns: 145px 145px;
+  }
+  
+  .smallToolButton {
+    width: 145px;
+    height: 48px;
+    font-size: 15px;
+  }
+  
+  .squareButton {
+    width: 145px;
+    height: 120px;
+    gap: 24px;
+    font-size: 22px;
+  }
 }
 
+/* For screens with height less than 700px */
+@media (max-height: 700px) {
+  .container {
+    padding: 40px 16px 16px 16px;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  
+  .questionTitle {
+    font-size: 18px;
+    line-height: 24px;
+    margin: -15px auto 0;
+  }
+  
+  .messageCard {
+    width: 90%;
+    max-width: 300px;
+    margin-top: 2px;
+  }
+  
+  .messageHeader {
+    padding: 12px 0 8px 0;
+    gap: 4px;
+  }
+  
+  .avatarCircle {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .messageHeader p {
+    font-size: 11px;
+  }
+  
+  .messageBubbleContainer {
+    width: 90%;
+    min-height: 60px;
+    max-height: 260px; /* Increased significantly */
+    margin: 10px 0;
+    padding: 12px 16px;
+    padding-right: 10px;
+  }
+  
+  .messageBubbleContainer::-webkit-scrollbar {
+    width: 9px;
+  }
+  
+  .hintText {
+    width: 90%;
+    max-width: 300px;
+    font-size: 18px;
+    line-height: 20px;
+    max-height: 130px; /* Increased from 80px */
+    margin: 2px 0;
+  }
+  
+  .actionGrid {
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .smallToolButton {
+    width: 140px;
+    height: 45px;
+    font-size: 14px;
+  }
+  
+  .squareButton {
+    width: 140px;
+    height: 110px;
+    gap: 20px;
+    font-size: 20px;
+  }
+}
+
+/* For screens with height less than 640px */
+@media (max-height: 640px) {
+  .container {
+    padding: 30px 12px 12px 12px;
+    gap: 6px;
+  }
+  
+  .progressBar {
+    margin-bottom: -5px;
+  }
+  
+  .questionTitle {
+    font-size: 16px;
+    line-height: 22px;
+    margin: -10px auto 0;
+  }
+  
+  .messageCard {
+    width: 90%;
+    max-width: 280px;
+  }
+  
+  .messageHeader {
+    padding: 10px 0 6px 0;
+  }
+  
+  .avatarCircle {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .messageBubbleContainer {
+    min-height: 50px;
+    max-height: 220px; /* Increased significantly */
+    margin: 8px 0;
+    padding: 10px 14px;
+    padding-right: 8px;
+  }
+  
+  .messageBubbleContainer::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .hintText {
+    font-size: 16px;
+    line-height: 18px;
+    max-height: 100px; /* Increased from 60px */
+  }
+  
+  .actionGrid {
+    gap: 6px;
+    margin-top: 8px;
+  }
+  
+  .smallToolButton {
+    width: 130px;
+    height: 40px;
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+  
+  .squareButton {
+    width: 130px;
+    height: 95px;
+    gap: 16px;
+    font-size: 18px;
+  }
+  
+  .buttonIcon {
+    width: 16px;
+  }
+}
+
+/* For very small screens with height less than 580px */
+@media (max-height: 580px) {
+  .container {
+    padding: 25px 10px 10px 10px;
+    gap: 4px;
+  }
+  
+  .progressBar {
+    margin-bottom: -8px;
+    max-width: 300px;
+  }
+  
+  .progressLabel,
+  .progressCounter {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .questionTitle {
+    font-size: 14px;
+    line-height: 20px;
+    margin: -8px auto 0;
+    max-width: 300px;
+  }
+  
+  .messageCard {
+    width: 90%;
+    max-width: 260px;
+  }
+  
+  .messageHeader {
+    padding: 8px 0 4px 0;
+  }
+  
+  .avatarCircle {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .messageHeader p {
+    font-size: 10px;
+  }
+  
+  .messageTimestamp {
+    font-size: 10px;
+    margin: 3px 0;
+  }
+  
+  .messageBubbleContainer {
+    width: 92%;
+    min-height: 40px;
+    max-height: 170px; /* Increased significantly */
+    margin: 6px 0;
+    padding: 8px 12px;
+    padding-right: 6px;
+  }
+  
+  .messageBubbleContainer::-webkit-scrollbar {
+    width: 7px;
+  }
+  
+  .hintText {
+    font-size: 14px;
+    line-height: 16px;
+    max-height: 80px; /* Increased from 50px */
+  }
+  
+  .actionGrid {
+    gap: 5px;
+    margin-top: 6px;
+    grid-template-columns: 120px 120px;
+  }
+  
+  .smallToolButton {
+    width: 120px;
+    height: 36px;
+    font-size: 12px;
+    padding: 6px 8px;
+    gap: 6px;
+  }
+  
+  .squareButton {
+    width: 120px;
+    height: 85px;
+    gap: 12px;
+    font-size: 16px;
+  }
+  
+  .buttonIcon {
+    width: 14px;
+    height: auto;
+  }
+}

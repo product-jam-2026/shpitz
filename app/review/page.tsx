@@ -38,38 +38,44 @@ export default function MessageOnly() {
     return (
         <div className={styles.pageWrapper}>
             <div className={styles.container} dir="rtl">
-                {/* Section Heading with counter */}
-                <div className={styles.progressBar}>
-                    <div className={styles.progressCounter}>{currentIndex + 1}/{totalQuestions}</div>
-                    <div className={styles.progressLabel}>סיכום יומי</div>
-                </div>
-
-                {/* כרטיס ההודעה */}
-                <div className={styles.messageCard}>
-                    <div className={styles.messageHeader}>
-                        <div className={styles.avatarCircle}></div>
-                        <p dir="ltr" className="font-bold text-xs">
-                            {current.Owner ?? "+972 528886666"}
-                        </p>
+                {/* Content Area - stays at top */}
+                <div className={styles.contentArea}>
+                    {/* Section Heading with counter */}
+                    <div className={styles.progressBar}>
+                        <div className={styles.progressCounter}>{currentIndex + 1}/{totalQuestions}</div>
+                        <div className={styles.progressLabel}>סיכום יומי</div>
                     </div>
-                    <div className={styles.messageTimestamp}>היום 9:07</div>
-                    <div className={styles.messageBubbleContainer}>
-                        <div className={styles.messageBubbleText}>
-                            <p>{current.content}</p>
+
+                    {/* כרטיס ההודעה */}
+                    <div className={styles.messageCard}>
+                        <div className={styles.messageHeader}>
+                            <div className={styles.avatarCircle}></div>
+                            <p dir="ltr" className="font-bold text-xs">
+                                {current.Owner ?? "+972 528886666"}
+                            </p>
+                        </div>
+                        <div className={styles.messageTimestamp}>היום 9:07</div>
+                        <div className={styles.messageBubbleContainer}>
+                            <div className={styles.messageBubbleText}>
+                                <p>{current.content}</p>
+                            </div>
                         </div>
                     </div>
+
+                    {/* טקסט רמז */}
+                    <div className={styles.hintText}>
+                        {current.tips ?? "אין רמז זמין"}
+                    </div>
                 </div>
 
-                {/* טקסט רמז */}
-                <div className={styles.hintText}>
-                    {current.tips ?? "אין רמז זמין"}
+                {/* Button Area - anchored to bottom */}
+                <div className={styles.buttonArea}>
+                    {/* כפתור דלג */}
+                    <SkipButton onClick={handleSkip} />
+
+                    {/* כפתור הבא */}
+                    <NextButton onClick={handleNext} />
                 </div>
-
-                {/* כפתור דלג */}
-                <SkipButton onClick={handleSkip} />
-
-                {/* כפתור הבא */}
-                <NextButton onClick={handleNext} />
             </div>
         </div>
     );
