@@ -10,6 +10,7 @@ export default function PreReview() {
   const router = useRouter();
   const [score, setScore] = useState(0);
   const [total, setTotal] = useState(5);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Get score from localStorage
@@ -18,6 +19,8 @@ export default function PreReview() {
     
     if (savedScore) setScore(parseInt(savedScore));
     if (savedTotal) setTotal(parseInt(savedTotal));
+
+    setLoading(false);
   }, []);
 
   const handleNext = () => {
@@ -26,6 +29,15 @@ export default function PreReview() {
 
   // Determine if score is good (more than 3 correct answers)
   const isGoodScore = score >= 3;
+
+  if (loading) {
+    return (
+      <div className={styles.container} dir="rtl">
+        <p style={{ textAlign: "center", color: "#fff" }}>טוען...</p>
+      </div>
+    );
+  }
+
 
   return (
     <div className={styles.container} dir="rtl">
