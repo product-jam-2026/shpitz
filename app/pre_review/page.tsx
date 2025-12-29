@@ -32,20 +32,20 @@ export default function PreReview() {
       {/* SVG Image - Different based on score */}
       <div className={styles.imageContainer}>
         {isGoodScore ? (
-  <Image 
-    src="/icons/chief.svg" 
-    alt="Success"
-    width={200}
-    height={200}
-  />
-) : (
-  <Image 
-    src="/icons/not_the_sharpest.svg"
-    alt="Try again"
-    width={200}
-    height={200}
-  />
-)}
+          <Image 
+            src="/icons/chief.svg" 
+            alt="Success"
+            fill
+            style={{ objectFit: 'contain' }}
+          />
+        ) : (
+          <Image 
+            src="/icons/not_the_sharpest.svg"
+            alt="Try again"
+            fill
+            style={{ objectFit: 'contain' }}
+          />
+        )}
       </div>
 
       {/* Text Content - Different based on score */}

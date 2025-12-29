@@ -107,6 +107,18 @@
   font-weight: 600;
 }
 
+.statsBox {
+  display: flex;
+  width: 90%;
+  max-width: 360px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--Light_blue_small_button, #BBD8FF);
+}
+
 /* Achievement badges */
 .badgesContainer {
   display: flex;
@@ -138,8 +150,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #FFFFFF;
   border-radius: 50%;
+  position: relative;  /* ADD THIS */
+}
+
+/* ADD THIS: */
+.badgeImage img {
+  width: 60px !important;
+  height: 60px !important;
+}
+
+.badge:nth-child(2) .badgeImage img {
+  width: 90px !important;
+  height: 90px !important;
+}
+
+.badge:nth-child(3) .badgeImage img {
+  width: 110px !important;
+  height: 110px !important;
 }
 
 .badgeLabel {
