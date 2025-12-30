@@ -3,9 +3,11 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./game.module.css";
+import Lottie from "lottie-react"
 import { useDailyQuestions } from "@/app/hooks/useDailyQuestions";
 import ConfettiEffect from "../ConfettiEffect"; 
 
+import confettiAnimation from "@/public/animation/confettiAnimation.json";
 type ResultState = "none" | "success" | "fail";
 
 export default function Challenge() {
@@ -52,7 +54,16 @@ export default function Challenge() {
 
   return (
     <div className={styles.screen}>
-      {result === "success" && <ConfettiEffect />}
+      {result === "success" && (
+      <div className={styles.lottieOverlay}>
+          <Lottie 
+            animationData={confettiAnimation} 
+            loop={false} 
+            style={{ width: '100%', height: '100%', position: 'absolute', pointerEvents: 'none' }}
+          />
+        </div>
+      )
+      }
 
       <div className={styles.phone} dir="rtl">
         <div className={styles.progressBar}>
