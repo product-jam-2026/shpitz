@@ -5,9 +5,9 @@ import Navbar from "@/lib/components/Navbar";
 import Footer from "@/lib/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Digital Product Jam Starter Kit",
+  title: "Shpitz Game",
   description:
-    "A starter kit for wiritng code in the Digital Product Jam course.",
+    "The app to teach oldies tech orianut",
 };
 
 export const viewport = {
