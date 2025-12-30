@@ -228,7 +228,7 @@
 
 .hintText {
   width: 324px;
-  max-height: 180px; /* Increased significantly from 120px */
+  max-height: 180px;
   color: #FFF;
   text-align: right;
   font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
@@ -238,7 +238,7 @@
   line-height: 23px;
   letter-spacing: 1.32px;
   white-space: pre-line;
-  margin: 5px 0;
+  margin: 5px 0px;
   overflow-y: auto;
   padding-left: 8px;
   scrollbar-width: thin;
@@ -565,9 +565,9 @@
 /* For iPhone 12/13/14 standard size (390x844) and similar */
 @media (max-height: 844px) and (min-height: 701px) {
   .container {
-    padding: 50px 18px 18px 18px;
     gap: 8px;
   }
+
   
   .messageCard {
     width: 92%;
@@ -591,7 +591,8 @@
     max-width: 310px;
     font-size: 20px;
     line-height: 22px;
-    max-height: 150px; /* Increased from 100px */
+    max-height: 150px;
+    margin-bottom: 10px;
   }
   
   .actionGrid {

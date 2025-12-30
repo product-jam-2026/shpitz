@@ -20,6 +20,7 @@ export default function MessageOnly() {
 
     const current = questions[currentIndex];
     const totalQuestions = questions.length;
+    const isLastQuestion = currentIndex === totalQuestions - 1;
 
     const handleNext = () => {
         if (currentIndex < totalQuestions - 1) {
@@ -70,11 +71,11 @@ export default function MessageOnly() {
 
                 {/* Button Area - anchored to bottom */}
                 <div className={styles.buttonArea}>
-                    {/* כפתור דלג */}
-                    <SkipButton onClick={handleSkip} />
+                    {/* כפתור דלג - hide on last question */}
+                    {!isLastQuestion && <SkipButton onClick={handleSkip} />}
 
-                    {/* כפתור הבא */}
-                    <NextButton onClick={handleNext} />
+                    {/* כפתור הבא - text changes on last question */}
+                    <NextButton onClick={handleNext} text={isLastQuestion ? "סיום" : undefined} />
                 </div>
             </div>
         </div>
