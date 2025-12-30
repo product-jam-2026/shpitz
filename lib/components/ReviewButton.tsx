@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./NextButton.module.css";
+import styles from "./ReviewButton.module.css";
 
 interface NextButtonProps {
   onClick?: () => void;
@@ -10,7 +10,7 @@ interface NextButtonProps {
 export default function NextButton({ onClick, disabled = false }: NextButtonProps) {
   return (
     <button 
-      className={styles.nextButton} 
+      className={styles.reviewButton} 
       onClick={onClick}
       disabled={disabled}
     >

@@ -1,13 +1,5 @@
 /* page.module.css */
 
-
-@font-face {
-  font-family: 'South_v2';
-  src: url('C:\Users\noysh\Desktop\shpitz\public\fonts\South_v2-Regular.27d40caf46fd6a81f09bf1b3f8f8f393.otf') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-}
-
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap");
 
@@ -45,7 +37,7 @@
 
 .mainTitle {
   color: #FFFFFF;
-  font-family: 'South_v2', 'Inter', sans-serif;
+  font-family: 'SouthFont', 'Inter', sans-serif;
   font-size: 20px;
   font-weight: 700;
   margin: 0;
@@ -268,7 +260,7 @@
 
 .shareText {
   color: #2C5F8D;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'SouthFont', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 32px;
   font-weight: 700;
 }
