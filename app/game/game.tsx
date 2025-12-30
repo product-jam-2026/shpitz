@@ -3,9 +3,11 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./game.module.css";
+import Lottie from "lottie-react"
 import { useDailyQuestions } from "@/app/hooks/useDailyQuestions";
 import ConfettiEffect from "../ConfettiEffect"; 
 
+import confettiAnimation from "@/public/animation/confettiAnimation.json";
 type ResultState = "none" | "success" | "fail";
 
 export default function Challenge() {
@@ -20,7 +22,15 @@ export default function Challenge() {
 
   const current = questions ? questions[step - 1] : undefined;
   const tipText = useMemo(() => current?.tips ?? "טיפ לא זמין כרגע.", [current]);
+  const [isClosing, setIsClosing] = useState(false);
 
+  const handleClose = () => {
+    setIsClosing(true); // מפעיל את אנימציית הירידה
+    setTimeout(() => {
+      setShowHint(false); // מסיר את הרכיב מהמסך אחרי שהאנימציה מסתיימת
+      setIsClosing(false); // מאפס את המצב לפעם הבאה
+    }, 500); // הזמן כאן חייב להיות תואם לזמן האנימציה ב-CSS
+  };
   const handleAnswer = (clickedOpen: boolean) => {
     if (!current) return;
     const isCorrect = clickedOpen === current.isTrue;
@@ -52,7 +62,16 @@ export default function Challenge() {
 
   return (
     <div className={styles.screen}>
-      {result === "success" && <ConfettiEffect />}
+      {result === "success" && (
+      <div className={styles.lottieOverlay}>
+          <Lottie 
+            animationData={confettiAnimation} 
+            loop={false} 
+            style={{ width: '100%', height: '100%', position: 'absolute', pointerEvents: 'none' }}
+          />
+        </div>
+      )
+      }
 
       <div className={styles.phone} dir="rtl">
         <div className={styles.progressBar}>
@@ -68,8 +87,12 @@ export default function Challenge() {
 
         <div className={styles.messageCard}>
           <div className={styles.messageHeader}>
-            <div className={styles.avatarCircle} />
-            <p dir="ltr" className="font-bold text-xs">{current.Owner ?? "+972"}</p>
+            <img 
+                src="icons/messageIcon.svg" 
+                alt="Message Icon" 
+                className={styles.headerIcon} 
+              />
+            <p dir="ltr" className={styles.ownerText}>{current.Owner}</p>
           </div>
           <div className={styles.messageTimestamp}>היום 9:07</div>
           <div className={styles.messageBubble}>
@@ -79,19 +102,30 @@ export default function Challenge() {
 
         <div className={styles.actions}>
           <div className={styles.toolsRow}>
-            <button className={styles.toolButton} onClick={() => setShowHint(true)}>רמז</button>
+            <button className={styles.toolButton} onClick={() => setShowHint(true)}>
+              
+              <img 
+                  src="/icons/sharp.svg" 
+                  alt="Hint Icon" 
+                  style={{ width: '35px', height: '35px' }} 
+                />
+              <span>רמז</span>
+              </button>
             <button className={styles.toolButton} onClick={() => router.push('/explantion?from=game')}>? הוראות</button>
           </div>
           <div className={styles.mainRow}>
-            <button className={styles.reportBtn} onClick={() => handleAnswer(false)}>לדווח</button>
-            <button className={styles.openBtn} onClick={() => handleAnswer(true)}>לפתוח</button>
+            <button className={styles.reportBtn} onClick={() => handleAnswer(false)}>תקינה</button>
+            <button className={styles.openBtn} onClick={() => handleAnswer(true)}>חשודה</button>
           </div>
         </div>
 
         {/* פופ-אפ רמז צף */}
         {showHint && (
-          <div className={styles.hintOverlay} onClick={() => setShowHint(false)}>
-            <div className={styles.hintCard} onClick={(e) => e.stopPropagation()}>
+         <div className={styles.hintOverlay} onClick={handleClose}>
+            <div 
+              className={`${styles.hintCard} ${isClosing ? styles.slideDown : ''}`} 
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className={styles.hintContent}>
                 <div className={styles.hintIconContainer}>
                    <img src="/icons/hint.svg" alt="רמז" className={styles.hintIcon} />
@@ -100,9 +134,9 @@ export default function Challenge() {
                   {current.hint || "אין רמז זמין לשאלה זו."}
                 </p>
               </div>
-              <button className={styles.backToGameBtn} onClick={() => setShowHint(false)}>
-                חזרה למשחק
-              </button>
+              <button className={styles.backToGameBtn} onClick={handleClose}>
+              חזרה למשחק
+            </button>
             </div>
           </div>
         )}

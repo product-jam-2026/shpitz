@@ -23,7 +23,18 @@
   margin: 0 0 24px;
   height: 34px;
 }
-
+.lottieOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999; /* מעל הכל */
+  pointer-events: none; /* מאפשר להמשיך ללחוץ על כפתורים מתחת */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .progressItem {
   flex: 1;
   display: flex;
@@ -98,7 +109,35 @@
   text-align: right;
   margin: 0;
 }
+.headerIcon {
+  width:70px;            /* שנוי לפי הגודל המתאים לך */
+  height: 70px;
+  object-fit: contain;
+}
 
+.ownerText {
+  color: var(--Dark_blue_text, #114081);
+  text-align: center;
+  font-family: 'Roboto', sans-serif; /* וודאי ש-Roboto טעון בפרויקט */
+  font-size: 13.334px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30.002px; /* 225% */
+  letter-spacing: 0.8px;
+  display: block; /* מבטיח שה-text-align: center יעבוד */
+}
+.messageTimestamp{
+  color: #BFBFBF;
+    text-align: center;
+
+    /* text-msg-date */
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 128.571% */
+    letter-spacing: 0.84px;
+}
 /* --- כפתורי עזר --- */
 .toolsRow {
   display: grid;
@@ -110,9 +149,9 @@
 .toolButton {
   height: 51px;
   border: 1px solid #114081;
-  border-right: 3px solid #114081;
-  border-bottom: 3px solid #114081;
-  background: #E0EDFF;
+  border-right: 3px solid var(--Dark_blue_text, #114081);
+  border-bottom: 3px solid var(--Dark_blue_text, #114081);
+  background: var(--Light_blue_small_button, #BBD8FF);
   color: #114081;
   font-family: 'SouthFont', sans-serif;
   font-weight: 700;
@@ -147,16 +186,16 @@
 
 .openBtn {
   background: #FF706E;
-  border-right: 3px solid #114081;
+  border-left: 3px solid #114081;
   border-bottom: 3px solid #114081;
-  border-radius: 0 0 24px 0;
+  border-radius: 0 0 0 24px ;
 }
 
 .reportBtn {
   background: #62CD81;
-  border-left: 3px solid #114081;
+  border-right: 3px solid #114081;
   border-bottom: 3px solid #114081;
-  border-radius: 0 0 0 24px;
+  border-radius: 0 0  24px 0;
 }
 
 /* --- פופ-אפ רמז (חדש!) --- */
@@ -170,17 +209,63 @@
   z-index: 10000;
   padding: 20px;
 }
-
 .hintCard {
+  /* שינוי לרוחב גמיש שלא חורג מהמסך */
   width: 100%;
-  max-width: 360px;
-  background: #DAEBFF;
-  border-radius: 36px 36px 24px 24px;
+  max-width: 500px; 
+  height: 496px;
+  background: var(--Light_blue_small_button, #BBD8FF);
+  
+  border-radius: 0 36px 0 0;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1000;
+  animation: slideUp 0.5s ease-out forwards;
 }
+
+@keyframes slideUp {
+  from {
+    /* מתחיל מתחת למסך */
+    transform: translateY(100%); 
+  }
+  to {
+    /* חוזר למיקום המקורי שלו בתחתית */
+    transform: translateY(0); 
+  }
+}
+.slideDown {
+  animation: slideDown 0.5s ease-in forwards !important;
+}
+
+/* הגדרת תנועת הירידה */
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+/* אנימציית פתיחה מלמטה */
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, 100%); /* מתחיל מחוץ למסך למטה */
+  }
+  to {
+    transform: translate(-50%, 0); /* מסיים במיקום המקורי */
+  }
+}
+
 
 .hintContent {
   padding: 40px 20px;
@@ -194,18 +279,18 @@
   display: flex;
   width: 100px;
   height: 100px;
-  background: #C7EE26;
+  background: #FFF9EC;
   border-radius: 50%;
   justify-content: center;
   align-items: center;
 }
 
-.hintIcon { width: 50px; height: auto; }
+.hintIcon { width: 70px; height: auto; }
 
 .hintText {
   color: #114081;
   text-align: center;
-  font-family: "Narkissim TRIAL", sans-serif;
+  font-family: "Narkissim";
   font-size: 26px;
   font-weight: 700;
   line-height: 36px;
@@ -215,7 +300,7 @@
 
 .backToGameBtn {
   display: flex;
-  width: 100%;
+  width: 325px;
   height: 63px;
   justify-content: center;
   align-items: center;
@@ -225,9 +310,9 @@
   border-bottom: 3px solid #114081;
   border-radius: 0 0 24px 24px;
   color: #114081;
-  font-family: "SouthFont", sans-serif;
+  font-family: "SouthFont";
   font-size: 26px;
-  font-weight: 700;
+  font-weight: 500;
   cursor: pointer;
 }
 
