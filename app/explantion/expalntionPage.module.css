@@ -12,14 +12,15 @@
 .container {
   width: 100%;
   max-width: 430px;
+  overflow: hidden;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 60px 20px 20px 20px;
-  min-height: 100vh;
-  position: relative;
+  gap: 2vh;
+  padding: 5vh 20px;
+  height: 100vh;
+  
 }
 
 /* מכולת המספרים - השורה כולה */
@@ -167,7 +168,7 @@
 
 .actionGrid {
   display: grid;
-  grid-template-columns: 152px 152px;
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
   justify-content: center;
   width: 100%;
@@ -340,28 +341,24 @@
 }
 
 
-.highlightSpotlightBox {
-    position: absolute;
-    bottom: 58px; 
-    left: 50%;
-    transform: translateX(-50%);
-    width: 348px;
-    height: 150px; 
-    /* שינוי לצבע הרקע המקורי שלך */
-    background-color: #FFF9EC; 
-
-    /* זיהוי מעל ה-Overlay (1000) */
-    z-index: 1100; 
-    pointer-events: none;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* הוספת צל קטן להפרדה מהחושך */
+.highlight {
+    position: relative !important;
+    z-index: 2500 !important; 
+    pointer-events: auto !important; 
+    filter: brightness(1.1);
 }
 
-.highlight {
-    z-index: 2000 !important;
-    position: relative !important;
-    /* אופציונלי: וודאי שהבורדר של הכפתור המקורי לא נעלם */
-    border-color: #000 !important;
-    pointer-events: auto !important; 
+.highlightSpotlightBox {
+    position: absolute;
+    width: 370px;
+    height: 165px;
+    left: 53%;
+    top:80%;
+    transform: translate(-50%, -50%);
+    background-color: #FFF9EC; 
+    z-index: 2500; 
+    pointer-events: none;
+    max-width: 95vw; 
 }
 
 /* אזור ההסבר */
@@ -376,12 +373,11 @@
 }
 /* הטקסט - נעלה אותו לאזור מרכז המסך */
 .explanationText {
-    position: relative;
-    top:450px;
-    /* bottom: -530px; /* שנה לערך שמתאים מעל ההודעה */
-    left: 120px;
+    position: absolute;
+    bottom: 240px;
+    left: 50%;
     transform: translateX(-50%);
-    width: 320px;
+    width: 80%;
     color: #C7EE26;
     font-family: "SouthFont", sans-serif;
     font-weight: 500;
@@ -393,7 +389,7 @@
 /* החץ - נעלה אותו שיהיה מתחת לטקסט */
 .customArrowsContainer {
     position: absolute;
-    bottom: 420px; /* שנה לערך שמתחת לטקסט */
+    bottom: 60vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 3001;
@@ -701,7 +697,7 @@
 
 .hintExplanationArea {
     position: absolute;
-    bottom: 125px;
+    bottom: 15vh;
     right: 50%; /* Position from center */
     transform: translateX(165px); /* Adjust to align with hint button */
     width: 280px;
