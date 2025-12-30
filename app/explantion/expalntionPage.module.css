@@ -168,11 +168,14 @@
 
 .actionGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  grid-template-columns: 152px 152px;
+  column-gap: 4px;
+  row-gap: 8px;
+
   justify-content: center;
   width: 100%;
   margin-top: 20px;
+  margin: 20px auto 0 auto;
 }
 
 
@@ -260,7 +263,7 @@
 .squareButtonReport {
   border-right: 3px solid var(--Dark_blue_text, #114081);
   border-bottom: 3px solid var(--Dark_blue_text, #114081);
-  background: var(--wrong_color, #FF706E);
+  background:  #FF706E;
 }
 .squareButton:nth-child(3) {
   border-radius: 0 0 24px 0;
@@ -350,10 +353,11 @@
 
 .highlightSpotlightBox {
     position: absolute;
-    width: 370px;
-    height: 165px;
-    left: 53%;
+    width: 340px;
+    height: 150px;
+    left: 50%;
     top:80%;
+    left: 50%;
     transform: translate(-50%, -50%);
     background-color: #FFF9EC; 
     z-index: 2500; 
@@ -379,7 +383,7 @@
     transform: translateX(-50%);
     width: 80%;
     color: #C7EE26;
-    font-family: "SouthFont", sans-serif;
+    font-family: "Narkissim", sans-serif;
     font-weight: 500;
     font-size: 24px;
     text-align: center;
