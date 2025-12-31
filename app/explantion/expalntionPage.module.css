@@ -543,7 +543,7 @@
     width: 450px;
     height: 237px;
     border-radius: 36px 36px 0 0; 
-    background: var(--True_color, #63CE83); 
+    background: #63CE83; 
     position: absolute;
     bottom: -137px; 
     left: 50%;

@@ -76,14 +76,21 @@ export default function Challenge() {
       <div className={styles.phone} dir="rtl">
         <div className={styles.progressBar}>
           {[1, 2, 3, 4, 5].map((n) => {
+            const isCurrent = n === step;
+            const isCorrect = answersHistory[n] === "success";
+            const isWrong = answersHistory[n] === "fail";
+            const isAnswered = isCorrect || isWrong;
             let cl = styles.progressItem;
-            if (n === step || answersHistory[n] === "success") cl += ` ${styles.progressActive}`;
-            else if (answersHistory[n] === "fail") cl += ` ${styles.failCard}`;
-            return <div key={n} className={cl}>{n}</div>;
+            if (isCurrent ) cl += ` ${styles.progressActive}`;
+            else if (isWrong) cl += ` ${styles.progressFail}`;
+            else if (isCorrect) cl += ` ${styles.progressSuccess}`;
+            return <div key={n} className={cl}>
+            {(isCurrent || isAnswered) ? n : ""}
+            </div>;
           })}
         </div>
 
-        <h2 className={styles.questionTitle}>האם הייתם פותחים את הלינק?</h2>
+        <h2 className={styles.questionTitle}>מה דעתכם על ההודעה?</h2>
 
         <div className={styles.messageCard}>
           <div className={styles.messageHeader}>
@@ -146,12 +153,15 @@ export default function Challenge() {
           <div className={styles.overlay}>
             <div className={`${styles.resultCard} ${result === "success" ? styles.successCard : styles.failCard}`}>
               {result === "success" ? (
-                <div className={styles.successHeader}>כל הכבוד, עוד כמה סיבובים<br />ותהיה שפיץ!</div>
+                <div className={styles.successHeader}>תשובה נכונה. <br />כל הכבוד, עוד כמה סיבובים<br />ותהיה שפיץ!</div>
               ) : (
-                <>
+                <div className={styles.failContainer}>
                   <div className={styles.failTitle}>תשובה לא נכונה</div>
-                  <div style={{color: 'white', fontWeight: 'bold', fontSize: '16px'}}>{tipText}</div>
-                </>
+                  <div className={styles.tipWrapper}>
+                    <img src="icons/sharpWringAnswerSvg.svg" alt="tip" className={styles.tipIcon} />
+                  <div className={styles.tipTextStyle}>{tipText}</div>
+                </div>
+                </div>
               )}
               <button className={styles.continueBtn} onClick={handleContinue}>המשך</button>
             </div>

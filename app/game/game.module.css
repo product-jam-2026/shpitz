@@ -41,24 +41,33 @@
   justify-content: center;
   align-items: center;
   background: #EBEBEB;
-  color: #BEBEBE;
-  font-family: 'SouthFont', sans-serif;
+  color: #BFBFBF;
+  font-family: 'SouthFont';
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .progressActive {
   background: #E0EDFF;
   color: #114081;
 }
-
+.progressSuccess {
+  background-color: #63CE83 !important;
+  color: white !important;
+  border: none;
+}
+.progressFail {
+  background-color: #FF706E !important;
+  color: white !important;
+  border: none;
+}
 /* --- כותרת השאלה --- */
 .questionTitle {
   margin: 0 0 20px;
   text-align: center;
-  font-family: 'SouthFont', sans-serif;
+  font-family: 'SouthFont';
   font-size: 28px;
-  font-weight: 900;
+  font-weight: 500;
   color: #114081;
   white-space: nowrap;
 }
@@ -73,7 +82,7 @@
 }
 
 .messageHeader {
-  background: #d9d9d9;
+  background: #BFBFBF;
   padding: 14px;
   display: flex;
   flex-direction: column;
@@ -352,9 +361,11 @@
 .failCard { background: #FF706E; color: #ffffff; }
 
 .successHeader, .failTitle {
-  font-family: 'SouthFont', sans-serif;
-  font-size: 26px;
-  font-weight: 900;
+  font-family: 'SouthFont';
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: -15px;
+  margin-bottom: 5px;
   line-height: 1.2;
 }
 
@@ -364,12 +375,45 @@
   height: 68px;
   flex-shrink: 0;
   border-radius: 14px;
-  border: 3px solid #114081;
-  background: #fff7ea;
   color: #114081;
-  font-family: 'SouthFont', sans-serif;
-  font-size: 26px;
-  font-weight: 900;
+  font-family: 'SouthFont';
+  font-size: 30px;
+  font-weight: 500;
   cursor: pointer;
   margin-top: auto;
+  border-radius: 0 0 24px 24px;
+  border-right: 3px solid #114081;
+  border-bottom: 3px solid #114081;
+  background: #FFF9EC;
+}
+.tipTextStyle{
+  color: #FFF;
+  text-align: right;
+
+  font-family: "Narkssim";
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px; /* 123.077% */
+  letter-spacing: -0.52px;
+}
+
+.tipIcon {
+  width: 40px; /* הגדירי לפי הגודל הרצוי */
+  height: auto;
+}
+.tipWrapper {
+  display: flex;
+  flex-direction: row; 
+  align-items: flex-start; 
+  gap: 12px;
+  direction: rtl; 
+}
+
+.failContainer {
+  display: flex;
+  flex-direction: column; /* מסדר את הכותרת מעל השורה של האייקון */
+  align-items: flex-start; /* מצמיד הכל לימין (בגלל ה-RTL) */
+  direction: rtl; 
+  width: 100%;
 }
