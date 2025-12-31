@@ -114,8 +114,8 @@ export default function Challenge() {
             <button className={styles.toolButton} onClick={() => router.push('/explantion?from=game')}>? הוראות</button>
           </div>
           <div className={styles.mainRow}>
-            <button className={styles.reportBtn} onClick={() => handleAnswer(false)}>תקינה</button>
-            <button className={styles.openBtn} onClick={() => handleAnswer(true)}>חשודה</button>
+            <button className={styles.reportBtn} onClick={() => handleAnswer(true)}>תקינה</button>
+            <button className={styles.openBtn} onClick={() => handleAnswer(false)}>חשודה</button>
           </div>
         </div>
 
