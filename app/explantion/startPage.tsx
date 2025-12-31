@@ -31,7 +31,7 @@ export default function ExplanationPage() {
         {/* טקסט ההסבר */}
         <div className={styles.contentWrapper}>
           <p className={styles.description}>
-            תוצג לפניכם הודעת טקסט, חשבו האם היא <span className={styles.highlight}>אמיתית</span> או <span className={styles.highlight}>הונאה</span> ולאחר מכן בחרו האם הייתם פותחים את הלינק או מדווחים.
+            תוצג לפניכם הודעת טקסט, חשבו האם היא <span className={styles.highlight}>תקינה</span> או <span className={styles.highlight}>חשודה</span> ובחרו את האופציה המתאימה.
           </p>
         </div>
 

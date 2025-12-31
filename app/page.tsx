@@ -98,7 +98,7 @@ function MobileContent({ activeDays, streak, onStart }: {
 
       <div className="flex flex-col items-center gap-4">
         <p className={styles.streakText}>
-          אתה מתחדד כבר {streak} ימים ברצף!
+          אתה מתחדד {streak} ימים ברצף!
         </p>
         
         <div className="flex flex-row-reverse gap-3" dir="ltr"> 

@@ -383,7 +383,7 @@
     transform: translateX(-50%);
     width: 80%;
     color: #C7EE26;
-    font-family: "Narkissim", sans-serif;
+    font-family: "SouthFont", sans-serif;
     font-weight: 500;
     font-size: 24px;
     text-align: center;
@@ -716,7 +716,7 @@
     position: relative;
     
     z-index: 2500 !important; /* גבוה יותר מה-Overlay */
-    background-color: #FFF9EC !important;
+    background-color: #BBD8FF !important;
    
     pointer-events: auto !important; /* מאפשר ללחוץ עליו */
 }

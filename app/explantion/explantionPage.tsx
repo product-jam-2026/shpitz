@@ -13,7 +13,7 @@ const explanationSteps = [
         showOverlay: true
     },
     { // שלב 1
-        body: "תוצג לפניכם הודעת טקסט, חשבו האם היא אמיתית או הונאה ולאחר מכן בחרו האם הייתם פותחים את הלינק או מדווחים.",
+        body: "תוצג לפניכם הודעת טקסט, חשבו האם היא תקינה או חשודה ובחרו את האופציה המתאימה",
         isTitleStep: false,
         isIntroStep: true,
         showOverlay: true
@@ -91,7 +91,7 @@ export default function ChallengeBase() {
             </div>
 
                 {/* 2. כותרת השאלה */}
-                <h2 className={styles.questionTitle}>האם הייתם פותחים את הלינק?</h2>
+                <h2 className={styles.questionTitle}>מה דעתכם על ההודעה?</h2>
 
                 {/* 3. כרטיס ההודעה */}
                 <div className={styles.messageCard}>
