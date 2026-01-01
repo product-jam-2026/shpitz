@@ -68,7 +68,9 @@ export default function StreakPage() {
       const file = new File([blob], "result.png", { type: "image/png" });
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({
+
           files: [file],
+          title : message,
           text: message,
         });
         } else {
