@@ -58,13 +58,14 @@ export default function StreakPage() {
     // const message = `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`;
     // const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
     // window.open(whatsappUrl, '_blank');
-    const stickerPath="/Stickers/Sticker1to3.webp";
+    const stickerPath="/Stickers/sticker day 1-3.png";
     const message = `אני מתחדד כבר ${3} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`;
     try{
       const response = await fetch(stickerPath);
       const blob = await response.blob();
 
-      const file = new File([blob], "sticker.webp", { type: blob.type });
+      // const file = new File([blob], "sticker.webp", { type: blob.type });
+      const file = new File([blob], "result.png", { type: "image/png" });
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({
           files: [file],
