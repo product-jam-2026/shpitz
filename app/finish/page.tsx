@@ -54,10 +54,31 @@ export default function StreakPage() {
     localStorage.setItem('userStreak', consecutiveStreak.toString());
   }, []);
 
-  const handleShare = () => {
-    const message = `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`;
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+  const handleShare = async () => {
+    // const message = `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`;
+    // const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    // window.open(whatsappUrl, '_blank');
+    const stickerPath="/Stickers/Sticker1to3.webp";
+    const message = `אני מתחדד כבר ${3} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`;
+    try{
+      const response = await fetch(stickerPath);
+      const blob = await response.blob();
+
+      const file = new File([blob], "sticker.webp", { type: blob.type });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          text: message,
+        });
+        } else {
+          const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+          window.open(whatsappUrl, '_blank');
+        } 
+        } catch (error) {
+          console.error('Error sharing:', error);const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+          window.open(whatsappUrl, '_blank');
+        }
+    
   };
 
   const handleContinue = () => {
