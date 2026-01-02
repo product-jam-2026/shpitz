@@ -13,6 +13,8 @@ export default function StreakPage() {
   useEffect(() => {
     const today = new Date();
     const todayDayOfWeek = today.getDay(); // 0 = Sunday, 6 = Saturday
+    const savedScore = localStorage.getItem('gameScore');
+    const s = savedScore ? parseInt(savedScore) : 0;
     
     // Get all activity dates from localStorage
     const activityDates = JSON.parse(localStorage.getItem('userActivityDates') || '[]');
@@ -53,35 +55,104 @@ export default function StreakPage() {
     setStreak(consecutiveStreak);
     localStorage.setItem('userStreak', consecutiveStreak.toString());
   }, []);
+  type StickerShare = {
+  stickerPath: string;  
+  message: string;
+  };
 
+  function getStickerByStats(streak: number, correctCount: number): StickerShare {
+    if (correctCount === 0) {
+    return {
+      stickerPath:"/Stickers/sticker0_no_answers.png",
+      message: `אני צריך להתאמץ יותר בזיהוי הונאות רשת! הצטרפו אליי ללמוד איך להתחדד!`
+    };}
+    else if (streak >= 1 && streak <= 3) {
+    return {
+      stickerPath: "/Stickers/stickerday1_3.png",
+      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+    };
+    }
+    if (streak >= 4 && streak <= 5) {
+      return {
+      stickerPath: "/Stickers/stickerday3_5.png",
+      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+    };
+  }
+  if (streak >= 6 && streak <= 7) {
+    return {
+      stickerPath: "/Stickers/stickerday5_7.png",
+      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+    };
+  }
+  if (streak >= 14 && streak <= 20) {
+    return {
+      stickerPath: "/Stickers/stickerday14_23.png",
+      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+    };
+  }
+  if (streak >= 21) {
+    return {
+      stickerPath: "/Stickers/stickerday21_31.png",
+      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+    };
+
+  }
+  return {
+  stickerPath:  "/Stickers/stickerday21_31.png",
+  message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+  };
+  }
   const handleShare = async () => {
     // const message = `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`;
     // const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
     // window.open(whatsappUrl, '_blank');
-    const stickerPath="/Stickers/sticker day 1-3.png";
-    const message = `אני מתחדד כבר ${3} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`;
-    try{
+    // const stickerPath="/Stickers/sticker day 1-3.png";
+    // const message = `אני מתחדד כבר ${3} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`;
+    // try{
+    //   const response = await fetch(stickerPath);
+    //   const blob = await response.blob();
+
+    //   // const file = new File([blob], "sticker.webp", { type: blob.type });
+    //   const file = new File([blob], "result.png", { type: "image/png" });
+    //   if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    //     await navigator.share({
+          
+    //       files: [file],
+    //       text: message,
+    //     });
+    //     } else {
+    //       const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    //       window.open(whatsappUrl, '_blank');
+    //     } 
+    //     } catch (error) {
+    //       console.error('Error sharing:', error);const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    //       window.open(whatsappUrl, '_blank');
+    //     }
+    const savedScore = localStorage.getItem("gameScore");
+    const correctCount = savedScore ? parseInt(savedScore, 10) : 0;
+    const { stickerPath, message } = getStickerByStats(streak, correctCount);
+     try {
       const response = await fetch(stickerPath);
       const blob = await response.blob();
+      const file = new File([blob], "sticker.png", { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })){
+         await navigator.share({
+            files: [file],
+            text: message,
+          });
+           return;
+      }
+      const stickerUrl = `${window.location.origin}${stickerPath}`;
+      const whatsappText = `${message}\n\nהסטיקר שלי 👇\n${stickerUrl}`;
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(whatsappText)}`;
+      window.open(whatsappUrl, "_blank");
+      } catch (err) {
+      console.error("Error sharing:", err);
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank");
+      }
 
-      // const file = new File([blob], "sticker.webp", { type: blob.type });
-      const file = new File([blob], "result.png", { type: "image/png" });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({
 
-          files: [file],
-          title : message,
-          text: message,
-        });
-        } else {
-          const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-          window.open(whatsappUrl, '_blank');
-        } 
-        } catch (error) {
-          console.error('Error sharing:', error);const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-          window.open(whatsappUrl, '_blank');
-        }
-    
   };
 
   const handleContinue = () => {
@@ -104,7 +175,6 @@ export default function StreakPage() {
   };
 
   const today = new Date().getDay();
-
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.container} dir="rtl">

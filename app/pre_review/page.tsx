@@ -38,7 +38,7 @@ export default function PreReview() {
     );
   }
 
-
+  
   return (
     <div className={styles.container} dir="rtl">
       {/* SVG Image - Different based on score */}
