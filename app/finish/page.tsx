@@ -19,10 +19,17 @@ export default function StreakPage() {
     // Get all activity dates from localStorage
     const activityDates = JSON.parse(localStorage.getItem('userActivityDates') || '[]');
     
-    // Calculate consecutive streak
+    // Save today's activity first
+    const todayString = today.toISOString().split('T')[0];
+    if (!activityDates.includes(todayString)) {
+      activityDates.push(todayString);
+      localStorage.setItem('userActivityDates', JSON.stringify(activityDates));
+    }
+
+    // Calculate consecutive streak (now including today)
     let consecutiveStreak = 0;
     let checkDate = new Date(today);
-    
+
     while (true) {
       const dateString = checkDate.toISOString().split('T')[0];
       if (activityDates.includes(dateString)) {
@@ -42,13 +49,6 @@ export default function StreakPage() {
       if (activityDates.includes(dateString)) {
         currentWeekActiveDays.push(i);
       }
-    }
-    
-    // Save today's activity
-    const todayString = today.toISOString().split('T')[0];
-    if (!activityDates.includes(todayString)) {
-      activityDates.push(todayString);
-      localStorage.setItem('userActivityDates', JSON.stringify(activityDates));
     }
     
     setActiveDays(currentWeekActiveDays);
