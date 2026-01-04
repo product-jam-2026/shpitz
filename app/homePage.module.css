@@ -4,7 +4,9 @@
 .screen {
   height: 100vh; 
   width: 100vw;
-  
+  min-height: 100dvh;
+  min-height: 100vh;
+  flex-direction: column;
   overflow: hidden; 
   
   background: linear-gradient(rgba(93, 198, 227, 0.2), rgba(93, 198, 227, 0.2)), 
@@ -112,13 +114,11 @@
   justify-content: center;
   align-items: center;
   
-  /* רוחב: 90% מהמסך בטלפונים, אבל לא יותר מ-325px */
   width: 80%;
   max-width: 260px;
   
-  /* גובה: ינוע בין 60px בטלפונים קטנים ל-100px במסכים גדולים */
-  /* ה-126px המקורי עלול להיות גבוה מדי למובייל */
-  height: clamp(80px, 15vh, 126px);
+ 
+  height: clamp(70px, 12vh, 110px);
 
   background: #C7EE26;
 
@@ -129,8 +129,8 @@
   
   
   margin: 0 auto;
-  margin-top: clamp(40px, 12vh, 98px);
-  margin-bottom: 2vh; 
+  margin-top: clamp(20px, 8vh, 60px);
+  margin-bottom: 3dvh;
 
   cursor: pointer;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
