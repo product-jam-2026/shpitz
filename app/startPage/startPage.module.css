@@ -91,14 +91,14 @@
     height: clamp(80px, 15vh, 126px);
     
     margin: 0 auto;
-    margin-top: clamp(40px, 15vh, 169px);
-    margin-bottom: 20px;
+    margin-top: clamp(20px, 6vh, 60px);
+    margin-bottom: 2dvh;
     
-    
+
     
     color: #000;
     font-family: SouthFont;
-    font-size: clamp(28px, 8vw, 40px);
+    font-size: clamp(26px, 7vw, 36px);
     font-weight: 500;
     line-height: 1;
     letter-spacing: 2px;
