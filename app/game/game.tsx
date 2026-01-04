@@ -44,6 +44,13 @@ export default function Challenge() {
     setResult("none");
     if (step < 5) setStep((s) => s + 1);
     else {
+      const todayKey = new Date().toISOString().slice(0, 10);
+      localStorage.setItem("dailyCompletedDate", todayKey);
+       localStorage.setItem("dailyResults", JSON.stringify({
+         score: correctAnswers,
+         total: 5,
+          answersHistory,
+      }));
       localStorage.setItem('gameScore', correctAnswers.toString());
       localStorage.setItem('totalQuestions', '5');
       router.push('/pre_review');

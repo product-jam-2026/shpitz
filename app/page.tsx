@@ -8,13 +8,17 @@ export default function Index() {
   const [activeDays, setActiveDays] = useState<number[]>([]);
   const [streak, setStreak] = useState(0);
   const [isFirstVisit, setIsFirstVisit] = useState<boolean | null>(null);
-  const router = useRouter(); // אתחול הראוטר
+  const router = useRouter(); 
+  const [hasCompletedToday, setHasCompletedToday] = useState(false);
+
 
   useEffect(() => {
-    // בדיקת ביקור ראשון
+    
     const hasVisited = localStorage.getItem('hasVisitedBefore');
     setIsFirstVisit(!hasVisited);
-
+    const todayKey = new Date().toISOString().slice(0, 10);
+    const completedDate = localStorage.getItem("dailyCompletedDate");
+    setHasCompletedToday(completedDate === todayKey);
     // לוגיקה של הסטריק
     const today = new Date().getDay();
     const savedDays = JSON.parse(localStorage.getItem('userActivityDays') || '[]');
@@ -34,12 +38,13 @@ export default function Index() {
   }, []);
 
   const handleStart = () => {
+    if (hasCompletedToday) {
+       router.push("/pre_review");
+        return;
+    }
     if (isFirstVisit) {
-      // ניווט לדף ההסבר (הנתיב הוא /explantion)
       router.push('/explantion');
     } else {
-      // כאן תוסיפי את הניווט למשחק עצמו בעתיד
-      console.log("מעבר ישיר לאתגר...");
       router.push('/startPage'); 
     }
   };
