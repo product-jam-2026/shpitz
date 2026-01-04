@@ -1,129 +1,141 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation'; // ייבוא הראוטר
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./homePage.module.css";
-import Image from 'next/image';
+import Image from "next/image";
+
 export default function Index() {
+  const router = useRouter();
+
   const [activeDays, setActiveDays] = useState<number[]>([]);
   const [streak, setStreak] = useState(0);
   const [isFirstVisit, setIsFirstVisit] = useState<boolean | null>(null);
-  const router = useRouter(); 
   const [hasCompletedToday, setHasCompletedToday] = useState(false);
-
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    
-    const hasVisited = localStorage.getItem('hasVisitedBefore');
+    const today = new Date();
+    const todayDayOfWeek = today.getDay(); // 0..6
+
+    // ✅ first visit
+    const hasVisited = localStorage.getItem("hasVisitedBefore");
     setIsFirstVisit(!hasVisited);
-    const todayKey = new Date().toISOString().slice(0, 10);
+
+    // ✅ completed today
+    const todayKey = today.toISOString().split("T")[0]; // YYYY-MM-DD
     const completedDate = localStorage.getItem("dailyCompletedDate");
     setHasCompletedToday(completedDate === todayKey);
-    // לוגיקה של הסטריק
-    const today = new Date().getDay();
-    const savedDays = JSON.parse(localStorage.getItem('userActivityDays') || '[]');
-    const savedStreak = parseInt(localStorage.getItem('userStreak') || '0');
 
-    if (!savedDays.includes(today)) {
-      const updatedDays = [...savedDays, today];
-      localStorage.setItem('userActivityDays', JSON.stringify(updatedDays));
-      setActiveDays(updatedDays);
-      const newStreak = savedStreak + 1;
-      localStorage.setItem('userStreak', newStreak.toString());
-      setStreak(newStreak);
-    } else {
-      setActiveDays(savedDays);
-      setStreak(savedStreak);
+    // ✅ streak based on real dates (like your StreakPage)
+    const activityDates: string[] = JSON.parse(
+      localStorage.getItem("userActivityDates") || "[]"
+    );
+
+    // save today's visit
+    if (!activityDates.includes(todayKey)) {
+      activityDates.push(todayKey);
+      localStorage.setItem("userActivityDates", JSON.stringify(activityDates));
     }
+
+    // calculate consecutive streak including today
+    let consecutiveStreak = 0;
+    const checkDate = new Date(today);
+
+    while (true) {
+      const dateString = checkDate.toISOString().split("T")[0];
+      if (activityDates.includes(dateString)) {
+        consecutiveStreak++;
+        checkDate.setDate(checkDate.getDate() - 1);
+      } else {
+        break;
+      }
+      
+    }
+
+    setStreak(consecutiveStreak);
+    localStorage.setItem("userStreak", consecutiveStreak.toString());
+
+    // ✅ active days for current week (only up to today)
+    const currentWeekActiveDays: number[] = [];
+    for (let i = 0; i <= todayDayOfWeek; i++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() - (todayDayOfWeek - i));
+      const dStr = d.toISOString().split("T")[0];
+      if (activityDates.includes(dStr)) {
+        currentWeekActiveDays.push(i);
+      }
+    }
+    setActiveDays(currentWeekActiveDays);
   }, []);
 
   const handleStart = () => {
     if (hasCompletedToday) {
-       router.push("/pre_review");
-        return;
+      router.push("/pre_review");
+      return;
     }
+
     if (isFirstVisit) {
-      router.push('/explantion');
+      router.push("/explantion");
     } else {
-      router.push('/startPage'); 
+      router.push("/startPage");
     }
   };
 
   return (
     <div className="min-h-screen bg-[#F3F3F3] flex flex-col items-center py-8 px-4" dir="rtl">
-      <div className="w-full max-w-md"> 
-        <MobileContent 
-          activeDays={activeDays} 
-          streak={streak} 
-          onStart={handleStart} 
-        />
+      <div className="w-full max-w-md">
+        <MobileContent activeDays={activeDays} streak={streak} onStart={handleStart} />
       </div>
     </div>
   );
 }
 
-// --- MobileContent Component ---
-function MobileContent({ activeDays, streak, onStart }: { 
-  activeDays: number[], 
-  streak: number, 
-  onStart: () => void }) {
-    
+function MobileContent({
+  activeDays,
+  streak,
+  onStart,
+}: {
+  activeDays: number[];
+  streak: number;
+  onStart: () => void;
+}) {
   const daysOfWeek = [
-    { label: 'א', value: 0 },
-    { label: 'ב', value: 1 },
-    { label: 'ג', value: 2 },
-    { label: 'ד', value: 3 },
-    { label: 'ה', value: 4 },
-    { label: 'ו', value: 5 },
-    { label: 'ש', value: 6 },
+    { label: "א", value: 0 },
+    { label: "ב", value: 1 },
+    { label: "ג", value: 2 },
+    { label: "ד", value: 3 },
+    { label: "ה", value: 4 },
+    { label: "ו", value: 5 },
+    { label: "ש", value: 6 },
   ];
 
   return (
     <div className={styles.screen} dir="rtl">
       <div className="w-full max-w-md">
-      {/* /*<div className="relative w-full aspect-[4/3] bg-[#EEE] border border-gray-300 flex items-center justify-center overflow-hidden"> */}
         <div className={styles.logoContainer}>
           <div className={styles.mainIcon}>
-              <Image 
-                src="icons/homePageIcon.svg"
-                alt="homePageLogo"
-                width={400}
-                height={400}
-                priority
-              
-              />
+            <Image src="icons/homePageIcon.svg" alt="homePageLogo" width={400} height={400} priority />
+          </div>
         </div>
-      </div>
 
-     
+        <h1 className={styles.mainTitle}>האתגר היומי שמחדד אותך לזיהוי הונאות רשת</h1>
 
-      <h1 className={styles.mainTitle}>
-        האתגר היומי שמחדד אותך לזיהוי הונאות רשת
-      </h1>
+        <div className="flex flex-col items-center gap-4">
+          <p className={styles.streakText}>אתה מתחדד {streak} ימים ברצף!</p>
 
-      <div className="flex flex-col items-center gap-4">
-        <p className={styles.streakText}>
-          אתה מתחדד {streak} ימים ברצף!
-        </p>
-        
-        <div className="flex flex-row-reverse gap-3" dir="ltr"> 
-          {daysOfWeek.map((day) => (
-            <DayIndicator 
-              key={day.value} 
-              letter={day.label} 
-              filled={activeDays.includes(day.value)} 
-            />
-          ))}
+          <div className="flex flex-row-reverse gap-3" dir="ltr">
+            {daysOfWeek.map((day) => (
+              <DayIndicator key={day.value} letter={day.label} filled={activeDays.includes(day.value)} />
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* חיבור הפונקציה לכפתור */}
-      <button className={styles.startButton} onClick={onStart}>
-        <span className={styles.buttonText}>התחל</span>
-      </button>
+        <button className={styles.startButton} onClick={onStart}>
+          <span className={styles.buttonText}>התחל</span>
+        </button>
+      </div>
     </div>
-  </div>
-  
   );
 }
 
@@ -132,19 +144,9 @@ function DayIndicator({ letter, filled }: { letter: string; filled: boolean }) {
     <div className="flex flex-col items-center gap-1 w-[35px]">
       <div className="w-10 h-10 relative flex items-center justify-center">
         {filled ? (
-         <Image 
-            src="/icons/starDaySvg.svg" 
-            alt="active day" 
-            width={40} 
-            height={40} 
-          />
+          <Image src="/icons/starDaySvg.svg" alt="active day" width={40} height={40} />
         ) : (
-          <Image 
-            src="/icons/NotActiveDay.svg" 
-            alt="inactive day" 
-            width={40} 
-            height={40} 
-          />
+          <Image src="/icons/NotActiveDay.svg" alt="inactive day" width={40} height={40} />
         )}
       </div>
       <span className={styles.dayLetter}>{letter}</span>
