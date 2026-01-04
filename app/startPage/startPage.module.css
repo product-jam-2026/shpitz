@@ -1,9 +1,13 @@
 .screen {
-  height: 100vh; 
+  height: 100dvh;
   width: 100vw;
-  
-  overflow: hidden; 
-  
+  /* min-height: 100dvh;
+  min-height: 100vh; */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  position: fixed;
+  top: 0;
+  left: 0;
   background: linear-gradient(rgba(93, 198, 227, 0.2), rgba(93, 198, 227, 0.2)), 
             url('/background.png') no-repeat center / cover;
   background-color: #5DC6E3;
@@ -11,13 +15,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between; /* עוזר בסידור האלמנטים מלמעלה למטה */
+  justify-content: flex-start; /* עוזר בסידור האלמנטים מלמעלה למטה */
   
-  padding: 5vh 5vw; 
+  padding: 4dvh 5vw;
   box-sizing: border-box;
-  position: fixed; 
-  top: 0;
-  left: 0;
+  
 }
 .container {
   display: flex;
@@ -34,7 +36,7 @@
     max-width: 300px;
     /* שואף ל-132px, אבל מתכווץ במסכים קצרים */
     aspect-ratio: 1 / 1; /* שומר על ריבוע לתמונה */
-    margin-top: clamp(60px, 15vh, 132px);
+    margin-top: clamp(20px, 5dvh, 40px);
     width: 166px;
     height: 166;
 
@@ -88,11 +90,12 @@
 
     width: 90%;
     max-width: 375px;
-    height: clamp(80px, 15vh, 126px);
+    height: clamp(85px, 12vh, 100px);
     
     margin: 0 auto;
-    margin-top: clamp(20px, 6vh, 60px);
-    margin-bottom: 2dvh;
+    
+    margin-bottom: 5dvh;
+    margin-top: clamp(15px, 4vh, 25px);
     
 
     
