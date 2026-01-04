@@ -124,7 +124,7 @@ function MobileContent({
         <div className="flex flex-col items-center gap-4">
           <p className={styles.streakText}>אתה מתחדד {streak} ימים ברצף!</p>
 
-          <div className="flex flex-row-reverse gap-3" dir="ltr">
+          <div className={styles.daysContainer}>
             {daysOfWeek.map((day) => (
               <DayIndicator key={day.value} letter={day.label} filled={activeDays.includes(day.value)} />
             ))}
@@ -141,15 +141,16 @@ function MobileContent({
 
 function DayIndicator({ letter, filled }: { letter: string; filled: boolean }) {
   return (
-    <div className="flex flex-col items-center gap-1 w-[35px]">
-      <div className="w-10 h-10 relative flex items-center justify-center">
-        {filled ? (
-          <Image src="/icons/starDaySvg.svg" alt="active day" width={40} height={40} />
-        ) : (
-          <Image src="/icons/NotActiveDay.svg" alt="inactive day" width={40} height={40} />
-        )}
+    <div className={styles.dayItem} >
+      <div className={styles.iconWrapper}>
+        <Image 
+          src={filled ? "/icons/starDaySvg.svg" : "/icons/NotActiveDay.svg"} 
+          alt="day status" 
+          width={28} 
+          height={28} 
+        />
       </div>
-      <span className={styles.dayLetter}>{letter}</span>
+      <span className={`${styles.dayLetter} ${filled ? styles.activeLetter : styles.inactiveLetter}`}>{letter}</span>
     </div>
   );
 }

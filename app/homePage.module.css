@@ -7,16 +7,18 @@
   
   overflow: hidden; 
   
-  background: #6AABFF; 
-
+  background: linear-gradient(rgba(93, 198, 227, 0.2), rgba(93, 198, 227, 0.2)), 
+            url('/background.png') no-repeat center / cover;
+  background-color: #5DC6E3;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between; /* עוזר בסידור האלמנטים מלמעלה למטה */
   
-  padding: 5vh 5vw; /* הפחתתי מעט כדי שלא יידחס במכשירים קטנים */
+  padding: 5vh 5vw; 
   box-sizing: border-box;
-  position: fixed; /* מבטיח שזה "נדבק" למסך */
+  position: fixed; 
   top: 0;
   left: 0;
 }
@@ -27,87 +29,124 @@
   align-items: center;
   width: 100%;
   flex: 1;
-  /* margin-top: 100px;  */
+  padding-top: 5vh;
 }
 .mainIcon {
-  /* שליטה על גודל הלוגו ביחס למסך */
-  width: 70vw;       /* הלוגו יתפוס 80% מרוחב המסך */
-  max-width: 320px;  /* אבל לא יהיה גדול יותר מ-400 פיקסלים במחשב */
-  height: auto;      /* שומר על פרופורציות */
-  /* position: relative;
-  top: 50px;
-  left: 0px; */
-  transition: all 0.3s ease; /* אנימציה חלקה כשמשנים גודל */
+  width: 70vw;       
+  max-width: 320px; 
+  height: auto;     
+  transition: all 0.3s ease;
 }
 .mainTitle {
-  color: #114081;
+  color: #000;
   text-align: center;
-  font-family: 'Narkssim', sans-serif;
-  font-size: clamp(24px, 8vw, 40px);
+  font-family: 'Narkssim';
+  font-size: clamp(20px, 5.5vw, 26px);
   font-style: normal;
-  font-weight: 600;
-  line-height: 1.1;
-  padding: 0 10px;
-  margin: 2vh 0;
-  margin-top: 1vh;
-  margin-bottom: 9vh;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  width: 90%;
+  max-width: 290px;
+  margin: 0 auto;
+  margin-top: -3vh;
 }
 
 .streakText {
-  color: var(--Background_color, #FFF9EC);
+  color: #FFF9EC;
   text-align: center;
-  font-family: 'SouthFont';
-  font-size: 28px;
+  font-family: 'SouthFont', sans-serif;
+  font-size: clamp(18px, 6vw, 24px);
   font-weight: 500; 
   line-height: 1.2;
-  margin-top: 20px;
+  white-space: nowrap;
+  width: auto;
+  max-width: 95vw;
+  margin-top: clamp(40px, 10vh, 85px);
+  margin-left: auto;
+  margin-right: auto;
 }
+.daysContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  gap: clamp(4px, 2.5vw, 12px); 
+  
+  width: 100%;
+  margin: 0 auto;
+  margin-top: clamp(4px, 2vh, 8px);
+}
+.dayItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5vh;
+ width: clamp(24px, 8vw, 32px);
+}
+.iconWrapper {
+  width: clamp(22px, 7vw, 28px);
+  height: clamp(22px, 7vw, 28px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 .dayLetter {
   font-family: 'SouthFont', sans-serif; 
-  font-size: 20px; 
-  font-weight: 600;
+ font-size: clamp(14px, 4vw, 20px);
+  font-weight: 500;
   color: #000;
   text-align: center;
   margin-top: 4px; 
 }
+
+.activeLetter {
+  color: #000000; /* שחור */
+}
+.inactiveLetter {
+  color: #FFFFFF; /* לבן */
+}
 .startButton {
-  width: 90%; 
-  max-width: 350px;
-  height: clamp(80px, 12vh, 126px); /* גובה שמשתנה לפי גובה המכשיר */
-  
-  border-radius: 0 0 24px 24px;
-  border-right: 3px solid #114081;
-  border-bottom: 3px solid #114081;
-  background: #C7EE26;
-  
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
   
-  margin-top: auto;
-  margin-bottom: 100vh;
+  /* רוחב: 90% מהמסך בטלפונים, אבל לא יותר מ-325px */
+  width: 80%;
+  max-width: 260px;
+  
+  /* גובה: ינוע בין 60px בטלפונים קטנים ל-100px במסכים גדולים */
+  /* ה-126px המקורי עלול להיות גבוה מדי למובייל */
+  height: clamp(80px, 15vh, 126px);
 
-  transform: translateY(50%);
+  background: #C7EE26;
+
+  /* עיצוב הפינות והמסגרת */
+  border-radius: 0 0 24px 24px;
+  border-right: 3px solid #000;
+  border-bottom: 3px solid #000;
+  
+  
+  margin: 0 auto;
+  margin-top: clamp(40px, 12vh, 98px);
+  margin-bottom: 2vh; 
+
   cursor: pointer;
-  /* transform: translateY(25px) translateX(-15px); */
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-
+/* אפקט לחיצה שנותן תחושה של כפתור אמיתי */
 .startButton:active {
-  transform: translateY(50%) scale(0.98);
-  border-bottom-width: 1px;
+  transform: translateY(2px);
   border-right-width: 1px;
-  filter: brightness(0.95);
+  border-bottom-width: 1px;
 }
 
 .buttonText {
-  font-family: 'SouthFont', sans-serif;
-  font-weight: 600;
-  color: #114081;
-  font-size: clamp(30px, 10vw, 50px);
+  font-family: 'SouthFont';
+  color: #000;
+  font-size: clamp(28px, 8vw, 38px);
   font-weight: 500;
-  /* line-height: 40px; /* 88.889% */
-  /* letter-spacing: 2.7px;  */
+  line-height: 1;
 }
