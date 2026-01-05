@@ -9,6 +9,32 @@ import ConfettiEffect from "../ConfettiEffect";
 
 import confettiAnimation from "@/public/animation/confettiAnimation.json";
 type ResultState = "none" | "success" | "fail";
+type DailyAnswer = {
+  index: number;      // 0..4
+  isCorrect: boolean; // true/false
+  tip: string;        // tip shown for this question (can be empty)
+};
+
+function getTodayKey() {
+  return new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+}
+
+function dailyAnswersKey() {
+  return `dailyAnswers_${getTodayKey()}`;
+}
+
+function loadDailyAnswers(): DailyAnswer[] {
+  const arr: DailyAnswer[] = JSON.parse(localStorage.getItem(dailyAnswersKey()) || "[]");
+  return arr.sort((a, b) => a.index - b.index);
+}
+
+function upsertDailyAnswer(answer: DailyAnswer) {
+  const arr = loadDailyAnswers();
+  const filtered = arr.filter(a => a.index !== answer.index);
+  filtered.push(answer);
+  filtered.sort((a, b) => a.index - b.index);
+  localStorage.setItem(dailyAnswersKey(), JSON.stringify(filtered));
+}
 
 export default function Challenge() {
   const router = useRouter();
@@ -38,23 +64,54 @@ export default function Challenge() {
     setResult(currentResult);
     setAnswersHistory(prev => ({ ...prev, [step]: currentResult }));
     if (isCorrect) setCorrectAnswers(prev => prev + 1);
+
+    upsertDailyAnswer({
+    index: step - 1,
+    isCorrect,
+    tip: current.tips ?? "",
+    });
   };
 
   const handleContinue = () => {
     setResult("none");
     if (step < 5) setStep((s) => s + 1);
+    // else {
+    //   const todayKey = new Date().toISOString().slice(0, 10);
+    //   localStorage.setItem("dailyCompletedDate", todayKey);
+    //    localStorage.setItem("dailyResults", JSON.stringify({
+    //      score: correctAnswers,
+    //      total: 5,
+    //       answersHistory,
+          
+    //   }));
+    //   localStorage.setItem('gameScore', correctAnswers.toString());
+    //   localStorage.setItem('totalQuestions', '5');
+    //   router.push('/pre_review');
+    // }
     else {
-      const todayKey = new Date().toISOString().slice(0, 10);
-      localStorage.setItem("dailyCompletedDate", todayKey);
-       localStorage.setItem("dailyResults", JSON.stringify({
-         score: correctAnswers,
-         total: 5,
-          answersHistory,
-      }));
-      localStorage.setItem('gameScore', correctAnswers.toString());
-      localStorage.setItem('totalQuestions', '5');
-      router.push('/pre_review');
-    }
+  const todayKey = getTodayKey();
+  localStorage.setItem("dailyCompletedDate", todayKey);
+
+  const daily = loadDailyAnswers();
+  const score = daily.filter(a => a.isCorrect).length;
+
+  // Optional: also save the first tip of the day explicitly (nice for StreakPage)
+  const dailyTip = daily.length > 0 ? (daily[0].tip || "") : "";
+
+  localStorage.setItem("dailyResults", JSON.stringify({
+    score,
+    total: 5,
+    answersHistory,     // keep if you want
+    squares: daily.map(a => (a.isCorrect ? "🟩" : "🟥")).join(""),
+    dailyTip,
+  }));
+
+  localStorage.setItem("gameScore", score.toString());
+  localStorage.setItem("totalQuestions", "5");
+
+  router.push("/pre_review");
+}
+
   };
 
   if (loading || error || !current) {
