@@ -176,8 +176,8 @@
   border: 1px solid #114081;
   border-right: 3px solid var(--Dark_blue_text, #114081);
   border-bottom: 3px solid var(--Dark_blue_text, #114081);
-  background: var(--Light_blue_small_button, #BBD8FF);
-  color: #114081;
+  background: white;
+  color: #000000;
   font-family: 'SouthFont', sans-serif;
   font-weight: 700;
   font-size: 18px;
@@ -212,16 +212,16 @@
 
 .openBtn {
   background: #FF706E;
-  border-left: 3px solid #114081;
-  border-bottom: 3px solid #114081;
+  border-right: 3px solid #000000;
+  border-bottom: 3px solid #000000;
   border-radius: 0 0 0 24px ;
 }
 
 .reportBtn {
-  background: #62CD81;
-  border-right: 3px solid #114081;
-  border-bottom: 3px solid #114081;
-  border-radius: 0 0  24px 0;
+  background: #62CE83;
+  border-right: 3px solid #000000;
+  border-bottom: 3px solid #000000;
+  border-radius: 0 0 24px 0;
 }
 
 /* --- פופ-אפ רמז --- */
@@ -343,8 +343,8 @@
   animation: slideUp 0.3s ease-out;
 }
 
-.successCard { background: #63CE83; color: #ffffff; }
-.failCard { background: #FF706E; color: #ffffff; }
+.successCard { background: #63CE83; color: #000000; }
+.failCard { background: #FF706E; color: #000000; }
 
 .successHeader, .failTitle {
   font-family: 'SouthFont';
@@ -373,7 +373,7 @@
   background: #FFF9EC;
 }
 .tipTextStyle{
-  color: #FFF;
+  color: #000000;
   text-align: right;
 
   font-family: "Narkssim";
