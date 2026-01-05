@@ -6,8 +6,9 @@
   justify-content: center;
   align-items: flex-start;
   /* שינוי: padding-bottom ל-0 כדי שהפס הכחול ייצמד לתחתית */
-  padding: 60px 12px 0; 
+  padding: 40px 12px 0; 
   font-family: 'SouthFont', sans-serif;
+  overflow-x: hidden;
 }
 
 .phone {
@@ -17,6 +18,7 @@
   /* הוספה: מבנה עמודה כדי לתמוך ב-Sticky */
   display: flex;
   flex-direction: column;
+  min-height: calc(100vh - 40px);
 }
 
 /* --- פס התקדמות --- */
@@ -151,7 +153,11 @@
     line-height: 18px; /* 128.571% */
     letter-spacing: 0.84px;
 }
-
+/* --- אזור התוכן הנגלל --- */
+.scrollableArea {
+  flex: 1; /* דוחף את ה-actions הכחול למטה */
+  padding-bottom: 20px;
+}
 /* --- כפתורי עזר והכרעה (הפס הכחול המקובע) --- */
 .actions {
   position: sticky;
@@ -160,7 +166,7 @@
   background-color: #5DC6E3; /* צבע המעצבים */
   padding: 20px 0 35px; /* מרווחים לפי הפיגמה */
   z-index: 10;
-  margin-top: 20px;
+  margin-top: auto;
 }
 
 .toolsRow {
