@@ -8,17 +8,16 @@ import { useDailyQuestions } from "@/app/hooks/useDailyQuestions";
 import ConfettiEffect from "../ConfettiEffect"; 
 
 import confettiAnimation from "@/public/animation/confettiAnimation.json";
-
 type ResultState = "none" | "success" | "fail";
 type DailyAnswer = {
-  index: number;
-  isCorrect: boolean;
-  tip: string;
-  questionData?: any;
+  index: number;      // 0..4
+  isCorrect: boolean; // true/false
+  tip: string;        // tip shown for this question (can be empty)
+  questionData?: any; // ADDED: Store full question data
 };
 
 function getTodayKey() {
-  return new Date().toISOString().slice(0, 10);
+  return new Date().toISOString().slice(0, 10); // YYYY-MM-DD
 }
 
 function dailyAnswersKey() {
@@ -53,16 +52,14 @@ export default function Challenge() {
   const [isClosing, setIsClosing] = useState(false);
 
   const handleClose = () => {
-    setIsClosing(true);
+    setIsClosing(true); // מפעיל את אנימציית הירידה
     setTimeout(() => {
-      setShowHint(false);
-      setIsClosing(false);
-    }, 500);
+      setShowHint(false); // מסיר את הרכיב מהמסך אחרי שהאנימציה מסתיימת
+      setIsClosing(false); // מאפס את המצב לפעם הבאה
+    }, 500); // הזמן כאן חייב להיות תואם לזמן האנימציה ב-CSS
   };
-  
   const handleAnswer = (clickedOpen: boolean) => {
     if (!current) return;
-    
     const isCorrect = clickedOpen === current.isTrue;
     const currentResult: ResultState = isCorrect ? "success" : "fail";
     setResult(currentResult);
@@ -70,24 +67,24 @@ export default function Challenge() {
     if (isCorrect) setCorrectAnswers(prev => prev + 1);
 
     upsertDailyAnswer({
-      index: step - 1,
-      isCorrect,
-      tip: current.tips ?? "",
-      questionData: current,
+    index: step - 1,
+    isCorrect,
+    tip: current.tips ?? "",
+    questionData: current, // ADDED: Save full question data
     });
   };
 
   const handleContinue = () => {
     setResult("none");
-    if (step < 5) {
-      setStep((s) => s + 1);
-    } else {
+    if (step < 5) setStep((s) => s + 1);
+    else {
       const todayKey = getTodayKey();
       localStorage.setItem("dailyCompletedDate", todayKey);
 
       const daily = loadDailyAnswers();
       const score = daily.filter(a => a.isCorrect).length;
 
+      // ADDED: Extract wrong answers with full question data
       const wrongAnswers = daily
         .filter(a => !a.isCorrect)
         .map(a => a.questionData)
@@ -95,16 +92,15 @@ export default function Challenge() {
 
       const dailyTip = daily.length > 0 ? (daily[0].tip || "") : "";
 
-      const resultsToSave = {
+      localStorage.setItem("dailyResults", JSON.stringify({
         score,
         total: 5,
-        answersHistory,
+        answersHistory,     
         squares: daily.map(a => (a.isCorrect ? "🟩" : "🟥")).join(""),
         dailyTip,
-        wrongAnswers,
-      };
+        wrongAnswers, // ADDED: Save wrong answers array
+      }));
 
-      localStorage.setItem("dailyResults", JSON.stringify(resultsToSave));
       localStorage.setItem("gameScore", score.toString());
       localStorage.setItem("totalQuestions", "5");
 
@@ -132,46 +128,50 @@ export default function Challenge() {
             style={{ width: '100%', height: '100%', position: 'absolute', pointerEvents: 'none' }}
           />
         </div>
-      )}
+      )
+      }
 
       <div className={styles.phone} dir="rtl">
-        <div className={styles.progressBar}>
-          {[1, 2, 3, 4, 5].map((n) => {
-            const isCurrent = n === step;
-            const isCorrect = answersHistory[n] === "success";
-            const isWrong = answersHistory[n] === "fail";
-            const isAnswered = isCorrect || isWrong;
-            let cl = styles.progressItem;
-            if (isCurrent ) cl += ` ${styles.progressActive}`;
-            else if (isWrong) cl += ` ${styles.progressFail}`;
-            else if (isCorrect) cl += ` ${styles.progressSuccess}`;
-            return <div key={n} className={cl}>
-            {(isCurrent || isAnswered) ? n : ""}
-            </div>;
-          })}
+        {/* אזור תוכן נגלל */}
+        <div className={styles.scrollableArea}>
+          <div className={styles.progressBar}>
+            {[1, 2, 3, 4, 5].map((n) => {
+              const isCurrent = n === step;
+              const isCorrect = answersHistory[n] === "success";
+              const isWrong = answersHistory[n] === "fail";
+              const isAnswered = isCorrect || isWrong;
+              let cl = styles.progressItem;
+              if (isCurrent ) cl += ` ${styles.progressActive}`;
+              else if (isWrong) cl += ` ${styles.progressFail}`;
+              else if (isCorrect) cl += ` ${styles.progressSuccess}`;
+              return <div key={n} className={cl}>
+              {(isCurrent || isAnswered) ? n : ""}
+              </div>;
+            })}
+          </div>
+
+          <h2 className={styles.questionTitle}>מה דעתכם על ההודעה?</h2>
+
+          <div className={styles.messageCard}>
+            <div className={styles.messageHeader}>
+              <img 
+                  src="icons/messageIcon.svg" 
+                  alt="Message Icon" 
+                  className={styles.headerIcon} 
+                />
+              <p dir="ltr" className={styles.ownerText}>{current.Owner}</p>
+            </div>
+            <div className={styles.messageTimestamp}>היום 9:07</div>
+            <div className={styles.messageBubble}>
+              <p className={styles.messageText}>{current.content}</p>
+            </div>
+          </div>
         </div>
 
-        <h2 className={styles.questionTitle}>מה דעתכם על ההודעה?</h2>
-
-        <div className={styles.messageCard}>
-          <div className={styles.messageHeader}>
-            <img 
-                src="icons/messageIcon.svg" 
-                alt="Message Icon" 
-                className={styles.headerIcon} 
-              />
-            <p dir="ltr" className={styles.ownerText}>{current.Owner}</p>
-          </div>
-          <div className={styles.messageTimestamp}>היום 9:07</div>
-          <div className={styles.messageBubble}>
-            <p className={styles.messageText}>{current.content}</p>
-          </div>
-        </div>
-
+        {/* החלק של הכפתורים - מקובע לתחתית ב-CSS */}
         <div className={styles.actions}>
           <div className={styles.toolsRow}>
             <button className={styles.toolButton} onClick={() => setShowHint(true)}>
-              
               <img 
                   src="/icons/sharp.svg" 
                   alt="Hint Icon" 
@@ -187,6 +187,7 @@ export default function Challenge() {
           </div>
         </div>
 
+        {/* פופ-אפ רמז צף */}
         {showHint && (
          <div className={styles.hintOverlay} onClick={handleClose}>
             <div 
@@ -208,6 +209,7 @@ export default function Challenge() {
           </div>
         )}
 
+        {/* פופ-אפ תוצאה (Bottom Sheet) */}
         {result !== "none" && (
           <div className={styles.overlay}>
             <div className={`${styles.resultCard} ${result === "success" ? styles.successCard : styles.failCard}`}>
