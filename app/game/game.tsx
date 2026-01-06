@@ -8,15 +8,19 @@ import { useDailyQuestions } from "@/app/hooks/useDailyQuestions";
 import ConfettiEffect from "../ConfettiEffect"; 
 
 import confettiAnimation from "@/public/animation/confettiAnimation.json";
+
+console.log('🚀 GAME COMPONENT FILE LOADED');
+
 type ResultState = "none" | "success" | "fail";
 type DailyAnswer = {
-  index: number;      // 0..4
-  isCorrect: boolean; // true/false
-  tip: string;        // tip shown for this question (can be empty)
+  index: number;
+  isCorrect: boolean;
+  tip: string;
+  questionData?: any; // Store full question
 };
 
 function getTodayKey() {
-  return new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  return new Date().toISOString().slice(0, 10);
 }
 
 function dailyAnswersKey() {
@@ -37,6 +41,8 @@ function upsertDailyAnswer(answer: DailyAnswer) {
 }
 
 export default function Challenge() {
+  console.log('🎮 Challenge component rendered');
+  
   const router = useRouter();
   const { questions, loading, error } = useDailyQuestions();
 
@@ -51,67 +57,82 @@ export default function Challenge() {
   const [isClosing, setIsClosing] = useState(false);
 
   const handleClose = () => {
-    setIsClosing(true); // מפעיל את אנימציית הירידה
+    setIsClosing(true);
     setTimeout(() => {
-      setShowHint(false); // מסיר את הרכיב מהמסך אחרי שהאנימציה מסתיימת
-      setIsClosing(false); // מאפס את המצב לפעם הבאה
-    }, 500); // הזמן כאן חייב להיות תואם לזמן האנימציה ב-CSS
+      setShowHint(false);
+      setIsClosing(false);
+    }, 500);
   };
+  
   const handleAnswer = (clickedOpen: boolean) => {
     if (!current) return;
+    
+    console.log(`📝 Question ${step} answered`);
+    
     const isCorrect = clickedOpen === current.isTrue;
     const currentResult: ResultState = isCorrect ? "success" : "fail";
     setResult(currentResult);
     setAnswersHistory(prev => ({ ...prev, [step]: currentResult }));
     if (isCorrect) setCorrectAnswers(prev => prev + 1);
 
+    // Save answer WITH full question data
     upsertDailyAnswer({
-    index: step - 1,
-    isCorrect,
-    tip: current.tips ?? "",
+      index: step - 1,
+      isCorrect,
+      tip: current.tips ?? "",
+      questionData: current, // Save the entire question object
     });
+    
+    console.log(`   Result: ${isCorrect ? '✅ Correct' : '❌ Wrong'}`);
   };
 
   const handleContinue = () => {
     setResult("none");
-    if (step < 5) setStep((s) => s + 1);
-    // else {
-    //   const todayKey = new Date().toISOString().slice(0, 10);
-    //   localStorage.setItem("dailyCompletedDate", todayKey);
-    //    localStorage.setItem("dailyResults", JSON.stringify({
-    //      score: correctAnswers,
-    //      total: 5,
-    //       answersHistory,
-          
-    //   }));
-    //   localStorage.setItem('gameScore', correctAnswers.toString());
-    //   localStorage.setItem('totalQuestions', '5');
-    //   router.push('/pre_review');
-    // }
-    else {
-  const todayKey = getTodayKey();
-  localStorage.setItem("dailyCompletedDate", todayKey);
+    if (step < 5) {
+      setStep((s) => s + 1);
+    } else {
+      console.log('🏁 Game complete, saving results...');
+      
+      const todayKey = getTodayKey();
+      localStorage.setItem("dailyCompletedDate", todayKey);
 
-  const daily = loadDailyAnswers();
-  const score = daily.filter(a => a.isCorrect).length;
+      const daily = loadDailyAnswers();
+      const score = daily.filter(a => a.isCorrect).length;
 
-  // Optional: also save the first tip of the day explicitly (nice for StreakPage)
-  const dailyTip = daily.length > 0 ? (daily[0].tip || "") : "";
+      console.log('Daily answers:', daily);
 
-  localStorage.setItem("dailyResults", JSON.stringify({
-    score,
-    total: 5,
-    answersHistory,     // keep if you want
-    squares: daily.map(a => (a.isCorrect ? "🟩" : "🟥")).join(""),
-    dailyTip,
-  }));
+      // Extract wrong answers from questionData
+      const wrongAnswers = daily
+        .filter(a => !a.isCorrect)
+        .map(a => a.questionData)
+        .filter(q => q !== undefined && q !== null);
 
-  localStorage.setItem("gameScore", score.toString());
-  localStorage.setItem("totalQuestions", "5");
+      console.log('Wrong answers extracted:', wrongAnswers);
+      console.log('Number of wrong answers:', wrongAnswers.length);
 
-  router.push("/pre_review");
-}
+      const dailyTip = daily.length > 0 ? (daily[0].tip || "") : "";
 
+      const resultsToSave = {
+        score,
+        total: 5,
+        answersHistory,
+        squares: daily.map(a => (a.isCorrect ? "🟩" : "🟥")).join(""),
+        dailyTip,
+        wrongAnswers, // This is the key field
+      };
+
+      console.log('Saving to localStorage:', resultsToSave);
+      localStorage.setItem("dailyResults", JSON.stringify(resultsToSave));
+
+      // Verify
+      const verify = JSON.parse(localStorage.getItem("dailyResults") || "{}");
+      console.log('Verification - wrongAnswers in storage:', verify.wrongAnswers);
+
+      localStorage.setItem("gameScore", score.toString());
+      localStorage.setItem("totalQuestions", "5");
+
+      router.push("/pre_review");
+    }
   };
 
   if (loading || error || !current) {
@@ -134,8 +155,7 @@ export default function Challenge() {
             style={{ width: '100%', height: '100%', position: 'absolute', pointerEvents: 'none' }}
           />
         </div>
-      )
-      }
+      )}
 
       <div className={styles.phone} dir="rtl">
         <div className={styles.progressBar}>
@@ -190,7 +210,6 @@ export default function Challenge() {
           </div>
         </div>
 
-        {/* פופ-אפ רמז צף */}
         {showHint && (
          <div className={styles.hintOverlay} onClick={handleClose}>
             <div 
@@ -212,7 +231,6 @@ export default function Challenge() {
           </div>
         )}
 
-        {/* פופ-אפ תוצאה (Bottom Sheet) */}
         {result !== "none" && (
           <div className={styles.overlay}>
             <div className={`${styles.resultCard} ${result === "success" ? styles.successCard : styles.failCard}`}>

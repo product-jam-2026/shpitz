@@ -6,7 +6,10 @@
 .pageWrapper {
   min-height: 100vh;
   width: 100%;
-  background: linear-gradient(180deg, #5BA3E5 0%, #4A8FD8 100%);
+  background-color: #5DC6E3;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   display: flex;
   justify-content: center;
 }
