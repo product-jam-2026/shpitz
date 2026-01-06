@@ -9,14 +9,12 @@ import ConfettiEffect from "../ConfettiEffect";
 
 import confettiAnimation from "@/public/animation/confettiAnimation.json";
 
-console.log('🚀 GAME COMPONENT FILE LOADED');
-
 type ResultState = "none" | "success" | "fail";
 type DailyAnswer = {
   index: number;
   isCorrect: boolean;
   tip: string;
-  questionData?: any; // Store full question
+  questionData?: any;
 };
 
 function getTodayKey() {
@@ -41,8 +39,6 @@ function upsertDailyAnswer(answer: DailyAnswer) {
 }
 
 export default function Challenge() {
-  console.log('🎮 Challenge component rendered');
-  
   const router = useRouter();
   const { questions, loading, error } = useDailyQuestions();
 
@@ -67,23 +63,18 @@ export default function Challenge() {
   const handleAnswer = (clickedOpen: boolean) => {
     if (!current) return;
     
-    console.log(`📝 Question ${step} answered`);
-    
     const isCorrect = clickedOpen === current.isTrue;
     const currentResult: ResultState = isCorrect ? "success" : "fail";
     setResult(currentResult);
     setAnswersHistory(prev => ({ ...prev, [step]: currentResult }));
     if (isCorrect) setCorrectAnswers(prev => prev + 1);
 
-    // Save answer WITH full question data
     upsertDailyAnswer({
       index: step - 1,
       isCorrect,
       tip: current.tips ?? "",
-      questionData: current, // Save the entire question object
+      questionData: current,
     });
-    
-    console.log(`   Result: ${isCorrect ? '✅ Correct' : '❌ Wrong'}`);
   };
 
   const handleContinue = () => {
@@ -91,32 +82,17 @@ export default function Challenge() {
     if (step < 5) {
       setStep((s) => s + 1);
     } else {
-      console.log('🏁 Game complete, saving results...');
-      
-      const todayKey = getTodayKey();
-      localStorage.setItem("dailyCompletedDate", todayKey);
-    if (step < 5) setStep((s) => s + 1);
-    else {
       const todayKey = getTodayKey();
       localStorage.setItem("dailyCompletedDate", todayKey);
 
       const daily = loadDailyAnswers();
       const score = daily.filter(a => a.isCorrect).length;
-      const daily = loadDailyAnswers();
-      const score = daily.filter(a => a.isCorrect).length;
 
-      console.log('Daily answers:', daily);
-
-      // Extract wrong answers from questionData
       const wrongAnswers = daily
         .filter(a => !a.isCorrect)
         .map(a => a.questionData)
         .filter(q => q !== undefined && q !== null);
 
-      console.log('Wrong answers extracted:', wrongAnswers);
-      console.log('Number of wrong answers:', wrongAnswers.length);
-
-      const dailyTip = daily.length > 0 ? (daily[0].tip || "") : "";
       const dailyTip = daily.length > 0 ? (daily[0].tip || "") : "";
 
       const resultsToSave = {
@@ -125,30 +101,13 @@ export default function Challenge() {
         answersHistory,
         squares: daily.map(a => (a.isCorrect ? "🟩" : "🟥")).join(""),
         dailyTip,
-        wrongAnswers, // This is the key field
+        wrongAnswers,
       };
 
-      console.log('Saving to localStorage:', resultsToSave);
       localStorage.setItem("dailyResults", JSON.stringify(resultsToSave));
-
-      // Verify
-      const verify = JSON.parse(localStorage.getItem("dailyResults") || "{}");
-      console.log('Verification - wrongAnswers in storage:', verify.wrongAnswers);
-      localStorage.setItem("dailyResults", JSON.stringify({
-        score,
-        total: 5,
-        answersHistory,     
-        squares: daily.map(a => (a.isCorrect ? "🟩" : "🟥")).join(""),
-        dailyTip,
-      }));
-
-      localStorage.setItem("gameScore", score.toString());
-      localStorage.setItem("totalQuestions", "5");
       localStorage.setItem("gameScore", score.toString());
       localStorage.setItem("totalQuestions", "5");
 
-      router.push("/pre_review");
-    }
       router.push("/pre_review");
     }
   };
@@ -176,46 +135,43 @@ export default function Challenge() {
       )}
 
       <div className={styles.phone} dir="rtl">
-        {/* אזור תוכן נגלל */}
-        <div className={styles.scrollableArea}>
-          <div className={styles.progressBar}>
-            {[1, 2, 3, 4, 5].map((n) => {
-              const isCurrent = n === step;
-              const isCorrect = answersHistory[n] === "success";
-              const isWrong = answersHistory[n] === "fail";
-              const isAnswered = isCorrect || isWrong;
-              let cl = styles.progressItem;
-              if (isCurrent ) cl += ` ${styles.progressActive}`;
-              else if (isWrong) cl += ` ${styles.progressFail}`;
-              else if (isCorrect) cl += ` ${styles.progressSuccess}`;
-              return <div key={n} className={cl}>
-              {(isCurrent || isAnswered) ? n : ""}
-              </div>;
-            })}
+        <div className={styles.progressBar}>
+          {[1, 2, 3, 4, 5].map((n) => {
+            const isCurrent = n === step;
+            const isCorrect = answersHistory[n] === "success";
+            const isWrong = answersHistory[n] === "fail";
+            const isAnswered = isCorrect || isWrong;
+            let cl = styles.progressItem;
+            if (isCurrent ) cl += ` ${styles.progressActive}`;
+            else if (isWrong) cl += ` ${styles.progressFail}`;
+            else if (isCorrect) cl += ` ${styles.progressSuccess}`;
+            return <div key={n} className={cl}>
+            {(isCurrent || isAnswered) ? n : ""}
+            </div>;
+          })}
+        </div>
+
+        <h2 className={styles.questionTitle}>מה דעתכם על ההודעה?</h2>
+
+        <div className={styles.messageCard}>
+          <div className={styles.messageHeader}>
+            <img 
+                src="icons/messageIcon.svg" 
+                alt="Message Icon" 
+                className={styles.headerIcon} 
+              />
+            <p dir="ltr" className={styles.ownerText}>{current.Owner}</p>
           </div>
-
-          <h2 className={styles.questionTitle}>מה דעתכם על ההודעה?</h2>
-
-          <div className={styles.messageCard}>
-            <div className={styles.messageHeader}>
-              <img 
-                  src="icons/messageIcon.svg" 
-                  alt="Message Icon" 
-                  className={styles.headerIcon} 
-                />
-              <p dir="ltr" className={styles.ownerText}>{current.Owner}</p>
-            </div>
-            <div className={styles.messageTimestamp}>היום 9:07</div>
-            <div className={styles.messageBubble}>
-              <p className={styles.messageText}>{current.content}</p>
-            </div>
+          <div className={styles.messageTimestamp}>היום 9:07</div>
+          <div className={styles.messageBubble}>
+            <p className={styles.messageText}>{current.content}</p>
           </div>
         </div>
 
-        {/* החלק של הכפתורים - מקובע לתחתית ב-CSS */}
         <div className={styles.actions}>
           <div className={styles.toolsRow}>
             <button className={styles.toolButton} onClick={() => setShowHint(true)}>
+              
               <img 
                   src="/icons/sharp.svg" 
                   alt="Hint Icon" 
