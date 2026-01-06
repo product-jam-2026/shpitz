@@ -95,7 +95,13 @@ export default function Challenge() {
       
       const todayKey = getTodayKey();
       localStorage.setItem("dailyCompletedDate", todayKey);
+    if (step < 5) setStep((s) => s + 1);
+    else {
+      const todayKey = getTodayKey();
+      localStorage.setItem("dailyCompletedDate", todayKey);
 
+      const daily = loadDailyAnswers();
+      const score = daily.filter(a => a.isCorrect).length;
       const daily = loadDailyAnswers();
       const score = daily.filter(a => a.isCorrect).length;
 
@@ -110,6 +116,7 @@ export default function Challenge() {
       console.log('Wrong answers extracted:', wrongAnswers);
       console.log('Number of wrong answers:', wrongAnswers.length);
 
+      const dailyTip = daily.length > 0 ? (daily[0].tip || "") : "";
       const dailyTip = daily.length > 0 ? (daily[0].tip || "") : "";
 
       const resultsToSave = {
@@ -127,10 +134,21 @@ export default function Challenge() {
       // Verify
       const verify = JSON.parse(localStorage.getItem("dailyResults") || "{}");
       console.log('Verification - wrongAnswers in storage:', verify.wrongAnswers);
+      localStorage.setItem("dailyResults", JSON.stringify({
+        score,
+        total: 5,
+        answersHistory,     
+        squares: daily.map(a => (a.isCorrect ? "🟩" : "🟥")).join(""),
+        dailyTip,
+      }));
 
       localStorage.setItem("gameScore", score.toString());
       localStorage.setItem("totalQuestions", "5");
+      localStorage.setItem("gameScore", score.toString());
+      localStorage.setItem("totalQuestions", "5");
 
+      router.push("/pre_review");
+    }
       router.push("/pre_review");
     }
   };
@@ -158,43 +176,46 @@ export default function Challenge() {
       )}
 
       <div className={styles.phone} dir="rtl">
-        <div className={styles.progressBar}>
-          {[1, 2, 3, 4, 5].map((n) => {
-            const isCurrent = n === step;
-            const isCorrect = answersHistory[n] === "success";
-            const isWrong = answersHistory[n] === "fail";
-            const isAnswered = isCorrect || isWrong;
-            let cl = styles.progressItem;
-            if (isCurrent ) cl += ` ${styles.progressActive}`;
-            else if (isWrong) cl += ` ${styles.progressFail}`;
-            else if (isCorrect) cl += ` ${styles.progressSuccess}`;
-            return <div key={n} className={cl}>
-            {(isCurrent || isAnswered) ? n : ""}
-            </div>;
-          })}
+        {/* אזור תוכן נגלל */}
+        <div className={styles.scrollableArea}>
+          <div className={styles.progressBar}>
+            {[1, 2, 3, 4, 5].map((n) => {
+              const isCurrent = n === step;
+              const isCorrect = answersHistory[n] === "success";
+              const isWrong = answersHistory[n] === "fail";
+              const isAnswered = isCorrect || isWrong;
+              let cl = styles.progressItem;
+              if (isCurrent ) cl += ` ${styles.progressActive}`;
+              else if (isWrong) cl += ` ${styles.progressFail}`;
+              else if (isCorrect) cl += ` ${styles.progressSuccess}`;
+              return <div key={n} className={cl}>
+              {(isCurrent || isAnswered) ? n : ""}
+              </div>;
+            })}
+          </div>
+
+          <h2 className={styles.questionTitle}>מה דעתכם על ההודעה?</h2>
+
+          <div className={styles.messageCard}>
+            <div className={styles.messageHeader}>
+              <img 
+                  src="icons/messageIcon.svg" 
+                  alt="Message Icon" 
+                  className={styles.headerIcon} 
+                />
+              <p dir="ltr" className={styles.ownerText}>{current.Owner}</p>
+            </div>
+            <div className={styles.messageTimestamp}>היום 9:07</div>
+            <div className={styles.messageBubble}>
+              <p className={styles.messageText}>{current.content}</p>
+            </div>
+          </div>
         </div>
 
-        <h2 className={styles.questionTitle}>מה דעתכם על ההודעה?</h2>
-
-        <div className={styles.messageCard}>
-          <div className={styles.messageHeader}>
-            <img 
-                src="icons/messageIcon.svg" 
-                alt="Message Icon" 
-                className={styles.headerIcon} 
-              />
-            <p dir="ltr" className={styles.ownerText}>{current.Owner}</p>
-          </div>
-          <div className={styles.messageTimestamp}>היום 9:07</div>
-          <div className={styles.messageBubble}>
-            <p className={styles.messageText}>{current.content}</p>
-          </div>
-        </div>
-
+        {/* החלק של הכפתורים - מקובע לתחתית ב-CSS */}
         <div className={styles.actions}>
           <div className={styles.toolsRow}>
             <button className={styles.toolButton} onClick={() => setShowHint(true)}>
-              
               <img 
                   src="/icons/sharp.svg" 
                   alt="Hint Icon" 
