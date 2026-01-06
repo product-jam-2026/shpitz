@@ -2,7 +2,7 @@
 .screen {
   height: 100vh;
   height: 100dvh;
-  background: #FFF9EC;
+  background: #DEF2FF;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -53,7 +53,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #EBEBEB;
+  background: #F3F3F3;
   color: #BFBFBF;
   font-family: 'SouthFont';
   font-size: 20px;
@@ -61,11 +61,11 @@
 }
 
 .progressActive {
-  background: #E0EDFF;
-  color: #114081;
+  background: #5EACE1;
+  color: #000000;
 }
 .progressSuccess {
-  background-color: #63CE83 !important;
+  background-color: #69D702 !important;
   color: white !important;
   border: none;
 }
@@ -81,7 +81,7 @@
   font-family: 'SouthFont';
   font-size: 28px;
   font-weight: 500;
-  color: #114081;
+  color: #000000;
   white-space: nowrap;
 }
 
@@ -186,9 +186,9 @@
 
 .toolButton {
   height: 51px;
-  border: 1px solid #114081;
-  border-right: 3px solid var(--Dark_blue_text, #114081);
-  border-bottom: 3px solid var(--Dark_blue_text, #114081);
+  border: 1px solid #000000;
+  border-right: 3px solid var(--Dark_blue_text, #000000);
+  border-bottom: 3px solid var(--Dark_blue_text, #000000);
   background: white;
   color: #000000;
   font-family: 'SouthFont', sans-serif;
@@ -231,7 +231,7 @@
 }
 
 .reportBtn {
-  background: #62CE83;
+  background: #69D702;
   border-right: 3px solid #000000;
   border-bottom: 3px solid #000000;
   border-radius: 0 0 24px 0;
@@ -319,10 +319,10 @@
   align-items: center;
   background: #FFF9EC;
   border: none;
-  border-right: 3px solid #114081;
-  border-bottom: 3px solid #114081;
+  border-right: 3px solid #000000;
+  border-bottom: 3px solid #000000;
   border-radius: 0 0 24px 24px;
-  color: #114081;
+  color: #000000;
   font-family: "SouthFont";
   font-size: 26px;
   font-weight: 500;
@@ -356,7 +356,7 @@
   animation: slideUp 0.3s ease-out;
 }
 
-.successCard { background: #63CE83; color: #000000; }
+.successCard { background: #69D702; color: #000000; }
 .failCard { background: #FF706E; color: #000000; }
 
 .successHeader, .failTitle {
@@ -365,6 +365,7 @@
   font-weight: 500;
   margin-top: -15px;
   margin-bottom: 5px;
+  text-align: right;
   line-height: 1.2;
 }
 
@@ -374,15 +375,15 @@
   height: 68px;
   flex-shrink: 0;
   border-radius: 14px;
-  color: #114081;
+  color: #000000;
   font-family: 'SouthFont';
   font-size: 30px;
   font-weight: 500;
   cursor: pointer;
   margin-top: auto;
   border-radius: 0 0 24px 24px;
-  border-right: 3px solid #114081;
-  border-bottom: 3px solid #114081;
+  border-right: 3px solid #000000;
+  border-bottom: 3px solid #000000;
   background: #FFF9EC;
 }
 .tipTextStyle{

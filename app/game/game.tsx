@@ -61,6 +61,16 @@ export default function Challenge() {
   const handleAnswer = (clickedOpen: boolean) => {
     if (!current) return;
     const isCorrect = clickedOpen === current.isTrue;
+
+    // --- AUDIO ADDITION START ---
+    const audioPath = isCorrect 
+      ? "/sounds/success.mp3" 
+      : "/sounds/fail.mp3";
+    
+    const audio = new Audio(audioPath);
+    audio.play().catch(err => console.error("Audio play failed:", err));
+    // --- AUDIO ADDITION END ---
+
     const currentResult: ResultState = isCorrect ? "success" : "fail";
     setResult(currentResult);
     setAnswersHistory(prev => ({ ...prev, [step]: currentResult }));
@@ -214,7 +224,7 @@ export default function Challenge() {
           <div className={styles.overlay}>
             <div className={`${styles.resultCard} ${result === "success" ? styles.successCard : styles.failCard}`}>
               {result === "success" ? (
-                <div className={styles.successHeader}>תשובה נכונה. <br />כל הכבוד, עוד כמה סיבובים<br />ותהיה שפיץ!</div>
+                <div className={styles.successHeader}>תשובה נכונה <br />חד ומדויק! עוד קצת ואתם שפיץ<br /> </div>
               ) : (
                 <div className={styles.failContainer}>
                   <div className={styles.failTitle}>תשובה לא נכונה</div>
