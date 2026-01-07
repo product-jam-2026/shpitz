@@ -54,7 +54,7 @@
   justify-content: center;
   align-items: center;
   background: #F3F3F3;
-  color: #000000 !important; /* CHANGED: force black with !important */
+  color: #BFBFBF; /* CHANGED: gray for unanswered */
   font-family: 'SouthFont';
   font-size: 20px;
   font-weight: 500;
@@ -62,16 +62,16 @@
 
 .progressActive {
   background: #5EACE1;
-  color: #000000 !important; /* CHANGED: force black with !important */
+  color: #000000 !important; /* Black for current */
 }
 .progressSuccess {
   background-color: #69D702 !important;
-  color: #000000 !important; /* CHANGED: force black with !important */
+  color: #000000 !important; /* Black for correct */
   border: none;
 }
 .progressFail {
   background-color: #FF706E !important;
-  color: #000000 !important; /* CHANGED: force black with !important */
+  color: #000000 !important; /* Black for wrong */
   border: none;
 }
 /* --- כותרת השאלה --- */

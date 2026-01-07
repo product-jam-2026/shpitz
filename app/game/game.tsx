@@ -165,7 +165,6 @@ export default function Challenge() {
               const isCurrent = n === step;
               const isCorrect = answersHistory[n] === "success";
               const isWrong = answersHistory[n] === "fail";
-              const isAnswered = isCorrect || isWrong;
               let cl = styles.progressItem;
               if (isCurrent ) cl += ` ${styles.progressActive}`;
               else if (isWrong) cl += ` ${styles.progressFail}`;
