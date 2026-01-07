@@ -164,12 +164,17 @@
 .scrollableArea {
   flex: 1; /* דוחף את ה-actions הכחול למטה */
   overflow-y: auto;
-  padding: 20px 0;
+  padding: 20px 12px; /* CHANGED: הוספת padding רק לתוכן */
   -webkit-overflow-scrolling: touch;
 }
 /* --- כפתורי עזר והכרעה (הפס הכחול המקובע) --- */
 .actions {
-  width: 100%;
+  width: 100vw; /* CHANGED: מלוא רוחב המסך */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw; /* CHANGED: דוחף לשמאל */
+  margin-right: -50vw; /* CHANGED: דוחף לימין */
   background-color: #5DC6E3; /* צבע המעצבים */
   padding: 20px 0 35px; /* מרווחים לפי הפיגמה */
   z-index: 10;

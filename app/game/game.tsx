@@ -149,17 +149,16 @@ export default function Challenge() {
 
   return (
     <div className={styles.screen}>
-      {result === "success" && (
-      <div className={styles.lottieOverlay}>
-          <Lottie 
-            animationData={confettiAnimation} 
-            loop={false} 
-            style={{ width: '100%', height: '100%', position: 'absolute', pointerEvents: 'none' }}
-          />
-        </div>
-      )}
-
       <div className={styles.phone} dir="rtl">
+        {result === "success" && (
+          <div className={styles.lottieOverlay}>
+            <Lottie 
+              animationData={confettiAnimation} 
+              loop={false} 
+              style={{ width: '100%', height: '100%', position: 'absolute', pointerEvents: 'none' }}
+            />
+          </div>
+        )}
         <div className={styles.scrollableArea}>
           <div className={styles.progressBar}>
             {[1, 2, 3, 4, 5].map((n) => {
