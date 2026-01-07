@@ -40,7 +40,8 @@ export default function PreReview() {
 
   
   return (
-    <div className={styles.container} dir="rtl">
+     <div className={styles.screen} dir="rtl">
+    <div className={styles.container}>
       {/* SVG Image - Different based on score */}
       <div className={styles.imageContainer}>
         {isGoodScore ? (
@@ -86,5 +87,6 @@ export default function PreReview() {
       {/* Button */}
       <ReviewButton onClick={handleNext} />
     </div>
+  </div>
   );
 }

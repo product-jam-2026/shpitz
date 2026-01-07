@@ -82,14 +82,11 @@ export default function Index() {
     }
   };
 
+
   return (
-    <div className="min-h-screen bg-[#F3F3F3] flex flex-col items-center py-8 px-4" dir="rtl">
-      <div className="w-full max-w-md">
-        <MobileContent activeDays={activeDays} streak={streak} onStart={handleStart} />
-      </div>
-    </div>
+    <MobileContent activeDays={activeDays} streak={streak} onStart={handleStart} />
   );
-}
+  }
 
 function MobileContent({
   activeDays,
@@ -112,7 +109,7 @@ function MobileContent({
 
   return (
     <div className={styles.screen} dir="rtl">
-      <div className={styles.contentWrapper}>
+      
         <div className={styles.logoContainer}>
           <div className={styles.mainIcon}>
             <Image src="icons/homePageIcon.svg" alt="homePageLogo" width={150} height={150} priority />
@@ -120,9 +117,9 @@ function MobileContent({
         </div>
 
         <h1 className={styles.mainTitle}>
-            חמש שאלות שמחדדות אותך
+           חמש שאלות, כל יום,
             <br />
-            לזיהוי הונאות רשת
+           ואתה שפיץ
           </h1>
 
         <div className={styles.streakSection}>
@@ -143,7 +140,7 @@ function MobileContent({
           <span className={styles.buttonText}>התחל</span>
         </button>
       </div>
-    </div>
+    
   );
 }
 

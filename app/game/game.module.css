@@ -176,7 +176,7 @@
   margin-left: -50vw; /* CHANGED: דוחף לשמאל */
   margin-right: -50vw; /* CHANGED: דוחף לימין */
   background-color: #5DC6E3; /* צבע המעצבים */
-  padding: 20px 0 35px; /* מרווחים לפי הפיגמה */
+  /* padding: 20px 0 35px;  */
   z-index: 10;
   flex-shrink: 0;
 }
