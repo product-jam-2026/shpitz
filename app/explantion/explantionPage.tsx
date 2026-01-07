@@ -143,7 +143,7 @@ export default function ChallengeBase() {
                         {/* step 3 */}
                         {stepData.isActionsStep && (
                             <>
-                                <div className={styles.highlightSpotlightBox}></div>
+                                {/* <div className={styles.highlightSpotlightBox}></div> */}
                                 <div className={styles.actionsExplanationArea}>
                                     {/* <div className={styles.rotatedTextContainer}> */}
                                         <p className={styles.explanationText}>{explanationSteps[3].body}</p>

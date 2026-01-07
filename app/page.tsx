@@ -112,17 +112,25 @@ function MobileContent({
 
   return (
     <div className={styles.screen} dir="rtl">
-      <div className="w-full max-w-md">
+      <div className={styles.contentWrapper}>
         <div className={styles.logoContainer}>
           <div className={styles.mainIcon}>
-            <Image src="icons/homePageIcon.svg" alt="homePageLogo" width={400} height={400} priority />
+            <Image src="icons/homePageIcon.svg" alt="homePageLogo" width={150} height={150} priority />
           </div>
         </div>
 
-        <h1 className={styles.mainTitle}>האתגר היומי שמחדד אותך לזיהוי הונאות רשת</h1>
+        <h1 className={styles.mainTitle}>
+            חמש שאלות שמחדדות אותך
+            <br />
+            לזיהוי הונאות רשת
+          </h1>
 
-        <div className="flex flex-col items-center gap-4">
-          <p className={styles.streakText}>אתה מתחדד {streak} ימים ברצף!</p>
+        <div className={styles.streakSection}>
+        <p className={styles.streakText}>
+            איזה כיף שחזרת אלינו!
+            <br />
+            יום {streak} ברצף של חידודים
+          </p>
 
           <div className={styles.daysContainer}>
             {daysOfWeek.map((day) => (
