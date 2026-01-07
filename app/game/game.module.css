@@ -54,7 +54,7 @@
   justify-content: center;
   align-items: center;
   background: #F3F3F3;
-  color: #BFBFBF;
+  color: #000000 !important; /* CHANGED: force black with !important */
   font-family: 'SouthFont';
   font-size: 20px;
   font-weight: 500;
@@ -62,16 +62,16 @@
 
 .progressActive {
   background: #5EACE1;
-  color: #000000;
+  color: #000000 !important; /* CHANGED: force black with !important */
 }
 .progressSuccess {
   background-color: #69D702 !important;
-  color: white !important;
+  color: #000000 !important; /* CHANGED: force black with !important */
   border: none;
 }
 .progressFail {
   background-color: #FF706E !important;
-  color: white !important;
+  color: #000000 !important; /* CHANGED: force black with !important */
   border: none;
 }
 /* --- כותרת השאלה --- */
@@ -346,8 +346,7 @@
 }
 
 .resultCard {
-  width: 100%;
-  max-width: 393px;
+  width: 100%; /* CHANGED: מלוא רוחב */
   min-height: 237px;
   border-radius: 0 36px 0 0;
   padding: 30px 24px;

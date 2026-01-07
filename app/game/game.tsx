@@ -171,7 +171,7 @@ export default function Challenge() {
               else if (isWrong) cl += ` ${styles.progressFail}`;
               else if (isCorrect) cl += ` ${styles.progressSuccess}`;
               return <div key={n} className={cl}>
-              {(isCurrent || isAnswered) ? n : ""}
+              {n}
               </div>;
             })}
           </div>
