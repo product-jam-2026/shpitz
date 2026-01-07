@@ -5,6 +5,7 @@
 
 .pageWrapper {
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
   width: 100%;
   background-color: #5DC6E3;
   background-repeat: no-repeat;
@@ -16,13 +17,14 @@
 
 .container {
   width: 100%;
-  max-width: 430px;
+  max-width: 26.875rem; /* 430px */
   margin: 0 auto;
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px 30px 20px;
+  padding: 2.5rem 1.25rem 1.875rem 1.25rem; /* 40px 20px 30px 20px */
   position: relative;
 }
 
@@ -30,10 +32,10 @@
   color: #000;
   text-align: center;
   font-family: 'Reisinger', sans-serif;
-  font-size: 26px;
+  font-size: 1.625rem; /* 26px */
   font-weight: 400; 
   line-height: 1;
-  margin-top: 5px;
+  margin-top: 0.3125rem; /* 5px */
   color: var(--Dark_blue_text, #114081);
 }
 
@@ -41,7 +43,7 @@
 .mainTitle {
   color: #FFFFFF;
   font-family: 'SouthFont', 'Inter', sans-serif;
-  font-size: 20px;
+  font-size: 1.25rem; /* 20px */
   font-weight: 700;
   margin: 0;
   line-height: 1.3;
@@ -50,22 +52,22 @@
 /* Header text */
 .headerText {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem; /* 30px */
 }
 
 .headerLine1 {
   color: #FFFFFF;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 24px;
+  font-size: 1.5rem; /* 24px */
   font-weight: 700;
-  margin: 0 0 8px 0;
+  margin: 0 0 0.5rem 0; /* 8px */
   line-height: 1.3;
 }
 
 .headerLine2 {
   color: #FFFFFF;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 24px;
+  font-size: 1.5rem; /* 24px */
   font-weight: 700;
   margin: 0;
   line-height: 1.3;
@@ -76,20 +78,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 40px;
+  gap: 0.75rem; /* 12px */
+  margin-bottom: 2.5rem; /* 40px */
 }
 
 .dayCircle {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem; /* 8px */
 }
 
 .circle {
-  width: 40px;
-  height: 40px;
+  width: 2.5rem; /* 40px */
+  height: 2.5rem; /* 40px */
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -99,33 +101,33 @@
 
 .circleEmpty {
   background: transparent;
-  border: 3px solid #FFFFFF;
+  border: 0.1875rem solid #FFFFFF; /* 3px */
 }
 
 .circleFilled {
   background: #2C5F8D;
-  border: 3px solid #2C5F8D;
+  border: 0.1875rem solid #2C5F8D; /* 3px */
 }
 
 .checkmark {
   color: #CCFF00;
-  font-size: 24px;
+  font-size: 1.5rem; /* 24px */
   font-weight: bold;
 }
 
 .dayLabel {
   color: #FFFFFF;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 16px;
+  font-size: 1rem; /* 16px */
   font-weight: 600;
 }
 
 .statsBox {
   display: flex;
   width: 90%;
-  max-width: 360px;
-  border-radius: 16px;
-  margin-bottom: 20px;
+  max-width: 22.5rem; /* 360px */
+  border-radius: 1rem; /* 16px */
+  margin-bottom: 1.25rem; /* 20px */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,15 +139,15 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 24px;
-  margin-bottom: 40px;
+  gap: 1.5rem; /* 24px */
+  margin-bottom: 2.5rem; /* 40px */
 }
 
 .badge {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem; /* 8px */
   transition: opacity 0.3s ease;
 }
 
@@ -158,35 +160,34 @@
 }
 
 .badgeImage {
-  width: 80px;
-  height: 80px;
+  width: 5rem; /* 80px */
+  height: 5rem; /* 80px */
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  position: relative;  /* ADD THIS */
+  position: relative;
 }
 
-/* ADD THIS: */
 .badgeImage img {
-  width: 60px !important;
-  height: 60px !important;
+  width: 3.75rem !important; /* 60px */
+  height: 3.75rem !important; /* 60px */
 }
 
 .badge:nth-child(2) .badgeImage img {
-  width: 90px !important;
-  height: 90px !important;
+  width: 5.625rem !important; /* 90px */
+  height: 5.625rem !important; /* 90px */
 }
 
 .badge:nth-child(3) .badgeImage img {
-  width: 110px !important;
-  height: 110px !important;
+  width: 6.875rem !important; /* 110px */
+  height: 6.875rem !important; /* 110px */
 }
 
 .badgeLabel {
   color: #FFFFFF;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 14px;
+  font-size: 0.875rem; /* 14px */
   font-weight: 600;
 }
 
@@ -197,14 +198,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 40px;
-  width: 300px;
-  height: 300px;
+  margin-bottom: 2.5rem; /* 40px */
+  width: 18.75rem; /* 300px */
+  height: 18.75rem; /* 300px */
 }
 
 .characterImage {
-  width: 300px;
-  height: 300px;
+  width: 18.75rem; /* 300px */
+  height: 18.75rem; /* 300px */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -227,50 +228,50 @@
 .congratsText {
   color: #FFFFFF;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 48px;
+  font-size: 3rem; /* 48px */
   font-weight: 900;
   margin: 0;
   line-height: 1.1;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.2); /* 2px 2px 4px */
 }
 
 /* Share button */
 .shareButton {
-  width: 240px;
-  height: 68px;
+  width: 15rem; /* 240px */
+  height: 4.25rem; /* 68px */
   background: #F5E6D3;
   border: none;
-  border-radius: 12px;
+  border-radius: 0.75rem; /* 12px */
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem; /* 12px */
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-  margin-bottom: 30px;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15); /* 0 4px 12px */
+  margin-bottom: 1.875rem; /* 30px */
 }
 
 .shareButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-0.125rem); /* -2px */
+  box-shadow: 0 0.375rem 1rem rgba(0, 0, 0, 0.2); /* 0 6px 16px */
 }
 
 .shareButton:active {
   transform: translateY(0);
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.15); /* 0 2px 8px */
 }
 
 .shareText {
   color: #2C5F8D;
   font-family: 'SouthFont', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 32px;
+  font-size: 2rem; /* 32px */
   font-weight: 700;
 }
 
 .shareArrow {
   color: #2C5F8D;
-  font-size: 28px;
+  font-size: 1.75rem; /* 28px */
   font-weight: bold;
 }
 
@@ -278,7 +279,7 @@
 .bottomLink {
   color: #2C5F8D;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 22px;
+  font-size: 1.375rem; /* 22px */
   font-weight: 700;
   text-decoration: underline;
   cursor: pointer;
@@ -292,40 +293,40 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 400px) {
+@media (max-width: 25rem) { /* 400px */
   .headerLine1,
   .headerLine2 {
-    font-size: 20px;
+    font-size: 1.25rem; /* 20px */
   }
 
   .congratsText {
-    font-size: 40px;
+    font-size: 2.5rem; /* 40px */
   }
 
   .shareButton {
-    width: 220px;
+    width: 13.75rem; /* 220px */
   }
 
   .shareText {
-    font-size: 28px;
+    font-size: 1.75rem; /* 28px */
   }
 
   .daysContainer {
-    gap: 8px;
+    gap: 0.5rem; /* 8px */
   }
 
   .circle {
-    width: 35px;
-    height: 35px;
+    width: 2.1875rem; /* 35px */
+    height: 2.1875rem; /* 35px */
   }
 
   .characterContainer {
-    width: 260px;
-    height: 260px;
+    width: 16.25rem; /* 260px */
+    height: 16.25rem; /* 260px */
   }
 
   .characterImage {
-    width: 260px;
-    height: 260px;
+    width: 16.25rem; /* 260px */
+    height: 16.25rem; /* 260px */
   }
 }
