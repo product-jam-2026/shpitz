@@ -164,15 +164,13 @@
 }
 
 .startButton {
-  /* מיקום */
   position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
+  inset-inline: 1.5rem; /* נותן מרווח שמאל/ימין */
   bottom: calc(2rem + env(safe-area-inset-bottom));
+  margin-inline: auto;  /* מרכז את הרוחב */
   z-index: 10;
 
-
-  width: min(20.3125rem, calc(100vw - 3rem));
+  width: min(20.3125rem, 100%); /* 325px או פחות */
   height: 7.875rem;
 
   display: flex;

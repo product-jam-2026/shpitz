@@ -87,7 +87,6 @@
   margin-top: clamp(0.375rem, 0.24rem, 0.5rem); /* 6px, 1.5vh, 8px */
 }
 
-/* כפתור "הבנתי" */
 /* כפתור "הבנתי" – מיושר ל-StartButton */
 .understandButton {
   /* מיקום – זהה ל-startButton */
