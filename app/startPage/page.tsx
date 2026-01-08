@@ -18,7 +18,7 @@ export default function Page() {
   if (loading) {
     return (
       <main className="min-h-screen bg-[#F3F3F3] flex items-center justify-center">
-        <p>טוען שאלות...</p>
+         <StartPage />
       </main>
     );
   }

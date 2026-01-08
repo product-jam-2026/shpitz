@@ -2,79 +2,88 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap");
 .screen {
-  height: 100vh; 
-  width: 100vw;
-  min-height: 100dvh;
-  min-height: 100vh;
-  flex-direction: column;
-  overflow: hidden; 
-  
-  /* background: linear-gradient(rgba(93, 198, 227, 0.2), rgba(93, 198, 227, 0.2)), 
-            url('/background.png') no-repeat center / cover;
-  background-color: #5DC6E3; */
-  background-color: #5DC6E3; 
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* עוזר בסידור האלמנטים מלמעלה למטה */
-  
-  padding: 0;
-  box-sizing: border-box;
-  position: fixed; 
-  top: 0;
-  left: 0;
-}
-
-.screen {
-  min-height: 100dvh; /* גובה מלא של המסך */
-  width: 100%;       /* רוחב מלא */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: linear-gradient(rgba(93, 198, 227, 0.2), rgba(93, 198, 227, 0.2)), 
-              url('/background.png') no-repeat center / cover;
+  /* מיקום וגודל */
+  position: fixed;
+  inset: 0;          /* מנצח top/left/width/height */
+  height: 100vh;
+  width: 100%;       /* מנצח width: 100vw */
+  min-height: 100vh; /* זה האחרון מבין שתי ההגדרות */
+  background: linear-gradient(rgba(93, 198, 227, 0.2), rgba(93, 198, 227, 0.2)), url('/background.png') no-repeat center / cover; 
   background-color: #5DC6E3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* מנצח justify-content: flex-start */
+  box-sizing: border-box;
+
+
+  overflow: hidden;
+  overflow-x: hidden;
+
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* מונע גלילה לצדדים */
+
+  background-size: 180px 180px;
+  background-repeat: repeat;
 }
-.contentWrapper {
-  width: 100%;
-  max-width: 430px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 10vh; 
-  padding-bottom: 5vh;
-  box-sizing: border-box;
+
+@media screen and (max-height: 670px) {
+  .streakSection {
+    margin-bottom: 17rem; 
+    
+    gap: 0.8rem; 
+  }
 }
 .logoContainer {
   display: flex;
-  justify-content: center; /* ב-RTL, זה ימינה */
+  justify-content: center; /* מרכוז מלא */
   align-items: center;
+
   width: 100%;
-  padding-left: 8%; /* שולט על המרחק מהצד השמאלי של המסך */
-  padding-top: 4vh;
+
+
+  padding: 0;              /* מבטל padding-left ו-padding-top מההגדרה הראשונה */
+  margin-top: 7.39375rem;  /* הרווח העליון שנקבע בהגדרה האחרונה */
+
+
   flex: 0 0 auto;
 }
 
+
 .mainIcon {
-  width: 60vw;
-  max-width: 240px;
-  height: auto;
+  /* מידות מהפיגמה */
+  width: 11.812rem;  /* 188.998px / 16 */
+  height: 8.514rem;  /* 136.234px / 16 */
+
+  /* סיבוב קל */
+  transform: rotate(0.016deg);
+
+  /* ממרכז את התוכן */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.mainIcon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
 .streakSection {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2vh;
-  margin-top: 0; /* מרווח בין הכותרת לסטריק */
+
+  width: 100%;
+  flex: 1;
+  margin-top: auto;
+  margin-bottom: 19.5rem;
+
+  gap: 1.5rem;
 }
+
 .mainTitle {
   color: #000;
   text-align: center;
@@ -109,19 +118,30 @@
   justify-content: center;
   align-items: center;
 
-  gap: clamp(4px, 2.5vw, 12px); 
-  
-  width: 100%;
-  margin: 0 auto;
-  margin-top: clamp(4px, 2vh, 8px);
+
+  width: 20.3125rem; /* 325px / 16 */
+  max-width: 90vw;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  margin-top: 1rem;
+
+  box-sizing: border-box;
+
+
+  gap: clamp(4px, 2.5vw, 12px);
 }
+
 .dayItem {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 2rem;                
+  width: clamp(24px, 8vw, 32px);  
   gap: 0.5vh;
- width: clamp(24px, 8vw, 32px);
 }
+
 .iconWrapper {
   width: 1.75rem; 
   height: 1.75rem;
@@ -137,44 +157,37 @@
 }
 
 .activeLetter {
-  color: #000000; /* שחור */
+  color: #000000; 
 }
 .inactiveLetter {
-  color: #FFFFFF; /* לבן */
+  color: #FFFFFF; 
 }
+
 .startButton {
+  /* מיקום */
   position: fixed;
-  bottom: calc(10px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(2rem + env(safe-area-inset-bottom));
+  z-index: 10;
+
+
+  width: min(20.3125rem, calc(100vw - 3rem));
+  height: 7.875rem;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  width: 80%;
-  max-width: 291px;
-  
- 
-  height: clamp(70px, 12vh, 110px);
 
   background: #C7EE26;
-
-
-  border-radius: 0 0 24px 24px;
-  border-right: 3px solid #000;
-  border-bottom: 3px solid #000;
-  
-  
-  margin: 0 auto;
-  margin-top: auto;
-  margin-bottom: 4vh;
-
+  border-radius: 0 0 1.5rem 1.5rem;
+  border-right: 0.1875rem solid #000;
+  border-bottom: 0.1875rem solid #000;
   cursor: pointer;
-  
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  transition: transform 0.1s ease;
 }
 
-/* אפקט לחיצה שנותן תחושה של כפתור אמיתי */
 .startButton:active {
-  transform: translateY(2px);
   border-right-width: 1px;
   border-bottom-width: 1px;
 }
@@ -186,129 +199,30 @@
   font-weight: 500;
   line-height: 1;
 }
-.startButton {
 
-  width: 20.3125rem;  /* 325px */
-  height: 7.875rem;   /* 126px */
 
-  /* מיקום וסידור */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  /* עיצוב ויזואלי מהפיגמה */
-  background: #C7EE26;
-  border-radius: 0 0 1.5rem 1.5rem; /* 24px */
-  border-right: 0.1875rem solid #000; /* 3px */
-  border-bottom: 0.1875rem solid #000; /* 3px */
-  
-  
-  position: fixed;
-  bottom: calc(10px + env(safe-area-inset-bottom));
-  
-  cursor: pointer;
-  transition: transform 0.1s ease;
-}
 
-/* אפקט לחיצה */
-.startButton:active {
-  transform: translate(-50%, 0.125rem); /* יורד מעט למטה בלחיצה */
-}
 
-.daysContainer {
-  display: flex;
-  /* מידות מהפיגמה */
-  width: 20.3125rem; /* 325px / 16 */
-  justify-content: center;
-  align-items: center;
 
-  /* מרכז את המיכל במסך */
-  margin-left: auto;
-  margin-right: auto;
-  
-  /* רווח עליון (התאמה לפי הצורך, למשל 16px) */
-  margin-top: 1rem; 
-  
-  /* מניעת חריגה במסכים צרים מאוד */
-  max-width: 90vw;
-  box-sizing: border-box;
-}
 
-.dayItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 2rem; 
-}
 
-.logoContainer {
-  display: flex;
-  justify-content: center; /* שינוי מ-flex-end ל-center למרכוז מלא */
-  align-items: center;
-  width: 100%;
-  padding: 0;             /* ביטול ה-padding-left שהיה קודם כדי שלא יסיט את המרכוז */
-  margin-top: 7.39375rem;      /* רווח מלמעלה - ניתן להתאמה */
-  flex: 0 0 auto;
-}
 
-.mainIcon {
-  /* המרה של המידות המדויקות מהפיגמה ל-REM */
-  width: 11.812rem;       /* 188.998px / 16 */
-  height: 8.514rem;       /* 136.234px / 16 */
-  
-  /* סיבוב קל כפי שמופיע בפיגמה */
-  transform: rotate(0.016deg);
-  
-  /* מבטיח שהתמונה בפנים תמלא את המיכל בדיוק */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-/* אם יש תמונה (Image) בתוך הדיב, נוודא שהיא תופסת 100% מהמיכל שהגדרנו */
-.mainIcon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
 
-.contentWrapper {
-  width: 100%;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 0;
-}
 
-.streakSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: auto; 
-  
-  
-  margin-bottom: 19.5rem; 
-  
-  gap: 1.5rem;
-  flex: 1;
-}
 
-.startButton {
-  /* הכפתור עכשיו נמצא מתחת ל-streakSection בתוך זרימת הדף */
-  width: 20.3125rem;
-  height: 7.875rem;
-  background: #C7EE26;
-  border-radius: 0 0 1.5rem 1.5rem;
-  border-right: 0.1875rem solid #000;
-  border-bottom: 0.1875rem solid #000;
-  
-  /* מרכוז ומיקום */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2rem; /* רווח מהקצה הממש תחתון של המכשיר */
-  flex-shrink: 0;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

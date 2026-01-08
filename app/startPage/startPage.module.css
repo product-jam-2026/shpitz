@@ -1,155 +1,132 @@
 .screen {
-  height: 100dvh;
+  height: 100rem;        /* 100dvh */
   width: 100vw;
-  /* min-height: 100dvh;
-  min-height: 100vh; */
+
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   position: fixed;
   top: 0;
   left: 0;
-  background: linear-gradient(rgba(93, 198, 227, 0.2), rgba(93, 198, 227, 0.2)), 
-            url('/background.png') no-repeat center / cover;
+
+  background:
+    linear-gradient(rgba(93, 198, 227, 0.2), rgba(93, 198, 227, 0.2)),
+    url('/background.png') no-repeat center / cover;
+
   background-color: #5DC6E3;
   background-size: cover;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; 
-  
-  padding-top: clamp(40px, 8vh, 100px);
+  justify-content: flex-start;
+
+  padding-top: clamp(6.5rem, 18vh, 11.625rem);
   box-sizing: border-box;
-  
 }
+
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   width: 100%;
-  max-width: 400px;
-  min-height: 80vh;
-  height: 100vh; /* תופס את כל גובה המסך */
-  padding: 0 20px;  
+  max-width: 25rem;      /* 400px */
+  min-height: 12.8rem;   /* 80vh */
+  height: 16rem;         /* 100vh */
+
+  padding: 0 1.25rem;    /* 20px */
 }
+
 .illustrationBox {
-    position: relative;
-    width: 100%;
-    max-width: 300px;
-    aspect-ratio: 1 / 1;
-    margin-top: clamp(20px, 5dvh, 40px);
-    width: 166px;
-    height: 166;
+  position: relative;
 
+  width: 100%;
+  max-width: 18.75rem;   /* 300px */
+  aspect-ratio: 1 / 1;
 
+  
+
+  width: 10.375rem;      /* 166px */
+  height: 10.375rem;     /* 166px */
 }
 
 .contentWrapper {
-    margin-top: clamp(20px, 5vh, 32px);
-    text-align: center;
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  margin-top: clamp(1.25rem, 0.8rem, 2rem); /* 20px, 5vh, 32px */
+  text-align: center;
+
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;          /* 12px */
 }
+
 .subTitle {
-  font-family: 'SouthFont', sans-serif; 
-  font-size: clamp(28px, 8vw, 38px);
+  font-family: 'SouthFont', sans-serif;
+  font-size: clamp(1.75rem, 2rem, 2.375rem); /* 28px, 8vw, 38px */
   font-weight: 600;
   color: #000;
   margin: 0;
 }
+
 .description {
-    color: #000;
-    text-align: center;
-    font-family: "Narkssim";
-    font-size: clamp(18px, 5vw, 24px);
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: -0.02em;
-    width: 95%;
-    max-width: 325px;
-    margin: 0 auto;
-    margin-top: clamp(6px, 1.5vh, 8px);
+  color: #000;
+  text-align: center;
+  font-family: "Narkssim";
+
+  font-size: clamp(1.125rem, 1.25rem, 1.5rem); /* 18px, 5vw, 24px */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+
+  width: 95%;
+  max-width: 20.3125rem; /* 325px */
+
+  margin: 0 auto;
+  margin-top: clamp(0.375rem, 0.24rem, 0.5rem); /* 6px, 1.5vh, 8px */
 }
-
-
 
 /* כפתור "הבנתי" */
+/* כפתור "הבנתי" – מיושר ל-StartButton */
 .understandButton {
-    position: fixed;
-    border-radius: 0 0 24px 24px;
-    border-right: 3px solid  #000;
-    border-bottom: 3px solid #000;
-    background: #FFF;
+  /* מיקום – זהה ל-startButton */
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(2rem + env(safe-area-inset-bottom));
+  z-index: 10;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    text-align: center;
+  /* מידות – זהות */
+  width: min(20.3125rem, calc(100vw - 3rem)); /* 325px */
+  height: 7.875rem;                            /* 126px */
 
-    width: 90%;
-    max-width: 375px;
-    height: clamp(85px, 12vh, 100px);
-    
-    margin: 0 auto;
-    
-    margin-bottom: 10dvh;
-    margin-top: clamp(15px, 4vh, 25px);
-    
+  /* פריסה */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem; /* 10px – נשאר מהכפתור המקורי */
 
-    
-    color: #000;
-    font-family: SouthFont;
-    font-size: clamp(26px, 7vw, 36px);
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.1s ease;
+  /* עיצוב – כמו startButton (חוץ מצבע) */
+  background: #FFF; /* נשאר לבן */
+  border-radius: 0 0 1.5rem 1.5rem;
+  border-right: 0.1875rem solid #000;
+  border-bottom: 0.1875rem solid #000;
+
+  /* טקסט */
+  color: #000;
+  font-family: SouthFont;
+  font-size: 2.25rem;      /* 36px – תואם תחושת כפתור ראשי */
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.125rem;
+
+  cursor: pointer;
+  transition: transform 0.1s ease;
 }
+
 
 .understandButton:active {
-    transform: translateY(2px);
-    box-shadow: 0px 2px 0px #000;
-}
-/* כפתור "הבנתי" */
-.understandButton {
-    position: fixed; /* מקבע את הכפתור למסך */
-    bottom: 40px;    /* המרחק המדויק מהקצה התחתון של המסך */
-    left: 50%;      /* ממרכז אופקית */
-    transform: translateX(-50%); /* תיקון מרכוז מושלם */
-    
-    border-radius: 0 0 24px 24px;
-    border-right: 3px solid #000;
-    border-bottom: 3px solid #000;
-    background: #FFF;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    text-align: center;
-
-    width: 90%;
-    max-width: 375px;
-    height: clamp(80px, 10vh, 100px); /* גובה גמיש אך מבוקר */
-    
-    z-index: 1000; /* מוודא שהכפתור תמיד מעל הכל */
-
-    color: #000;
-    font-family: SouthFont;
-    font-size: clamp(26px, 7vw, 36px);
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.1s ease;
-}
-
-.understandButton:active {
-    /* שיניתי מעט את הטרנספורם כדי שלא יתנגש עם המרכוז */
-    transform: translateX(-50%) translateY(2px);
-    box-shadow: 0px 2px 0px #000;
+  transform: translateX(-50%) translateY(0.125rem); /* 2px */
+  box-shadow: 0 0.125rem 0 #000;
 }

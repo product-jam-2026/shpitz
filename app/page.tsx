@@ -117,7 +117,7 @@ function MobileContent({
         </div>
 
         <h1 className={styles.mainTitle}>
-           חמש שאלות, כל יום,
+           חמש שאלות,  <br /> כל יום,
             <br />
            ואתה שפיץ
           </h1>

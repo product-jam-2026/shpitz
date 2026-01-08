@@ -35,13 +35,9 @@ export default function StartPage() {
         <div className={styles.contentWrapper}>
           <h2 className={styles.subTitle}>?איך משחקים</h2>
           <p className={styles.description}>
-            תוצג לפניכם הודעת טקסט, חשבו
+           ,תוצג לפניכם הודעת טקסט 
             <br />
-            האם היא אמיתית או הונאה
-            <br />
-            ולאחר מכן בחרו האם הייתם
-            <br />
-            .פותחים את הלינק או מדווחים
+           ?האם היא אמיתית או הונאה
           </p>
         </div>
 
