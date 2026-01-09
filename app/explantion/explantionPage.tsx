@@ -42,9 +42,11 @@ const explanationSteps = [
         isHintStep: true
     },
     { // שלב 6 - הסבר על הוראות
-        body: "חזרו לעמוד זה והזכרו כיצד להשתמש",
+       
+        body: <>חזרו לעמוד זה והזכרו <br /> כיצד להשתמש</>,
         showOverlay: true,
         isInstructionsStep: true
+
     },
     { 
         body: "הבנתי, בואו נתחיל לשחק!", 
@@ -202,7 +204,7 @@ export default function ChallengeBase() {
                                                     className={styles.lottieAnimation}
                                                 />
                                         </div>
-                                        <p className={styles.feedbackText}>כל הכבוד, עוד כמה סיבובים ותהיה שפיץ!</p>
+                                        <p className={styles.feedbackText}>כל הכבוד, עוד כמה סיבובים <br/> ותהיה שפיץ!</p>
                                         <button className={styles.continueButton}>המשך</button>
                                     </div>
                                 </div>
