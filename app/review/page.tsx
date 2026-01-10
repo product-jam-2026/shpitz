@@ -102,8 +102,11 @@ export default function ReviewPage() {
                                 </div>
                             </div>
 
-                            <div className={styles.hintText}>
-                                {question?.tips ?? "אין רמז זמין"}
+                            <div>
+                                <h3 className={styles.tipTitle}>חידוד מספר  {index + 1}</h3>
+                                <div className={styles.hintText}>
+                                    {question?.tips ?? "אין רמז זמין"}
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -119,7 +122,7 @@ export default function ReviewPage() {
                                 transition: 'opacity 0.1s',
                             }}
                         >
-                            <span className={styles.buttonText}>סבבה, הבנתי</span>
+                            <span className={styles.buttonText}>הבנתי</span>
                         </button>
                     </div>
                 </div>
