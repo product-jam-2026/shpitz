@@ -103,7 +103,7 @@ export default function ReviewPage() {
                             </div>
 
                             <div>
-                                <h3 className={styles.tipTitle}>חידוד מספר  {index + 1}</h3>
+                                <h3 className={styles.tipTitle}>חידוד  {index + 1}</h3>
                                 <div className={styles.hintText}>
                                     {question?.tips ?? "אין רמז זמין"}
                                 </div>
