@@ -2,37 +2,22 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from "./page.module.css";
-import SkipButton from "@/lib/components/SkipButton";
-import NextButton from "@/lib/components/NextButton";
-
-console.log('📄 REVIEW PAGE FILE LOADED');
 
 export default function ReviewPage() {
-    console.log('📖 Review page component rendered');
-    
     const router = useRouter();
     const [wrongQuestions, setWrongQuestions] = useState<any[]>([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log('🔍 Loading wrong answers from localStorage...');
-        
         // Load wrong answers from localStorage
         const dailyResultsStr = localStorage.getItem('dailyResults');
-        console.log('Raw dailyResults:', dailyResultsStr);
         
         if (dailyResultsStr) {
             try {
                 const results = JSON.parse(dailyResultsStr);
-                console.log('Parsed results:', results);
-                console.log('wrongAnswers field:', results.wrongAnswers);
-                
                 const wrongAnswers = results.wrongAnswers || [];
-                console.log(`Found ${wrongAnswers.length} wrong answers`);
                 
                 if (wrongAnswers.length === 0) {
-                    console.log('No wrong answers - redirecting to finish');
                     router.push('/finish');
                     return;
                 }
@@ -43,12 +28,19 @@ export default function ReviewPage() {
                 router.push('/finish');
             }
         } else {
-            console.log('No dailyResults found - redirecting to finish');
             router.push('/finish');
         }
         
         setLoading(false);
     }, [router]);
+
+    const handleFinish = () => {
+        router.push('/finish');
+    };
+
+    const handleBack = () => {
+        router.back();
+    };
 
     if (loading) {
         return (
@@ -70,56 +62,66 @@ export default function ReviewPage() {
         );
     }
 
-    const current = wrongQuestions[currentIndex];
-    const totalQuestions = wrongQuestions.length;
-    const isLastQuestion = currentIndex === totalQuestions - 1;
-
-    console.log(`Showing question ${currentIndex + 1}/${totalQuestions}:`, current);
-
-    const handleNext = () => {
-        if (currentIndex < totalQuestions - 1) {
-            setCurrentIndex(prev => prev + 1);
-        } else {
-            router.push('/finish');
-        }
-    };
-
-    const handleSkip = () => {
-        router.push('/finish');
-    };
-
     return (
         <div className={styles.pageWrapper}>
+            {/* Back arrow button */}
+            <button className={styles.backButton} onClick={handleBack}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41" fill="none">
+                    <path d="M27.4258 18.6515L17.9309 9.1566L20.347 6.78288L33.9111 20.347L20.347 33.9111L17.9309 31.5374L27.4258 22.0425L6.78288 22.0425L6.78288 18.6515L27.4258 18.6515Z" fill="#1C1D1E"/>
+                </svg>
+            </button>
+
             <div className={styles.container} dir="rtl">
                 <div className={styles.contentArea}>
-                    <div className={styles.progressBar}>
-                        <div className={styles.progressCounter}>{currentIndex + 1}/{totalQuestions}</div>
-                        <div className={styles.progressLabel}>סיכום יומי - תשובות שגויות</div>
+                    {/* Title section */}
+                    <div className={styles.titleSection}>
+                        <div className={styles.avatarCircleLarge}></div>
+                        <h1 className={styles.mainTitle}>סיכום יומי</h1>
+                        <p className={styles.subtitle}>
+                            זה המקום להעמיק ולקרוא איזה
+                            <br />
+                            טיפ היה עוזר לזהות שקרים
+                        </p>
                     </div>
 
-                    <div className={styles.messageCard}>
-                        <div className={styles.messageHeader}>
-                            <div className={styles.avatarCircle}></div>
-                            <p dir="ltr" className="font-bold text-xs">
-                                {current?.Owner ?? "+972 528886666"}
-                            </p>
-                        </div>
-                        <div className={styles.messageTimestamp}>היום 9:07</div>
-                        <div className={styles.messageBubbleContainer}>
-                            <div className={styles.messageBubbleText}>
-                                <p>{current?.content}</p>
+                    {/* Show all wrong questions */}
+                    {wrongQuestions.map((question, index) => (
+                        <div key={index} className={styles.questionContainer}>
+                            <div className={styles.messageCard}>
+                                <div className={styles.messageHeader}>
+                                    <div className={styles.avatarCircle}></div>
+                                    <p dir="ltr">
+                                        {question?.Owner ?? "+972 528886666"}
+                                    </p>
+                                </div>
+                                <div className={styles.messageTimestamp}>היום 9:07</div>
+                                <div className={styles.messageBubbleContainer}>
+                                    <div className={styles.messageBubbleText}>
+                                        <p>{question?.content}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className={styles.hintText}>
+                                {question?.tips ?? "אין רמז זמין"}
                             </div>
                         </div>
-                    </div>
-
-                    <div className={styles.hintText}>
-                        {current?.tips ?? "אין רמז זמין"}
-                    </div>
+                    ))}
                 </div>
 
                 <div className={styles.buttonArea}>
-                    {!isLastQuestion && <SkipButton onClick={handleSkip} />}
-                    <NextButton onClick={handleNext} text={isLastQuestion ? "סיום" : undefined} />
+                    <div className={styles.buttonContainer}>
+                        <button 
+                            className={styles.understoodButton}
+                            onClick={handleFinish}
+                            style={{
+                                transform: 'none',
+                                transition: 'opacity 0.1s',
+                            }}
+                        >
+                            <span className={styles.buttonText}>סבבה, הבנתי</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

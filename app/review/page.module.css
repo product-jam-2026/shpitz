@@ -5,6 +5,7 @@
 
 .pageWrapper {
   min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
   background: linear-gradient(rgba(93, 198, 227, 0.2), rgba(93, 198, 227, 0.2)), 
             url('/background.png') no-repeat center / cover;
@@ -12,6 +13,33 @@
   background-size: cover;
   display: flex;
   justify-content: center;
+  position: relative;
+}
+
+/* Back arrow button */
+.backButton {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 41px;
+  height: 41px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: opacity 0.2s;
+  padding: 0;
+}
+
+.backButton:hover {
+  opacity: 0.7;
+}
+
+.backButton:active {
+  opacity: 0.5;
 }
 
 .container {
@@ -22,12 +50,49 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding: 60px 20px 20px 20px;
+  padding: 60px 20px 140px 20px;
   min-height: 100vh;
-  height: 100vh;
+  min-height: 100dvh;
   position: relative;
-  overflow-y: auto; /* Allow container to scroll */
-  justify-content: space-between;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Title section */
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.avatarCircleLarge {
+  width: 180px;
+  height: 180px;
+  background: #FFF9EC;
+  border-radius: 50%;
+  position: relative;
+}
+
+.mainTitle {
+  color: #000;
+  font-family: 'Narkissim', 'Heebo', sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.subtitle {
+  color: #000;
+  font-family: 'Narkissim', 'Heebo', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 320px;
 }
 
 /* Wrapper for content that should stay together at top */
@@ -38,6 +103,22 @@
   gap: 10px;
   width: 100%;
   flex-shrink: 0;
+  padding-bottom: 20px;
+}
+
+/* Container for each question - light blue rounded container */
+.questionContainer {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  background: rgba(189, 216, 255, 0.6); /* Light blue container like Figma */
+  border-radius: 24px;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
 /* Wrapper for buttons that should stay at bottom */
@@ -51,83 +132,15 @@
   padding-bottom: 10px;
 }
 
-/* שורת התקדמות עליונה */
-.progressBar {
-    display: flex;
-    width: 100%;
-    max-width: 334px;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 0px;
-}
-
-.progressLabel {
-    background: #FFFFFF;
-    color: var(--background-transparency, rgba(35, 44, 57, 0.90));
-    padding: 8px 16px;
-    font-family: 'South_v2', -apple-system, Roboto, Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
-    letter-spacing: 0.8px;
-}
-
-.progressCounter {
-    background: #FFFFFF;
-    color: var(--background-transparency, rgba(35, 44, 57, 0.90));
-    padding: 8px 16px;
-    font-family: 'South_v2', 'South_v2', -apple-system, Roboto, Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
-    letter-spacing: 0.8px;
-}
-
-.progressItem {
-    display: flex;
-    flex: 1;
-    height: 34px;
-    justify-content: center;
-    align-items: center;
-    background: #EBEBEB;
-    color: #BEBEBE;
-    font-family: 'South_v2', 'South_v2', -apple-system, Roboto, Helvetica, sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.progressActive {
-    background: #FFFFFF;
-    color: #000000;
-}
-
-/* כותרת השאלה */
-.questionTitle {
-    color: #000;
-    text-align: right;
-    font-family: 'Inter', sans-serif;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 28px;
-    letter-spacing: 1.32px;
-    width: 100%;          
-    max-width: 334px;    
-    margin: -25px auto 0;
-    padding: 0;
-}
-
 .messageCard {
   display: flex;
-  width: 324px;
+  width: 100%;
   flex-direction: column;
   align-items: center;
-  border-radius: 32px;
+  border-radius: 24px;
   background: #FFF;
   overflow: hidden;
   position: relative;
-  margin-top: 5px;
 }
 
 .messageHeader {
@@ -137,8 +150,8 @@
   width: 100%;
   padding: 20px 0 12px 0;
   gap: 8px;
-  background: #D9D9D9;
-  border-radius: 32px 32px 0 0; 
+  background: #FF8B89; /* Coral/salmon color like Figma */
+  border-radius: 24px 24px 0 0; 
 }
 
 .avatarCircle {
@@ -163,11 +176,11 @@
 
 .messageBubbleContainer {
   position: relative;
-  width: 304px;
+  width: 100%;
   min-height: 80px;
-  margin: 15px 0;
-  background: #F3F3F3;
-  border-radius: 20px;
+  margin: 0;
+  background: #FFF;
+  border-radius: 0 0 24px 24px;
   padding: 15px 20px;
   display: flex;
   flex-direction: column;
@@ -200,314 +213,71 @@
 }
 
 .hintText {
-  width: 324px;
-  color: #FFF;
+  width: 100%;
+  color: #000;
+  background: #FFF;
+  border-radius: 16px;
+  padding: 15px 20px;
   text-align: right;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 23px;
-  letter-spacing: 1.32px;
-  white-space: pre-line;
-  margin: 5px 0px;
-  padding-left: 8px;
-}
-
-.actionGrid {
-  display: grid;
-  grid-template-columns: 152px 152px;
-  gap: 12px;
-  justify-content: center;
-  width: 100%;
-  margin-top: 20px;
-}
-
-.buttonIcon {
-  width: 20px;
-  height: 100px;
-  flex-shrink: 0;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.smallToolButton {
-  display: flex;
-  width: 152px;
-  height: 51px;
-  padding: 10px 12px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid #000;
-  border-right: 3px solid #000;
-  border-bottom: 3px solid #000;
-  background: #D5D5D5;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  color: #000;
-  cursor: pointer;
-}
-
-.smallToolButton:active {
-  border-right: 1px solid #000;
-  border-bottom: 1px solid #000;
-  transform: translate(2px, 2px);
-}
-
-.squareButton {
-  display: flex;
-  width: 152px;
-  height: 138px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
-  background: #8F8F8F;
-  border: 1px solid #000;
-  border-right: 3px solid #000;
-  border-bottom: 3px solid #000;
-  color: #000;
-  font-family: 'Inter', sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.squareButton:nth-child(3) {
-  border-radius: 0 0 24px 0;
-}
-
-.squareButton:nth-child(4) {
-  border-radius: 0 0 0 24px;
-}
-
-.instructionBody {
-  color: #CCFF00;
+  font-family: 'Narkissim', 'Heebo', Inter, sans-serif;
   font-size: 18px;
-  font-family: 'Reisinger', sans-serif;
-  line-height: 1.3;
-  margin: 0;
-  font-weight: 500;
-}
-
-.instructionBoxAnim {
-  animation: fadeInScale 0.4s ease-out;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.fullTextOverlay {
-  max-width: 320px;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.explanationText {
-  color: #CCFF00;
-  font-family: 'Reisinger', sans-serif;
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 1.3;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
   white-space: pre-line;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.transparentClickLayer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 2000;
-    background: transparent;
-    cursor: pointer;
-}
-
-.hintExplanationBox {
-    position: absolute;
-    bottom: 250px;
-    max-width: 280px;
-    text-align: center;
-    background: transparent;
-    padding: 10px;
-}
-
-@keyframes stepFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-} 
-
-.stepAnimation {
-  animation: stepFadeIn 0.3s ease-out forwards;
+/* Green container that stretches full width */
+.buttonContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
-  height: 100%;
+  background: #C7EE26;
+  padding: 20px 0 calc(20px + env(safe-area-inset-bottom));
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(40, 40, 40, 0.80);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; 
-    padding-top: 150px; 
-    z-index: 1000;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-.highlightSpotlightBox {
-    position: absolute;
-    bottom: 10px; 
-    width: 348px;
-    height: 157px;
-    background-color: #D9D9D9;
-    z-index: 2500; 
-    border-radius: 0; 
-    animation: stepFadeIn 0.3s ease-out forwards;
-}
-
-.highlight {
-    position: relative;
-    z-index: 3000 !important; 
-    background-color: #8F8F8F !important; 
-}
-
-.feedbackText {
-  color: #000;
-  font-family: Inter, sans-serif;
-  font-size: 27px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.continueButton {
-  border-radius: 0 0 24px 24px;
-  border-right: 3px solid #000;
-  border-bottom: 3px solid #000;
-  background: #8F8F8F;
-  display: flex;
-  width: 325px;
-  height: 68px;
-  padding: 10px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  font-family: South_v2;
-  font-size: 40px;
-  font-weight: 700;
-  color: #000;
+  z-index: 100;
+}
+
+/* Single "הבנתי" button - now white */
+.understoodButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 80%;
+  max-width: 400px;
+  
+  height: clamp(70px, 12vh, 100px);
+  background: #FFF;
+
   cursor: pointer;
-  transition: transform 0.1s ease;
+  will-change: opacity;
+  transform: none !important;
+  transition: opacity 0.1s;
+  border: none;
+  border-radius: 0 0 1.5rem 1.5rem;
+  border-right: 0.1875rem solid #000;
+  border-bottom: 0.1875rem solid #000;
 }
 
-.continueButton:active {
-  transform: translateY(2px);
+.understoodButton:active {
+  opacity: 0.8;
+  transform: none !important;
 }
 
-.stepHighlight {
-  position: relative;
-  z-index: 4000 !important;
-  background: #68DCDC !important;
-  border: 2px solid #fdfafa;
-}
-
-.finalBoxContainer {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 200px; 
-    pointer-events: none;
-}
-
-.finalInstructionBox {
-    display: flex;
-    width: 334px;
-    height: 132px;
-    padding: 20px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-right: 3px solid #000;
-    border-bottom: 3px solid #000;
-    background: #FFF;
-}
-
-.finalText {
-    color: #000;
-    text-align: center;
-    font-family: Inter;
-    font-size: 38px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 48px;
-    letter-spacing: 2.7px;
-    width: 348.502px;
-    flex-shrink: 0;
-}
-
-.illustrationBox {
-    width: 200px;
-    height: 200px;
-    background-color: #EEEEEE;
-    border: 1px solid #776D6D;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.crossContainer {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.crossLines {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    stroke: #776D6D;
-    stroke-width: 1;
-}
-
-.illustrationText {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #000;
-    z-index: 1;
-}
-
-.contentWrapper {
-    width: 100%;
-}
-
-.description {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    color: #333;
-    font-weight: 500;
+.buttonText {
+  font-family: 'SouthFont', sans-serif;
+  color: #000;
+  font-size: clamp(28px, 7vw, 36px);
+  font-weight: 550;
+  line-height: 1;
+  text-align: center;
 }
 
 /* ============================
@@ -518,66 +288,66 @@
 @media (max-height: 844px) and (min-height: 701px) {
   .container {
     gap: 8px;
+    padding-bottom: 120px;
   }
 
-  
-  .messageCard {
-    width: 92%;
-    max-width: 310px;
+  .titleSection {
+    margin-bottom: 25px;
   }
-  
-  .messageBubbleContainer {
-    width: 92%;
-    margin: 12px 0;
-    padding: 14px 18px;
+
+  .avatarCircleLarge {
+    width: 150px;
+    height: 150px;
+  }
+
+  .mainTitle {
+    font-size: 36px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .questionContainer {
+    max-width: 350px;
+    margin-bottom: 25px;
   }
   
   .hintText {
-    width: 92%;
-    max-width: 310px;
-    font-size: 20px;
-    line-height: 22px;
-    margin-bottom: 10px;
-  }
-  
-  .actionGrid {
-    gap: 10px;
-    margin-top: 12px;
-    grid-template-columns: 145px 145px;
-  }
-  
-  .smallToolButton {
-    width: 145px;
-    height: 48px;
-    font-size: 15px;
-  }
-  
-  .squareButton {
-    width: 145px;
-    height: 120px;
-    gap: 24px;
-    font-size: 22px;
+    font-size: 17px;
   }
 }
 
 /* For screens with height less than 700px */
 @media (max-height: 700px) {
   .container {
-    padding: 40px 16px 16px 16px;
+    padding: 40px 16px 110px 16px;
     gap: 8px;
-    justify-content: space-between;
   }
-  
-  .questionTitle {
-    font-size: 18px;
-    line-height: 24px;
-    margin: -15px auto 0;
+
+  .titleSection {
+    margin-bottom: 20px;
+    gap: 10px;
   }
-  
-  .messageCard {
-    width: 90%;
-    max-width: 300px;
-    margin-top: 2px;
+
+  .avatarCircleLarge {
+    width: 130px;
+    height: 130px;
+  }
+
+  .mainTitle {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .questionContainer {
+    max-width: 340px;
+    margin-bottom: 20px;
+    padding: 12px;
+    gap: 12px;
   }
   
   .messageHeader {
@@ -595,59 +365,45 @@
   }
   
   .messageBubbleContainer {
-    width: 90%;
     min-height: 60px;
-    margin: 10px 0;
     padding: 12px 16px;
   }
   
   .hintText {
-    width: 90%;
-    max-width: 300px;
-    font-size: 18px;
-    line-height: 20px;
-    margin: 2px 0;
-  }
-  
-  .actionGrid {
-    gap: 8px;
-    margin-top: 10px;
-  }
-  
-  .smallToolButton {
-    width: 140px;
-    height: 45px;
-    font-size: 14px;
-  }
-  
-  .squareButton {
-    width: 140px;
-    height: 110px;
-    gap: 20px;
-    font-size: 20px;
+    font-size: 16px;
   }
 }
 
 /* For screens with height less than 640px */
 @media (max-height: 640px) {
   .container {
-    padding: 30px 12px 12px 12px;
+    padding: 30px 12px 100px 12px;
     gap: 6px;
   }
-  
-  .progressBar {
-    margin-bottom: -5px;
+
+  .titleSection {
+    margin-bottom: 15px;
+    gap: 8px;
   }
-  
-  .questionTitle {
-    font-size: 16px;
-    line-height: 22px;
-    margin: -10px auto 0;
+
+  .avatarCircleLarge {
+    width: 110px;
+    height: 110px;
   }
-  
-  .messageCard {
-    width: 90%;
-    max-width: 280px;
+
+  .mainTitle {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .questionContainer {
+    max-width: 320px;
+    margin-bottom: 15px;
+    padding: 10px;
+    gap: 10px;
   }
   
   .messageHeader {
@@ -661,67 +417,45 @@
   
   .messageBubbleContainer {
     min-height: 50px;
-    margin: 8px 0;
     padding: 10px 14px;
   }
   
   .hintText {
-    font-size: 16px;
-    line-height: 18px;
-  }
-  
-  .actionGrid {
-    gap: 6px;
-    margin-top: 8px;
-  }
-  
-  .smallToolButton {
-    width: 130px;
-    height: 40px;
-    font-size: 13px;
-    padding: 8px 10px;
-  }
-  
-  .squareButton {
-    width: 130px;
-    height: 95px;
-    gap: 16px;
-    font-size: 18px;
-  }
-  
-  .buttonIcon {
-    width: 16px;
+    font-size: 15px;
+    padding: 12px 16px;
   }
 }
 
 /* For very small screens with height less than 580px */
 @media (max-height: 580px) {
   .container {
-    padding: 25px 10px 10px 10px;
+    padding: 25px 10px 90px 10px;
     gap: 4px;
   }
-  
-  .progressBar {
-    margin-bottom: -8px;
+
+  .titleSection {
+    margin-bottom: 12px;
+    gap: 6px;
+  }
+
+  .avatarCircleLarge {
+    width: 90px;
+    height: 90px;
+  }
+
+  .mainTitle {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .questionContainer {
     max-width: 300px;
-  }
-  
-  .progressLabel,
-  .progressCounter {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-  
-  .questionTitle {
-    font-size: 14px;
-    line-height: 20px;
-    margin: -8px auto 0;
-    max-width: 300px;
-  }
-  
-  .messageCard {
-    width: 90%;
-    max-width: 260px;
+    margin-bottom: 12px;
+    padding: 8px;
+    gap: 8px;
   }
   
   .messageHeader {
@@ -743,40 +477,12 @@
   }
   
   .messageBubbleContainer {
-    width: 92%;
     min-height: 40px;
-    margin: 6px 0;
     padding: 8px 12px;
   }
   
   .hintText {
     font-size: 14px;
-    line-height: 16px;
-  }
-  
-  .actionGrid {
-    gap: 5px;
-    margin-top: 6px;
-    grid-template-columns: 120px 120px;
-  }
-  
-  .smallToolButton {
-    width: 120px;
-    height: 36px;
-    font-size: 12px;
-    padding: 6px 8px;
-    gap: 6px;
-  }
-  
-  .squareButton {
-    width: 120px;
-    height: 85px;
-    gap: 12px;
-    font-size: 16px;
-  }
-  
-  .buttonIcon {
-    width: 14px;
-    height: auto;
+    padding: 10px 14px;
   }
 }
