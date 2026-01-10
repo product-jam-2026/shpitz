@@ -19,10 +19,10 @@
 /* Back arrow button */
 .backButton {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 41px;
-  height: 41px;
+  top: 1.25rem; /* 20px */
+  right: 1.25rem; /* 20px */
+  width: 2.5625rem; /* 41px */
+  height: 2.5625rem; /* 41px */
   background: transparent;
   border: none;
   cursor: pointer;
@@ -44,13 +44,13 @@
 
 .container {
   width: 100%;
-  max-width: 430px;
+  max-width: 26.875rem; /* 430px */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 60px 20px 140px 20px;
+  gap: 0.625rem; /* 10px */
+  padding: 3.75rem 1.25rem 8.75rem 1.25rem; /* 60px 20px 140px 20px */
   min-height: 100vh;
   min-height: 100dvh;
   position: relative;
@@ -63,14 +63,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 30px;
+  gap: 0.9375rem; /* 15px */
+  margin-bottom: 1.875rem; /* 30px */
   text-align: center;
 }
 
 .avatarCircleLarge {
-  width: 180px;
-  height: 180px;
+  width: 11.25rem; /* 180px */
+  height: 11.25rem; /* 180px */
   background: #FFF9EC;
   border-radius: 50%;
   position: relative;
@@ -79,7 +79,7 @@
 .mainTitle {
   color: #000;
   font-family: 'Narkissim', 'Heebo', sans-serif;
-  font-size: 40px;
+  font-size: 2.75rem; /* 44px - increased from 40px */
   font-weight: 700;
   line-height: 1.2;
   margin: 0;
@@ -88,11 +88,11 @@
 .subtitle {
   color: #000;
   font-family: 'Narkissim', 'Heebo', sans-serif;
-  font-size: 18px;
+  font-size: 1.5rem; /* 20px - increased from 18px */
   font-weight: 400;
   line-height: 1.5;
   margin: 0;
-  max-width: 320px;
+  max-width: 20rem; /* 320px */
 }
 
 /* Wrapper for content that should stay together at top */
@@ -100,24 +100,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem; /* 10px */
   width: 100%;
   flex-shrink: 0;
-  padding-bottom: 20px;
+  padding-bottom: 1.25rem; /* 20px */
 }
 
 /* Container for each question - light blue rounded container */
 .questionContainer {
   width: 100%;
-  max-width: 380px;
+  max-width: 23.75rem; /* 380px */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 30px;
-  background: rgba(189, 216, 255, 0.6); /* Light blue container like Figma */
-  border-radius: 24px;
-  padding: 15px;
+  gap: 0.9375rem; /* 15px */
+  margin-bottom: 1.875rem; /* 30px */
+  background: rgba(189, 216, 255, 0.6);
+  border-radius: 1.5rem; /* 24px */
+  padding: 0.9375rem; /* 15px */
   box-sizing: border-box;
 }
 
@@ -126,10 +126,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem; /* 10px */
   width: 100%;
   flex-shrink: 0;
-  padding-bottom: 10px;
+  padding-bottom: 0.625rem; /* 10px */
 }
 
 .messageCard {
@@ -137,7 +137,7 @@
   width: 100%;
   flex-direction: column;
   align-items: center;
-  border-radius: 24px;
+  border-radius: 1.5rem; /* 24px */
   background: #FFF;
   overflow: hidden;
   position: relative;
@@ -148,15 +148,15 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 20px 0 12px 0;
-  gap: 8px;
-  background: #FF8B89; /* Coral/salmon color like Figma */
-  border-radius: 24px 24px 0 0; 
+  padding: 1.25rem 0 0.75rem 0; /* 20px 0 12px 0 */
+  gap: 0.5rem; /* 8px */
+  background: #FF8B89;
+  border-radius: 1.5rem 1.5rem 0 0; /* 24px */
 }
 
 .avatarCircle {
-  width: 44px;
-  height: 44px;
+  width: 2.75rem; /* 44px */
+  height: 2.75rem; /* 44px */
   background: #FFF;
   border-radius: 50%;
   position: relative;
@@ -164,24 +164,24 @@
 
 .messageHeader p {
   margin: 0;
-  font-size: 12px;
+  font-size: 0.75rem; /* 12px */
   font-weight: bold;
 }
 
 .messageTimestamp {
   color: #808080;
-  font-size: 11px;
-  margin: 5px 0;
+  font-size: 0.6875rem; /* 11px */
+  margin: 0.3125rem 0; /* 5px */
 }
 
 .messageBubbleContainer {
   position: relative;
   width: 100%;
-  min-height: 80px;
+  min-height: 5rem; /* 80px */
   margin: 0;
   background: #FFF;
-  border-radius: 0 0 24px 24px;
-  padding: 15px 20px;
+  border-radius: 0 0 1.5rem 1.5rem; /* 24px */
+  padding: 0.9375rem 1.25rem; /* 15px 20px */
   display: flex;
   flex-direction: column;
 }
@@ -190,10 +190,10 @@
   position: relative;
   color: #000;
   font-family: Roboto, sans-serif;
-  font-size: 22px;
+  font-size: 1.375rem; /* 22px */
   font-weight: 400;
   font-style: normal;
-  letter-spacing: 1.32px;
+  letter-spacing: 0.0825rem; /* 1.32px */
   line-height: 1.6;
   text-align: right;
   word-wrap: break-word;
@@ -208,19 +208,19 @@
   text-decoration: underline;
   font-family: Roboto, sans-serif;
   display: block;
-  margin-top: 8px;
+  margin-top: 0.5rem; /* 8px */
   word-break: break-all;
 }
 
 .hintText {
   width: 100%;
   color: #000;
-  background: transparent; /* No visible container */
+  background: transparent;
   border-radius: 0;
   padding: 0;
   text-align: right;
   font-family: 'Narkissim', 'Heebo', Inter, sans-serif;
-  font-size: 18px;
+  font-size: 1.125rem; /* 18px */
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -234,10 +234,10 @@
   width: 100%;
   color: #000;
   font-family: 'Narkissim', 'Heebo', sans-serif;
-  font-size: 20px;
+  font-size: 1.25rem; /* 20px */
   font-weight: 700;
   text-align: right;
-  margin: 0 0 8px 0;
+  margin: 0 0 0.5rem 0; /* 0 0 8px 0 */
 }
 
 /* Green container that stretches full width */
@@ -248,7 +248,7 @@
   right: 0;
   width: 100%;
   background: #C7EE26;
-  padding: 20px 0 calc(20px + env(safe-area-inset-bottom));
+  padding: 1.25rem 0 calc(1.25rem + env(safe-area-inset-bottom)); /* 20px */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -262,9 +262,9 @@
   align-items: center;
   
   width: 80%;
-  max-width: 400px;
+  max-width: 25rem; /* 400px */
   
-  height: clamp(70px, 12vh, 100px);
+  height: clamp(4.375rem, 12vh, 6.25rem); /* clamp(70px, 12vh, 100px) */
   background: #FFF;
 
   cursor: pointer;
@@ -285,7 +285,7 @@
 .buttonText {
   font-family: 'SouthFont', sans-serif;
   color: #000;
-  font-size: clamp(28px, 7vw, 36px);
+  font-size: clamp(1.75rem, 7vw, 2.25rem); /* clamp(28px, 7vw, 36px) */
   font-weight: 550;
   line-height: 1;
   text-align: center;
@@ -296,204 +296,204 @@
    ============================ */
 
 /* For iPhone 12/13/14 standard size (390x844) and similar */
-@media (max-height: 844px) and (min-height: 701px) {
+@media (max-height: 52.75rem) and (min-height: 43.8125rem) { /* 844px to 701px */
   .container {
-    gap: 8px;
-    padding-bottom: 120px;
+    gap: 0.5rem; /* 8px */
+    padding-bottom: 7.5rem; /* 120px */
   }
 
   .titleSection {
-    margin-bottom: 25px;
+    margin-bottom: 1.5625rem; /* 25px */
   }
 
   .avatarCircleLarge {
-    width: 150px;
-    height: 150px;
+    width: 9.375rem; /* 150px */
+    height: 9.375rem; /* 150px */
   }
 
   .mainTitle {
-    font-size: 36px;
+    font-size: 2.375rem; /* 38px */
   }
 
   .subtitle {
-    font-size: 16px;
+    font-size: 1.125rem; /* 18px */
   }
 
   .questionContainer {
-    max-width: 350px;
-    margin-bottom: 25px;
+    max-width: 21.875rem; /* 350px */
+    margin-bottom: 1.5625rem; /* 25px */
   }
   
   .hintText {
-    font-size: 17px;
+    font-size: 1.0625rem; /* 17px */
   }
 }
 
 /* For screens with height less than 700px */
-@media (max-height: 700px) {
+@media (max-height: 43.75rem) { /* 700px */
   .container {
-    padding: 40px 16px 110px 16px;
-    gap: 8px;
+    padding: 2.5rem 1rem 6.875rem 1rem; /* 40px 16px 110px 16px */
+    gap: 0.5rem; /* 8px */
   }
 
   .titleSection {
-    margin-bottom: 20px;
-    gap: 10px;
+    margin-bottom: 1.25rem; /* 20px */
+    gap: 0.625rem; /* 10px */
   }
 
   .avatarCircleLarge {
-    width: 130px;
-    height: 130px;
+    width: 8.125rem; /* 130px */
+    height: 8.125rem; /* 130px */
   }
 
   .mainTitle {
-    font-size: 32px;
+    font-size: 2.125rem; /* 34px */
   }
 
   .subtitle {
-    font-size: 15px;
+    font-size: 1.0625rem; /* 17px */
   }
 
   .questionContainer {
-    max-width: 340px;
-    margin-bottom: 20px;
-    padding: 12px;
-    gap: 12px;
+    max-width: 21.25rem; /* 340px */
+    margin-bottom: 1.25rem; /* 20px */
+    padding: 0.75rem; /* 12px */
+    gap: 0.75rem; /* 12px */
   }
   
   .messageHeader {
-    padding: 12px 0 8px 0;
-    gap: 4px;
+    padding: 0.75rem 0 0.5rem 0; /* 12px 0 8px 0 */
+    gap: 0.25rem; /* 4px */
   }
   
   .avatarCircle {
-    width: 36px;
-    height: 36px;
+    width: 2.25rem; /* 36px */
+    height: 2.25rem; /* 36px */
   }
   
   .messageHeader p {
-    font-size: 11px;
+    font-size: 0.6875rem; /* 11px */
   }
   
   .messageBubbleContainer {
-    min-height: 60px;
-    padding: 12px 16px;
+    min-height: 3.75rem; /* 60px */
+    padding: 0.75rem 1rem; /* 12px 16px */
   }
   
   .hintText {
-    font-size: 16px;
+    font-size: 1rem; /* 16px */
   }
 }
 
 /* For screens with height less than 640px */
-@media (max-height: 640px) {
+@media (max-height: 40rem) { /* 640px */
   .container {
-    padding: 30px 12px 100px 12px;
-    gap: 6px;
+    padding: 1.875rem 0.75rem 6.25rem 0.75rem; /* 30px 12px 100px 12px */
+    gap: 0.375rem; /* 6px */
   }
 
   .titleSection {
-    margin-bottom: 15px;
-    gap: 8px;
+    margin-bottom: 0.9375rem; /* 15px */
+    gap: 0.5rem; /* 8px */
   }
 
   .avatarCircleLarge {
-    width: 110px;
-    height: 110px;
+    width: 6.875rem; /* 110px */
+    height: 6.875rem; /* 110px */
   }
 
   .mainTitle {
-    font-size: 28px;
+    font-size: 1.875rem; /* 30px */
   }
 
   .subtitle {
-    font-size: 14px;
+    font-size: 1rem; /* 16px */
   }
 
   .questionContainer {
-    max-width: 320px;
-    margin-bottom: 15px;
-    padding: 10px;
-    gap: 10px;
+    max-width: 20rem; /* 320px */
+    margin-bottom: 0.9375rem; /* 15px */
+    padding: 0.625rem; /* 10px */
+    gap: 0.625rem; /* 10px */
   }
   
   .messageHeader {
-    padding: 10px 0 6px 0;
+    padding: 0.625rem 0 0.375rem 0; /* 10px 0 6px 0 */
   }
   
   .avatarCircle {
-    width: 32px;
-    height: 32px;
+    width: 2rem; /* 32px */
+    height: 2rem; /* 32px */
   }
   
   .messageBubbleContainer {
-    min-height: 50px;
-    padding: 10px 14px;
+    min-height: 3.125rem; /* 50px */
+    padding: 0.625rem 0.875rem; /* 10px 14px */
   }
   
   .hintText {
-    font-size: 15px;
-    padding: 12px 16px;
+    font-size: 0.9375rem; /* 15px */
+    padding: 0.75rem 1rem; /* 12px 16px */
   }
 }
 
 /* For very small screens with height less than 580px */
-@media (max-height: 580px) {
+@media (max-height: 36.25rem) { /* 580px */
   .container {
-    padding: 25px 10px 90px 10px;
-    gap: 4px;
+    padding: 1.5625rem 0.625rem 5.625rem 0.625rem; /* 25px 10px 90px 10px */
+    gap: 0.25rem; /* 4px */
   }
 
   .titleSection {
-    margin-bottom: 12px;
-    gap: 6px;
+    margin-bottom: 0.75rem; /* 12px */
+    gap: 0.375rem; /* 6px */
   }
 
   .avatarCircleLarge {
-    width: 90px;
-    height: 90px;
+    width: 5.625rem; /* 90px */
+    height: 5.625rem; /* 90px */
   }
 
   .mainTitle {
-    font-size: 24px;
+    font-size: 1.625rem; /* 26px */
   }
 
   .subtitle {
-    font-size: 13px;
+    font-size: 0.9375rem; /* 15px */
   }
 
   .questionContainer {
-    max-width: 300px;
-    margin-bottom: 12px;
-    padding: 8px;
-    gap: 8px;
+    max-width: 18.75rem; /* 300px */
+    margin-bottom: 0.75rem; /* 12px */
+    padding: 0.5rem; /* 8px */
+    gap: 0.5rem; /* 8px */
   }
   
   .messageHeader {
-    padding: 8px 0 4px 0;
+    padding: 0.5rem 0 0.25rem 0; /* 8px 0 4px 0 */
   }
   
   .avatarCircle {
-    width: 28px;
-    height: 28px;
+    width: 1.75rem; /* 28px */
+    height: 1.75rem; /* 28px */
   }
   
   .messageHeader p {
-    font-size: 10px;
+    font-size: 0.625rem; /* 10px */
   }
   
   .messageTimestamp {
-    font-size: 10px;
-    margin: 3px 0;
+    font-size: 0.625rem; /* 10px */
+    margin: 0.1875rem 0; /* 3px */
   }
   
   .messageBubbleContainer {
-    min-height: 40px;
-    padding: 8px 12px;
+    min-height: 2.5rem; /* 40px */
+    padding: 0.5rem 0.75rem; /* 8px 12px */
   }
   
   .hintText {
-    font-size: 14px;
-    padding: 10px 14px;
+    font-size: 0.875rem; /* 14px */
+    padding: 0.625rem 0.875rem; /* 10px 14px */
   }
 }
