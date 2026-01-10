@@ -8,12 +8,9 @@
   height: 100vh;
   width: 100%;       /* מנצח width: 100vw */
   min-height: 100vh; /* זה האחרון מבין שתי ההגדרות */
-  /* background: linear-gradient(rgba(93, 198, 227, 0.2), rgba(93, 198, 227, 0.2)), url('/background.png') no-repeat center / cover; 
-  background-color: #5DC6E3; */
-  background: url("/open.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain; 
+  background: linear-gradient(rgba(93, 198, 227, 0.2), rgba(93, 198, 227, 0.2)), url('/background.png') no-repeat center / cover; 
+  background-color: #5DC6E3;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,26 +19,14 @@
 
 
   overflow: hidden;
-  /* overflow-x: hidden; */
-/* 
+  overflow-x: hidden;
+
   margin: 0;
-  padding: 0; */
+  padding: 0;
 
-  /* background-size: 180px 180px;
-  background-repeat: repeat; */
+  background-size: 180px 180px;
+  background-repeat: repeat;
 }
-.screen {
-  position: fixed;
-  inset: 0;
-
-  background-image: url("/open.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-
-  overflow: hidden;
-}
-
 
 @media screen and (max-height: 670px) {
   .streakSection {
