@@ -40,53 +40,57 @@ export default function PreReview() {
 
   
   return (
-     <div className={styles.screen} dir="rtl">
-    <div className={styles.container}>
-      {/* SVG Image - Different based on score */}
-      <div className={styles.imageContainer}>
-        {isGoodScore ? (
-          <Image 
-            src="/icons/chief.svg" 
-            alt="Success"
-            fill
-            style={{ objectFit: 'contain' }}
-          />
-        ) : (
-          <Image 
-            src="/icons/not_the_sharpest.svg"
-            alt="Try again"
-            fill
-            style={{ objectFit: 'contain' }}
-          />
-        )}
-      </div>
+    <div className={styles.screen} dir="rtl">
+      <div className={styles.container}>
+        <div className={styles.contentWrapper}>
+          {/* SVG Image - Different based on score */}
+          <div className={styles.imageContainer}>
+            {isGoodScore ? (
+              <Image 
+                src="/icons/chief.svg" 
+                alt="Success"
+                fill
+                style={{ objectFit: 'contain' }}
+              />
+            ) : (
+              <Image 
+                src="/icons/not_the_sharpest.svg"
+                alt="Try again"
+                fill
+                style={{ objectFit: 'contain' }}
+              />
+            )}
+          </div>
 
-      {/* Text Content - Different based on score */}
-      <div className={styles.textContent}>
-        {isGoodScore ? (
-          <>
-            <p className={styles.mainText}>
-              כל הכבוד, יצאת שפיץ!
-            </p>
-            <p className={styles.scoreText}>
-              ענית נכון על {score}/{total} שאלות
-            </p>
-          </>
-        ) : (
-          <>
-            <p className={styles.mainText}>
-              לא נורא, פעם הבאה תבוא מחודד יותר!
-            </p>
-            <p className={styles.scoreText}>
-              ענית נכון על {score}/{total} שאלות
-            </p>
-          </>
-        )}
-      </div>
+          {/* Text Content - Different based on score */}
+          <div className={styles.textContent}>
+            {isGoodScore ? (
+              <>
+                <p className={styles.mainText}>
+                  כל הכבוד, יצאת שפיץ!
+                </p>
+                <p className={styles.scoreText}>
+                  ענית נכון על {score}/{total} שאלות
+                </p>
+              </>
+            ) : (
+              <>
+                <p className={styles.mainText}>
+                  לא נורא, פעם הבאה תבוא מחודד יותר!
+                </p>
+                <p className={styles.scoreText}>
+                  ענית נכון על {score}/{total} שאלות
+                </p>
+              </>
+            )}
+          </div>
+        </div>
 
-      {/* Button */}
-      <ReviewButton onClick={handleNext} />
+        {/* Button - Fixed at bottom */}
+        <div className={styles.buttonWrapper}>
+          <ReviewButton onClick={handleNext} />
+        </div>
+      </div>
     </div>
-  </div>
   );
 }
