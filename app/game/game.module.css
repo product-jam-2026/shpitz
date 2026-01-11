@@ -1,4 +1,23 @@
 /* --- רקע כללי --- */
+@font-face {
+  font-family: "SimplerPro-Regular";
+  src: url('/fonts/SimplerPro-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SimplerPro-Bold";
+  src: url('/fonts/SimplerPro-Bold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "VC_Haim-Tzar";
+  src: url('/fonts/VC_Haim-Tzar.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 .screen {
   height: 100vh;
   height: 100dvh;
@@ -78,7 +97,7 @@
 .questionTitle {
   margin: 0 0 20px;
   text-align: center;
-  font-family: 'SouthFont';
+  font-family: "SimplerPro-Bold";
   font-size: 28px;
   font-weight: 500;
   color: #000000;
@@ -198,7 +217,7 @@
   border-bottom: 3px solid var(--Dark_blue_text, #000000);
   background: white;
   color: #000000;
-  font-family: 'SouthFont', sans-serif;
+  font-family: "VC_Haim-Regular";
   font-weight: 700;
   font-size: 18px;
   cursor: pointer;
@@ -224,7 +243,7 @@
   border: none;
   cursor: pointer;
   color: #000000;
-  font-family: 'SouthFont', sans-serif;
+  font-family: "VC_Haim-Regular";
   font-size: 40px;
   font-weight: 500;
   letter-spacing: 2px;
@@ -310,7 +329,7 @@
 .hintText {
   color: #114081;
   text-align: center;
-  font-family: "Narkissim";
+  font-family: "SimplerPro-Regular";
   font-size: 26px;
   font-weight: 700;
   line-height: 36px;
@@ -330,7 +349,7 @@
   border-bottom: 3px solid #000000;
   border-radius: 0 0 24px 24px;
   color: #000000;
-  font-family: "SouthFont";
+  font-family: "VC_Haim-Regular";
   font-size: 26px;
   font-weight: 500;
   cursor: pointer;
@@ -382,7 +401,7 @@
   flex-shrink: 0;
   border-radius: 14px;
   color: #000000;
-  font-family: 'SouthFont';
+  font-family: "VC_Haim-Regular";
   font-size: 30px;
   font-weight: 500;
   cursor: pointer;
@@ -396,7 +415,7 @@
   color: #000000;
   text-align: right;
 
-  font-family: "Narkssim";
+  font-family: "SimplerPro-Regular";
   font-size: 26px;
   font-style: normal;
   font-weight: 400;
@@ -426,7 +445,7 @@
 
 .resultStatusTitle {
   display: block;
-  font-family: 'SouthFont', sans-serif;
+  font-family: "SimplerPro-Bold";
   font-size: 26px; /* גודל מודגש ובולט */
   font-weight: 700; /* הדגשה חזקה */
   margin-bottom: 8px;
@@ -437,7 +456,7 @@
 /* הטקסט המשתנה בכרטיס הצלחה (משפטי השפיץ) */
 .resultFeedbackText {
   margin: 0;
-  font-family: 'SouthFont', sans-serif;
+  font-family: "SimplerPro-Regular";
   font-size: 24px;
   font-weight: 400;
   line-height: 1.2;
