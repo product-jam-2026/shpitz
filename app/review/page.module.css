@@ -105,6 +105,30 @@
   max-width: 20rem; /* 320px */
 }
 
+/* Answer status squares */
+.answerSquares {
+  display: flex;
+  gap: 0.75rem; /* 12px */
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.625rem; /* 10px */
+}
+
+.answerSquare {
+  width: 2.5rem; /* 40px */
+  height: 2.5rem; /* 40px */
+  border-radius: 0.375rem; /* 6px */
+  transition: all 0.3s ease;
+}
+
+.answerSquare.correct {
+  background: #C7EE26; /* Green */
+}
+
+.answerSquare.incorrect {
+  background: #FF6B6B; /* Red */
+}
+
 /* Wrapper for content that should stay together at top */
 .contentArea {
   display: flex;

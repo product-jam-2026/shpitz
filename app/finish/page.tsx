@@ -38,7 +38,6 @@ function countCorrect(answers: DailyAnswer[]) {
 }
 
 function getDailyTip(answers: DailyAnswer[]) {
-  // Tip of the first question shown today
   return answers.length > 0 ? (answers[0].tip || "") : "";
 }
 
@@ -62,31 +61,27 @@ https://shpitz.vercel.app/`
   );
 }
 
-
-
-
 export default function StreakPage() {
   const router = useRouter();
   const [activeDays, setActiveDays] = useState<number[]>([]);
   const [streak, setStreak] = useState(0);
+  const [answerResults, setAnswerResults] = useState<boolean[]>([]);
 
   useEffect(() => {
     const today = new Date();
-    const todayDayOfWeek = today.getDay(); // 0 = Sunday, 6 = Saturday
-    const savedScore = localStorage.getItem('gameScore');
-    const s = savedScore ? parseInt(savedScore) : 0;
+    const todayDayOfWeek = today.getDay();
     
-    // Get all activity dates from localStorage
+    // Get activity dates
     const activityDates = JSON.parse(localStorage.getItem('userActivityDates') || '[]');
     
-    // Save today's activity first
+    // Save today's activity
     const todayString = today.toISOString().split('T')[0];
     if (!activityDates.includes(todayString)) {
       activityDates.push(todayString);
       localStorage.setItem('userActivityDates', JSON.stringify(activityDates));
     }
 
-    // Calculate consecutive streak (now including today)
+    // Calculate consecutive streak
     let consecutiveStreak = 0;
     let checkDate = new Date(today);
 
@@ -94,13 +89,13 @@ export default function StreakPage() {
       const dateString = checkDate.toISOString().split('T')[0];
       if (activityDates.includes(dateString)) {
         consecutiveStreak++;
-        checkDate.setDate(checkDate.getDate() - 1); // Go back one day
+        checkDate.setDate(checkDate.getDate() - 1);
       } else {
-        break; // Streak broken
+        break;
       }
     }
     
-    // Get active days for current week (only days that have passed)
+    // Get active days for current week
     const currentWeekActiveDays: number[] = [];
     for (let i = 0; i <= todayDayOfWeek; i++) {
       const checkDay = new Date(today);
@@ -114,145 +109,115 @@ export default function StreakPage() {
     setActiveDays(currentWeekActiveDays);
     setStreak(consecutiveStreak);
     localStorage.setItem('userStreak', consecutiveStreak.toString());
+
+    // Get answer results for squares
+    const daily = loadDailyAnswers();
+    const answers = daily.map(a => a.isCorrect);
+    setAnswerResults(answers);
   }, []);
+
   type StickerShare = {
-  stickerPath: string;  
-  message: string;
+    stickerPath: string;  
+    message: string;
   };
 
   function getStickerByStats(streak: number, correctCount: number): StickerShare {
     if (correctCount === 0) {
-    return {
-      stickerPath:"/Stickers/sticker0_no_answers.png",
-      message: `אני צריך להתאמץ יותר בזיהוי הונאות רשת! הצטרפו אליי ללמוד איך להתחדד!`
-    };}
+      return {
+        stickerPath:"/Stickers/sticker0_no_answers.png",
+        message: `אני צריך להתאמץ יותר בזיהוי הונאות רשת! הצטרפו אליי ללמוד איך להתחדד!`
+      };
+    }
     else if (streak >= 1 && streak <= 3) {
-    return {
-      stickerPath: "/Stickers/stickerday1_3.png",
-      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
-    };
+      return {
+        stickerPath: "/Stickers/stickerday1_3.png",
+        message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+      };
     }
     if (streak >= 4 && streak <= 5) {
       return {
-      stickerPath: "/Stickers/stickerday3_5.png",
-      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
-    };
-  }
-  if (streak >= 6 && streak <= 7) {
-    return {
-      stickerPath: "/Stickers/stickerday5_7.png",
-      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
-    };
-  }
-  if (streak >= 14 && streak <= 20) {
-    return {
-      stickerPath: "/Stickers/stickerday14_23.png",
-      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
-    };
-  }
-  if (streak >= 21) {
-    return {
-      stickerPath: "/Stickers/stickerday21_31.png",
-      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
-    };
-
-  }
-  return {
-  stickerPath:  "/Stickers/stickerday21_31.png",
-  message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
-  };
-  }
-  // const handleShare = async () => {
-  //   const savedScore = localStorage.getItem("gameScore");
-  //   const correctCount = savedScore ? parseInt(savedScore, 10) : 0;
-  //   const { stickerPath, message } = getStickerByStats(streak, correctCount);
-
-  //   //Todo added now 
-  //     const stickerUrl = `${window.location.origin}${stickerPath}`;
-  //     const whatsappText = `${message}\n\nהסטיקר שלי 👇\n${stickerUrl}`;
-  //       const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(whatsappText)}`;
-  //    try {
-  //     const response = await fetch(stickerPath);
-  //     const blob = await response.blob();
-  //     const file = new File([blob], "sticker.png", { type: "image/png" });
-  //     if (navigator.canShare && navigator.canShare({ files: [file] })){
-  //        await navigator.share({
-  //           files: [file],
-  //           text: message,
-  //         });
-  //         window.open(whatsappUrl, "_blank");
-  //          return;
-  //     }
-  
-  //     } catch (err) {
-  //     console.error("Error sharing:", err);
-  //     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-  //     window.open(whatsappUrl, "_blank");
-  //     }
-
-
-  // };
-const handleShare = async () => {
-  const total = 5;
-
-  // Build real results from today's stored answers
-  const daily = loadDailyAnswers();
-  const correctCount = countCorrect(daily);
-  const squares = buildSquares(daily, total);
-  const dailyTip =
-    getDailyTip(daily) ||
-    "בדקו האם יש אזורים מרוחים על הפנים של הדמויות."; // fallback if missing
-
-  // Sticker (streak-based) - stays like you have
-  const { stickerPath, message: streakMessage } = getStickerByStats(streak, correctCount);
-
-  // Build final share text (sticker message + daily summary)
-  const shareText = `${streakMessage}\n\n${buildShareSummary({
-    correctCount,
-    total,
-    squares,
-    dailyTip,
-  })}`;
-
-  // WhatsApp URL text fallback (cannot attach a file through wa.me)
-  const stickerUrl = `${window.location.origin}${stickerPath}`;
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${shareText}\n\n(סטיקר): ${stickerUrl}`)}`;
-
-  try {
-    const response = await fetch(stickerPath);
-    const blob = await response.blob();
-    const file = new File([blob], "sticker.png", { type: "image/png" });
-
-    // Best path: one share with image + text (mostly on mobile)
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      await navigator.share({
-        files: [file],
-        text: shareText,
-      });
-      return;
+        stickerPath: "/Stickers/stickerday3_5.png",
+        message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+      };
     }
-
-    // Fallback: open WhatsApp with full text + sticker link
-    window.open(whatsappUrl, "_blank");
-  } catch (err) {
-    console.error("Error sharing:", err);
-    window.open(whatsappUrl, "_blank");
+    if (streak >= 6 && streak <= 7) {
+      return {
+        stickerPath: "/Stickers/stickerday5_7.png",
+        message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+      };
+    }
+    if (streak >= 14 && streak <= 20) {
+      return {
+        stickerPath: "/Stickers/stickerday14_23.png",
+        message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+      };
+    }
+    if (streak >= 21) {
+      return {
+        stickerPath: "/Stickers/stickerday21_31.png",
+        message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+      };
+    }
+    return {
+      stickerPath:  "/Stickers/stickerday21_31.png",
+      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+    };
   }
-};
+
+  const handleShare = async () => {
+    const total = 5;
+    const daily = loadDailyAnswers();
+    const correctCount = countCorrect(daily);
+    const squares = buildSquares(daily, total);
+    const dailyTip = getDailyTip(daily) || "בדקו האם יש אזורים מרוחים על הפנים של הדמויות.";
+
+    const { stickerPath, message: streakMessage } = getStickerByStats(streak, correctCount);
+    const shareText = `${streakMessage}\n\n${buildShareSummary({
+      correctCount,
+      total,
+      squares,
+      dailyTip,
+    })}`;
+
+    const stickerUrl = `${window.location.origin}${stickerPath}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${shareText}\n\n(סטיקר): ${stickerUrl}`)}`;
+
+    try {
+      const response = await fetch(stickerPath);
+      const blob = await response.blob();
+      const file = new File([blob], "sticker.png", { type: "image/png" });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          text: shareText,
+        });
+        return;
+      }
+
+      window.open(whatsappUrl, "_blank");
+    } catch (err) {
+      console.error("Error sharing:", err);
+      window.open(whatsappUrl, "_blank");
+    }
+  };
+
+  const handleBack = () => {
+    router.back();
+  };
 
   const handleContinue = () => {
     router.push('/');
   };
 
-  // Days of week: Sunday (0) to Saturday (6)
   const daysOfWeek = [
-    { label: 'א', value: 0 }, // Sunday
-    { label: 'ב', value: 1 }, // Monday
-    { label: 'ג', value: 2 }, // Tuesday
-    { label: 'ד', value: 3 }, // Wednesday
-    { label: 'ה', value: 4 }, // Thursday
-    { label: 'ו', value: 5 }, // Friday
-    { label: 'ש', value: 6 }, // Saturday
+    { label: 'א', value: 0 },
+    { label: 'ב', value: 1 },
+    { label: 'ג', value: 2 },
+    { label: 'ד', value: 3 },
+    { label: 'ה', value: 4 },
+    { label: 'ו', value: 5 },
+    { label: 'ש', value: 6 },
   ];
 
   const getBadgeStatus = (days: number) => {
@@ -260,90 +225,134 @@ const handleShare = async () => {
   };
 
   const today = new Date().getDay();
+
   return (
     <div className={styles.pageWrapper}>
+      {/* Back arrow button */}
+      <button className={styles.backButton} onClick={handleBack}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41" fill="none">
+          <path d="M27.4258 18.6515L17.9309 9.1566L20.347 6.78288L33.9111 20.347L20.347 33.9111L17.9309 31.5374L27.4258 22.0425L6.78288 22.0425L6.78288 18.6515L27.4258 18.6515Z" fill="#1C1D1E"/>
+        </svg>
+      </button>
+
       <div className={styles.container} dir="rtl">
-        <div className={styles.statsBox}>
-          <div className={styles.headerText}>
-            <p className={styles.mainTitle}>אתה מתחדד {streak} ימים ברצף!</p>
+        {/* Title */}
+        <h1 className={styles.mainTitle}>נתראה מחר!</h1>
+
+        {/* Main card with character and squares */}
+        <div className={styles.mainCard}>
+          {/* Character image */}
+          <div className={styles.characterContainer}>
+            <Image 
+              src="/icons/YOUR_CHARACTER_ICON.svg" 
+              alt="Character"
+              width={200}
+              height={200}
+              className={styles.characterImage}
+            />
           </div>
 
+          {/* Text below character */}
+          <p className={styles.cardText}>שבת של שלום<br />וחידודים</p>
+
+          {/* Colored squares */}
+          {answerResults.length > 0 && (
+            <div className={styles.answersIndicator}>
+              {answerResults.map((isCorrect, index) => (
+                <div 
+                  key={index} 
+                  className={`${styles.answerSquare} ${isCorrect ? styles.correct : styles.wrong}`}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Share button */}
+          <button className={styles.shareButton} onClick={handleShare}>
+            <span className={styles.shareText}>שתף חברים</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        {/* Weekly streak section */}
+        <div className={styles.streakCard}>
+          <p className={styles.streakTitle}>מתחדד כבר 5 ימים ברצף!</p>
+          
           <div className={styles.daysContainer}>
             {daysOfWeek.map((day) => {
               const isActive = activeDays.includes(day.value);
-              const isPast = day.value <= today; // Only show days up to today
+              const isPast = day.value <= today;
               
               return (
                 <div key={day.value} className={styles.dayCircle}>
                   <div className={`${styles.circle} ${isActive && isPast ? styles.circleFilled : styles.circleEmpty}`}>
-                    {isActive && isPast && (
-                      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="1.83" y="1.83" width="26.34" height="26.34" rx="13.17" stroke="#FFFFFF" strokeWidth="3.66"/>
-                        <path d="M11.0185 24.4996C9.9352 24.2829 8.03934 22.9288 7.49767 21.9537L13.0227 16.3745L12.7519 15.6162L5.2768 14.3161C5.06013 13.2328 5.87264 11.0119 6.63099 10.1453L13.6186 13.6661L13.9436 13.3953L12.8061 5.86603C13.8352 5.37852 16.2186 5.37852 17.2478 5.86603L16.1103 13.5036L16.3811 13.6661L23.3687 10.1453C24.1271 11.0119 24.9396 13.2328 24.7229 14.3161L17.2478 15.6162L16.977 16.3745L22.3937 21.8454C21.9062 22.8746 20.0103 24.2288 18.8187 24.4454L15.2978 17.6745H14.6478L11.0185 24.4996Z" fill="#CCFF00"/>
-                      </svg>
-                    )}
+                    {isActive && isPast && <span className={styles.checkmark}>+</span>}
                   </div>
                   <span className={styles.dayLabel}>{day.label}</span>
                 </div>
               );
             })}
           </div>
+        </div>
 
-          <div className={styles.badgesContainer}>
-            <div className={`${styles.badge} ${getBadgeStatus(5) ? styles.badgeActive : styles.badgeInactive}`}>
-              <div className={styles.badgeImage}>
-                <Image 
-                  src="/icons/5days.svg" 
-                  alt="5 days badge"
-                  width={60}
-                  height={60}
-                />
-              </div>
-              <span className={styles.badgeLabel}>5 ימים</span>
+        {/* Badges section */}
+        <div className={styles.badgesContainer}>
+          <div className={`${styles.badge} ${getBadgeStatus(5) ? styles.badgeActive : styles.badgeInactive}`}>
+            <div className={styles.badgeImage}>
+              <Image 
+                src="/icons/YOUR_5DAYS_BADGE.svg" 
+                alt="5 days"
+                width={60}
+                height={60}
+              />
             </div>
-            <div className={`${styles.badge} ${getBadgeStatus(9) ? styles.badgeActive : styles.badgeInactive}`}>
-              <div className={styles.badgeImage}>
-                <Image 
-                  src="/icons/9days.svg" 
-                  alt="9 days badge"
-                  width={100}
-                  height={100}
-                />
-              </div>
-              <span className={styles.badgeLabel}>9 ימים</span>
+            <span className={styles.badgeLabel}>5 ימים</span>
+          </div>
+          <div className={`${styles.badge} ${getBadgeStatus(9) ? styles.badgeActive : styles.badgeInactive}`}>
+            <div className={styles.badgeImage}>
+              <Image 
+                src="/icons/YOUR_9DAYS_BADGE.svg" 
+                alt="9 days"
+                width={90}
+                height={90}
+              />
             </div>
-            <div className={`${styles.badge} ${getBadgeStatus(13) ? styles.badgeActive : styles.badgeInactive}`}>
-              <div className={styles.badgeImage}>
-                <Image 
-                  src="/icons/13days.svg" 
-                  alt="13 days badge"
-                  width={120}
-                  height={120}
-                />
-              </div>
-              <span className={styles.badgeLabel}>13 ימים</span>
+            <span className={styles.badgeLabel}>9 ימים</span>
+          </div>
+          <div className={`${styles.badge} ${getBadgeStatus(13) ? styles.badgeActive : styles.badgeInactive}`}>
+            <div className={styles.badgeImage}>
+              <Image 
+                src="/icons/YOUR_13DAYS_BADGE.svg" 
+                alt="13 days"
+                width={110}
+                height={110}
+              />
             </div>
+            <span className={styles.badgeLabel}>13 ימים</span>
           </div>
         </div>
 
-        <div className={styles.characterContainer}>
-          <div className={styles.characterImage}>
+        {/* Bottom section with character and continue button */}
+        <div className={styles.bottomSection}>
+          <div className={styles.bottomCharacter}>
             <Image 
-              src="/icons/final.svg" 
+              src="/icons/YOUR_BOTTOM_CHARACTER.svg" 
               alt="Character"
-              width={250}
-              height={250}
+              width={120}
+              height={120}
             />
           </div>
-        </div>
 
-        <button className={styles.shareButton} onClick={handleShare}>
-          <span className={styles.shareText}>שתף</span>
-          <span className={styles.shareArrow}>↩</span>
-        </button>
+          <button className={styles.continueButton} onClick={handleContinue}>
+            <span className={styles.continueText}>שבוע</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
 
-        <div className={styles.streakText}>
-          נתראה מחר!
+          <p className={styles.bottomText}>בשתוקנו איכולו<br />האינטרנט הישראלי!</p>
         </div>
       </div>
     </div>
