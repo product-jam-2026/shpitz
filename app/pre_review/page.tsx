@@ -47,7 +47,7 @@ export default function PreReview() {
           <div className={styles.imageContainer}>
             {isGoodScore ? (
               <Image 
-                src="/icons/chief.svg" 
+                src="/icons/very_sharp.svg" 
                 alt="Success"
                 fill
                 style={{ objectFit: 'contain' }}
@@ -67,7 +67,7 @@ export default function PreReview() {
             {isGoodScore ? (
               <>
                 <p className={styles.mainText}>
-                  כל הכבוד, יצאת שפיץ!
+                 חד בהגזמה!
                 </p>
                 <p className={styles.scoreText}>
                   ענית נכון על {score}/{total} שאלות

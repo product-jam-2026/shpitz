@@ -75,12 +75,18 @@ export default function ReviewPage() {
                 <div className={styles.contentArea}>
                     {/* Title section */}
                     <div className={styles.titleSection}>
-                        <div className={styles.avatarCircleLarge}></div>
+                        <div className={styles.avatarCircleLarge}>
+                            <img 
+                                src="/icons/review.svg" 
+                                alt="Review Icon" 
+                                className={styles.avatarIcon}
+                            />
+                        </div>
                         <h1 className={styles.mainTitle}>סיכום יומי</h1>
                         <p className={styles.subtitle}>
-                            זה המקום להעמיק ולקרוא איזה
+                            זה הזמן לעצור ולבדוק מה יכולתם
                             <br />
-                            טיפ היה עוזר לזהות שקרים
+                            לזהות כבר במהלך המשחק
                         </p>
                     </div>
 
@@ -103,7 +109,7 @@ export default function ReviewPage() {
                             </div>
 
                             <div>
-                                <h3 className={styles.tipTitle}>חידוד  {index + 1}</h3>
+                                <h3 className={styles.tipTitle}>חידוד {index + 1}</h3>
                                 <div className={styles.hintText}>
                                     {question?.tips ?? "אין רמז זמין"}
                                 </div>
