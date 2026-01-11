@@ -196,6 +196,7 @@
   margin-right: -50vw; /* CHANGED: דוחף לימין */
   background-color: #65B1E2; /* צבע המעצבים */
   /* padding: 20px 0 35px;  */
+  padding: 1.25rem;
   z-index: 10;
   flex-shrink: 0;
 }
@@ -203,8 +204,9 @@
 .toolsRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 0.875rem; 
+  /* עדכון: רווח של 14 פיקסלים מתחת לשורה */
+  margin-bottom: 0.875rem;
   padding: 0 12px; /* רווח מהצדדים בתוך הפס הכחול */
 }
 
@@ -347,7 +349,6 @@
   border: none;
   border-right: 3px solid #000000;
   border-bottom: 3px solid #000000;
-  border-radius: 0 0 24px 24px;
   color: #000000;
   font-family: "VC_Haim-Regular";
   font-size: 2.5rem;
@@ -370,13 +371,13 @@
   width: 100%; /* CHANGED: מלוא רוחב */
   min-height: 237px;
   border-radius: 0 36px 0 0;
-  padding: 30px 24px;
-  text-align: center;
+  padding: 1.875rem 2.1875rem;
+  text-align: right;
   display: flex;
   flex-direction: column;
   justify-content: flex-start; 
   gap: 20px;
-  align-items: center;
+  align-items: flex-start;
   box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
   animation: slideUp 0.3s ease-out;
 }
@@ -399,14 +400,13 @@
   max-width: 325px;
   height: 68px;
   flex-shrink: 0;
-  border-radius: 14px;
+  border-radius: 0;
   color: #000000;
   font-family: "VC_Haim-Regular";
   font-size: 2.5rem;
   font-weight: 500;
   cursor: pointer;
   margin-top: auto;
-  border-radius: 0 0 24px 24px;
   border-right: 3px solid #000000;
   border-bottom: 3px solid #000000;
   background: #FFF9EC;
