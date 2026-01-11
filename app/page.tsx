@@ -109,7 +109,7 @@ function MobileContent({
 
   return (
     <div className={styles.screen} dir="rtl">
-      
+      <div className={styles.mainContent}>
         <div className={styles.logoContainer}>
           <div className={styles.mainIcon}>
             <Image src="icons/homePageIcon.svg" alt="homePageLogo" width={150} height={150} priority />
@@ -146,7 +146,7 @@ function MobileContent({
           <span className={styles.buttonText}>התחל</span>
         </button>
       </div>
-    
+    </div>
   );
 }
 
