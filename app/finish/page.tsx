@@ -162,36 +162,7 @@ export default function StreakPage() {
   message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
   };
   }
-  // const handleShare = async () => {
-  //   const savedScore = localStorage.getItem("gameScore");
-  //   const correctCount = savedScore ? parseInt(savedScore, 10) : 0;
-  //   const { stickerPath, message } = getStickerByStats(streak, correctCount);
 
-  //   //Todo added now 
-  //     const stickerUrl = `${window.location.origin}${stickerPath}`;
-  //     const whatsappText = `${message}\n\nהסטיקר שלי 👇\n${stickerUrl}`;
-  //       const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(whatsappText)}`;
-  //    try {
-  //     const response = await fetch(stickerPath);
-  //     const blob = await response.blob();
-  //     const file = new File([blob], "sticker.png", { type: "image/png" });
-  //     if (navigator.canShare && navigator.canShare({ files: [file] })){
-  //        await navigator.share({
-  //           files: [file],
-  //           text: message,
-  //         });
-  //         window.open(whatsappUrl, "_blank");
-  //          return;
-  //     }
-  
-  //     } catch (err) {
-  //     console.error("Error sharing:", err);
-  //     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-  //     window.open(whatsappUrl, "_blank");
-  //     }
-
-
-  // };
 const handleShare = async () => {
   const total = 5;
 

@@ -14,20 +14,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  box-sizing: border-box;
+  overflow: hidden;
   filter: saturate(0.8) brightness(1.05);
 }
-
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 1.25rem;
+  box-sizing: border-box;
+  justify-content: flex-start; 
+  gap: 2rem;
+}
 /* הגדרות ברירת מחדל למסכים גדולים */
 .logoContainer {
-  margin-top: 8rem;
+  margin-top: clamp(2rem, 10vh, 6rem); 
   flex: none;
+  display: flex;
+  justify-content: center;
 }
 
 .mainIcon {
   width: 11.812rem;
-  height: 8.514rem;
+  height: auto;
+  margin-right: 1.875rem;
 }
 
 .mainTitle {
@@ -37,8 +49,8 @@
   font-size: 1.625rem;
   font-weight: 600;
   line-height: 2rem;
-  margin: 4rem auto 0 auto;
-  width: 90%;
+  margin: 5rem auto 0 auto;
+  width: 100%;
 }
 
 .streakSection {
@@ -62,7 +74,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.6rem; /* המרווח בין יום ליום */
+  gap: 0.875  rem; /* המרווח בין יום ליום */
   width: 100%;
 }
 
@@ -82,38 +94,37 @@
   margin: 0;              /* מאפס מרווחים שעלולים להסיט את האות */
 }
 
-
 .startButton {
   position: fixed;
-  bottom: 2rem;
-  
-  /* מידות מהפיגמה */
- width: min(20rem, 90%);
-  height: 6.875rem;    /* 110px */
+  margin: 0;
+  bottom: calc(4rem + env(safe-area-inset-bottom));
+  z-index: 10;
+  left:50%;
+  transform: translateX(-50%);
+  /* מידות – זהות */
+  width: 20.3125rem; /* 325px */
+  height: 7.875rem;                            /* 126px */
   
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  /* צבעים וגבולות */
-  background-color: #C7EE26;
-  border: none;
-  border-right: 3px solid #111012; /* החזרתי ל-3px לפי הפיגמה */
-  border-bottom: 3px solid #111012;
-  
-  /* ביטול עיגול פינות */
-  border-radius: 0; 
+  gap: 0.625rem; 
+  background: #C7EE26; 
 
-  /* טיפוגרפיה ב-REM */
+  border-right: 0.1875rem solid #000;
+  border-bottom: 0.1875rem solid #000;
+
   color: #111012;
   font-family: "VC_Haim-Regular";
-  font-size: 3.75rem;      /* 60px / 16 */
+  font-size: 4rem;      /* 36px – תואם תחושת כפתור ראשי */
   font-weight: 500;
-  line-height: 2.5rem;    /* 40px / 16 */
-  letter-spacing: 0.1125rem; /* 1.8px / 16 */
+  line-height: 1;
+  letter-spacing: 0.125rem;
 
   cursor: pointer;
-  z-index: 10;
+  transition: transform 0.1s ease;
+  
+  
 }
 
 /* אפקט לחיצה */
@@ -121,7 +132,7 @@
   border-right-width: 1px;
   border-bottom-width: 1px;
   /* הוספת ה-translateX כדי שהמרכוז לא יישבר בלחיצה */
-  transform: translate(-50%, 2px); 
+  transform: translate(-50%, 2px);
 }
 /* 📱 התיקון הקריטי למסך SE - חייב להיות בסוף הקובץ! */
 @media screen and (max-height: 670px) {
@@ -144,6 +155,6 @@
   }
 
   .startButton {
-    height: 5rem; /* מקטין את הכפתור ב-SE כדי שלא יסתיר תוכן */
+    height: 7rem; /* מקטין את הכפתור ב-SE כדי שלא יסתיר תוכן */
   }
 }
