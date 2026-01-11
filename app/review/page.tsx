@@ -6,6 +6,7 @@ import styles from "./page.module.css";
 export default function ReviewPage() {
     const router = useRouter();
     const [wrongQuestions, setWrongQuestions] = useState<any[]>([]);
+    const [answerResults, setAnswerResults] = useState<boolean[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -16,6 +17,16 @@ export default function ReviewPage() {
             try {
                 const results = JSON.parse(dailyResultsStr);
                 const wrongAnswers = results.wrongAnswers || [];
+                
+                // Get the answer results (true = correct, false = incorrect)
+                // Assuming you have 5 questions total
+                const totalQuestions = 5;
+                const wrongIndices = wrongAnswers.map((q: any) => q.questionIndex || 0);
+                const allResults = Array.from({ length: totalQuestions }, (_, index) => 
+                    !wrongIndices.includes(index)
+                );
+                
+                setAnswerResults(allResults);
                 
                 if (wrongAnswers.length === 0) {
                     router.push('/finish');
@@ -84,9 +95,9 @@ export default function ReviewPage() {
                         </div>
                         <h1 className={styles.mainTitle}>סיכום יומי</h1>
                         <p className={styles.subtitle}>
-                            זה הזמן לעצור ולבדוק מה יכולתם
+                            זה המקום להעמיק ולקרוא איזה
                             <br />
-                            לזהות כבר במהלך המשחק
+                            טיפ היה עוזר לזהות שקרים
                         </p>
                     </div>
 
