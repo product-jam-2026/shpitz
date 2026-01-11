@@ -1,8 +1,27 @@
 /* --- רקע כללי --- */
+@font-face {
+  font-family: "SimplerPro-Regular";
+  src: url('/fonts/SimplerPro-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SimplerPro-Bold";
+  src: url('/fonts/SimplerPro-Bold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "VC_Haim-Tzar";
+  src: url('/fonts/VC_Haim-Tzar.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 .screen {
   height: 100vh;
   height: 100dvh;
-  background: #DEF2FF;
+  background: #C1E0F3;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -65,7 +84,7 @@
   color: #000000 !important; /* Black for current */
 }
 .progressSuccess {
-  background-color: #69D702 !important;
+  background-color: #C7EE26 !important;
   color: #000000 !important; /* Black for correct */
   border: none;
 }
@@ -78,8 +97,8 @@
 .questionTitle {
   margin: 0 0 20px;
   text-align: center;
-  font-family: 'SouthFont';
-  font-size: 28px;
+  font-family: "SimplerPro-Bold";
+  font-size: 1.625rem;
   font-weight: 500;
   color: #000000;
   white-space: nowrap;
@@ -175,7 +194,7 @@
   right: 50%;
   margin-left: -50vw; /* CHANGED: דוחף לשמאל */
   margin-right: -50vw; /* CHANGED: דוחף לימין */
-  background-color: #5DC6E3; /* צבע המעצבים */
+  background-color: #65B1E2; /* צבע המעצבים */
   /* padding: 20px 0 35px;  */
   z-index: 10;
   flex-shrink: 0;
@@ -192,13 +211,15 @@
 .toolButton {
   height: 51px;
   border: 1px solid #000000;
+  border-top: none;      /* מבטל מסגרת למעלה */
+  border-left: none;
   border-right: 3px solid var(--Dark_blue_text, #000000);
   border-bottom: 3px solid var(--Dark_blue_text, #000000);
   background: white;
   color: #000000;
-  font-family: 'SouthFont', sans-serif;
+  font-family: "VC_Haim-Regular";
   font-weight: 700;
-  font-size: 18px;
+  font-size: 1.625rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -221,9 +242,9 @@
   height: 126px;
   border: none;
   cursor: pointer;
-  color: white;
-  font-family: 'SouthFont', sans-serif;
-  font-size: 40px;
+  color: #000000;
+  font-family: "VC_Haim-Regular";
+  font-size: 2.5rem;
   font-weight: 500;
   letter-spacing: 2px;
 }
@@ -236,7 +257,7 @@
 }
 
 .reportBtn {
-  background: #69D702;
+  background: #C7EE26;
   border-right: 3px solid #000000;
   border-bottom: 3px solid #000000;
   border-radius: 0 0 24px 0;
@@ -257,7 +278,7 @@
   width: 100%;
   max-width: 500px; 
   height: 496px;
-  background: var(--Light_blue_small_button, #BBD8FF);
+  background: var(--Light_blue_small_button, #C1E0F3);
   border-radius: 0 36px 0 0;
   display: flex;
   flex-direction: column;
@@ -308,7 +329,7 @@
 .hintText {
   color: #114081;
   text-align: center;
-  font-family: "Narkissim";
+  font-family: "SimplerPro-Regular";
   font-size: 26px;
   font-weight: 700;
   line-height: 36px;
@@ -328,8 +349,8 @@
   border-bottom: 3px solid #000000;
   border-radius: 0 0 24px 24px;
   color: #000000;
-  font-family: "SouthFont";
-  font-size: 26px;
+  font-family: "VC_Haim-Regular";
+  font-size: 2.5rem;
   font-weight: 500;
   cursor: pointer;
 }
@@ -360,7 +381,7 @@
   animation: slideUp 0.3s ease-out;
 }
 
-.successCard { background: #69D702; color: #000000; }
+.successCard { background: #C7EE26; color: #000000; }
 .failCard { background: #FF706E; color: #000000; }
 
 .successHeader, .failTitle {
@@ -380,8 +401,8 @@
   flex-shrink: 0;
   border-radius: 14px;
   color: #000000;
-  font-family: 'SouthFont';
-  font-size: 30px;
+  font-family: "VC_Haim-Regular";
+  font-size: 2.5rem;
   font-weight: 500;
   cursor: pointer;
   margin-top: auto;
@@ -394,8 +415,8 @@
   color: #000000;
   text-align: right;
 
-  font-family: "Narkssim";
-  font-size: 26px;
+  font-family: "SimplerPro-Regular";
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 400;
   line-height: 32px; /* 123.077% */
@@ -419,5 +440,26 @@
   flex-direction: column; /* מסדר את הכותרת מעל השורה של האייקון */
   align-items: flex-start; /* מצמיד הכל לימין (בגלל ה-RTL) */
   direction: rtl; 
+  width: 100%;
+}
+
+.resultStatusTitle {
+  display: block;
+  font-family: "SimplerPro-Bold";
+  font-size: 26px; /* גודל מודגש ובולט */
+  font-weight: 700; /* הדגשה חזקה */
+  margin-bottom: 8px;
+  text-align: right;
+  width: 100%;
+}
+
+/* הטקסט המשתנה בכרטיס הצלחה (משפטי השפיץ) */
+.resultFeedbackText {
+  margin: 0;
+  font-family: "SimplerPro-Regular";
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: right;
   width: 100%;
 }

@@ -36,6 +36,15 @@ function upsertDailyAnswer(answer: DailyAnswer) {
   localStorage.setItem(dailyAnswersKey(), JSON.stringify(filtered));
 }
 
+// מערך המשפטים החדש לפי הוראות הפיגמה
+const successMessages = [
+  "יפה, החושים מתחדדים!",
+  "זיהוי כזה? עליתם על המסלול להיות חדים כמו שפיץ!",
+  "חד ומדויק, עוד קצת ואתם שפיץ!",
+  "וואו כמה שזה היה חד, הדרך לשפיץ מתקרבת!",
+  "מצוין! ככה נראית שפיציות!"
+];
+
 export default function Challenge() {
   const router = useRouter();
   
@@ -89,6 +98,11 @@ export default function Challenge() {
     
     const audio = new Audio(audioPath);
     audio.play().catch(err => console.error("Audio play failed:", err));
+    if (!isCorrect) {
+      if (typeof window !== "undefined" && window.navigator.vibrate) {
+        window.navigator.vibrate(200); // 200ms של רטט
+      }
+    }
 
     const currentResult: ResultState = isCorrect ? "success" : "fail";
     setResult(currentResult);
@@ -206,8 +220,8 @@ export default function Challenge() {
             <button className={styles.toolButton} onClick={() => router.push('/explantion?from=game')}>? הוראות</button>
           </div>
           <div className={styles.mainRow}>
-            <button className={styles.reportBtn} onClick={() => handleAnswer(true)}>תקינה</button>
-            <button className={styles.openBtn} onClick={() => handleAnswer(false)}>חשודה</button>
+            <button className={styles.reportBtn} onClick={() => handleAnswer(true)}>אמיתית</button>
+            <button className={styles.openBtn} onClick={() => handleAnswer(false)}>הונאה</button>
           </div>
         </div>
 
@@ -236,14 +250,19 @@ export default function Challenge() {
           <div className={styles.overlay}>
             <div className={`${styles.resultCard} ${result === "success" ? styles.successCard : styles.failCard}`}>
               {result === "success" ? (
-                <div className={styles.successHeader}>תשובה נכונה <br />חד ומדויק! עוד קצת ואתם שפיץ<br /> </div>
+                <div className={styles.successHeader}>
+                  <span className={styles.resultStatusTitle}>תשובה נכונה</span>
+                  <p className={styles.resultFeedbackText}>
+                    {successMessages[correctAnswers - 1] || successMessages[0]}
+                  </p>
+                </div>
               ) : (
                 <div className={styles.failContainer}>
-                  <div className={styles.failTitle}>תשובה לא נכונה</div>
+                  <span className={styles.resultStatusTitle}>תשובה לא נכונה</span>
                   <div className={styles.tipWrapper}>
                     <img src="icons/sharpWringAnswerSvg.svg" alt="tip" className={styles.tipIcon} />
-                  <div className={styles.tipTextStyle}>{tipText}</div>
-                </div>
+                    <div className={styles.tipTextStyle}>{tipText}</div>
+                  </div>
                 </div>
               )}
               <button className={styles.continueBtn} onClick={handleContinue}>המשך</button>

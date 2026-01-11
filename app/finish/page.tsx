@@ -136,9 +136,74 @@ export default function StreakPage() {
     }
     if (streak >= 4 && streak <= 5) {
       return {
-        stickerPath: "/Stickers/stickerday3_5.png",
-        message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
-      };
+      stickerPath: "/Stickers/stickerday3_5.png",
+      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+    };
+  }
+  if (streak >= 6 && streak <= 7) {
+    return {
+      stickerPath: "/Stickers/stickerday5_7.png",
+      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+    };
+  }
+  if (streak >= 14 && streak <= 20) {
+    return {
+      stickerPath: "/Stickers/stickerday14_23.png",
+      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+    };
+  }
+  if (streak >= 21) {
+    return {
+      stickerPath: "/Stickers/stickerday21_31.png",
+      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+    };
+
+  }
+  return {
+  stickerPath:  "/Stickers/stickerday21_31.png",
+  message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+  };
+  }
+
+const handleShare = async () => {
+  const total = 5;
+
+  // Build real results from today's stored answers
+  const daily = loadDailyAnswers();
+  const correctCount = countCorrect(daily);
+  const squares = buildSquares(daily, total);
+  const dailyTip =
+    getDailyTip(daily) ||
+    "בדקו האם יש אזורים מרוחים על הפנים של הדמויות."; // fallback if missing
+
+  // Sticker (streak-based) - stays like you have
+  const { stickerPath, message: streakMessage } = getStickerByStats(streak, correctCount);
+
+  // Build final share text (sticker message + daily summary)
+  const shareText = `${streakMessage}\n\n${buildShareSummary({
+    correctCount,
+    total,
+    squares,
+    dailyTip,
+  })}`;
+
+  // WhatsApp URL text fallback (cannot attach a file through wa.me)
+  const stickerUrl = `${window.location.origin}${stickerPath}`;
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${shareText}\n\n(סטיקר): ${stickerUrl}`)}`;
+
+  try {
+    const response = await fetch(stickerPath);
+    const blob = await response.blob();
+    const file = new File([blob], "sticker.png", { type: "image/png" });
+
+    // Best path: one share with image + text (mostly on mobile)
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        files: [file],
+        text: shareText,
+      });
+      return;
+>>>>>>> c6982703792ece53e5cf11e5583712a3d72e9316
     }
     if (streak >= 6 && streak <= 7) {
       return {

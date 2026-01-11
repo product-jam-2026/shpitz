@@ -109,7 +109,7 @@ function MobileContent({
 
   return (
     <div className={styles.screen} dir="rtl">
-      
+      <div className={styles.mainContent}>
         <div className={styles.logoContainer}>
           <div className={styles.mainIcon}>
             <Image src="icons/homePageIcon.svg" alt="homePageLogo" width={150} height={150} priority />
@@ -117,15 +117,14 @@ function MobileContent({
         </div>
 
         <h1 className={styles.mainTitle}>
-           חמש שאלות,  <br /> כל יום,
+            חמש שאלות כל יום, 
             <br />
-           ואתה שפיץ
+            אפס נפילות בהונאות רשת   
+               
           </h1>
 
         <div className={styles.streakSection}>
         <p className={styles.streakText}>
-            איזה כיף שחזרת אלינו!
-            <br />
             יום {streak} ברצף של חידודים
           </p>
 
@@ -139,15 +138,11 @@ function MobileContent({
         <button 
           className={styles.startButton} 
           onClick={onStart}
-          style={{
-            transform: 'none',
-            transition: 'opacity 0.1s',
-          }}
         >
           <span className={styles.buttonText}>התחל</span>
         </button>
       </div>
-    
+    </div>
   );
 }
 
@@ -162,7 +157,7 @@ function DayIndicator({ letter, filled }: { letter: string; filled: boolean }) {
           height={28} 
         />
       </div>
-      <span className={`${styles.dayLetter} ${filled ? styles.activeLetter : styles.inactiveLetter}`}>{letter}</span>
+      <span className={styles.dayLetter}>{letter}</span>
     </div>
   );
 }

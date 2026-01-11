@@ -118,3 +118,22 @@
   font-weight: 400;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Levit-Bold";
+  src: url('/fonts/Levit_Blended-Bold.otf') format('opentype');
+}
+@font-face{
+  font-family: "SimplePro-Regular";
+  src: url('/fonts/SimplerPro-Regular.otf') format('opentype');
+}
+
+@font-face{
+  font-family: "SimplePro-Bold";
+  src: url('/fonts/SimplerPro-Bold.otf') format('opentype');
+}
+@font-face{
+  font-family: "VC_Haim-Regular";
+  src: url('/fonts/VC_Haim-Tzar.otf') format('opentype');
+}
+
