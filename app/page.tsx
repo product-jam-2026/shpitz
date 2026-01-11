@@ -50,6 +50,7 @@ export default function Index() {
       } else {
         break;
       }
+      
     }
 
     setStreak(consecutiveStreak);
@@ -81,10 +82,11 @@ export default function Index() {
     }
   };
 
+
   return (
     <MobileContent activeDays={activeDays} streak={streak} onStart={handleStart} />
   );
-}
+  }
 
 function MobileContent({
   activeDays,
@@ -105,67 +107,57 @@ function MobileContent({
     { label: "ש", value: 6 },
   ];
 
-  const today = new Date().getDay();
-
   return (
     <div className={styles.screen} dir="rtl">
-      {/* Logo at top */}
-      <div className={styles.logoContainer}>
-        <div className={styles.mainIcon}>
-          <Image 
-            src="/icons/homePageIcon.svg" 
-            alt="homePageLogo" 
-            width={150} 
-            height={150} 
-            priority 
-          />
+      <div className={styles.mainContent}>
+        <div className={styles.logoContainer}>
+          <div className={styles.mainIcon}>
+            <Image src="icons/homePageIcon.svg" alt="homePageLogo" width={150} height={150} priority />
+          </div>
         </div>
-      </div>
 
-      {/* Center content */}
-      <div className={styles.centerContainer}>
         <h1 className={styles.mainTitle}>
-          חמש שאלות כל יום,
-          <br />
-          אפס נפילות בהונאות רשת
-        </h1>
+            חמש שאלות כל יום, 
+            <br />
+            אפס נפילות בהונאות רשת   
+               
+          </h1>
 
         <div className={styles.streakSection}>
-          <p className={styles.streakText}>
+        <p className={styles.streakText}>
             יום {streak} ברצף של חידודים
           </p>
 
           <div className={styles.daysContainer}>
-            {daysOfWeek.map((day) => {
-              const isActive = activeDays.includes(day.value);
-              const isPast = day.value <= today;
-              
-              return (
-                <div key={day.value} className={styles.dayCircle}>
-                  <div className={`${styles.circle} ${isActive && isPast ? styles.circleFilled : styles.circleEmpty}`}>
-                    {isActive && isPast && <span className={styles.checkmark}>+</span>}
-                  </div>
-                  <span className={styles.dayLabel}>{day.label}</span>
-                </div>
-              );
-            })}
+            {daysOfWeek.map((day) => (
+              <DayIndicator key={day.value} letter={day.label} filled={activeDays.includes(day.value)} />
+            ))}
           </div>
         </div>
-      </div>
 
-      {/* Button at bottom */}
-      <div className={styles.buttonWrapper}>
         <button 
           className={styles.startButton} 
           onClick={onStart}
-          style={{
-            transform: 'none',
-            transition: 'opacity 0.1s',
-          }}
         >
           <span className={styles.buttonText}>התחל</span>
         </button>
       </div>
+    </div>
+  );
+}
+
+function DayIndicator({ letter, filled }: { letter: string; filled: boolean }) {
+  return (
+    <div className={styles.dayItem} >
+      <div className={styles.iconWrapper}>
+        <Image 
+          src={filled ? "/icons/starDaySvg.svg" : "/icons/NotActiveDay.svg"} 
+          alt="day status" 
+          width={28} 
+          height={28} 
+        />
+      </div>
+      <span className={styles.dayLetter}>{letter}</span>
     </div>
   );
 }
