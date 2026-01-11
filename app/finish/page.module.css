@@ -73,7 +73,7 @@
   width: 100%;
   max-width: 21.875rem; /* 350px */
   background: rgba(189, 216, 255, 0.6);
-  border-radius: 1.5rem; /* 24px */
+  border-radius: 0; /* Sharp edges */
   padding: 1.5rem; /* 24px */
   display: flex;
   flex-direction: column;
@@ -118,7 +118,7 @@
 .answerSquare {
   width: 2.5rem; /* 40px */
   height: 2.5rem; /* 40px */
-  border-radius: 0.375rem; /* 6px */
+  border-radius: 0; /* Sharp edges */
   flex-shrink: 0;
 }
 
@@ -132,16 +132,18 @@
 
 /* Share button */
 .shareButton {
-  width: 100%;
-  max-width: 18.75rem; /* 300px */
-  height: 3.75rem; /* 60px */
+  width: 15.9375rem; /* 255px */
+  height: 4.6875rem; /* 75px */
+  padding: 2.3125rem 3.8125rem; /* 37px 61px */
   background: #FFF;
-  border: 0.1875rem solid #000; /* 3px */
-  border-radius: 1.5rem; /* 24px */
+  border: none;
+  border-right: 0.1875rem solid #111012; /* 3px */
+  border-bottom: 0.1875rem solid #111012; /* 3px */
+  border-radius: 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  gap: 0.75rem; /* 12px */
+  gap: 0.625rem; /* 10px */
   cursor: pointer;
   transition: opacity 0.2s;
 }
@@ -155,10 +157,21 @@
 }
 
 .shareText {
-  color: #000;
-  font-family: 'Narkissim', 'Heebo', 'SouthFont', sans-serif;
-  font-size: 1.5rem; /* 24px */
-  font-weight: 700;
+  color: #111012;
+  font-family: 'VC_Haim-Regular', sans-serif;
+  font-size: 2.5rem; /* 40px */
+  font-weight: 500;
+  line-height: 2.5rem; /* 40px */
+  letter-spacing: 0.075rem; /* 1.2px */
+  text-align: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.shareArrow {
+  flex-shrink: 0;
+  width: 2.3125rem; /* 37px */
+  height: 1.9375rem; /* 31px */
 }
 
 /* Weekly streak card */
@@ -166,7 +179,7 @@
   width: 100%;
   max-width: 21.875rem; /* 350px */
   background: rgba(189, 216, 255, 0.6);
-  border-radius: 1.5rem; /* 24px */
+  border-radius: 0; /* Sharp edges */
   padding: 1.25rem; /* 20px */
   display: flex;
   flex-direction: column;
@@ -191,37 +204,17 @@
   width: 100%;
 }
 
-.dayCircle {
+.dayItem {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.375rem; /* 6px */
 }
 
-.circle {
-  width: 2.5rem; /* 40px */
-  height: 2.5rem; /* 40px */
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  border: 0.1875rem solid #FFF; /* 3px */
-}
-
-.circleEmpty {
-  background: transparent;
-}
-
-.circleFilled {
-  background: #FFF;
-}
-
-.checkmark {
-  color: #C7EE26;
-  font-size: 1.75rem; /* 28px */
-  font-weight: bold;
-  line-height: 1;
+.daySquare {
+  width: 1.6875rem; /* 27px */
+  height: 1.6875rem; /* 27px */
+  flex-shrink: 0;
 }
 
 .dayLabel {
@@ -231,20 +224,32 @@
   font-weight: 600;
 }
 
-/* Badges section */
+/* Badges section - wrapper for card and labels */
+.badgesCard {
+  width: 100%;
+  max-width: 21.875rem; /* 350px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem; /* 8px */
+}
+
+/* Container with light blue background for all badge icons */
 .badgesContainer {
+  width: 100%;
+  background: rgba(189, 216, 255, 0.6);
+  border-radius: 0; /* Sharp edges */
+  padding: 1.25rem; /* 20px */
   display: flex;
   justify-content: center;
   align-items: flex-end;
   gap: 1.5rem; /* 24px */
-  margin: 1rem 0; /* 16px */
 }
 
 .badge {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem; /* 8px */
   transition: opacity 0.3s ease;
 }
 
@@ -279,11 +284,23 @@
   height: 6.875rem !important;
 }
 
+/* Labels outside the container */
+.badgeLabelsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem; /* 24px - matches icon spacing */
+  padding: 0 1.25rem; /* 20px - matches container padding */
+}
+
 .badgeLabel {
   color: #000;
   font-family: 'Heebo', sans-serif;
   font-size: 0.875rem; /* 14px */
   font-weight: 600;
+  flex: 0 0 5.625rem; /* Fixed width to align with middle badge */
+  text-align: center;
 }
 
 /* Bottom section */
@@ -291,7 +308,7 @@
   width: 100%;
   max-width: 21.875rem; /* 350px */
   background: #4A4A4A;
-  border-radius: 1.5rem; /* 24px */
+  border-radius: 0; /* Sharp edges */
   padding: 1.5rem; /* 24px */
   display: flex;
   flex-direction: column;
@@ -314,7 +331,7 @@
   height: 3.75rem; /* 60px */
   background: #FFF;
   border: 0.1875rem solid #000; /* 3px */
-  border-radius: 1.5rem; /* 24px */
+  border-radius: 0; /* Sharp edges */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -370,6 +387,11 @@
 
   .badgesContainer {
     gap: 1rem; /* 16px */
+    padding: 1rem; /* 16px */
+  }
+  
+  .badgeLabelsContainer {
+    gap: 1rem; /* 16px */
   }
 }
 
@@ -407,8 +429,8 @@
     gap: 0.5rem; /* 8px */
   }
 
-  .circle {
-    width: 2.25rem; /* 36px */
-    height: 2.25rem; /* 36px */
+  .daySquare {
+    width: 1.5rem; /* 24px */
+    height: 1.5rem; /* 24px */
   }
 }
