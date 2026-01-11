@@ -2,7 +2,7 @@
 .screen {
   height: 100vh;
   height: 100dvh;
-  background: #DEF2FF;
+  background: #C1E0F3;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -65,7 +65,7 @@
   color: #000000 !important; /* Black for current */
 }
 .progressSuccess {
-  background-color: #69D702 !important;
+  background-color: #C7EE26 !important;
   color: #000000 !important; /* Black for correct */
   border: none;
 }
@@ -175,7 +175,7 @@
   right: 50%;
   margin-left: -50vw; /* CHANGED: דוחף לשמאל */
   margin-right: -50vw; /* CHANGED: דוחף לימין */
-  background-color: #5DC6E3; /* צבע המעצבים */
+  background-color: #65B1E2; /* צבע המעצבים */
   /* padding: 20px 0 35px;  */
   z-index: 10;
   flex-shrink: 0;
@@ -192,6 +192,8 @@
 .toolButton {
   height: 51px;
   border: 1px solid #000000;
+  border-top: none;      /* מבטל מסגרת למעלה */
+  border-left: none;
   border-right: 3px solid var(--Dark_blue_text, #000000);
   border-bottom: 3px solid var(--Dark_blue_text, #000000);
   background: white;
@@ -221,7 +223,7 @@
   height: 126px;
   border: none;
   cursor: pointer;
-  color: white;
+  color: #000000;
   font-family: 'SouthFont', sans-serif;
   font-size: 40px;
   font-weight: 500;
@@ -236,7 +238,7 @@
 }
 
 .reportBtn {
-  background: #69D702;
+  background: #C7EE26;
   border-right: 3px solid #000000;
   border-bottom: 3px solid #000000;
   border-radius: 0 0 24px 0;
@@ -360,7 +362,7 @@
   animation: slideUp 0.3s ease-out;
 }
 
-.successCard { background: #69D702; color: #000000; }
+.successCard { background: #C7EE26; color: #000000; }
 .failCard { background: #FF706E; color: #000000; }
 
 .successHeader, .failTitle {
@@ -419,5 +421,26 @@
   flex-direction: column; /* מסדר את הכותרת מעל השורה של האייקון */
   align-items: flex-start; /* מצמיד הכל לימין (בגלל ה-RTL) */
   direction: rtl; 
+  width: 100%;
+}
+
+.resultStatusTitle {
+  display: block;
+  font-family: 'SouthFont', sans-serif;
+  font-size: 26px; /* גודל מודגש ובולט */
+  font-weight: 700; /* הדגשה חזקה */
+  margin-bottom: 8px;
+  text-align: right;
+  width: 100%;
+}
+
+/* הטקסט המשתנה בכרטיס הצלחה (משפטי השפיץ) */
+.resultFeedbackText {
+  margin: 0;
+  font-family: 'SouthFont', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: right;
   width: 100%;
 }
