@@ -23,11 +23,13 @@
 .logoContainer {
   margin-top: 8rem;
   flex: none;
+  
 }
 
 .mainIcon {
   width: 11.812rem;
   height: 8.514rem;
+  margin-right: 1.875rem;
 }
 
 .mainTitle {
@@ -82,38 +84,35 @@
   margin: 0;              /* מאפס מרווחים שעלולים להסיט את האות */
 }
 
-
 .startButton {
+  /* מיקום – זהה ל-startButton */
   position: fixed;
-  bottom: 2rem;
   
-  /* מידות מהפיגמה */
- width: min(20rem, 90%);
-  height: 6.875rem;    /* 110px */
-  
+  bottom: calc(2rem + env(safe-area-inset-bottom));
+  z-index: 10;
+
+  /* מידות – זהות */
+  width: min(20.3125rem, calc(100vw - 3rem)); /* 325px */
+  height: 7.875rem;                            /* 126px */
+
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  /* צבעים וגבולות */
-  background-color: #C7EE26;
-  border: none;
-  border-right: 3px solid #111012; /* החזרתי ל-3px לפי הפיגמה */
-  border-bottom: 3px solid #111012;
-  
-  /* ביטול עיגול פינות */
-  border-radius: 0; 
+  gap: 0.625rem; 
+  background: #C7EE26; 
 
-  /* טיפוגרפיה ב-REM */
+  border-right: 0.1875rem solid #000;
+  border-bottom: 0.1875rem solid #000;
+
   color: #111012;
   font-family: "VC_Haim-Regular";
-  font-size: 3.75rem;      /* 60px / 16 */
+  font-size: 4rem;      /* 36px – תואם תחושת כפתור ראשי */
   font-weight: 500;
-  line-height: 2.5rem;    /* 40px / 16 */
-  letter-spacing: 0.1125rem; /* 1.8px / 16 */
+  line-height: 1;
+  letter-spacing: 0.125rem;
 
   cursor: pointer;
-  z-index: 10;
+  transition: transform 0.1s ease;
 }
 
 /* אפקט לחיצה */
