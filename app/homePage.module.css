@@ -97,12 +97,12 @@
 .startButton {
   position: fixed;
   margin: 0;
-  bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  bottom: calc(4rem + env(safe-area-inset-bottom));
   z-index: 10;
-  left:10%;
-  transform: translateX(-10%);
+  left:50%;
+  transform: translateX(-50%);
   /* מידות – זהות */
-  width: min(20.3125rem, calc(100vw - 3rem)); /* 325px */
+  width: 20.3125rem; /* 325px */
   height: 7.875rem;                            /* 126px */
   
   display: flex;
@@ -132,7 +132,7 @@
   border-right-width: 1px;
   border-bottom-width: 1px;
   /* הוספת ה-translateX כדי שהמרכוז לא יישבר בלחיצה */
-  transform: translate(-50%, 2px); 
+  transform: translate(-50%, 2px);
 }
 /* 📱 התיקון הקריטי למסך SE - חייב להיות בסוף הקובץ! */
 @media screen and (max-height: 670px) {

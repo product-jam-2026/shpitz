@@ -138,10 +138,6 @@ function MobileContent({
         <button 
           className={styles.startButton} 
           onClick={onStart}
-          style={{
-            transform: 'none',
-            transition: 'opacity 0.1s',
-          }}
         >
           <span className={styles.buttonText}>התחל</span>
         </button>
