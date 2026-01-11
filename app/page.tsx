@@ -117,15 +117,14 @@ function MobileContent({
         </div>
 
         <h1 className={styles.mainTitle}>
-           חמש שאלות,  <br /> כל יום,
+            חמש שאלות כל יום, 
             <br />
-           ואתה שפיץ
+            אפס נפילות בהונאות רשת   
+               
           </h1>
 
         <div className={styles.streakSection}>
         <p className={styles.streakText}>
-            איזה כיף שחזרת אלינו!
-            <br />
             יום {streak} ברצף של חידודים
           </p>
 
@@ -162,7 +161,7 @@ function DayIndicator({ letter, filled }: { letter: string; filled: boolean }) {
           height={28} 
         />
       </div>
-      <span className={`${styles.dayLetter} ${filled ? styles.activeLetter : styles.inactiveLetter}`}>{letter}</span>
+      <span className={styles.dayLetter}>{letter}</span>
     </div>
   );
 }

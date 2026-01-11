@@ -33,7 +33,9 @@ export default function StartPage() {
 
         {/* טקסט ההסבר */}
         <div className={styles.contentWrapper}>
-          <h2 className={styles.subTitle}>?איך משחקים</h2>
+         <h2 className={styles.subTitle}>
+           איך משחקים<span className={styles.qMark}>?</span>
+    </h2>
           <p className={styles.description}>
            ,תוצג לפניכם הודעת טקסט 
             <br />

@@ -1,227 +1,149 @@
 /** @import must precede all other statements */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap");
+
 .screen {
-  /* מיקום וגודל */
   position: fixed;
   inset: 0;
   height: 100vh;
   width: 100%;
-  min-height: 100vh;
-
-  /* הגדרת הרקע החדש - שימוש ב-SVG כ-Data URI */
-  background-color: #3BAFFA; /* צבע גיבוי */
+  background-color: #3BAFFA;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='393' height='852' viewBox='0 0 393 852' fill='none'%3E%3Cg filter='url(%23filter0_nn_1775_5022)'%3E%3Crect width='393' height='852' fill='%233BAFFA'/%3E%3C/g%3E%3Cdefs%3E%3Cfilter id='filter0_nn_1775_5022' x='0' y='0' width='393' height='852' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2 2' stitchTiles='stitch' numOctaves='3' result='noise' seed='437'/%3E%3CfeColorMatrix in='noise' type='luminanceToAlpha' result='alphaNoise'/%3E%3CfeComponentTransfer in='alphaNoise' result='coloredNoise1'%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 '/%3E%3C/feComponentTransfer%3E%3CfeComposite operator='in' in2='shape' in='coloredNoise1' result='noise1Clipped'/%3E%3CfeFlood flood-color='%23F6F6F6' result='color1Flood'/%3E%3CfeComposite operator='in' in2='noise1Clipped' in='color1Flood' result='color1'/%3E%3CfeMerge result='effect1_noise_1775_5022'%3E%3CfeMergeNode in='shape'/%3E%3CfeMergeNode in='color1'/%3E%3C/feMerge%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.4 0.4' stitchTiles='stitch' numOctaves='3' result='noise' seed='3815'/%3E%3CfeColorMatrix in='noise' type='luminanceToAlpha' result='alphaNoise'/%3E%3CfeComponentTransfer in='alphaNoise' result='coloredNoise1'%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 '/%3E%3C/feComponentTransfer%3E%3CfeComposite operator='in' in2='effect1_noise_1775_5022' in='coloredNoise1' result='noise1Clipped'/%3E%3CfeFlood flood-color='rgba(255, 0, 251, 0.7)' result='color1Flood'/%3E%3CfeComposite operator='in' in2='noise1Clipped' in='color1Flood' result='color1'/%3E%3CfeMerge result='effect2_noise_1775_5022'%3E%3CfeMergeNode in='effect1_noise_1775_5022'/%3E%3CfeMergeNode in='color1'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   box-sizing: border-box;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-
+  filter: saturate(0.8) brightness(1.05);
 }
 
-
-
-@media screen and (max-height: 670px) {
-  .streakSection {
-    margin-bottom: 17rem; 
-    
-    gap: 0.8rem; 
-  }
-}
+/* הגדרות ברירת מחדל למסכים גדולים */
 .logoContainer {
-  display: flex;
-  justify-content: center; /* מרכוז מלא */
-  align-items: center;
-
-  width: 100%;
-
-
-  padding: 0;              /* מבטל padding-left ו-padding-top מההגדרה הראשונה */
-  margin-top: 7.39375rem;  /* הרווח העליון שנקבע בהגדרה האחרונה */
-
-
-  flex: 0 0 auto;
+  margin-top: 8rem;
+  flex: none;
 }
-
 
 .mainIcon {
-  /* מידות מהפיגמה */
-  width: 11.812rem;  /* 188.998px / 16 */
-  height: 8.514rem;  /* 136.234px / 16 */
-
-  /* סיבוב קל */
-  transform: rotate(0.016deg);
-
-  /* ממרכז את התוכן */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 11.812rem;
+  height: 8.514rem;
 }
 
-.mainIcon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+.mainTitle {
+  color: #111012;
+  text-align: center;
+  font-family: 'SimplePro-Regular', sans-serif;
+  font-size: 1.625rem;
+  font-weight: 600;
+  line-height: 2rem;
+  margin: 4rem auto 0 auto;
+  width: 90%;
 }
 
 .streakSection {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  margin-top: 1.5rem;
+  gap: 0.5rem;
   width: 100%;
-  flex: 1;
-  margin-top: auto;
-  margin-bottom: 19.5rem;
-
-  gap: 1.5rem;
-}
-
-.mainTitle {
-  color: #000;
-  text-align: center;
-  font-family: 'Narkssim';
-  font-size: clamp(20px, 5.5vw, 26px);
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
-  width: 90%;
-  max-width: 290px;
-  margin: 0 auto;
-  margin-top: clamp(16px, 5vh, 32px);
 }
 
 .streakText {
-  color: #FFF9EC;
+  color: #111012;
+  font-family: 'SimplePro-Regular';
+  font-size: 1.5rem;
+  font-weight: 700;
   text-align: center;
-  font-family: 'SouthFont', sans-serif;
-  font-size: clamp(18px, 6vw, 24px);
-  font-weight: 500; 
-  line-height: 1.2;
-  white-space: nowrap;
-  width: auto;
-  max-width: 95vw;
-  margin-top: clamp(40px, 10vh, 85px);
-  margin-left: auto;
-  margin-right: auto;
 }
+
 .daysContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-
-
-  width: 20.3125rem; /* 325px / 16 */
-  max-width: 90vw;
-
-  margin-left: auto;
-  margin-right: auto;
-
-  margin-top: 1rem;
-
-  box-sizing: border-box;
-
-
-  gap: clamp(4px, 2.5vw, 12px);
+  gap: 0.6rem; /* המרווח בין יום ליום */
+  width: 100%;
 }
 
 .dayItem {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 2rem;                
-  width: clamp(24px, 8vw, 32px);  
-  gap: 0.5vh;
-}
-
-.iconWrapper {
-  width: 1.75rem; 
-  height: 1.75rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column; /* גורם לאות להיות מתחת לכוכב */
+  align-items: center;    /* ממרכז את האות בדיוק מתחת לכוכב */
+  gap: 0.25rem;           /* המרווח האנכי בין הכוכב לאות */
+  min-width: 2.5rem;      /* עוזר לשמור על רווח שווה */
 }
 .dayLetter {
-  font-family: 'SouthFont', sans-serif; 
-  font-size: 1.125rem; /* 18px */
+  color: #111012;
+  font-family: 'SimplePro-Regular';
+  font-size: 1.135rem;
   font-weight: 500;
-  margin-top: 0.25rem; /* 4px */
+  text-align: center;     /* מוודא שהטקסט ממורכז בתוך עצמו */
+  margin: 0;              /* מאפס מרווחים שעלולים להסיט את האות */
 }
 
-.activeLetter {
-  color: #000000; 
-}
-.inactiveLetter {
-  color: #FFFFFF; 
-}
 
 .startButton {
   position: fixed;
-  inset-inline: 1.5rem; /* נותן מרווח שמאל/ימין */
-  bottom: calc(2rem + env(safe-area-inset-bottom));
-  margin-inline: auto;  /* מרכז את הרוחב */
-  z-index: 10;
-
-  width: min(20.3125rem, 100%); /* 325px או פחות */
-  height: 7.875rem;
-
+  bottom: 2rem;
+  
+  /* מידות מהפיגמה */
+ width: min(20rem, 90%);
+  height: 6.875rem;    /* 110px */
+  
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  /* צבעים וגבולות */
+  background-color: #C7EE26;
+  border: none;
+  border-right: 3px solid #111012; /* החזרתי ל-3px לפי הפיגמה */
+  border-bottom: 3px solid #111012;
+  
+  /* ביטול עיגול פינות */
+  border-radius: 0; 
 
-  background: #C7EE26;
-  border-radius: 0 0 1.5rem 1.5rem;
-  border-right: 0.1875rem solid #000;
-  border-bottom: 0.1875rem solid #000;
+  /* טיפוגרפיה ב-REM */
+  color: #111012;
+  font-family: "VC_Haim-Regular";
+  font-size: 3.75rem;      /* 60px / 16 */
+  font-weight: 500;
+  line-height: 2.5rem;    /* 40px / 16 */
+  letter-spacing: 0.1125rem; /* 1.8px / 16 */
+
   cursor: pointer;
-  transition: transform 0.1s ease;
+  z-index: 10;
 }
 
+/* אפקט לחיצה */
 .startButton:active {
   border-right-width: 1px;
   border-bottom-width: 1px;
+  /* הוספת ה-translateX כדי שהמרכוז לא יישבר בלחיצה */
+  transform: translate(-50%, 2px); 
 }
+/* 📱 התיקון הקריטי למסך SE - חייב להיות בסוף הקובץ! */
+@media screen and (max-height: 670px) {
+  .logoContainer {
+    margin-top: 2rem; /* מצמצם את הרווח העליון ב-SE */
+  }
 
-.buttonText {
-  font-family: 'SouthFont';
-  color: #000;
-  font-size: clamp(28px, 8vw, 38px);
-  font-weight: 500;
-  line-height: 1;
+  .mainTitle {
+    margin-top: 1.5rem; /* מצמצם את המרחק מהלוגו */
+    font-size: 1.3rem; /* מקטין את הכותרת */
+    line-height: 1.6rem;
+  }
+
+  .streakSection {
+    margin-top: 0.8rem;
+  }
+
+  .streakText {
+    font-size: 1.2rem;
+  }
+
+  .startButton {
+    height: 5rem; /* מקטין את הכפתור ב-SE כדי שלא יסתיר תוכן */
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
