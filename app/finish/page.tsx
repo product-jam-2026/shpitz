@@ -246,8 +246,8 @@ export default function StreakPage() {
             <Image 
               src="/icons/saturday.svg"
               alt="Character"
-              width={200}
-              height={200}
+              width={300}
+              height={300}
               className={styles.characterImage}
             />
           </div>
@@ -265,16 +265,13 @@ export default function StreakPage() {
 
           {/* Share button */}
           <button className={styles.shareButton} onClick={handleShare}>
-            <svg className={styles.shareArrow} xmlns="http://www.w3.org/2000/svg" width="37" height="31" viewBox="0 0 37 31" fill="none">
-              <g clipPath="url(#clip0_1722_3001)">
-                <path d="M37.0003 12.4124V13.6515C35.1448 15.7094 24.7185 28.9856 23.4594 24.7593V19.8029C14.4248 19.2939 7.48866 24.4053 1.9 30.9106C-0.264774 31.1762 0.0223907 30.977 0.0223907 29.052C0.0223907 21.2854 5.54478 12.8992 12.3263 9.27038C15.3746 7.63298 22.9293 6.52663 23.3269 6.10621C23.9896 5.42027 23.2827 -0.819556 25.3149 0.10978L37.0224 12.4124H37.0003Z" fill="#111012"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_1722_3001">
-                  <rect width="37" height="31" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
+             <Image
+                    src="/icons/arrowInTheFinal.svg"
+                    alt="Share"
+                    width={37}
+                    height={31}
+                    className={styles.shareArrow}
+                  />
             <span className={styles.shareText}>שתף חברים</span>
           </button>
         </div>
@@ -290,19 +287,13 @@ export default function StreakPage() {
               
               return (
                 <div key={day.value} className={styles.dayItem}>
-                  {/* SVG Square */}
-                  {isActive && isPast ? (
-                    // Filled square - no outline, just green plus on black background
-                    <svg className={styles.daySquare} xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
-                      <rect width="27" height="27" fill="#111012"/>
-                      <path d="M27.1143 27.3506H-0.249023V-0.0126953H27.1143V27.3506ZM13.4121 3.60547C12.5535 3.60547 11.8574 4.30153 11.8574 5.16016V12.1211H4.89746C4.04975 12.1211 3.3623 12.8085 3.3623 13.6562C3.36244 14.5038 4.04983 15.1914 4.89746 15.1914H11.8574V22.1777C11.8577 23.036 12.5529 23.7322 13.4111 23.7324C14.2696 23.7324 14.9656 23.0361 14.9658 22.1777V15.1914H21.9688C22.8162 15.1912 23.5028 14.5037 23.5029 13.6562C23.5029 12.8087 22.8163 12.1213 21.9688 12.1211H14.9668V5.16016C14.9668 4.30169 14.2705 3.60573 13.4121 3.60547Z" fill="#C7EE26"/>
-                    </svg>
-                  ) : (
-                    // Empty square - very bold outline
-                    <svg className={styles.daySquare} xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
-                      <rect x="2.5" y="2.5" width="22" height="22" fill="transparent" stroke="#111012" strokeWidth="3"/>
-                    </svg>
-                  )}
+                  <Image
+                        src={isActive && isPast ? "/icons/activeDay.svg" : "/icons/NotActiveDay.svg"}
+                        alt={isActive && isPast ? "יום פעיל" : "יום לא פעיל"}
+                        width={36}
+                        height={36}
+                        className={styles.daySquare}
+                      />
                   <span className={styles.dayLabel}>{day.label}</span>
                 </div>
               );
@@ -312,14 +303,15 @@ export default function StreakPage() {
 
         {/* Badges section - all icons in one container */}
         <div className={styles.badgesCard}>
+          <p className={styles.badgesTitle}>משחקים באופן קבוע?<br/> מקבלים מדבקה חדשה!</p>
           <div className={styles.badgesContainer}>
-            <div className={`${styles.badge} ${getBadgeStatus(5) ? styles.badgeActive : styles.badgeInactive}`}>
+            <div className={`${styles.badge} ${getBadgeStatus(3) ? styles.badgeActive : styles.badgeInactive}`}>
               <div className={styles.badgeImage}>
                 <Image 
-                  src="/icons/5days.svg" 
+                  src="/icons/candelShabatSticker.svg" 
                   alt="5 days"
-                  width={60}
-                  height={60}
+                  width={90}
+                  height={90}
                 />
               </div>
             </div>
@@ -338,8 +330,8 @@ export default function StreakPage() {
                 <Image 
                   src="/icons/13days.svg" 
                   alt="13 days"
-                  width={110}
-                  height={110}
+                  width={90}
+                  height={90}
                 />
               </div>
             </div>
@@ -347,20 +339,21 @@ export default function StreakPage() {
           
           {/* Labels outside container */}
           <div className={styles.badgeLabelsContainer}>
-            <span className={styles.badgeLabel}>5 ימים</span>
+            <span className={styles.badgeLabel}>3 ימים</span>
             <span className={styles.badgeLabel}>9 ימים</span>
             <span className={styles.badgeLabel}>13 ימים</span>
           </div>
         </div>
         {/* Button Section*/}
-          <div className={styles.bottomCharacter}>
+          <div className={styles.bottomSection}>
             <Image 
-              src="/icons/YOUR_BOTTOM_CHARACTER.svg" 
+              src="/icons/finalLogo.svg" 
               alt="Character"
-              width={120}
-              height={120}
+              width={300}
+              height={300}
+               
             />
-          <p className={styles.bottomText}>בשתוקנו איכולו<br />האינטרנט הישראלי!</p>
+         
         </div>
       </div>
     </div>

@@ -7,9 +7,9 @@
   min-height: 100vh;
   min-height: 100dvh;
   width: 100%;
-  background: linear-gradient(rgba(93, 198, 227, 0.2), rgba(93, 198, 227, 0.2)), 
-            url('/background.png') no-repeat center / cover;
-  background-color: #5DC6E3;
+  background-color: #3BAFFA;
+  /* ה-SVG החדש המעודכן */
+  background-image: url('/background/homeNoise.svg');
   background-size: cover;
   display: flex;
   justify-content: center;

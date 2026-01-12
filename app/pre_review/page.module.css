@@ -11,10 +11,9 @@
   flex-direction: column;
   overflow: hidden; 
   
-  background-color: #5DC6E3; 
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  background-size: cover;
-  display: flex;
+   background-color: #3BAFFA;
+  /* ה-SVG החדש המעודכן */
+  background-image: url('/background/homeNoise.svg');
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -32,7 +31,9 @@
   margin: 0 auto;
   min-height: 100vh;
   min-height: 100dvh;
-  background: linear-gradient(180deg, #5BA3E5 0%, #4A8FD8 100%);
+  background-color: #3BAFFA;
+  /* ה-SVG החדש המעודכן */
+  background-image: url('/background/homeNoise.svg');
   display: flex;
   flex-direction: column;
   align-items: center;
