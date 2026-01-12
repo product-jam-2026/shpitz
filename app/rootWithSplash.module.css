@@ -33,6 +33,8 @@
 /* הוידאו ממלא מסך */
 .video {
   position: absolute;
+  background: transparent;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
   inset: 0;
   width: 100%;
   height: 100%;
