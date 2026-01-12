@@ -179,21 +179,23 @@ export default function Challenge() {
 
     const target = step + 1;
 
-    // ✅ NEW: trigger fill animation for the step we're completing
-    setProgressAnimStep(step);
-    setTimeout(() => setProgressAnimStep(null), 1000);
+// keep bar animation
+setIsTransitioning(true);
+setActionsDown(true);
 
-    // keep bar animation
-    setIsTransitioning(true);
-    setActionsDown(true);
+// close the bottom sheet first, then change step (this triggers the slide animation)
+setTimeout(() => {
+  setResult("none");
 
-    // close the bottom sheet first, then change step (this triggers the slide animation)
-    setTimeout(() => {
-      setResult("none");
-      setStep(target);
-      setActionsDown(false);
-      setIsTransitioning(false);
-    }, 260);
+  // ✅ start fill EXACTLY when message starts sliding (when step changes)
+  setProgressAnimStep(step);
+  setTimeout(() => setProgressAnimStep(null), 1000);
+
+  setStep(target);
+  setActionsDown(false);
+  setIsTransitioning(false);
+}, 260);
+
   };
 
   if (loading || error || !current) {

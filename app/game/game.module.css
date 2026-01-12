@@ -606,13 +606,13 @@
   position: absolute;
   top: 50%;
   transform: translate(110%, -50%) rotate(-90deg); /* התחלה מחוץ למסגרת */
-  width: 40px;       /* אפשר לשנות */
-  height: 40px;      /* אפשר לשנות */
+  width: 45px;       /* אפשר לשנות */
+  height: 45px;      /* אפשר לשנות */
   background: url("/icons/sharp.svg") no-repeat center / contain;
   pointer-events: none;
   z-index: 3;
 
-  animation: sharpSweepRTL 500ms linear forwards;
+  animation: sharpSweepRTL 400ms linear forwards;
   will-change: transform;
 }
 
