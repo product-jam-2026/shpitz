@@ -18,6 +18,7 @@
   font-weight: normal;
   font-style: normal;
 }
+
 .screen {
   height: 100vh;
   height: 100dvh;
@@ -34,12 +35,12 @@
 .phone {
   width: 100%;
   max-width: 550px;
-  height: 100%;
+  height: 100vh; 
+  height: 100dvh;
   position: relative;
   /* הוספה: מבנה עמודה כדי לתמוך ב-Sticky */
   display: flex;
   flex-direction: column;
-  min-height: 100%;
 }
 /* פתרון לאייפון 14 גדול: אם המסך רחב, הטלפון יגדל ל-410 פיקסלים */
 @media (min-width: 400px) {
@@ -189,8 +190,7 @@
 /* --- כפתורי עזר והכרעה (הפס הכחול המקובע) --- */
 .actions {
   width: 100vw; /* CHANGED: מלוא רוחב המסך */
-  position: sticky;
-  bottom: 0;
+  position: relative;
   left: 50%;
   right: 50%;
   margin-left: -50vw; /* CHANGED: דוחף לשמאל */
