@@ -464,3 +464,54 @@
   text-align: right;
   width: 100%;
 }
+/* עוטף ההודעה כדי לאפשר “שתי הודעות” אחת מעל השנייה בזמן מעבר */
+.messageStage {
+  position: relative;
+  overflow: hidden; /* חשוב כדי שלא יראו את ההודעה נכנסת מבחוץ */
+}
+
+/* שכבות הודעה בזמן אנימציה */
+.messageLayer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+/* ההודעה הרגילה (כשאין מעבר) */
+.messageStatic {
+  position: relative;
+}
+
+/* אנימציות החלקה */
+.slideOutRight {
+  animation: slideOutRight 320ms ease-in forwards;
+}
+.slideInLeft {
+  animation: slideInLeft 320ms ease-out forwards;
+}
+
+@keyframes slideOutRight {
+  from { transform: translateX(0); opacity: 1; }
+  to   { transform: translateX(110%); opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-110%); opacity: 1; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+/* הפס הכחול יורד למטה */
+.actionsAnimating {
+  will-change: transform;
+  transition: transform 260ms ease;
+}
+.actionsDown {
+  transform: translateY(105%);
+}
+
+/* נגישות: לכבד prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .slideOutRight, .slideInLeft { animation: none !important; }
+  .actionsAnimating { transition: none !important; }
+}
