@@ -518,3 +518,20 @@
   .slideOutRight, .slideInLeft { animation: none !important; }
   .actionsAnimating { transition: none !important; }
 }
+/* הודעה חדשה נכנסת משמאל */
+.msgEnter {
+  transform: translateX(-120%);
+}
+.msgEnterActive {
+  transform: translateX(0);
+  transition: transform 750ms cubic-bezier(.2,.8,.2,1);
+}
+
+/* הודעה קיימת יוצאת ימינה */
+.msgExit {
+  transform: translateX(0);
+}
+.msgExitActive {
+  transform: translateX(120%);
+  transition: transform 750ms cubic-bezier(.2,.8,.2,1);
+}

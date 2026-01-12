@@ -8,6 +8,10 @@ import ConfettiEffect from "../ConfettiEffect";
 
 import confettiAnimation from "@/public/animation/confettiAnimation.json";
 import successAnimation from "@/public/animation/success.json";
+
+// ✅ NEW: transition helpers
+import { SwitchTransition, CSSTransition } from "react-transition-group";
+
 type ResultState = "none" | "success" | "fail";
 type DailyAnswer = {
   index: number;
@@ -80,12 +84,9 @@ export default function Challenge() {
   const tipText = useMemo(() => current?.tips ?? "טיפ לא זמין כרגע.", [current]);
   const [isClosing, setIsClosing] = useState(false);
 
-  // ✅ NEW: states for transition animation (minimal additions)
+  // ✅ keep actions animation as-is
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [nextStep, setNextStep] = useState<number | null>(null);
   const [actionsDown, setActionsDown] = useState(false);
-
-  const next = nextStep ? questions[nextStep - 1] : null;
 
   const handleClose = () => {
     setIsClosing(true);
@@ -123,11 +124,10 @@ export default function Challenge() {
     });
   };
 
-  // ✅ CHANGED: handleContinue now animates actions + message transition
   const handleContinue = () => {
     if (isTransitioning) return;
 
-    // Last step - keep original behavior (no transition required)
+    // Last step - keep original behavior
     if (step >= 5) {
       setResult("none");
       const todayKey = getTodayKey();
@@ -162,24 +162,19 @@ export default function Challenge() {
       return;
     }
 
-   const target = step + 1;
+    const target = step + 1;
 
-setIsTransitioning(true);
-setActionsDown(true);
+    // keep bar animation
+    setIsTransitioning(true);
+    setActionsDown(true);
 
-setTimeout(() => {
-  setResult("none");
-  setNextStep(target);
-
-  setTimeout(() => {
-    setStep(target);
-    setActionsDown(false);
-    setNextStep(null);
-    setIsTransitioning(false);
-  }, 550); // 👈 חשוב להתאים ל-CSS (סעיף 2)
-}, 260);
-
-
+    // close the bottom sheet first, then change step (this triggers the slide animation)
+    setTimeout(() => {
+      setResult("none");
+      setStep(target);
+      setActionsDown(false);
+      setIsTransitioning(false);
+    }, 260);
   };
 
   if (loading || error || !current) {
@@ -224,14 +219,17 @@ setTimeout(() => {
 
           <h2 className={styles.questionTitle}>מה דעתכם על ההודעה?</h2>
 
-          {/* ✅ CHANGED: stage that allows sliding current out + next in */}
-          <div className={styles.messageStage}>
-            <div
-              className={
-                isTransitioning
-                  ? `${styles.messageLayer} ${styles.slideOutRight}`
-                  : styles.messageStatic
-              }
+          {/* ✅ REPLACED: message swap animation */}
+          <SwitchTransition mode="out-in">
+            <CSSTransition
+              key={step}
+              timeout={350}
+              classNames={{
+                enter: styles.msgEnter,
+                enterActive: styles.msgEnterActive,
+                exit: styles.msgExit,
+                exitActive: styles.msgExitActive,
+              }}
             >
               <div className={styles.messageCard}>
                 <div className={styles.messageHeader}>
@@ -245,31 +243,12 @@ setTimeout(() => {
                   <p className={styles.messageText}>{current.content}</p>
                 </div>
               </div>
-            </div>
-
-            {isTransitioning && next && (
-              <div className={`${styles.messageLayer} ${styles.slideInLeft}`}>
-                <div className={styles.messageCard}>
-                  <div className={styles.messageHeader}>
-                    <img src="icons/messageIcon.svg" alt="Message Icon" className={styles.headerIcon} />
-                    <p dir="ltr" className={styles.ownerText}>
-                      {next.Owner}
-                    </p>
-                  </div>
-                  <div className={styles.messageTimestamp}>היום 9:07</div>
-                  <div className={styles.messageBubble}>
-                    <p className={styles.messageText}>{next.content}</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+            </CSSTransition>
+          </SwitchTransition>
         </div>
 
-        {/* ✅ CHANGED: actions gets animation classes (does not change layout logic) */}
-        <div
-          className={`${styles.actions} ${styles.actionsAnimating} ${actionsDown ? styles.actionsDown : ""}`}
-        >
+        {/* ✅ CHANGED earlier: actions gets animation classes */}
+        <div className={`${styles.actions} ${styles.actionsAnimating} ${actionsDown ? styles.actionsDown : ""}`}>
           <div className={styles.toolsRow}>
             <button className={styles.toolButton} onClick={() => setShowHint(true)}>
               <img src="/icons/sharp.svg" alt="Hint Icon" style={{ width: "35px", height: "35px" }} />
@@ -310,11 +289,7 @@ setTimeout(() => {
 
         {result !== "none" && (
           <div className={styles.overlay}>
-            <div
-              className={`${styles.resultCard} ${
-                result === "success" ? styles.successCard : styles.failCard
-              }`}
-            >
+            <div className={`${styles.resultCard} ${result === "success" ? styles.successCard : styles.failCard}`}>
               {result === "success" ? (
                 <div className={styles.successHeader}>
                   <span className={styles.resultStatusTitle}>תשובה נכונה</span>
