@@ -7,6 +7,7 @@ import Lottie from "lottie-react";
 import ConfettiEffect from "../ConfettiEffect";
 
 import confettiAnimation from "@/public/animation/confettiAnimation.json";
+import successAnimation from "@/public/animation/success.json";
 type ResultState = "none" | "success" | "fail";
 type DailyAnswer = {
   index: number;
@@ -161,26 +162,24 @@ export default function Challenge() {
       return;
     }
 
-    const target = step + 1;
+   const target = step + 1;
 
-    setIsTransitioning(true);
-    setNextStep(target);
+setIsTransitioning(true);
+setActionsDown(true);
 
-    // 1) actions bar goes down
-    setActionsDown(true);
+setTimeout(() => {
+  setResult("none");
+  setNextStep(target);
 
-    // 2) close bottom sheet so we can see the message slide
-    setTimeout(() => {
-      setResult("none");
+  setTimeout(() => {
+    setStep(target);
+    setActionsDown(false);
+    setNextStep(null);
+    setIsTransitioning(false);
+  }, 550); // 👈 חשוב להתאים ל-CSS (סעיף 2)
+}, 260);
 
-      // 3) after slide animation: commit next question and restore actions
-      setTimeout(() => {
-        setStep(target);
-        setActionsDown(false);
-        setNextStep(null);
-        setIsTransitioning(false);
-      }, 320);
-    }, 260);
+
   };
 
   if (loading || error || !current) {
@@ -199,7 +198,7 @@ export default function Challenge() {
         {result === "success" && (
           <div className={styles.lottieOverlay}>
             <Lottie
-              animationData={confettiAnimation}
+              animationData={successAnimation}
               loop={false}
               style={{ width: "100%", height: "100%", position: "absolute", pointerEvents: "none" }}
             />
