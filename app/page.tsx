@@ -51,6 +51,8 @@ export default function RootWithSplash() {
             playsInline
             preload="auto"
           />
+           <source src="/animation/Splash/splash.mp4" type="video/mp4" />
+           <source src="/animation/Splash/splash.webm" type="video/webm" />
         </div>
       )}
     </div>
