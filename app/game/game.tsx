@@ -256,18 +256,21 @@ setTimeout(() => {
                 exitActive: styles.msgExitActive,
               }}
             >
-              <div className={styles.messageCard}>
-                <div className={styles.messageHeader}>
-                  <img src="icons/messageIcon.svg" alt="Message Icon" className={styles.headerIcon} />
-                  <p dir="ltr" className={styles.ownerText}>
-                    {current.Owner}
-                  </p>
-                </div>
-                <div className={styles.messageTimestamp}>היום 9:07</div>
-                <div className={styles.messageBubble}>
-                  <p className={styles.messageText}>{current.content}</p>
-                </div>
-              </div>
+              <div className={styles.messageCardWrap}>
+  <div className={styles.messageCard}>
+    <div className={styles.messageHeader}>
+      <img src="icons/messageIcon.svg" alt="Message Icon" className={styles.headerIcon} />
+      <p dir="ltr" className={styles.ownerText}>
+        {current.Owner}
+      </p>
+    </div>
+    <div className={styles.messageTimestamp}>היום 9:07</div>
+    <div className={styles.messageBubble}>
+      <p className={styles.messageText}>{current.content}</p>
+    </div>
+  </div>
+</div>
+
             </CSSTransition>
           </SwitchTransition>
         </div>
