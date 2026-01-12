@@ -88,6 +88,21 @@ export default function Challenge() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [actionsDown, setActionsDown] = useState(false);
 
+  // ✅ NEW: delay success animation
+  const [showSuccessLottie, setShowSuccessLottie] = useState(false);
+
+  // ✅ NEW: progress fill animation trigger
+  const [progressAnimStep, setProgressAnimStep] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (result === "success") {
+      const t = setTimeout(() => setShowSuccessLottie(true), 500);
+      return () => clearTimeout(t);
+    } else {
+      setShowSuccessLottie(false);
+    }
+  }, [result]);
+
   const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => {
@@ -164,6 +179,10 @@ export default function Challenge() {
 
     const target = step + 1;
 
+    // ✅ NEW: trigger fill animation for the step we're completing
+    setProgressAnimStep(step);
+    setTimeout(() => setProgressAnimStep(null), 1000);
+
     // keep bar animation
     setIsTransitioning(true);
     setActionsDown(true);
@@ -190,7 +209,7 @@ export default function Challenge() {
   return (
     <div className={styles.screen}>
       <div className={styles.phone} dir="rtl">
-        {result === "success" && (
+        {result === "success" && showSuccessLottie && (
           <div className={styles.lottieOverlay}>
             <Lottie
               animationData={successAnimation}
@@ -209,6 +228,10 @@ export default function Challenge() {
               if (isCurrent) cl += ` ${styles.progressActive}`;
               else if (isWrong) cl += ` ${styles.progressFail}`;
               else if (isCorrect) cl += ` ${styles.progressSuccess}`;
+
+              // ✅ NEW: add fill animation class
+              if (progressAnimStep === n) cl += ` ${styles.progressFillAnim}`;
+
               return (
                 <div key={n} className={cl}>
                   {n}

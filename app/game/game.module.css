@@ -256,14 +256,14 @@
   background: #FF706E;
   border-right: 3px solid #000000;
   border-bottom: 3px solid #000000;
-  border-radius: 0 0 0 24px ;
+  border-radius: 0 0 0 ;
 }
 
 .reportBtn {
   background: #C7EE26;
   border-right: 3px solid #000000;
   border-bottom: 3px solid #000000;
-  border-radius: 0 0 24px 0;
+  border-radius: 0 0 0;
 }
 
 /* --- פופ-אפ רמז --- */
@@ -524,7 +524,7 @@
 }
 .msgEnterActive {
   transform: translateX(0);
-  transition: transform 750ms cubic-bezier(.2,.8,.2,1);
+  transition: transform 750ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* הודעה קיימת יוצאת ימינה */
@@ -533,5 +533,97 @@
 }
 .msgExitActive {
   transform: translateX(120%);
-  transition: transform 750ms cubic-bezier(.2,.8,.2,1);
+  transition: transform 750ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* מאפשר מילוי “להיכנס” בלי ליצור גלילה */
+.progressItem {
+  position: relative;
+  overflow: hidden;
+  --fill-color: transparent;
+}
+
+.progressActive { --fill-color: #5EACE1; }
+.progressSuccess { --fill-color: #C7EE26; }
+.progressFail { --fill-color: #FF706E; }
+
+/* חשוב: שיהיה אפשר לחתוך את ההחלקה */
+.progressItem {
+  position: relative;
+  overflow: hidden;
+}
+
+/* שכבת "כיסוי" אפורה שמחליקה שמאלה וחושפת את הצבע מתחת */
+/* שכבת היילייט שמחליקה מימין לשמאל - בלי לכסות את הצבע */
+.progressFillAnim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+
+  /* היילייט לבן-שקוף שמרגיש כמו מילוי */
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.65) 45%,
+    rgba(255,255,255,0) 100%
+  );
+
+  /* מתחיל מחוץ למסגרת מימין ומחליק שמאלה */
+  transform: translateX(110%);
+  animation: sweepRTL 1000ms cubic-bezier(0.30, 0.00, 0.10, 1) forwards;
+  will-change: transform;
+}
+
+@keyframes sweepRTL {
+  to { transform: translateX(-110%); }
+}
+
+
+/* הקלאס שכבר יש: highlight שמחליק */
+.progressFillAnim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.65) 45%,
+    rgba(255,255,255,0) 100%
+  );
+
+  transform: translateX(110%);
+  animation: sweepRTL 950ms cubic-bezier(0.10, 0.90, 0.20, 1) forwards;
+  will-change: transform;
+}
+
+/* ✅ NEW: המחדד עצמו — צמוד לקצה ומוביל את התנועה */
+.progressFillAnim::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translate(110%, -50%) rotate(-90deg); /* התחלה מחוץ למסגרת */
+  width: 40px;       /* אפשר לשנות */
+  height: 40px;      /* אפשר לשנות */
+  background: url("/icons/sharp.svg") no-repeat center / contain;
+  pointer-events: none;
+  z-index: 3;
+
+  animation: sharpSweepRTL 500ms linear forwards;
+  will-change: transform;
+}
+
+/* תנועת ההיילייט */
+@keyframes sweepRTL {
+  to { transform: translateX(-110%); }
+}
+
+/* תנועת המחדד — אותו כיוון, אבל נשאר צמוד לקצה */
+@keyframes sharpSweepRTL {
+  0%   { transform: translate(110%, -50%) rotate(-90deg); opacity: 1; }
+  80%  { transform: translate(-110%, -50%) rotate(-90deg); opacity: 1; }
+  100% { transform: translate(-180%, -50%) rotate(-90deg); opacity: 0; }
 }
