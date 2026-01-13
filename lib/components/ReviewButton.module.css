@@ -1,17 +1,23 @@
 .reviewButton {
   display: flex;
-  width: 325px;
-  height: 126px;
-  padding: 35px 61px;
   justify-content: center;
   align-items: center;
-  gap: 0px;
+  gap: 0.625rem;              /* 10px */
+
+  width: 20.3125rem;          /* 325px */
+  height: 6.875rem;           /* 110px */
+  padding: 2.3125rem 3.8125rem; /* 37px 61px */
+
+  background: #F7F7F7;
+  border: none;
+  border-right: 0.1875rem solid #111012;  /* 3px */
+  border-bottom: 0.1875rem solid #111012; /* 3px */
+
+  color: #111012;             /* אם זה טקסט כהה בפיגמה */
+  font-family: 'VC_Haim-Regular', sans-serif;  /* או מה שאת משתמשת */
+  font-weight: 700;
+
   cursor: pointer;
-  transition: transform 0.1s ease;
-  border-radius: 0 0 24px 24px;
-  border-right: 3px solid var(--Dark_blue_text, #114081);
-  border-bottom: 3px solid var(--Dark_blue_text, #114081);
-  background: var(--Background_color, #FFF9EC);
 }
 
 .reviewButton:active {
@@ -32,10 +38,9 @@
 }
 
 .buttonText {
-  color: var(--Dark_blue_text, #114081);
-  text-align: center;
-  font-family: 'SouthFont', 'South_v2', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 25px;
+ color: #111012;             /* אם זה טקסט כהה בפיגמה */
+  font-family: 'VC_Haim-Regular', sans-serif;  /* או מה שאת משתמשת */
+  font-size: 60px;
   font-style: normal;
   font-weight: 400;
   line-height: 40px;

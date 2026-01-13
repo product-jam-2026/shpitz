@@ -12,6 +12,7 @@ export default function PreReview() {
   const [total, setTotal] = useState(5);
   const [answerResults, setAnswerResults] = useState<boolean[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showAnim, setShowAnim] = useState(true);
 
   useEffect(() => {
     // Get score from localStorage
@@ -84,6 +85,10 @@ export default function PreReview() {
 
   // Determine if score is good (more than 3 correct answers)
   const isGoodScore = score >= 3;
+  useEffect(() => {
+  setShowAnim(isGoodScore); // show only when score is good
+}, [isGoodScore]);
+
 
   if (loading) {
     return (
@@ -107,24 +112,45 @@ export default function PreReview() {
                 alt="Success"
                 fill
                 style={{ objectFit: 'contain' }}
+                priority
               />
             ) : (
               <Image 
                 src="/icons/not_the_sharpest.svg"
                 alt="Try again"
-                fill
-                style={{ objectFit: 'contain' }}
+                className={styles.smallIcon}
+                width={24}
+                height={24}
+                
               />
             )}
+          
+{/* 
+          {isGoodScore && showAnim && (
+              <video
+                className={styles.animOverlay}
+                autoPlay
+                muted
+                playsInline
+                preload="auto"
+                onEnded={() => setShowAnim(false)}
+                onError={(e) => console.log("VIDEO ERROR:", e)}
+              >
+                <source src="/animation/preReview/characterAnimation.webm" type="video/webm" />
+                <source src="/animation/preReview/characterAnimation.mp4" type="video/mp4" />
+              </video>
+              
+            )} */}
           </div>
+          
 
           {/* Text Content - Different based on score */}
           <div className={styles.textContent}>
             {isGoodScore ? (
               <>
-                <p className={styles.mainText}>
+                {/* <p className={styles.mainText}>
                   חד בהגזמה!
-                </p>
+                </p> */}
                 <p className={styles.scoreText}>
                   ענית נכון על {score}/{total} שאלות
                 </p>

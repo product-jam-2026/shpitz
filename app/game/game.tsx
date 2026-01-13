@@ -11,6 +11,9 @@ import successAnimation from "@/public/animation/success.json";
 
 // ✅ NEW: transition helpers
 import { SwitchTransition, CSSTransition } from "react-transition-group";
+console.log("SwitchTransition:", SwitchTransition);
+console.log("CSSTransition:", CSSTransition);
+console.log("Lottie:", Lottie);
 
 type ResultState = "none" | "success" | "fail";
 type DailyAnswer = {
