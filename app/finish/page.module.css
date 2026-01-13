@@ -8,7 +8,6 @@
   min-height: 100dvh;
   width: 100%;
   background-color: #3BAFFA;
-  /* ה-SVG החדש המעודכן */
   background-image: url('/background/homeNoise.svg');
   background-size: cover;
   display: flex;
@@ -20,10 +19,10 @@
 /* Back arrow button */
 .backButton {
   position: fixed;
-  top: 1.25rem; /* 20px */
-  right: 1.25rem; /* 20px */
-  width: 2.5625rem; /* 41px */
-  height: 2.5625rem; /* 41px */
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 2.5625rem;
+  height: 2.5625rem;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -45,48 +44,47 @@
 
 .container {
   width: 100%;
-  max-width: 26.875rem; /* 430px */
+  max-width: 26.875rem;
   margin: 0 auto;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4.375rem 1.25rem 2rem 1.25rem; /* 70px 20px 32px 20px */
+  padding: 4.375rem 1.25rem 2rem 1.25rem;
   position: relative;
   box-sizing: border-box;
-  gap: 1.25rem; /* 20px */
+  gap: 1.25rem;
 }
 
 /* Main title */
 .mainTitle {
   color: #111012;
   font-family: 'VC_Haim', 'VC_Haim-Regular', sans-serif;
-  font-size: 3.75rem;           /* 60px */
+  font-size: 3.75rem;
   font-weight: 500;
-  line-height: 2.5rem;          /* 40px */
-  letter-spacing: 0.1125rem;    /* 1.8px */
+  line-height: 2.5rem;
+  letter-spacing: 0.1125rem;
   margin: 0;
   text-align: center;
 }
 
-
 /* Main card with character and squares */
 .mainCard {
   width: 100%;
-  max-width: 21.875rem; /* 350px */
+  max-width: 21.875rem;
   background: #C1E0F3;
-  border-radius: 0; /* Sharp edges */
-  padding: 1.5rem; /* 24px */
+  border-radius: 0;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem; /* 16px */
+  gap: 1rem;
 }
 
 .characterContainer {
-  width: 12.5rem; /* 200px */
-  height: 12.5rem; /* 200px */
+  width: 12.5rem;
+  height: 12.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,7 +100,7 @@
 .cardText {
   color: #000;
   font-family: 'Narkissim', 'Heebo', sans-serif;
-  font-size: 1.375rem; /* 22px */
+  font-size: 1.375rem;
   font-weight: 700;
   margin: 0;
   text-align: center;
@@ -112,16 +110,15 @@
 /* Colored squares */
 .answersIndicator {
   display: flex;
-  gap: 0.625rem; /* 10px */
+  gap: 0.625rem;
   justify-content: center;
   align-items: center;
-  margin: 0.5rem 0; /* 8px */
+  margin: 0.5rem 0;
 }
 
 .answerSquare {
-  width: 1.7rem; /* 40px */
-  height: 1.7rem; /* 40px */
- 
+  width: 1.7rem;
+  height: 1.7rem;
   flex-shrink: 0;
 }
 
@@ -135,18 +132,18 @@
 
 /* Share button */
 .shareButton {
-  width: 15.9375rem; /* 255px */
-  height: 4.6875rem; /* 75px */
-  padding: 2.3125rem 3.8125rem; /* 37px 61px */
+  width: 15.9375rem;
+  height: 4.6875rem;
+  padding: 2.3125rem 3.8125rem;
   background: #FFF;
   border: none;
-  border-right: 0.1875rem solid #111012; /* 3px */
-  border-bottom: 0.1875rem solid #111012; /* 3px */
+  border-right: 0.1875rem solid #111012;
+  border-bottom: 0.1875rem solid #111012;
   border-radius: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem; /* 10px */
+  gap: 1rem;
   cursor: pointer;
   transition: opacity 0.2s;
 }
@@ -162,43 +159,41 @@
 .shareText {
   color: #111012;
   font-family: 'VC_Haim-Regular';
-  font-size: 2.5rem; /* 40px */
+  font-size: 3rem;
   font-weight: 500;
-  line-height: 2.5rem; /* 40px */
-  letter-spacing: 0.075rem; /* 1.2px */
+  line-height: 3rem;
+  letter-spacing: 0.075rem;
   text-align: center;
   white-space: nowrap;
   flex-shrink: 0;
-  font-size: 3rem;          /* 48px */
-  line-height: 3rem; 
 }
 
 .shareArrow {
   flex-shrink: 0;
-  width: 2.3125rem;             /* 37px */
-  height: 1.9375rem;            /* 31px */
-  margin-inline-start: auto;    /* ב-RTL זה דוחף לימין */
+  width: 2.3125rem;
+  height: 1.9375rem;
+  margin-inline-start: auto;
 }
 
 /* Weekly streak card */
 .streakCard {
   width: 100%;
-  max-width: 21.875rem; /* 350px */
-   background: #C1E0F3;
-  border-radius: 0; /* Sharp edges */
-  padding: 1.25rem; /* 20px */
+  max-width: 21.875rem;
+  background: #C1E0F3;
+  border-radius: 0;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem; /* 16px */
+  gap: 1rem;
 }
 
 .streakTitle {
   color: #111012;
   font-family: 'SimplePro-Regular';
-  font-size: 1.625rem;      /* 26px */
+  font-size: 1.625rem;
   font-weight: 700;
-  line-height: 2rem;        /* 32px */
+  line-height: 2rem;
   margin: 0;
   text-align: center;
 }
@@ -207,7 +202,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.8rem; /* 12px */
+  gap: 0.8rem;
   width: 100%;
 }
 
@@ -215,55 +210,53 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.375rem; /* 6px */
+  gap: 0.375rem;
 }
 
 .daySquare {
-   width: 2.25rem; /* 27px */
-   width: 2.25rem; /* 27px */
+  width: 2.25rem;
+  height: 2.25rem;
   flex-shrink: 0;
-   object-fit: contain;
+  object-fit: contain;
 }
 
 .dayLabel {
   color: #000;
   font-family: 'SimplePro-Regular';
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
   font-weight: 600;
 }
 
 /* Badges section - wrapper for card and labels */
 .badgesCard {
   width: 100%;
-  max-width: 21.875rem; /* 350px */
+  max-width: 21.875rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem; /* 8px */
+  gap: 0.5rem;
   background: #C1E0F3;
+  padding: 1.25rem;
 }
+
 .badgesTitle {
   color: #111012;
   text-align: center;
-
   font-family: 'SimplePro-Bold';
-  font-size: 1.625rem;   /* 26px */
+  font-size: 1.625rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 2rem;     /* 32px */
-  margin: 0;
+  line-height: 2rem;
+  margin: 0 0 1rem 0;
 }
 
-/* Container with light blue background for all badge icons */
+/* Container for all badge icons */
 .badgesContainer {
   width: 100%;
-   background: #C1E0F3;
-  border-radius: 0; /* Sharp edges */
-  padding: 1.25rem; /* 20px */
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  gap: 1.5rem; /* 24px */
+  align-items: center; /* Changed to center for equal alignment */
+  gap: 1.5rem;
 }
 
 .badge {
@@ -286,92 +279,59 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  width: 5.625rem; /* Fixed width container for all badges */
+  height: 5.625rem; /* Fixed height container for all badges */
 }
 
 .badge:nth-child(1) .badgeImage img {
-  width: 3.75rem !important; /* 60px */
-  height: 3.75rem !important;
+  width: 5rem !important; /* 90px - all same size */
+  height: 5rem !important;
 }
 
 .badge:nth-child(2) .badgeImage img {
   width: 5.625rem !important; /* 90px */
   height: 5.625rem !important;
+  margin-top: 1rem;
+  margin-right: 0.5rem;
 }
 
 .badge:nth-child(3) .badgeImage img {
-  width: 6.875rem !important; /* 110px */
-  height: 6.875rem !important;
+  width: 5.625rem !important; /* 90px */
+  height: 5.625rem !important;
 }
 
-/* Labels outside the container */
+/* Labels directly below badges */
 .badgeLabelsContainer {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem; 
-  padding: 0 1.25rem; 
+  gap: 1.5rem;
+  margin-top: 0.5rem;
 }
 
 .badgeLabel {
-  color: #000;
+  color: #111012;
   font-family: 'SimplePro-Regular';
-  font-size: 0.875rem; /* 14px */
+  font-size: 1rem; /* Slightly larger for better readability */
   font-weight: 600;
-  flex: 0 0 5.625rem; /* Fixed width to align with middle badge */
+  width: 5.625rem; /* Same width as badge images */
   text-align: center;
 }
 
 /* Bottom section */
 .bottomSection {
   width: 100%;
-  max-width: 21.875rem; /* 350px */
-  border-radius: 0; /* Sharp edges */
-  padding: 1.5rem; /* 24px */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem; /* 16px */
-  margin-top: 1rem; /* 16px */
-}
-
-.bottomCharacter {
-  width: 7.5rem; /* 120px */
-  height: 7.5rem; /* 120px */
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 0.5rem;
 }
-.bottomText {
-  color: #FFF;
-  font-family: 'Narkissim', 'Heebo', sans-serif;
-  font-size: 1.125rem; /* 18px */
-  font-weight: 400;
-  margin: 0;
-  text-align: center;
-  line-height: 1.4;
-}
-
-.bottomSection {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 0.5rem; /* 8px–12px זה אידאלי */
-}
-
-
-
-
-
-
-
 
 /* Responsive adjustments */
-@media (max-height: 50rem) { /* 800px */
+@media (max-height: 50rem) {
   .container {
-    padding: 3.75rem 1rem 1.5rem 1rem; /* 60px 16px 24px 16px */
-    gap: 1rem; /* 16px */
+    padding: 3.75rem 1rem 1.5rem 1rem;
+    gap: 1rem;
   }
 
   .mainTitle {
@@ -379,60 +339,54 @@
   }
 
   .mainCard {
-    padding: 1.25rem; /* 20px */
+    padding: 1.25rem;
   }
 
   .characterContainer {
-    width: 10rem; /* 160px */
-    height: 10rem; /* 160px */
+    width: 10rem;
+    height: 10rem;
   }
 
   .badgesContainer {
-    gap: 1rem; /* 16px */
-    padding: 1rem; /* 16px */
+    gap: 1rem;
   }
   
   .badgeLabelsContainer {
-    gap: 1rem; /* 16px */
+    gap: 1rem;
   }
 }
 
-@media (max-height: 43.75rem) { /* 700px */
+@media (max-height: 43.75rem) {
   .mainTitle {
     font-size: 3.75rem;
   }
 
   .characterContainer {
-    width: 8.75rem; /* 140px */
-    height: 8.75rem; /* 140px */
+    width: 8.75rem;
+    height: 8.75rem;
   }
 
   .answerSquare {
-    width: 2.25rem; /* 36px */
-    height: 2.25rem; /* 36px */
-  }
-
-  .bottomSection {
-    padding: 1.25rem; /* 20px */
+    width: 2.25rem;
+    height: 2.25rem;
   }
 }
 
-@media (max-width: 25rem) { /* 400px */
+@media (max-width: 25rem) {
   .mainTitle {
     font-size: 3.75rem;
   }
 
-  .shareText,
-  .continueText {
-    font-size: 2.5rem; /* 22px */
+  .shareText {
+    font-size: 2.5rem;
   }
 
   .daysContainer {
-    gap: 0.8rem; /* 8px */
+    gap: 0.8rem;
   }
 
   .daySquare {
-    width: 1.5rem; /* 24px */
-    height: 1.5rem; /* 24px */
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
