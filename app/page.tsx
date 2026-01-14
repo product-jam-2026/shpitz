@@ -41,18 +41,26 @@ export default function RootWithSplash() {
 
       {/* הספלאש מעל הבית */}
       {showSplash && (
-        <div className={`${styles.splash} ${isFading ? styles.fadeOut : ""}`}>
-          <video
-            ref={videoRef}
-            className={styles.video}
-            src="/animation/Splash/splash.webm"
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
+        // <div className={`${styles.splash} ${isFading ? styles.fadeOut : ""}`}>
+        //   <video
+        //     ref={videoRef}
+        //     className={styles.video}
+        //     src="/animation/Splash/splash.webm"
+        //     autoPlay
+        //     muted
+        //     playsInline
+        //     preload="auto"
+        //   />
+        //    <source src="/animation/Splash/splash.mp4" type="video/mp4" />
+        //    <source src="/animation/Splash/splash.webm" type="video/webm" />
+        // </div>
+                <div className={`${styles.splash} ${isFading ? styles.fadeOut : ""}`}>
+          <img
+            className={styles.gif}
+            src="/animation/Splash/splash.gif"
+            alt="Splash"
+            draggable={false}
           />
-           <source src="/animation/Splash/splash.mp4" type="video/mp4" />
-           <source src="/animation/Splash/splash.webm" type="video/webm" />
         </div>
       )}
     </div>
