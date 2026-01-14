@@ -30,6 +30,7 @@
   padding: 0; 
   font-family: 'SouthFont', sans-serif;
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 .phone {
