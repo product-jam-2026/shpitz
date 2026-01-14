@@ -14,7 +14,7 @@
   display: flex;
   justify-content: center;
   position: relative;
-  overflow-y: auto;
+  caret-color: transparent;
 }
 
 /* Back arrow button */
@@ -76,12 +76,19 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  caret-color: transparent;
+  user-select: none;
 }
 
 .avatarIcon {
   width: 50%;
   height: 50%;
   object-fit: contain;
+  will-change: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .mainTitle {
