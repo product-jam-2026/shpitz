@@ -265,12 +265,12 @@ setTimeout(() => {
               }}
             >
               <div className={styles.messageCardWrap}>
-                {isMessageMode ? (
+                {isMessageMode && current.content ? (
                   <div className={styles.messageCard}>
                     <div className={styles.messageHeader}>
                       <img src="icons/messageIcon.svg" alt="Message Icon" className={styles.headerIcon} />
                       <p dir="ltr" className={styles.ownerText}>
-                        {current.Owner}
+                        {current.Owner || "+972 528886666"}
                       </p>
                     </div>
                     <div className={styles.messageTimestamp}>היום 9:07</div>
@@ -278,13 +278,19 @@ setTimeout(() => {
                       <p className={styles.messageText}>{current.content}</p>
                     </div>
                   </div>
-                ) : (
+                ) : current.picture ? (
                   <div className={styles.photoCard}>
                     <img
                       src={current.picture}
                       alt="Question"
                       className={styles.photoImage}
                     />
+                  </div>
+                ) : (
+                  <div className={styles.messageCard}>
+                    <div className={styles.messageBubble}>
+                      <p className={styles.messageText}>Error: No content available</p>
+                    </div>
                   </div>
                 )}
               </div>
