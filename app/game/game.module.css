@@ -126,7 +126,7 @@
 }
 .messageHeader p {
   margin: 0;
-  font-size: 22px; /* הגדלתי מברירת המחדל ל-22px */
+  font-size: 22px;
   font-weight: 400;
   color: #000000;
   font-family: 'Roboto', sans-serif;
@@ -643,4 +643,25 @@
 .messageCardWrap {
   position: relative;
   min-height: 240px;
+}
+
+/* --- כרטיס תמונה --- */
+.photoCard {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+.photoImage {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  display: block;
 }
