@@ -5,12 +5,11 @@ import styles from "./page.module.css";
 
 export default function ReviewPage() {
     const router = useRouter();
-    const [wrongQuestions, setWrongQuestions] = useState<any[]>([]);
-    const [answerResults, setAnswerResults] = useState<boolean[]>([]);
+    const [allQuestions, setAllQuestions] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Load wrong answers from localStorage
+        // Load all questions and results from localStorage
         const dailyResultsStr = localStorage.getItem('dailyResults');
         
         if (dailyResultsStr) {
@@ -18,22 +17,35 @@ export default function ReviewPage() {
                 const results = JSON.parse(dailyResultsStr);
                 const wrongAnswers = results.wrongAnswers || [];
                 
-                // Get the answer results (true = correct, false = incorrect)
-                // Assuming you have 5 questions total
-                const totalQuestions = 5;
-                const wrongIndices = wrongAnswers.map((q: any) => q.questionIndex || 0);
-                const allResults = Array.from({ length: totalQuestions }, (_, index) => 
-                    !wrongIndices.includes(index)
-                );
+                // Get all questions from localStorage (you'll need to adjust this based on your data structure)
+                // For now, I'm assuming you have a way to get all questions
+                const allQuestionsStr = localStorage.getItem('dailyQuestions');
                 
-                setAnswerResults(allResults);
-                
-                if (wrongAnswers.length === 0) {
-                    router.push('/finish');
-                    return;
+                if (allQuestionsStr) {
+                    const questions = JSON.parse(allQuestionsStr);
+                    
+                    // Mark each question as correct or wrong
+                    const questionsWithStatus = questions.map((question: any, index: number) => {
+                        const isWrong = wrongAnswers.some((wrongQ: any) => 
+                            wrongQ.questionIndex === index || wrongQ.id === question.id
+                        );
+                        
+                        return {
+                            ...question,
+                            isCorrect: !isWrong,
+                            questionIndex: index
+                        };
+                    });
+                    
+                    setAllQuestions(questionsWithStatus);
+                } else {
+                    // If we don't have all questions, fall back to showing only wrong answers
+                    const questionsWithStatus = wrongAnswers.map((question: any, index: number) => ({
+                        ...question,
+                        isCorrect: false
+                    }));
+                    setAllQuestions(questionsWithStatus);
                 }
-                
-                setWrongQuestions(wrongAnswers);
             } catch (error) {
                 console.error('Error parsing dailyResults:', error);
                 router.push('/finish');
@@ -63,11 +75,11 @@ export default function ReviewPage() {
         );
     }
 
-    if (wrongQuestions.length === 0) {
+    if (allQuestions.length === 0) {
         return (
             <div className={styles.pageWrapper}>
                 <div className={styles.container} dir="rtl">
-                    <p>כל התשובות נכונות! מעביר לסיום...</p>
+                    <p>אין שאלות להצגה...</p>
                 </div>
             </div>
         );
@@ -101,28 +113,30 @@ export default function ReviewPage() {
                         </p>
                     </div>
 
-                    {/* Show all wrong questions */}
-                    {wrongQuestions.map((question, index) => (
-                        <div key={index} className={styles.questionContainer}>
+                    {/* Show all questions with correct/incorrect styling */}
+                    {allQuestions.map((question, index) => (
+                        <div 
+                            key={index} 
+                            className={`${styles.questionContainer} ${question.isCorrect ? styles.correctQuestion : ''}`}
+                        >
+                            <div>
+                                <h3 className={`${styles.tipTitle} ${question.isCorrect ? styles.correctTitle : ''}`}>
+                                    שאלה #{index + 1}
+                                </h3>
+                                <div className={styles.hintText}>
+                                    {question?.tips ?? "אין רמז זמין"}
+                                </div>
+                            </div>
                             <div className={styles.messageCard}>
-                                <div className={styles.messageHeader}>
-                                    <div className={styles.avatarCircle}></div>
+                                <div className={`${styles.messageHeader} ${question.isCorrect ? styles.correctHeader : ''}`}>
                                     <p dir="ltr">
                                         {question?.Owner ?? "+972 528886666"}
                                     </p>
                                 </div>
-                                <div className={styles.messageTimestamp}>היום 9:07</div>
                                 <div className={styles.messageBubbleContainer}>
                                     <div className={styles.messageBubbleText}>
                                         <p>{question?.content}</p>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h3 className={styles.tipTitle}>חידוד {index + 1}</h3>
-                                <div className={styles.hintText}>
-                                    {question?.tips ?? "אין רמז זמין"}
                                 </div>
                             </div>
                         </div>

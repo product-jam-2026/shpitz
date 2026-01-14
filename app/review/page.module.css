@@ -149,9 +149,8 @@
   align-items: center;
   gap: 0.9375rem; /* 15px */
   margin-bottom: 1.875rem; /* 30px */
-  background: rgba(189, 216, 255, 0.6);
-  border-radius: 1.5rem; /* 24px */
-  padding: 0.9375rem; /* 15px */
+  background: rgba(189, 216, 255, 0.822);
+  padding: 2rem 0.9375rem; /* 15px */
   box-sizing: border-box;
 }
 
@@ -184,7 +183,7 @@
   width: 100%;
   padding: 1.25rem 0 0.75rem 0; /* 20px 0 12px 0 */
   gap: 0.5rem; /* 8px */
-  background: #FF8B89;
+  background: var(--Wrong, #FF706E);;
   border-radius: 1.5rem 1.5rem 0 0; /* 24px */
 }
 
@@ -198,7 +197,7 @@
 
 .messageHeader p {
   margin: 0;
-  font-size: 0.75rem; /* 12px */
+  font-size: 1rem; /* 16px - increased from 12px */
   font-weight: bold;
 }
 
@@ -265,13 +264,24 @@
 
 /* Tip title */
 .tipTitle {
-  width: 100%;
+  display: inline-block;
   color: #000;
-  font-family: 'Narkissim', 'Heebo', sans-serif;
+  font-family: 'SimplePro-Regular', 'Narkissim', 'Heebo', sans-serif;
   font-size: 1.25rem; /* 20px */
   font-weight: 700;
   text-align: right;
+  background: var(--Wrong, #FF706E);
   margin: 0 0 0.5rem 0; /* 0 0 8px 0 */
+  padding: 0.25rem 0.5rem; /* Optional: add some padding around the text */
+}
+
+/* Correct answer styling - green */
+.tipTitle.correctTitle {
+  background: #C7EE26; /* Green background for correct answers */
+}
+
+.messageHeader.correctHeader {
+  background: #C7EE26 !important; /* Green background for correct answers */
 }
 
 /* Green container that stretches full width */
@@ -356,10 +366,17 @@
   .questionContainer {
     max-width: 21.875rem; /* 350px */
     margin-bottom: 1.5625rem; /* 25px */
+    padding-top: 1.5rem;
   }
   
   .hintText {
     font-size: 1.0625rem; /* 17px */
+    font-family: 'SimplePro-Regular', 'Narkissim', 'Heebo', sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2rem;
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -406,7 +423,7 @@
   }
   
   .messageHeader p {
-    font-size: 0.6875rem; /* 11px */
+    font-size: 0.9375rem; /* 15px */
   }
   
   .messageBubbleContainer {
@@ -458,6 +475,10 @@
   .avatarCircle {
     width: 2rem; /* 32px */
     height: 2rem; /* 32px */
+  }
+  
+  .messageHeader p {
+    font-size: 0.875rem; /* 14px */
   }
   
   .messageBubbleContainer {
@@ -513,7 +534,7 @@
   }
   
   .messageHeader p {
-    font-size: 0.625rem; /* 10px */
+    font-size: 0.75rem; /* 12px */
   }
   
   .messageTimestamp {
