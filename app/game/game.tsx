@@ -70,7 +70,8 @@ export default function Challenge() {
     if (savedQuestions) {
       try {
         setQuestions(JSON.parse(savedQuestions));
-        setIsMessageMode(savedMode === "messages");
+        // If savedMode is null/undefined, default to messages (true)
+        setIsMessageMode(savedMode !== "photos");
         setLoading(false);
       } catch (err) {
         setError("שגיאה בטעינת השאלות");
