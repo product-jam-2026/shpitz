@@ -63,6 +63,8 @@ export default function Challenge() {
   const [isMessageMode, setIsMessageMode] = useState(true);
 
   useEffect(() => {
+    document.body.style.height = '100vh';
+    document.body.style.overflow = 'hidden';
     const savedQuestions = localStorage.getItem("dailyQuestions");
     const savedMode = localStorage.getItem("dailyQuestionMode");
     if (savedQuestions) {
@@ -195,12 +197,12 @@ setTimeout(() => {
 
   // ✅ start fill EXACTLY when message starts sliding (when step changes)
   setProgressAnimStep(step);
-  setTimeout(() => setProgressAnimStep(null), 1000);
+  setTimeout(() => setProgressAnimStep(null), 2000);
 
   setStep(target);
   setActionsDown(false);
   setIsTransitioning(false);
-}, 260);
+}, 600);
 
   };
 
