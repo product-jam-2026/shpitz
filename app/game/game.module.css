@@ -54,7 +54,7 @@
   display: flex;
   width: 100%;
   gap: 10px;
-  margin: 0 0 24px;
+  margin: 0;
   height: 34px;
 }
 .lottieOverlay {
@@ -668,4 +668,19 @@
   max-height: 500px;
   object-fit: contain;
   display: block;
+}
+.topHeader {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background-color: #3BAFFA; /* הצבע שביקשת */
+  height: 4rem; /* 64px ב-REM */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  flex-shrink: 0;
 }

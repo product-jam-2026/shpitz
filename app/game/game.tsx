@@ -188,22 +188,22 @@ export default function Challenge() {
 
     const target = step + 1;
 
-// keep bar animation
-setIsTransitioning(true);
-setActionsDown(true);
+    // keep bar animation
+    setIsTransitioning(true);
+    setActionsDown(true);
 
-// close the bottom sheet first, then change step (this triggers the slide animation)
-setTimeout(() => {
-  setResult("none");
+    // close the bottom sheet first, then change step (this triggers the slide animation)
+    setTimeout(() => {
+      setResult("none");
 
-  // ✅ start fill EXACTLY when message starts sliding (when step changes)
-  setProgressAnimStep(step);
-  setTimeout(() => setProgressAnimStep(null), 800);
+      // ✅ start fill EXACTLY when message starts sliding (when step changes)
+      setProgressAnimStep(step);
+      setTimeout(() => setProgressAnimStep(null), 800);
 
-  setStep(target);
-  setActionsDown(false);
-  setIsTransitioning(false);
-}, 50);
+      setStep(target);
+      setActionsDown(false);
+      setIsTransitioning(false);
+    }, 50);
 
   };
 
@@ -229,7 +229,9 @@ setTimeout(() => {
             />
           </div>
         )}
-        <div className={styles.scrollableArea}>
+
+        {/* ✅ השינוי: הוספת הבר הכחול העליון מקובע מחוץ לאזור הנגלל */}
+        <div className={styles.topHeader}>
           <div className={styles.progressBar}>
             {[1, 2, 3, 4, 5].map(n => {
               const isCurrent = n === step;
@@ -250,7 +252,9 @@ setTimeout(() => {
               );
             })}
           </div>
+        </div>
 
+        <div className={styles.scrollableArea}>
           <h2 className={styles.questionTitle}>מה דעתכם על ההודעה?</h2>
 
           {/* ✅ REPLACED: message swap animation */}
