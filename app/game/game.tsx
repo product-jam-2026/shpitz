@@ -62,6 +62,8 @@ export default function Challenge() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    document.body.style.height = '100vh';
+    document.body.style.overflow = 'hidden';
     const savedQuestions = localStorage.getItem("dailyQuestions");
     if (savedQuestions) {
       try {

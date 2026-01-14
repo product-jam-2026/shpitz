@@ -221,7 +221,7 @@
   background: white;
   color: #000000;
   font-family: "VC_Haim-Regular";
-  font-weight: 700;
+  font-weight: 300;
   font-size: 1.75rem;
   cursor: pointer;
   display: flex;
@@ -249,7 +249,7 @@
   color: #000000;
   font-family: "VC_Haim-Regular";
   font-size: 2.5rem;
-  font-weight: 500;
+  font-weight: 100;
   letter-spacing: 2px;
 }
 
@@ -401,6 +401,7 @@
   width: 100%;
   max-width: 325px;
   height: 68px;
+  align-self: center;
   flex-shrink: 0;
   border-radius: 0;
   color: #000000;
