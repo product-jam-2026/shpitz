@@ -6,6 +6,22 @@ import ReviewButton from "@/lib/components/ReviewButton";
 import styles from './page.module.css';
 import Image from 'next/image';
 
+type DailyAnswer = {
+  index: number;
+  isCorrect: boolean;
+  tip: string;
+};
+
+function getTodayKey() {
+  return new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+}
+
+function loadDailyAnswers(): DailyAnswer[] {
+  const key = `dailyAnswers_${getTodayKey()}`;
+  const arr: DailyAnswer[] = JSON.parse(localStorage.getItem(key) || "[]");
+  return arr.sort((a, b) => a.index - b.index);
+}
+
 export default function PreReview() {
   const router = useRouter();
   const [score, setScore] = useState(0);
@@ -22,60 +38,14 @@ export default function PreReview() {
     if (savedScore) setScore(parseInt(savedScore));
     if (savedTotal) setTotal(parseInt(savedTotal));
 
-    // Get individual answer results
-    const dailyResultsStr = localStorage.getItem('dailyResults');
-    console.log('📦 dailyResults:', dailyResultsStr);
+    // Use the SAME method as finish page to get answer results
+    const daily = loadDailyAnswers();
+    console.log('📦 Daily answers:', daily);
     
-    if (dailyResultsStr) {
-      try {
-        const results = JSON.parse(dailyResultsStr);
-        console.log('📊 Parsed results:', results);
-        
-        // Try multiple possible data structures
-        let answers: boolean[] = [];
-        
-        // Check if we have a questions array with isCorrect property
-        if (results.questions && Array.isArray(results.questions)) {
-          answers = results.questions.map((q: any) => q.isCorrect === true);
-          console.log('✅ Found answers from questions array:', answers);
-        }
-        // Check if we have correctAnswers array
-        else if (results.correctAnswers && Array.isArray(results.correctAnswers)) {
-          answers = results.correctAnswers;
-          console.log('✅ Found answers from correctAnswers array:', answers);
-        }
-        // Check if we have answers array
-        else if (results.answers && Array.isArray(results.answers)) {
-          answers = results.answers;
-          console.log('✅ Found answers from answers array:', answers);
-        }
-        // Fallback: derive from score
-        else {
-          const correctCount = parseInt(savedScore || '0');
-          const totalCount = parseInt(savedTotal || '5');
-          // Create array: first 'correctCount' are true, rest are false
-          answers = Array.from({ length: totalCount }, (_, i) => i < correctCount);
-          console.log('⚠️ Using fallback based on score:', answers);
-        }
-        
-        setAnswerResults(answers);
-      } catch (error) {
-        console.error('❌ Error parsing dailyResults:', error);
-        // Fallback to score-based array
-        const correctCount = parseInt(savedScore || '0');
-        const totalCount = parseInt(savedTotal || '5');
-        const fallbackAnswers = Array.from({ length: totalCount }, (_, i) => i < correctCount);
-        setAnswerResults(fallbackAnswers);
-      }
-    } else {
-      // No dailyResults, use score-based fallback
-      const correctCount = parseInt(savedScore || '0');
-      const totalCount = parseInt(savedTotal || '5');
-      const fallbackAnswers = Array.from({ length: totalCount }, (_, i) => i < correctCount);
-      console.log('⚠️ No dailyResults, using score-based fallback:', fallbackAnswers);
-      setAnswerResults(fallbackAnswers);
-    }
-
+    const answers = daily.map(a => a.isCorrect);
+    console.log('✅ Mapped answers:', answers);
+    
+    setAnswerResults(answers);
     setLoading(false);
   }, []);
 
@@ -85,10 +55,10 @@ export default function PreReview() {
 
   // Determine if score is good (more than 3 correct answers)
   const isGoodScore = score >= 3;
+  
   useEffect(() => {
-  setShowAnim(isGoodScore); // show only when score is good
-}, [isGoodScore]);
-
+    setShowAnim(isGoodScore); // show only when score is good
+  }, [isGoodScore]);
 
   if (loading) {
     return (
@@ -121,12 +91,11 @@ export default function PreReview() {
                 className={styles.smallIcon}
                 width={24}
                 height={24}
-                
               />
             )}
           
-{/* 
-          {isGoodScore && showAnim && (
+            {/* Uncomment when ready to use animation */}
+            {/* {isGoodScore && showAnim && (
               <video
                 className={styles.animOverlay}
                 autoPlay
@@ -139,10 +108,8 @@ export default function PreReview() {
                 <source src="/animation/preReview/characterAnimation.webm" type="video/webm" />
                 <source src="/animation/preReview/characterAnimation.mp4" type="video/mp4" />
               </video>
-              
             )} */}
           </div>
-          
 
           {/* Text Content - Different based on score */}
           <div className={styles.textContent}>
