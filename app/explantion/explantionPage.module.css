@@ -4,7 +4,7 @@
 .pageWrapper {
   min-height: 100vh;
   width: 100%;
-  background: var(--Background_color, #FFF9EC);
+  background:  #C1E0F3;
   display: flex;
   justify-content: center;
 }
@@ -23,7 +23,7 @@
   
 }
 
-/* מכולת המספרים - השורה כולה */
+
 .progressBar {
     display: flex;
     width: 100%;
@@ -185,7 +185,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(40, 40, 40, 0.80);
+    background-color: rgba(17, 16, 18, 0.90);
     display: flex;
     justify-content: center;
     align-items: flex-start; 
@@ -1079,24 +1079,42 @@ letter-spacing: 0.96px;
 }
 
 .instructionBox {
-  width: 17.5rem; /* 280px */
-  padding: 1.875rem 1.25rem; /* 30px 20px */
+  position: fixed;
+  top: 136px; /* 362px */
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  
+  width: 100%;
+  /* padding: 0 1rem; */
+  margin-bottom: 20px;
 }
+
 
 .instructionTitle {
   color: #C7EE26;
-  font-family: 'SouthFont';
-  font-size: 2.1875rem; /* 35px */
+  text-align: center;
+
+  font-family: VC_Haim-Regular;
+  font-size: 3.75rem; /* 60px */
+  font-style: normal;
   font-weight: 500;
-  margin: 0;
+  line-height: 2.5rem; /* 40px */
+  letter-spacing: 0.1125rem; /* 1.8px */
+
+  margin: 1rem;
 }
+
 
 .instructionBody {
   color: #C7EE26;
   text-align: center;
-  font-family: 'SouthFont';
-  font-size: 1.375rem; /* 22px */
+  font-family: 'SimplePro-Regular';
+  font-size: 1.378rem; /* 22px */
   font-style: normal;
   font-weight: 500;
   line-height: 2.25rem; /* 36px */
@@ -1534,3 +1552,58 @@ letter-spacing: 0.96px;
     transform: translateY(0);
   }
 } 
+/* covers the entire phone screen */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--Blur_background, rgba(17, 16, 18, 0.90));
+}
+
+
+
+
+/* the animated container that holds each step */
+.stepAnimation {
+  position: relative;
+  z-index: 1; /* above the dark layer */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* transparent click layer for step 2 */
+.transparentClickLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+}
+/* === Step 2: spotlight on the message card === */
+.overlayMessageSpotlight {
+  background: transparent !important;
+  padding-top: 0 !important;
+  align-items: flex-start !important;
+}
+
+/* החור נקבע לפי משתנים שנשים מה-JS */
+.overlayMessageSpotlight::after {
+  content: "";
+  position: absolute;
+
+  top: var(--spot-top, 120px);
+  left: var(--spot-left, 50%);
+  width: var(--spot-width, 345px);
+  height: var(--spot-height, 360px);
+
+  transform: translateX(-50%);
+  border-radius: var(--spot-radius, 32px);
+  box-shadow: 0 0 0 9999px rgba(17, 16, 18, 0.9);
+  pointer-events: none;
+}
