@@ -107,9 +107,9 @@ export default function ReviewPage() {
                         </div>
                         <h1 className={styles.mainTitle}>סיכום יומי</h1>
                         <p className={styles.subtitle}>
-                            זה המקום להעמיק ולקרוא איזה
+                            זה הזמן לעצור ולבדוק מה יכולתם
                             <br />
-                            טיפ היה עוזר לזהות שקרים
+                            לזהות כבר במהלך המשחק
                         </p>
                     </div>
 
