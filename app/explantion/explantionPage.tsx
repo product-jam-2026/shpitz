@@ -3,7 +3,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import Lottie from 'lottie-react';
 import confettiData from "@/public/animation/confettiAnimation.json";
-import styles from "./expalntionPage.module.css";
+import styles from "./explantionPage.module.css";
 import Image from 'next/image';
 const explanationSteps = [
     { // שלב 0

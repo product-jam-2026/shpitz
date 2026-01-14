@@ -60,12 +60,15 @@ export default function Challenge() {
   const [questions, setQuestions] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isMessageMode, setIsMessageMode] = useState(true);
 
   useEffect(() => {
     const savedQuestions = localStorage.getItem("dailyQuestions");
+    const savedMode = localStorage.getItem("dailyQuestionMode");
     if (savedQuestions) {
       try {
         setQuestions(JSON.parse(savedQuestions));
+        setIsMessageMode(savedMode === "messages");
         setLoading(false);
       } catch (err) {
         setError("שגיאה בטעינת השאלות");
@@ -260,20 +263,29 @@ setTimeout(() => {
               }}
             >
               <div className={styles.messageCardWrap}>
-  <div className={styles.messageCard}>
-    <div className={styles.messageHeader}>
-      <img src="icons/messageIcon.svg" alt="Message Icon" className={styles.headerIcon} />
-      <p dir="ltr" className={styles.ownerText}>
-        {current.Owner}
-      </p>
-    </div>
-    <div className={styles.messageTimestamp}>היום 9:07</div>
-    <div className={styles.messageBubble}>
-      <p className={styles.messageText}>{current.content}</p>
-    </div>
-  </div>
-</div>
-
+                {isMessageMode ? (
+                  <div className={styles.messageCard}>
+                    <div className={styles.messageHeader}>
+                      <img src="icons/messageIcon.svg" alt="Message Icon" className={styles.headerIcon} />
+                      <p dir="ltr" className={styles.ownerText}>
+                        {current.Owner}
+                      </p>
+                    </div>
+                    <div className={styles.messageTimestamp}>היום 9:07</div>
+                    <div className={styles.messageBubble}>
+                      <p className={styles.messageText}>{current.content}</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className={styles.photoCard}>
+                    <img
+                      src={current.picture}
+                      alt="Question"
+                      className={styles.photoImage}
+                    />
+                  </div>
+                )}
+              </div>
             </CSSTransition>
           </SwitchTransition>
         </div>

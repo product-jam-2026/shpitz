@@ -7,8 +7,13 @@ export default function ReviewPage() {
     const router = useRouter();
     const [allQuestions, setAllQuestions] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [isMessageMode, setIsMessageMode] = useState(true);
 
     useEffect(() => {
+        // Load the mode (messages or photos)
+        const savedMode = localStorage.getItem('dailyQuestionMode');
+        setIsMessageMode(savedMode === 'messages');
+
         // Load all questions and results from localStorage
         const dailyResultsStr = localStorage.getItem('dailyResults');
         
@@ -127,18 +132,28 @@ export default function ReviewPage() {
                                     {question?.tips ?? "אין רמז זמין"}
                                 </div>
                             </div>
-                            <div className={styles.messageCard}>
-                                <div className={`${styles.messageHeader} ${question.isCorrect ? styles.correctHeader : ''}`}>
-                                    <p dir="ltr">
-                                        {question?.Owner ?? "+972 528886666"}
-                                    </p>
-                                </div>
-                                <div className={styles.messageBubbleContainer}>
-                                    <div className={styles.messageBubbleText}>
-                                        <p>{question?.content}</p>
+                            {isMessageMode ? (
+                                <div className={styles.messageCard}>
+                                    <div className={`${styles.messageHeader} ${question.isCorrect ? styles.correctHeader : ''}`}>
+                                        <p dir="ltr">
+                                            {question?.Owner ?? "+972 528886666"}
+                                        </p>
+                                    </div>
+                                    <div className={styles.messageBubbleContainer}>
+                                        <div className={styles.messageBubbleText}>
+                                            <p>{question?.content}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            ) : (
+                                <div className={styles.photoCard}>
+                                    <img
+                                        src={question?.picture}
+                                        alt={`Question ${index + 1}`}
+                                        className={styles.photoImage}
+                                    />
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>

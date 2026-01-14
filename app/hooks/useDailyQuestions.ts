@@ -11,13 +11,28 @@ export type DbMessage = {
   hint: string | null;
 };
 
+export type DbPhoto = {
+  id: number;
+  picture: string;
+  isTrue: boolean;
+  tips: string | null;
+  hint: string | null;
+};
+
+export type DailyQuestion = DbMessage | DbPhoto;
+
+// Helper to check if a question is a photo
+export function isPhotoQuestion(question: DailyQuestion): question is DbPhoto {
+  return 'picture' in question;
+}
+
 // 1. A helper function to generate a number based on today's date string
 // This ensures the "random" shuffle is the same for everyone, all day long.
 function getDailySeed() {
   const date = new Date();
   // Create a string like "2023-10-27"
   const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  
+
   // Convert string to a number hash
   let hash = 0;
   for (let i = 0; i < dateString.length; i++) {
@@ -26,6 +41,17 @@ function getDailySeed() {
     hash = hash & hash; // Convert to 32bit integer
   }
   return Math.abs(hash);
+}
+
+// Helper function to determine if today should show photos or messages
+// Based on the daily seed, returns true for messages, false for photos
+export function shouldShowMessages() {
+  // 🔧 Force messages mode (original behavior)
+  return true; // Set to true for messages, false for photos
+
+  // Uncomment below to enable date-based switching:
+  // const seed = getDailySeed();
+  // return seed % 2 === 0; // Even = messages, Odd = photos
 }
 
 // 2. A seeded random generator (Linear Congruential Generator)
@@ -43,9 +69,10 @@ function seededRandom(seed: number) {
 
 // 3. The Hook itself
 export function useDailyQuestions() {
-  const [questions, setQuestions] = useState<DbMessage[]>([]);
+  const [questions, setQuestions] = useState<DailyQuestion[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isMessageMode, setIsMessageMode] = useState(true);
 
   useEffect(() => {
     const fetchAndShuffle = async () => {
@@ -53,17 +80,36 @@ export function useDailyQuestions() {
         setLoading(true);
         const supabase = createClient();
 
-        // Fetch ALL potential candidates (we filter them in JS to ensure daily rotation works)
-        // If your table is huge, we might need a different strategy, but for <1000 rows this is fine.
-        const { data, error } = await supabase
-          .from("assets")
-          .select("id, content, isTrue, tips, Owner, hint")
-          .eq("topic", "message")
-          .eq("type", "txt");
+        // Determine if today is message day or photo day
+        const showMessages = shouldShowMessages();
+        setIsMessageMode(showMessages);
+
+        let data: any[] | null = null;
+        let error: any = null;
+
+        if (showMessages) {
+          // Fetch text messages from assets table
+          const response = await supabase
+            .from("assets")
+            .select("id, content, isTrue, tips, Owner, hint")
+            .eq("topic", "message")
+            .eq("type", "txt");
+
+          data = response.data;
+          error = response.error;
+        } else {
+          // Fetch photos from pictures table
+          const response = await supabase
+            .from("pictures")
+            .select("id, picture, isTrue, tips, hint");
+
+          data = response.data;
+          error = response.error;
+        }
 
         if (error) throw error;
         if (!data || data.length === 0) {
-            setQuestions([]); 
+            setQuestions([]);
             return;
         }
 
@@ -75,8 +121,8 @@ export function useDailyQuestions() {
         const shuffled = [...data].sort(() => rng() - 0.5);
 
         // Take the first 5
-        setQuestions(shuffled.slice(0, 5) as DbMessage[]);
-        
+        setQuestions(shuffled.slice(0, 5) as DailyQuestion[]);
+
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -87,5 +133,5 @@ export function useDailyQuestions() {
     fetchAndShuffle();
   }, []);
 
-  return { questions, loading, error };
+  return { questions, loading, error, isMessageMode };
 }
