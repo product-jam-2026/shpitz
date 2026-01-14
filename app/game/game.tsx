@@ -198,7 +198,7 @@ setTimeout(() => {
 
   // ✅ start fill EXACTLY when message starts sliding (when step changes)
   setProgressAnimStep(step);
-  setTimeout(() => setProgressAnimStep(null), 2000);
+  setTimeout(() => setProgressAnimStep(null), 800);
 
   setStep(target);
   setActionsDown(false);
@@ -257,7 +257,7 @@ setTimeout(() => {
           <SwitchTransition>
             <CSSTransition
               key={step}
-              timeout={1200}
+              timeout={600}
               classNames={{
                 enter: styles.msgEnter,
                 enterActive: styles.msgEnterActive,
