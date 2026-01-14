@@ -1,7 +1,52 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from "./page.module.css";
+
+// Memoized question component to prevent unnecessary re-renders
+const QuestionItem = memo(({ question, index, isMessageMode }: {
+    question: any;
+    index: number;
+    isMessageMode: boolean;
+}) => (
+    <div
+        className={`${styles.questionContainer} ${question.isCorrect ? styles.correctQuestion : ''}`}
+    >
+        <div>
+            <h3 className={`${styles.tipTitle} ${question.isCorrect ? styles.correctTitle : ''}`}>
+                שאלה #{index + 1}
+            </h3>
+            <div className={styles.hintText}>
+                {question?.tips ?? "אין רמז זמין"}
+            </div>
+        </div>
+        {isMessageMode ? (
+            <div className={styles.messageCard}>
+                <div className={`${styles.messageHeader} ${question.isCorrect ? styles.correctHeader : ''}`}>
+                    <p dir="ltr">
+                        {question?.Owner ?? "+972 528886666"}
+                    </p>
+                </div>
+                <div className={styles.messageBubbleContainer}>
+                    <div className={styles.messageBubbleText}>
+                        <p>{question?.content}</p>
+                    </div>
+                </div>
+            </div>
+        ) : (
+            <div className={styles.photoCard}>
+                <img
+                    src={question?.picture}
+                    alt={`Question ${index + 1}`}
+                    className={styles.photoImage}
+                    loading="lazy"
+                />
+            </div>
+        )}
+    </div>
+));
+
+QuestionItem.displayName = 'QuestionItem';
 
 export default function ReviewPage() {
     const router = useRouter();
@@ -120,53 +165,20 @@ export default function ReviewPage() {
 
                     {/* Show all questions with correct/incorrect styling */}
                     {allQuestions.map((question, index) => (
-                        <div 
-                            key={index} 
-                            className={`${styles.questionContainer} ${question.isCorrect ? styles.correctQuestion : ''}`}
-                        >
-                            <div>
-                                <h3 className={`${styles.tipTitle} ${question.isCorrect ? styles.correctTitle : ''}`}>
-                                    שאלה #{index + 1}
-                                </h3>
-                                <div className={styles.hintText}>
-                                    {question?.tips ?? "אין רמז זמין"}
-                                </div>
-                            </div>
-                            {isMessageMode ? (
-                                <div className={styles.messageCard}>
-                                    <div className={`${styles.messageHeader} ${question.isCorrect ? styles.correctHeader : ''}`}>
-                                        <p dir="ltr">
-                                            {question?.Owner ?? "+972 528886666"}
-                                        </p>
-                                    </div>
-                                    <div className={styles.messageBubbleContainer}>
-                                        <div className={styles.messageBubbleText}>
-                                            <p>{question?.content}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : (
-                                <div className={styles.photoCard}>
-                                    <img
-                                        src={question?.picture}
-                                        alt={`Question ${index + 1}`}
-                                        className={styles.photoImage}
-                                    />
-                                </div>
-                            )}
-                        </div>
+                        <QuestionItem
+                            key={question.id || index}
+                            question={question}
+                            index={index}
+                            isMessageMode={isMessageMode}
+                        />
                     ))}
                 </div>
 
                 <div className={styles.buttonArea}>
                     <div className={styles.buttonContainer}>
-                        <button 
+                        <button
                             className={styles.understoodButton}
                             onClick={handleFinish}
-                            style={{
-                                transform: 'none',
-                                transition: 'opacity 0.1s',
-                            }}
                         >
                             <span className={styles.buttonText}>הבנתי</span>
                         </button>
