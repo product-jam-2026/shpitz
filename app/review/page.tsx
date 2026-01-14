@@ -3,12 +3,56 @@ import { useState, useEffect, memo } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from "./page.module.css";
 
+// Function to parse text and detect URLs
+const parseTextWithLinks = (text: string) => {
+    if (!text) return null;
+
+    // Regex to match URLs (http, https, www)
+    const urlRegex = /(https?:\/\/[^\s]+)|(www\.[^\s]+)/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = urlRegex.exec(text)) !== null) {
+        // Add text before the URL
+        if (match.index > lastIndex) {
+            parts.push({
+                type: 'text',
+                content: text.substring(lastIndex, match.index)
+            });
+        }
+
+        // Add the URL
+        const url = match[0];
+        parts.push({
+            type: 'link',
+            content: url,
+            href: url.startsWith('http') ? url : `https://${url}`
+        });
+
+        lastIndex = match.index + url.length;
+    }
+
+    // Add remaining text
+    if (lastIndex < text.length) {
+        parts.push({
+            type: 'text',
+            content: text.substring(lastIndex)
+        });
+    }
+
+    return parts.length > 0 ? parts : [{ type: 'text', content: text }];
+};
+
 // Memoized question component to prevent unnecessary re-renders
 const QuestionItem = memo(({ question, index, isMessageMode }: {
     question: any;
     index: number;
     isMessageMode: boolean;
-}) => (
+}) => {
+    const contentParts = parseTextWithLinks(question?.content);
+
+    return (
     <div
         className={`${styles.questionContainer} ${question.isCorrect ? styles.correctQuestion : ''}`}
     >
@@ -29,7 +73,22 @@ const QuestionItem = memo(({ question, index, isMessageMode }: {
                 </div>
                 <div className={styles.messageBubbleContainer}>
                     <div className={styles.messageBubbleText}>
-                        <p>{question?.content}</p>
+                        <p>
+                            {contentParts?.map((part, idx) =>
+                                part.type === 'link' ? (
+                                    <a
+                                        key={idx}
+                                        href={part.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {part.content}
+                                    </a>
+                                ) : (
+                                    <span key={idx}>{part.content}</span>
+                                )
+                            )}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -44,7 +103,8 @@ const QuestionItem = memo(({ question, index, isMessageMode }: {
             </div>
         )}
     </div>
-));
+    );
+});
 
 QuestionItem.displayName = 'QuestionItem';
 
