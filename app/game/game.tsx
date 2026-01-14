@@ -282,7 +282,7 @@ setTimeout(() => {
         <div className={`${styles.actions} ${styles.actionsAnimating} ${actionsDown ? styles.actionsDown : ""}`}>
           <div className={styles.toolsRow}>
             <button className={styles.toolButton} onClick={() => setShowHint(true)}>
-              <img src="/icons/sharp.svg" alt="Hint Icon" style={{ width: "35px", height: "35px" }} />
+              <img src="/icons/hintIcon.svg" alt="Hint Icon" style={{ width: "35px", height: "35px" }} />
               <span>רמז</span>
             </button>
             <button className={styles.toolButton} onClick={() => router.push("/explantion?from=game")}>
@@ -307,7 +307,7 @@ setTimeout(() => {
             >
               <div className={styles.hintContent}>
                 <div className={styles.hintIconContainer}>
-                  <img src="/icons/hint.svg" alt="רמז" className={styles.hintIcon} />
+                  <img src="/icons/hintIcon.svg" alt="רמז" className={styles.hintIcon} />
                 </div>
                 <p className={styles.hintText}>{current.hint || "אין רמז זמין לשאלה זו."}</p>
               </div>
@@ -332,7 +332,7 @@ setTimeout(() => {
                 <div className={styles.failContainer}>
                   <span className={styles.resultStatusTitle}>תשובה לא נכונה</span>
                   <div className={styles.tipWrapper}>
-                    <img src="icons/sharpWringAnswerSvg.svg" alt="tip" className={styles.tipIcon} />
+                    <img src="/icons/hintNew.svg" alt="tip" className={styles.tipIcon} />
                     <div className={styles.tipTextStyle}>{tipText}</div>
                   </div>
                 </div>

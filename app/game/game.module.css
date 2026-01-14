@@ -222,11 +222,12 @@
   color: #000000;
   font-family: "VC_Haim-Regular";
   font-weight: 700;
-  font-size: 1.625rem;
+  font-size: 1.75rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.625rem;
 }
 
 /* --- כפתורי הכרעה --- */
