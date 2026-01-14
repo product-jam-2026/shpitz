@@ -523,20 +523,24 @@
 }
 /* הודעה חדשה נכנסת משמאל */
 .msgEnter {
-  transform: translateX(-120%);
+  transform: translateX(-110%);
+  opacity: 0;
 }
 .msgEnterActive {
   transform: translateX(0);
-  transition: transform 2000ms cubic-bezier(0.16, 1, 0.3, 1), opacity 1500ms ease-out;
+  opacity: 1;
+  transition: transform 600ms cubic-bezier(0.175, 0.885, 0.32, 1.1), opacity 300ms ease-out;
 }
 
 /* הודעה קיימת יוצאת ימינה */
 .msgExit {
   transform: translateX(0);
+  opacity: 1;
 }
 .msgExitActive {
-  transform: translateX(120%);
-  transition: transform 2000ms cubic-bezier(0.16, 1, 0.3, 1), opacity 1000ms ease-in;
+  transform: translateX(130%);
+  opacity: 0;
+  transition: transform 600ms cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 400ms ease-in;
 }
 .msgEnter,
 .msgEnterActive,
