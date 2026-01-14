@@ -22,6 +22,20 @@ function loadDailyAnswers(): DailyAnswer[] {
   return arr.sort((a, b) => a.index - b.index);
 }
 
+// Get icon based on score (0-5 correct answers)
+function getIconByScore(score: number) {
+  const icons = {
+    0: '/icons/score/0correct.svg',  // 0 correct
+    1: '/icons/score/1correct.svg',  // 1 correct
+    2: '/icons/score/20correct.svg',  // 2 correct
+    3: '/icons/very_sharp.svg',     // 3 correct - ORIGINAL UNCHANGED
+    4: '/icons/score/4correct.svg',  // 4 correct
+    5: '/icons/score/5correct.svg',  // 5 correct (perfect!)
+  };
+  
+  return icons[score as keyof typeof icons] || icons[0];
+}
+
 export default function PreReview() {
   const router = useRouter();
   const [score, setScore] = useState(0);
@@ -78,24 +92,23 @@ export default function PreReview() {
           <div className={styles.imageContainer}>
             {isGoodScore ? (
               <Image 
-                src="/icons/very_sharp.svg" 
+                src={getIconByScore(score)}
                 alt="Success"
                 fill
-                style={{ objectFit: 'contain' }}
+                className={styles.scoreImage}
                 priority
               />
             ) : (
               <Image 
-                src="/icons/not_the_sharpest.svg"
+                src={getIconByScore(score)}
                 alt="Try again"
-                className={styles.smallIcon}
-                width={24}
-                height={24}
+                fill
+                className={styles.scoreImage}
+                priority
               />
             )}
           
-            {/* Uncomment when ready to use animation */}
-            {/* {isGoodScore && showAnim && (
+            {isGoodScore && showAnim && (
               <video
                 className={styles.animOverlay}
                 autoPlay
@@ -108,7 +121,7 @@ export default function PreReview() {
                 <source src="/animation/preReview/characterAnimation.webm" type="video/webm" />
                 <source src="/animation/preReview/characterAnimation.mp4" type="video/mp4" />
               </video>
-            )} */}
+            )}
           </div>
 
           {/* Text Content - Different based on score */}

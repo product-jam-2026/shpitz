@@ -58,28 +58,17 @@
 
 /* Image Container */
 .imageContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
-  width: 100%;
+  width: 70%;
+  margin-top: 4rem;
   max-width: 21.875rem; /* 350px */
-  height: 21.875rem; /* 350px */
+  aspect-ratio: 1 / 1;
   flex-shrink: 0;
-  
-  
 }
 
-.imageContainer img {
-  width: 100%;
-  height: 100%;
-}
-.imageContainer {
-  position: relative;
-  width: 100%;
-  max-width: 21.875rem; /* 350px */
-  aspect-ratio: 1 / 1;  /* ✅ שומר ריבוע כמו ה-SVG */
-  flex-shrink: 0;
+/* Image styling - replaces inline styles */
+.scoreImage {
+  object-fit: contain;
 }
 
 /* Text Content */
@@ -96,9 +85,10 @@
 .mainText {
  color: #111012;
   text-align: center;
-  font-family: VC_Haim-Regular;
+  font-family: 'VC_Haim-Regular';
   font-size: 2rem; /* 28px */
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: 1.8px;
   line-height: 2;
   margin: 0;
   letter-spacing: 0.03125rem; /* 0.5px */
@@ -143,9 +133,22 @@
 .answerSquare.wrong {
   background: #FF6B6B; /* Red */
 }
+
 .smallIcon {
   width: 1.5rem;   /* 24px */
   height: 1.5rem;
+}
+
+/* Animation overlay */
+.animOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 10;
 }
 
 /* Button wrapper - stays at bottom */
@@ -198,7 +201,6 @@
 
   .imageContainer {
     max-width: 17.5rem; /* 280px */
-    height: 17.5rem; /* 280px */
   }
 
   .mainText {
@@ -228,7 +230,6 @@
 
   .imageContainer {
     max-width: 13.75rem; /* 220px */
-    height: 13.75rem; /* 220px */
   }
 
   .contentWrapper {
@@ -283,4 +284,3 @@
     max-width: 21.875rem; /* 350px */
   }
 }
-

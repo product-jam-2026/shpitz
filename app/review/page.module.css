@@ -144,7 +144,6 @@
   padding-bottom: 1.25rem; /* 20px */
 }
 
-/* Container for each question - light blue rounded container */
 .questionContainer {
   width: 100%;
   max-width: 23.75rem; /* 380px */
@@ -175,7 +174,7 @@
   flex-direction: column;
   align-items: center;
   border-radius: 1.5rem; /* 24px */
-  background: #FFF;
+  background: var(--Boxes, #C1E0F3);
   overflow: hidden;
   position: relative;
 }
@@ -194,7 +193,7 @@
 .avatarCircle {
   width: 2.75rem; /* 44px */
   height: 2.75rem; /* 44px */
-  background: #FFF;
+  background: var(--Boxes, #C1E0F3);
   border-radius: 50%;
   position: relative;
 }
@@ -357,6 +356,7 @@
   .avatarCircleLarge {
     width: 9.375rem; /* 150px */
     height: 9.375rem; /* 150px */
+    background: var(--Boxes, #C1E0F3);
   }
 
   .mainTitle {
@@ -371,6 +371,7 @@
     max-width: 21.875rem; /* 350px */
     margin-bottom: 1.5625rem; /* 25px */
     padding-top: 1.5rem;
+    background: var(--Boxes, #C1E0F3);
   }
   
   .hintText {
@@ -399,6 +400,7 @@
   .avatarCircleLarge {
     width: 8.125rem; /* 130px */
     height: 8.125rem; /* 130px */
+    background: var(--Boxes, #C1E0F3);
   }
 
   .mainTitle {
@@ -414,6 +416,7 @@
     margin-bottom: 1.25rem; /* 20px */
     padding: 0.75rem; /* 12px */
     gap: 0.75rem; /* 12px */
+    background: var(--Boxes, #C1E0F3);
   }
   
   .messageHeader {
@@ -424,6 +427,7 @@
   .avatarCircle {
     width: 2.25rem; /* 36px */
     height: 2.25rem; /* 36px */
+    background: var(--Boxes, #C1E0F3);
   }
   
   .messageHeader p {
@@ -455,6 +459,7 @@
   .avatarCircleLarge {
     width: 6.875rem; /* 110px */
     height: 6.875rem; /* 110px */
+    background: var(--Boxes, #C1E0F3);
   }
 
   .mainTitle {
@@ -470,6 +475,7 @@
     margin-bottom: 0.9375rem; /* 15px */
     padding: 0.625rem; /* 10px */
     gap: 0.625rem; /* 10px */
+    background: var(--Boxes, #C1E0F3);
   }
   
   .messageHeader {
@@ -479,6 +485,7 @@
   .avatarCircle {
     width: 2rem; /* 32px */
     height: 2rem; /* 32px */
+    background: var(--Boxes, #C1E0F3);
   }
   
   .messageHeader p {
@@ -511,6 +518,7 @@
   .avatarCircleLarge {
     width: 5.625rem; /* 90px */
     height: 5.625rem; /* 90px */
+    background: var(--Boxes, #C1E0F3);
   }
 
   .mainTitle {
@@ -526,6 +534,7 @@
     margin-bottom: 0.75rem; /* 12px */
     padding: 0.5rem; /* 8px */
     gap: 0.5rem; /* 8px */
+    background: var(--Boxes, #C1E0F3);
   }
   
   .messageHeader {
@@ -535,6 +544,7 @@
   .avatarCircle {
     width: 1.75rem; /* 28px */
     height: 1.75rem; /* 28px */
+    background: var(--Boxes, #C1E0F3);
   }
   
   .messageHeader p {
