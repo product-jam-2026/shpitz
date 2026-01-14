@@ -527,7 +527,7 @@
 }
 .msgEnterActive {
   transform: translateX(0);
-  transition: transform 2000ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 2000ms cubic-bezier(0.16, 1, 0.3, 1), opacity 1500ms ease-out;
 }
 
 /* הודעה קיימת יוצאת ימינה */
@@ -536,7 +536,7 @@
 }
 .msgExitActive {
   transform: translateX(120%);
-  transition: transform 2000ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 2000ms cubic-bezier(0.16, 1, 0.3, 1), opacity 1000ms ease-in;
 }
 .msgEnter,
 .msgEnterActive,

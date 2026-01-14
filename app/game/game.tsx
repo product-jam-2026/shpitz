@@ -199,7 +199,7 @@ setTimeout(() => {
   setStep(target);
   setActionsDown(false);
   setIsTransitioning(false);
-}, 600);
+}, 50);
 
   };
 
@@ -250,10 +250,10 @@ setTimeout(() => {
           <h2 className={styles.questionTitle}>מה דעתכם על ההודעה?</h2>
 
           {/* ✅ REPLACED: message swap animation */}
-          <SwitchTransition mode="out-in">
+          <SwitchTransition>
             <CSSTransition
               key={step}
-              timeout={350}
+              timeout={1200}
               classNames={{
                 enter: styles.msgEnter,
                 enterActive: styles.msgEnterActive,
