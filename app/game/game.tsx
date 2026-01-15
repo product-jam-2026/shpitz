@@ -61,6 +61,18 @@ export default function Challenge() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isMessageMode, setIsMessageMode] = useState(true);
+  const goToInstructions = () => {
+  const snapshot = {
+    step,
+    answersHistory,
+    correctAnswers,
+    result,
+    isMessageMode,
+  };
+
+  localStorage.setItem("gameSnapshot", JSON.stringify(snapshot));
+  router.push("/explantion?from=game");
+};
 
   useEffect(() => {
     document.body.style.height = '100vh';
@@ -73,7 +85,24 @@ export default function Challenge() {
         // If savedMode is null/undefined, default to messages (true)
         setIsMessageMode(savedMode !== "photos");
         setLoading(false);
-      } catch (err) {
+       const snapStr = localStorage.getItem("gameSnapshot");
+      if (snapStr) {
+        try {
+          const snap = JSON.parse(snapStr);
+
+          if (typeof snap.step === "number") setStep(snap.step);
+          if (snap.answersHistory) setAnswersHistory(snap.answersHistory);
+          if (typeof snap.correctAnswers === "number") setCorrectAnswers(snap.correctAnswers);
+          if (snap.result) setResult(snap.result);
+      }catch (e) {
+          console.error("Failed to restore game snapshot", e);
+        }
+
+        localStorage.removeItem("gameSnapshot");
+      }
+    } 
+      
+      catch (err) {
         setError("שגיאה בטעינת השאלות");
         setLoading(false);
       }
@@ -304,9 +333,9 @@ export default function Challenge() {
               <img src="/icons/hintIcon.svg" alt="Hint Icon" style={{ width: "35px", height: "35px" }} />
               <span>רמז</span>
             </button>
-            <button className={styles.toolButton} onClick={() => router.push("/explantion?from=game")}>
-              ? הוראות
-            </button>
+            <button className={styles.toolButton} onClick={goToInstructions}>
+            ? הוראות
+          </button>
           </div>
           <div className={styles.mainRow}>
             <button className={styles.reportBtn} onClick={() => handleAnswer(true)}>

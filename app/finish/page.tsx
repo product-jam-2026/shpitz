@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import Image from 'next/image';
-
+import Lottie from "lottie-react";
+import introAnim from "@/public/animation/finish/intro.json";
 type DailyAnswer = {
   index: number;
   isCorrect: boolean;
@@ -66,6 +67,9 @@ export default function StreakPage() {
   const [activeDays, setActiveDays] = useState<number[]>([]);
   const [streak, setStreak] = useState(0);
   const [answerResults, setAnswerResults] = useState<boolean[]>([]);
+  const [showIntro, setShowIntro] = useState(true);
+
+  const [fadeIntro, setFadeIntro] = useState(false);  // האם להתחיל fade-out
 
   useEffect(() => {
     const today = new Date();
@@ -79,7 +83,10 @@ export default function StreakPage() {
     if (!activityDates.includes(todayString)) {
       activityDates.push(todayString);
       localStorage.setItem('userActivityDates', JSON.stringify(activityDates));
+
+    
     }
+ 
 
     // Calculate consecutive streak
     let consecutiveStreak = 0;
@@ -121,45 +128,34 @@ export default function StreakPage() {
     message: string;
   };
 
-  function getStickerByStats(streak: number, correctCount: number): StickerShare {
-    if (correctCount === 0) {
-      return {
-        stickerPath:"/Stickers/sticker0_no_answers.png",
-        message: `אני צריך להתאמץ יותר בזיהוי הונאות רשת! הצטרפו אליי ללמוד איך להתחדד!`
-      };
-    }
-    else if (streak >= 1 && streak <= 3) {
+  function getStickerByStats(streak: number): StickerShare {
+    // if (correctCount === 0) {
+    //   return {
+    //     stickerPath:"/Stickers/sticker0_no_answers.png",
+    //     message: `אני צריך להתאמץ יותר בזיהוי הונאות רשת! הצטרפו אליי ללמוד איך להתחדד!`
+    //   };
+    // }
+    if (streak >= 0 && streak <= 3) {
       return {
         stickerPath: "/Stickers/stickerday1_3.png",
         message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
       };
     }
-    if (streak >= 4 && streak <= 5) {
+    if (streak >= 4 && streak <= 7) {
       return {
-        stickerPath: "/Stickers/stickerday3_5.png",
+        stickerPath: "/Stickers/stickerday3_7.png",
         message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
       };
     }
-    if (streak >= 6 && streak <= 7) {
+    if (streak >= 7 && streak <=14 ) {
       return {
-        stickerPath: "/Stickers/stickerday5_7.png",
+        stickerPath: "/Stickers/stickerday7_14.png",
         message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
       };
     }
-    if (streak >= 14 && streak <= 20) {
-      return {
-        stickerPath: "/Stickers/stickerday14_23.png",
-        message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
-      };
-    }
-    if (streak >= 21) {
-      return {
-        stickerPath: "/Stickers/stickerday21_31.png",
-        message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
-      };
-    }
+
     return {
-      stickerPath:  "/Stickers/stickerday21_31.png",
+      stickerPath:  "/Stickers/stickerday7_14.png",
       message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
     };
   }
@@ -171,7 +167,7 @@ export default function StreakPage() {
     const squares = buildSquares(daily, total);
     const dailyTip = getDailyTip(daily) || "בדקו האם יש אזורים מרוחים על הפנים של הדמויות.";
 
-    const { stickerPath, message: streakMessage } = getStickerByStats(streak, correctCount);
+    const { stickerPath, message: streakMessage } = getStickerByStats(streak);
     const shareText = `${streakMessage}\n\n${buildShareSummary({
       correctCount,
       total,
@@ -226,9 +222,23 @@ export default function StreakPage() {
 
   const today = new Date().getDay();
 
-  return (
-    <div className={styles.pageWrapper}>
-      {/* Back arrow button */}
+          return (
+            <div className={styles.pageWrapper}>
+              {/* Back arrow button */}
+              {showIntro && (
+          <div className={`${styles.introOverlay} ${fadeIntro ? styles.introFadeOut : ""}`}>
+            <Lottie
+      animationData={introAnim}
+      loop={false}
+      onComplete={() => {
+        setFadeIntro(true);                 // מתחיל fade-out
+        setTimeout(() => setShowIntro(false), 500); // אחרי 500ms מוריד מה-DOM
+      }}
+      className={styles.introLottie}
+    />
+          </div>
+        )}
+
       <button className={styles.backButton} onClick={handleBack}>
         <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41" fill="none">
           <path d="M27.4258 18.6515L17.9309 9.1566L20.347 6.78288L33.9111 20.347L20.347 33.9111L17.9309 31.5374L27.4258 22.0425L6.78288 22.0425L6.78288 18.6515L27.4258 18.6515Z" fill="#1C1D1E"/>
@@ -251,17 +261,7 @@ export default function StreakPage() {
               className={styles.characterImage}
             />
           </div>
-          {/* Colored squares */}
-          {answerResults.length > 0 && (
-            <div className={styles.answersIndicator}>
-              {answerResults.map((isCorrect, index) => (
-                <div 
-                  key={index} 
-                  className={`${styles.answerSquare} ${isCorrect ? styles.correct : styles.wrong}`}
-                />
-              ))}
-            </div>
-          )}
+
 
           {/* Share button */}
           <button className={styles.shareButton} onClick={handleShare}>
@@ -339,9 +339,29 @@ export default function StreakPage() {
           
           {/* Labels outside container */}
           <div className={styles.badgeLabelsContainer}>
-            <span className={styles.badgeLabel}>3 ימים</span>
-            <span className={styles.badgeLabel}>9 ימים</span>
-            <span className={styles.badgeLabel}>13 ימים</span>
+             <span
+              className={`${styles.badgeLabel} ${
+                getBadgeStatus(3) ? styles.badgeLabelActive : styles.badgeLabelInactive
+              }`}
+            >
+              3 ימים
+            </span>
+             <span
+              className={`${styles.badgeLabel} ${
+                getBadgeStatus(9) ? styles.badgeLabelActive : styles.badgeLabelInactive
+              }`}
+            >
+              9 ימים
+            </span>
+             <span
+              className={`${styles.badgeLabel} ${
+                getBadgeStatus(13) ? styles.badgeLabelActive : styles.badgeLabelInactive
+              }`}
+            >
+              13 ימים
+            </span>
+
+          
           </div>
         </div>
         {/* Button Section*/}

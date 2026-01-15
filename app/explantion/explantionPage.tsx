@@ -62,7 +62,7 @@ export default function ChallengeBase() {
     const [currentStep, setCurrentStep] = useState(0);
     
     const [isFinished, setIsFinished] = useState(false);
-
+    
     const handleNextStep = () => {
         if (currentStep < explanationSteps.length - 1) {
             setCurrentStep(currentStep + 1);

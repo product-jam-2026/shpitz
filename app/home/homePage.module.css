@@ -74,9 +74,9 @@
 
 .daysContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-betwee;
   align-items: center;
-  gap: 0.875  rem; /* המרווח בין יום ליום */
+  gap: 0.3rem; 
   width: 100%;
 }
 
@@ -84,13 +84,13 @@
   display: flex;
   flex-direction: column; /* גורם לאות להיות מתחת לכוכב */
   align-items: center;    /* ממרכז את האות בדיוק מתחת לכוכב */
-  gap: 0.25rem;           /* המרווח האנכי בין הכוכב לאות */
+  gap: 0.25rem;           
   min-width: 2.5rem;      /* עוזר לשמור על רווח שווה */
 }
 .dayLetter {
   color: #111012;
   font-family: 'SimplePro-Regular';
-  font-size: 1.135rem;
+  font-size: 1rem;
   font-weight: 500;
   text-align: center;     /* מוודא שהטקסט ממורכז בתוך עצמו */
   margin: 0;              /* מאפס מרווחים שעלולים להסיט את האות */

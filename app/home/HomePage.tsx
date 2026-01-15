@@ -8,7 +8,7 @@ import Image from "next/image";
 export default function HomePage(){
   const router = useRouter();
 
-  const [activeDays, setActiveDays] = useState<number[]>([]);
+  const [activeDays, setActiveDays] = useState<string[]>([]);
   const [streak, setStreak] = useState(0);
   const [isFirstVisit, setIsFirstVisit] = useState<boolean | null>(null);
   const [hasCompletedToday, setHasCompletedToday] = useState(false);
@@ -57,16 +57,17 @@ export default function HomePage(){
     localStorage.setItem("userStreak", consecutiveStreak.toString());
 
     // ✅ active days for current week (only up to today)
-    const currentWeekActiveDays: number[] = [];
+    const currentWeekActiveDays: string[] = [];
     for (let i = 0; i <= todayDayOfWeek; i++) {
       const d = new Date(today);
       d.setDate(today.getDate() - (todayDayOfWeek - i));
-      const dStr = d.toISOString().split("T")[0];
+      const dStr = d.toISOString().split("T")[0]; // YYYY-MM-DD
       if (activityDates.includes(dStr)) {
-        currentWeekActiveDays.push(i);
+        currentWeekActiveDays.push(dStr);
       }
     }
     setActiveDays(currentWeekActiveDays);
+
   }, []);
 
   const handleStart = () => {
@@ -93,19 +94,32 @@ function MobileContent({
   streak,
   onStart,
 }: {
-  activeDays: number[];
+  activeDays: string[];
   streak: number;
   onStart: () => void;
 }) {
-  const daysOfWeek = [
-    { label: "א", value: 0 },
-    { label: "ב", value: 1 },
-    { label: "ג", value: 2 },
-    { label: "ד", value: 3 },
-    { label: "ה", value: 4 },
-    { label: "ו", value: 5 },
-    { label: "ש", value: 6 },
-  ];
+function formatDDMM(date: Date) {
+  const dd = String(date.getDate()).padStart(2, "0");
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  return `${dd}.${mm}`;
+}
+
+function toISODate(date: Date) {
+  return date.toISOString().split("T")[0]; // YYYY-MM-DD
+}
+
+const today = new Date();
+const todayDayOfWeek = today.getDay();
+
+const weekDays = Array.from({ length: 7 }, (_, i) => {
+  const d = new Date(today);
+  d.setDate(today.getDate() - (todayDayOfWeek - i)); // מתחילת השבוע עד היום/שבת
+  return {
+    iso: toISODate(d),
+    label: formatDDMM(d), // DD-MM
+  };
+});
+
 
   return (
     <div className={styles.screen} dir="rtl">
@@ -129,9 +143,15 @@ function MobileContent({
           </p>
 
           <div className={styles.daysContainer}>
-            {daysOfWeek.map((day) => (
-              <DayIndicator key={day.value} letter={day.label} filled={activeDays.includes(day.value)} />
-            ))}
+          {weekDays.map((day) => (
+            <DayIndicator
+              key={day.iso}
+              label={day.label}
+              filled={activeDays.includes(day.iso)}
+            />
+          ))}
+
+
           </div>
         </div>
 
@@ -146,7 +166,7 @@ function MobileContent({
   );
 }
 
-function DayIndicator({ letter, filled }: { letter: string; filled: boolean }) {
+function DayIndicator({ label, filled }: { label: string; filled: boolean }) {
   return (
     <div className={styles.dayItem} >
       <div className={styles.iconWrapper}>
@@ -157,7 +177,7 @@ function DayIndicator({ letter, filled }: { letter: string; filled: boolean }) {
           height={28} 
         />
       </div>
-      <span className={styles.dayLetter}>{letter}</span>
+      <span className={styles.dayLetter}>{label}</span>
     </div>
   );
 }

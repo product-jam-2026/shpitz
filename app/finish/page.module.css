@@ -318,6 +318,41 @@
   width: 5.625rem; /* Same width as badge images */
   text-align: center;
 }
+.badgeLabelActive {
+  color: #111012; /* כהה / פעיל */
+}
+
+.badgeLabelInactive {
+  color: #BFBFBF; /* אפור / לא פעיל */
+}
+.introOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+   background-color: #3BAFFA;
+  background-image: url('/background/homeNoise.svg');
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.introLottie {
+  width: 100vw;
+  height: 100vh;
+
+}
+
+.introFadeOut {
+  opacity: 0;
+  pointer-events: none;
+}
+/* אופציונלי: לנעול גלילה/לחיצות בזמן אינטרו */
+.locked {
+  height: 100vh;
+  overflow: hidden;
+}
 
 /* Bottom section */
 .bottomSection {
