@@ -255,7 +255,7 @@ export default function Challenge() {
         </div>
 
         <div className={styles.scrollableArea}>
-          <h2 className={styles.questionTitle}>מה דעתכם על ההודעה?</h2>
+          <h2 className={styles.questionTitle}>מה דעתכם?</h2>
 
           {/* ✅ REPLACED: message swap animation */}
           <SwitchTransition>

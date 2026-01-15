@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import ReviewButton from "@/lib/components/ReviewButton";
-import styles from './page.module.css';
-import Image from 'next/image';
+import styles from "./page.module.css";
+import Lottie, { LottieRefCurrentProps } from "lottie-react";
+
+import lottie3 from "@/public/animation/preReview/score3.json";
 
 type DailyAnswer = {
   index: number;
@@ -22,18 +24,45 @@ function loadDailyAnswers(): DailyAnswer[] {
   return arr.sort((a, b) => a.index - b.index);
 }
 
-// Get icon based on score (0-5 correct answers)
-function getIconByScore(score: number) {
-  const icons = {
-    0: '/icons/score/0correct.svg',  // 0 correct
-    1: '/icons/score/1correct.svg',  // 1 correct
-    2: '/icons/score/20correct.svg',  // 2 correct
-    3: '/icons/very_sharp.svg',     // 3 correct - ORIGINAL UNCHANGED
-    4: '/icons/score/4correct.svg',  // 4 correct
-    5: '/icons/score/5correct.svg',  // 5 correct (perfect!)
-  };
-  
-  return icons[score as keyof typeof icons] || icons[0];
+type ScoreAssets = {
+  lottieData: object;
+};
+
+// כרגע יש לך רק score=3. אם תוסיפי עוד קבצים, פשוט תרחיבי את המפה.
+const SCORE_ASSETS: Record<number, ScoreAssets> = {
+  3: { lottieData: lottie3 },
+};
+
+// fallback בטוח: אם אין התאמה לציון, נשתמש בלוטי של 3 (או הראשון שיש)
+function getAssetsByScore(score: number): ScoreAssets {
+  return SCORE_ASSETS[score] ?? SCORE_ASSETS[3];
+}
+
+function LottieFreeze({ score, alt }: { score: number; alt: string }) {
+  const { lottieData } = useMemo(() => getAssetsByScore(score), [score]);
+  const lottieRef = useRef<LottieRefCurrentProps | null>(null);
+
+  useEffect(() => {
+    // מתחיל מחדש כש-score משתנה
+    lottieRef.current?.goToAndPlay(0, true);
+  }, [score]);
+
+  return (
+    <div className={styles.imageContainer} aria-label={alt}>
+      <Lottie
+        lottieRef={lottieRef}
+        animationData={lottieData}
+        loop={false}
+        autoplay
+        onComplete={() => {
+          // Freeze אמיתי על הפריים האחרון
+          const frames = lottieRef.current?.getDuration(true); // frames count
+          if (!frames) return;
+          lottieRef.current?.goToAndStop(frames - 1, true);
+        }}
+      />
+    </div>
+  );
 }
 
 export default function PreReview() {
@@ -42,37 +71,25 @@ export default function PreReview() {
   const [total, setTotal] = useState(5);
   const [answerResults, setAnswerResults] = useState<boolean[]>([]);
   const [loading, setLoading] = useState(true);
-  const [showAnim, setShowAnim] = useState(true);
 
   useEffect(() => {
-    // Get score from localStorage
-    const savedScore = localStorage.getItem('gameScore');
-    const savedTotal = localStorage.getItem('totalQuestions');
-    
-    if (savedScore) setScore(parseInt(savedScore));
-    if (savedTotal) setTotal(parseInt(savedTotal));
+    const savedScore = localStorage.getItem("gameScore");
+    const savedTotal = localStorage.getItem("totalQuestions");
 
-    // Use the SAME method as finish page to get answer results
+    if (savedScore) setScore(parseInt(savedScore, 10));
+    if (savedTotal) setTotal(parseInt(savedTotal, 10));
+
     const daily = loadDailyAnswers();
-    console.log('📦 Daily answers:', daily);
-    
-    const answers = daily.map(a => a.isCorrect);
-    console.log('✅ Mapped answers:', answers);
-    
-    setAnswerResults(answers);
+    setAnswerResults(daily.map((a) => a.isCorrect));
+
     setLoading(false);
   }, []);
 
   const handleNext = () => {
-    router.push('./review');
+    router.push("./review");
   };
 
-  // Determine if score is good (more than 3 correct answers)
   const isGoodScore = score >= 3;
-  
-  useEffect(() => {
-    setShowAnim(isGoodScore); // show only when score is good
-  }, [isGoodScore]);
 
   if (loading) {
     return (
@@ -82,77 +99,40 @@ export default function PreReview() {
     );
   }
 
-  console.log('🎨 Rendering with answerResults:', answerResults);
-  
   return (
     <div className={styles.screen} dir="rtl">
       <div className={styles.container}>
         <div className={styles.contentWrapper}>
-          {/* SVG Image - Different based on score */}
-          <div className={styles.imageContainer}>
-            {isGoodScore ? (
-              <Image 
-                src={getIconByScore(score)}
-                alt="Success"
-                fill
-                className={styles.scoreImage}
-                priority
-              />
-            ) : (
-              <Image 
-                src={getIconByScore(score)}
-                alt="Try again"
-                fill
-                className={styles.scoreImage}
-                priority
-              />
-            )}
-          
-            {isGoodScore && showAnim && (
-              <video
-                className={styles.animOverlay}
-                autoPlay
-                muted
-                playsInline
-                preload="auto"
-                onEnded={() => setShowAnim(false)}
-                onError={(e) => console.log("VIDEO ERROR:", e)}
-              >
-                <source src="/animation/preReview/characterAnimation.webm" type="video/webm" />
-                <source src="/animation/preReview/characterAnimation.mp4" type="video/mp4" />
-              </video>
-            )}
-          </div>
+          {/* ✅ Lottie only, freezes on last frame */}
+          <LottieFreeze score={score} alt={isGoodScore ? "Success" : "Try again"} />
 
-          {/* Text Content - Different based on score */}
+          {/* Text Content */}
           <div className={styles.textContent}>
             {isGoodScore ? (
               <>
-                {/* <p className={styles.mainText}>
-                  חד בהגזמה!
-                </p> */}
+                <p className={styles.mainText}>חד בהגזמה!</p>
                 <p className={styles.scoreText}>
                   ענית נכון על {score}/{total} שאלות
                 </p>
               </>
             ) : (
               <>
-                <p className={styles.mainText}>
-                  לא נורא, פעם הבאה תבוא מחודד יותר!
-                </p>
+                <p className={styles.mainText}>לא נורא, פעם הבאה תבוא מחודד יותר!</p>
                 <p className={styles.scoreText}>
                   ענית נכון על {score}/{total} שאלות
                 </p>
               </>
             )}
 
-            {/* Colored squares showing correct/wrong answers */}
+            {/* Colored squares */}
             {answerResults.length > 0 && (
               <div className={styles.answersIndicator}>
                 {answerResults.map((isCorrect, index) => (
-                  <div 
-                    key={index} 
-                    className={`${styles.answerSquare} ${isCorrect ? styles.correct : styles.wrong}`}
+                  <div
+                    key={index}
+                    className={`${styles.answerSquare} ${
+                      isCorrect ? styles.correct : styles.wrong
+                    }`}
                   />
                 ))}
               </div>
@@ -160,7 +140,7 @@ export default function PreReview() {
           </div>
         </div>
 
-        {/* Button - Fixed at bottom */}
+        {/* Button */}
         <div className={styles.buttonWrapper}>
           <ReviewButton onClick={handleNext} />
         </div>

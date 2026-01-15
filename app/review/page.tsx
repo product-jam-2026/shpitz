@@ -1,52 +1,48 @@
 "use client";
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from "./page.module.css";
 
-// Memoized question component to prevent unnecessary re-renders
-const QuestionItem = memo(({ question, index, isMessageMode }: {
-    question: any;
-    index: number;
-    isMessageMode: boolean;
-}) => (
-    <div
-        className={`${styles.questionContainer} ${question.isCorrect ? styles.correctQuestion : ''}`}
-    >
-        <div>
-            <h3 className={`${styles.tipTitle} ${question.isCorrect ? styles.correctTitle : ''}`}>
-                שאלה #{index + 1}
-            </h3>
-            <div className={styles.hintText}>
-                {question?.tips ?? "אין רמז זמין"}
-            </div>
-        </div>
-        {isMessageMode ? (
-            <div className={styles.messageCard}>
-                <div className={`${styles.messageHeader} ${question.isCorrect ? styles.correctHeader : ''}`}>
-                    <p dir="ltr">
-                        {question?.Owner ?? "+972 528886666"}
-                    </p>
-                </div>
-                <div className={styles.messageBubbleContainer}>
-                    <div className={styles.messageBubbleText}>
-                        <p>{question?.content}</p>
-                    </div>
-                </div>
-            </div>
-        ) : (
-            <div className={styles.photoCard}>
-                <img
-                    src={question?.picture}
-                    alt={`Question ${index + 1}`}
-                    className={styles.photoImage}
-                    loading="lazy"
-                />
-            </div>
-        )}
-    </div>
-));
+// Function to parse text and detect URLs
+const parseTextWithLinks = (text: string) => {
+    if (!text) return null;
 
-QuestionItem.displayName = 'QuestionItem';
+    // Regex to match URLs (http, https, www)
+    const urlRegex = /(https?:\/\/[^\s]+)|(www\.[^\s]+)/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = urlRegex.exec(text)) !== null) {
+        // Add text before the URL
+        if (match.index > lastIndex) {
+            parts.push({
+                type: 'text',
+                content: text.substring(lastIndex, match.index)
+            });
+        }
+
+        // Add the URL
+        const url = match[0];
+        parts.push({
+            type: 'link',
+            content: url,
+            href: url.startsWith('http') ? url : `https://${url}`
+        });
+
+        lastIndex = match.index + url.length;
+    }
+
+    // Add remaining text
+    if (lastIndex < text.length) {
+        parts.push({
+            type: 'text',
+            content: text.substring(lastIndex)
+        });
+    }
+
+    return parts.length > 0 ? parts : [{ type: 'text', content: text }];
+};
 
 export default function ReviewPage() {
     const router = useRouter();
@@ -55,46 +51,68 @@ export default function ReviewPage() {
     const [isMessageMode, setIsMessageMode] = useState(true);
 
     useEffect(() => {
+        // Reset body styles that were set by the game page
+        document.body.style.height = '';
+        document.body.style.overflow = '';
+
+        // Remove any active focus that might show a cursor
+        if (document.activeElement instanceof HTMLElement) {
+            document.activeElement.blur();
+        }
+
         // Load the mode (messages or photos)
         const savedMode = localStorage.getItem('dailyQuestionMode');
-        setIsMessageMode(savedMode === 'messages');
+        // Default to messages if not set, otherwise check if it's NOT 'photos'
+        setIsMessageMode(savedMode !== 'photos');
 
         // Load all questions and results from localStorage
         const dailyResultsStr = localStorage.getItem('dailyResults');
-        
+
         if (dailyResultsStr) {
             try {
                 const results = JSON.parse(dailyResultsStr);
                 const wrongAnswers = results.wrongAnswers || [];
-                
-                // Get all questions from localStorage (you'll need to adjust this based on your data structure)
-                // For now, I'm assuming you have a way to get all questions
+                const answersHistory = results.answersHistory || [];
+
+                // Get all questions from localStorage
                 const allQuestionsStr = localStorage.getItem('dailyQuestions');
-                
+
                 if (allQuestionsStr) {
                     const questions = JSON.parse(allQuestionsStr);
-                    
+
                     // Mark each question as correct or wrong
                     const questionsWithStatus = questions.map((question: any, index: number) => {
-                        const isWrong = wrongAnswers.some((wrongQ: any) => 
+                        const isWrong = wrongAnswers.some((wrongQ: any) =>
                             wrongQ.questionIndex === index || wrongQ.id === question.id
                         );
-                        
+
                         return {
                             ...question,
                             isCorrect: !isWrong,
                             questionIndex: index
                         };
                     });
-                    
+
                     setAllQuestions(questionsWithStatus);
-                } else {
-                    // If we don't have all questions, fall back to showing only wrong answers
-                    const questionsWithStatus = wrongAnswers.map((question: any, index: number) => ({
-                        ...question,
-                        isCorrect: false
+                } else if (answersHistory.length > 0) {
+                    // If we don't have dailyQuestions but have answersHistory, use that
+                    const questionsWithStatus = answersHistory.map((answer: any, index: number) => ({
+                        ...answer.questionData,
+                        isCorrect: answer.isCorrect,
+                        questionIndex: index
                     }));
                     setAllQuestions(questionsWithStatus);
+                } else if (wrongAnswers.length > 0) {
+                    // Last fallback: show only wrong answers
+                    const questionsWithStatus = wrongAnswers.map((question: any, index: number) => ({
+                        ...question,
+                        isCorrect: false,
+                        questionIndex: index
+                    }));
+                    setAllQuestions(questionsWithStatus);
+                } else {
+                    // No data available at all
+                    console.warn('No question data found in dailyResults');
                 }
             } catch (error) {
                 console.error('Error parsing dailyResults:', error);
@@ -103,7 +121,7 @@ export default function ReviewPage() {
         } else {
             router.push('/finish');
         }
-        
+
         setLoading(false);
     }, [router]);
 
@@ -164,14 +182,63 @@ export default function ReviewPage() {
                     </div>
 
                     {/* Show all questions with correct/incorrect styling */}
-                    {allQuestions.map((question, index) => (
-                        <QuestionItem
-                            key={question.id || index}
-                            question={question}
-                            index={index}
-                            isMessageMode={isMessageMode}
-                        />
-                    ))}
+                    {allQuestions.map((question, index) => {
+                        const contentParts = parseTextWithLinks(question?.content);
+
+                        return (
+                            <div
+                                key={question.id || index}
+                                className={`${styles.questionContainer} ${question.isCorrect ? styles.correctQuestion : ''}`}
+                            >
+                                <div>
+                                    <h3 className={`${styles.tipTitle} ${question.isCorrect ? styles.correctTitle : ''}`}>
+                                        שאלה #{index + 1}
+                                    </h3>
+                                    <div className={styles.hintText}>
+                                        {question?.tips ?? "אין רמז זמין"}
+                                    </div>
+                                </div>
+                                {isMessageMode ? (
+                                    <div className={styles.messageCard}>
+                                        <div className={`${styles.messageHeader} ${question.isCorrect ? styles.correctHeader : ''}`}>
+                                            <p dir="ltr">
+                                                {question?.Owner ?? "+972 528886666"}
+                                            </p>
+                                        </div>
+                                        <div className={styles.messageBubbleContainer}>
+                                            <div className={styles.messageBubbleText}>
+                                                <p>
+                                                    {contentParts?.map((part, idx) =>
+                                                        part.type === 'link' ? (
+                                                            <a
+                                                                key={idx}
+                                                                href={part.href}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                            >
+                                                                {part.content}
+                                                            </a>
+                                                        ) : (
+                                                            <span key={idx}>{part.content}</span>
+                                                        )
+                                                    )}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className={styles.photoCard}>
+                                        <img
+                                            src={question?.picture}
+                                            alt={`Question ${index + 1}`}
+                                            className={styles.photoImage}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
                 </div>
 
                 <div className={styles.buttonArea}>

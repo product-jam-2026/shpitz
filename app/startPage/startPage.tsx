@@ -37,9 +37,9 @@ export default function StartPage() {
            איך משחקים<span className={styles.qMark}>?</span>
     </h2>
           <p className={styles.description}>
-           תוצג לפניכם הודעת טקסט, לחצו
+           יוצגו לפניכם הודעת טקסט או תמונה
             <br />
-           האם היא אמיתית או הונאה
+           לחצו האם הן אמיתיות או הונאה
           </p>
         </div>
 
