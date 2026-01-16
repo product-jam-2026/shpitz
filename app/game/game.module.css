@@ -686,3 +686,292 @@
   z-index: 10;
   flex-shrink: 0;
 }
+
+/* Tutorial Overlay Styles */
+.tutorialOverlay {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  z-index: 99999;
+  cursor: pointer;
+}
+
+.tutorialDarkBackground {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 99999;
+  pointer-events: none;
+}
+
+.tutorialCloseBtn {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  width: 35px;
+  height: 35px;
+  background: transparent;
+  border: none;
+  color: #C7EE26;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100002;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.tutorialCloseBtn:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
+}
+
+.tutorialCloseBtn:active {
+  transform: scale(0.95);
+}
+
+.tutorialHighlight {
+  position: absolute;
+  pointer-events: none;
+  border: none;
+  border-radius: 0;
+  /* Create a "cut-out" effect - darken everything EXCEPT the highlighted area */
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
+  z-index: 100000;
+  transition: all 0.4s ease;
+  /* Make the highlighted area itself fully visible */
+  background: transparent;
+}
+
+/* Secondary highlight - used when we have multiple spotlights */
+.tutorialHighlightSecondary {
+  position: absolute;
+  pointer-events: none;
+  border: none;
+  border-radius: 0;
+  /* No box-shadow - we'll clip it from the main highlight's shadow */
+  box-shadow: none;
+  z-index: 100000;
+  transition: all 0.4s ease;
+  background: transparent;
+}
+
+.tutorialHighlightSecondary[data-highlight="realButton"] {
+  bottom: 1.25rem;
+  left: calc(1.25rem + 12px);
+  width: calc(50% - 1.25rem - 12px - 6px);
+  height: 4.6875rem;
+}
+
+/* Gap darkener - darkens the space between the two buttons */
+.tutorialGapDarkener {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 4.6875rem;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 100001;
+  pointer-events: none;
+}
+
+/* Raise elements above tutorial shadow when needed */
+.tutorialRaised {
+  position: relative;
+  z-index: 100001 !important;
+}
+
+/* Position highlights for each element */
+.tutorialHighlight[data-highlight="progressBar"] {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+}
+
+.tutorialHighlight[data-highlight="messageCard"] {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 320px;
+  height: 300px;
+}
+
+.tutorialHighlight[data-highlight="hintButton"],
+.tutorialHighlight[data-highlight="instructionsButton"] {
+  bottom: calc(1.25rem + 4.6875rem + 0.875rem);
+  width: calc(50% - 1.25rem - 12px - 7px);
+  height: 51px;
+}
+
+.tutorialHighlight[data-highlight="hintButton"] {
+  left: calc(1.25rem + 12px);
+}
+
+.tutorialHighlight[data-highlight="instructionsButton"] {
+  right: calc(1.25rem + 12px);
+}
+
+.tutorialHighlight[data-highlight="realButton"],
+.tutorialHighlight[data-highlight="scamButton"] {
+  bottom: 1.25rem;
+  width: calc(50% - 1.25rem - 12px - 6px);
+  height: 4.6875rem;
+}
+
+.tutorialHighlight[data-highlight="realButton"] {
+  left: calc(1.25rem + 12px);
+}
+
+.tutorialHighlight[data-highlight="scamButton"] {
+  right: calc(1.25rem + 12px);
+}
+
+.tutorialHighlight[data-highlight="bottomButtons"] {
+  bottom: 1.25rem;
+  left: calc(1.25rem + 12px);
+  right: calc(1.25rem + 12px);
+  height: 4.6875rem;
+}
+
+/* Tutorial Text */
+.tutorialText {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  color: #C7EE26;
+  padding: 20px 15px;
+  border-radius: 16px;
+  font-family: "SimplerPro-Bold", 'Heebo', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  max-width: 95%;
+  width: 95%;
+  z-index: 100001;
+  line-height: 1.5;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  animation: tutorialPulse 0.5s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Tutorial Progress Indicator */
+.tutorialProgress {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.tutorialProgressBox {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #C7EE26;
+  background: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.tutorialProgressActive {
+  background: #C7EE26;
+}
+
+/* Tutorial Icon */
+.tutorialIconContainer {
+  width: 11rem;
+  height: 11rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.tutorialIcon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@keyframes tutorialPulse {
+  0% {
+    transform: translateX(-50%) scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tutorialPulseMiddle {
+  0% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.tutorialTextBottom {
+  top: 80px;
+}
+
+.tutorialTextTop {
+  bottom: 250px;
+}
+
+.tutorialTextMiddle {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  bottom: auto !important;
+  right: auto !important;
+  transform: translate(-50%, -50%) !important;
+  animation: tutorialPulseMiddle 0.5s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 20px 15px;
+  max-height: 90vh;
+  overflow: visible;
+}
+
+/* Specific positioning for each step */
+.tutorialText[data-position="progressBar"] {
+  top: 80px;
+}
+
+.tutorialText[data-position="messageCard"] {
+  bottom: 250px;
+}
+
+.tutorialText[data-position="hintButton"],
+.tutorialText[data-position="instructionsButton"],
+.tutorialText[data-position="realButton"],
+.tutorialText[data-position="scamButton"],
+.tutorialText[data-position="bottomButtons"] {
+  bottom: 260px;
+}
+
+/* Override for middle positioned items with none target */
+.tutorialTextMiddle[data-position="none"] {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  bottom: auto !important;
+  right: auto !important;
+  transform: translate(-50%, -50%) !important;
+}

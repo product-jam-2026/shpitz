@@ -61,6 +61,87 @@ export default function Challenge() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isMessageMode, setIsMessageMode] = useState(true);
+
+  // Tutorial state
+  const [tutorialActive, setTutorialActive] = useState(false);
+  const [tutorialStep, setTutorialStep] = useState(0);
+
+  // Tutorial steps configuration - changes based on message/photo mode
+  const tutorialSteps = [
+    {
+      target: "none",
+      text: "לחצו על המסך בצד ימין ושמאל כדי לעבור בין שלבי ההוראות ",
+      position: "middle"
+    },
+    {
+      target: "progressBar",
+      text: "כאן תוכלו לראות את ההתקדמות שלכם במשחק - 5 שאלות בסך הכל",
+      position: "bottom"
+    },
+    {
+      target: "messageCard",
+      text: isMessageMode
+        ? "תוצג לפניכם הודעת טקסט"
+        : "תוצג לפניכם תמונה",
+      position: "bottom"
+    },
+    {
+      target: "bottomButtons",
+      text: isMessageMode
+        ? "לחצו האם היא אמיתית או הונאה"
+        : "לחצו האם היא אמיתית או מזוייפת (נוצרה בבינה מלאכותית)",
+      position: "top"
+    },
+    {
+      target: "instructionsButton",
+      text: "לחצו כאן כדי לקבל רמז שיעזור לכם להחליט",
+      position: "top"
+    },
+    {
+      target: "hintButton",
+      text: "כפתור ההוראות - תמיד יכולים לחזור אליי!",
+      position: "top"
+    },
+    {
+      target: "none",
+      text: "הבנתי, בואו נתחיל לשחק!",
+      position: "middle",
+      showIcon: true
+    }
+  ];
+
+  const startTutorial = () => {
+    setTutorialActive(true);
+    setTutorialStep(0);
+  };
+
+  const handleTutorialClick = (e: React.MouseEvent) => {
+    const clickX = e.clientX;
+    const screenWidth = window.innerWidth;
+    const clickedOnLeftHalf = clickX < screenWidth / 2;
+
+    if (clickedOnLeftHalf) {
+      // Go forward
+      if (tutorialStep < tutorialSteps.length - 1) {
+        setTutorialStep(tutorialStep + 1);
+      } else {
+        setTutorialActive(false);
+        setTutorialStep(0);
+      }
+    } else {
+      // Go back
+      if (tutorialStep > 0) {
+        setTutorialStep(tutorialStep - 1);
+      }
+    }
+  };
+
+  const closeTutorial = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setTutorialActive(false);
+    setTutorialStep(0);
+  };
+
   const goToInstructions = () => {
   const snapshot = {
     step,
@@ -261,7 +342,7 @@ export default function Challenge() {
 
         {/* ✅ השינוי: הוספת הבר הכחול העליון מקובע מחוץ לאזור הנגלל */}
         <div className={styles.topHeader}>
-          <div className={styles.progressBar}>
+          <div className={styles.progressBar} data-tutorial="progressBar">
             {[1, 2, 3, 4, 5].map(n => {
               const isCurrent = n === step;
               const isCorrect = answersHistory[n] === "success";
@@ -298,7 +379,7 @@ export default function Challenge() {
                 exitActive: styles.msgExitActive,
               }}
             >
-              <div className={styles.messageCardWrap}>
+              <div className={styles.messageCardWrap} data-tutorial="messageCard">
                 {isMessageMode ? (
                   <div className={styles.messageCard}>
                     <div className={styles.messageHeader}>
@@ -329,19 +410,27 @@ export default function Challenge() {
         {/* ✅ CHANGED earlier: actions gets animation classes */}
         <div className={`${styles.actions} ${styles.actionsAnimating} ${actionsDown ? styles.actionsDown : ""}`}>
           <div className={styles.toolsRow}>
-            <button className={styles.toolButton} onClick={() => setShowHint(true)}>
+            <button className={styles.toolButton} onClick={() => setShowHint(true)} data-tutorial="hintButton">
               <img src="/icons/hintIcon.svg" alt="Hint Icon" style={{ width: "35px", height: "35px" }} />
               <span>רמז</span>
             </button>
-            <button className={styles.toolButton} onClick={goToInstructions}>
+            <button className={styles.toolButton} onClick={startTutorial} data-tutorial="instructionsButton">
             ? הוראות
           </button>
           </div>
           <div className={styles.mainRow}>
-            <button className={styles.reportBtn} onClick={() => handleAnswer(true)}>
+            <button
+              className={`${styles.reportBtn} ${tutorialActive && tutorialSteps[tutorialStep].target === "bottomButtons" ? styles.tutorialRaised : ""}`}
+              onClick={() => handleAnswer(true)}
+              data-tutorial="realButton"
+            >
               אמיתית
             </button>
-            <button className={styles.openBtn} onClick={() => handleAnswer(false)}>
+            <button
+              className={`${styles.openBtn} ${tutorialActive && tutorialSteps[tutorialStep].target === "bottomButtons" ? styles.tutorialRaised : ""}`}
+              onClick={() => handleAnswer(false)}
+              data-tutorial="scamButton"
+            >
               הונאה
             </button>
           </div>
@@ -388,6 +477,50 @@ export default function Challenge() {
               <button className={styles.continueBtn} onClick={handleContinue}>
                 המשך
               </button>
+            </div>
+          </div>
+        )}
+
+        {/* Tutorial Overlay */}
+        {tutorialActive && (
+          <div className={styles.tutorialOverlay} onClick={handleTutorialClick}>
+            <button className={styles.tutorialCloseBtn} onClick={closeTutorial}>
+              ✕
+            </button>
+            {tutorialSteps[tutorialStep].target === "none" ? (
+              <div className={styles.tutorialDarkBackground} />
+            ) : tutorialSteps[tutorialStep].target === "bottomButtons" ? (
+              <>
+                <div className={styles.tutorialHighlight} data-highlight="bottomButtons" />
+                <div className={styles.tutorialGapDarkener} />
+              </>
+            ) : (
+              <div className={styles.tutorialHighlight} data-highlight={tutorialSteps[tutorialStep].target} />
+            )}
+            <div
+              className={`${styles.tutorialText} ${
+                tutorialSteps[tutorialStep].position === 'middle'
+                  ? styles.tutorialTextMiddle
+                  : styles[`tutorialText${tutorialSteps[tutorialStep].position === 'top' ? 'Top' : 'Bottom'}`]
+              }`}
+              data-position={tutorialSteps[tutorialStep].target}
+            >
+              {/* Icon for final step - shown first */}
+              {tutorialSteps[tutorialStep].showIcon && (
+                <div className={styles.tutorialIconContainer}>
+                  <img src="/icons/instructionsIcon.svg" alt="Instructions" className={styles.tutorialIcon} />
+                </div>
+              )}
+              {/* Progress indicator */}
+              <div className={styles.tutorialProgress}>
+                {tutorialSteps.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`${styles.tutorialProgressBox} ${index <= tutorialStep ? styles.tutorialProgressActive : ''}`}
+                  />
+                ))}
+              </div>
+              {tutorialSteps[tutorialStep].text}
             </div>
           </div>
         )}
