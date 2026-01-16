@@ -37,6 +37,12 @@ function buildSquares(answers: DailyAnswer[], total: number) {
 function countCorrect(answers: DailyAnswer[]) {
   return answers.filter(a => a.isCorrect).length;
 }
+function localDateKey(d: Date) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`; // YYYY-MM-DD (LOCAL)
+}
 
 function getDailyTip(answers: DailyAnswer[]) {
   return answers.length > 0 ? (answers[0].tip || "") : "";
@@ -70,6 +76,13 @@ export default function StreakPage() {
   const [showIntro, setShowIntro] = useState(true);
 
   const [fadeIntro, setFadeIntro] = useState(false);  // האם להתחיל fade-out
+   type DateCell = {
+    key: string;       // YYYY-MM-DD
+    label: string;     // 21.1
+    offset: number;    // -3..+3
+  };
+   const [dateCells, setDateCells] = useState<DateCell[]>([]);
+  const [activitySet, setActivitySet] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const today = new Date();
@@ -79,12 +92,10 @@ export default function StreakPage() {
     const activityDates = JSON.parse(localStorage.getItem('userActivityDates') || '[]');
     
     // Save today's activity
-    const todayString = today.toISOString().split('T')[0];
+    const todayString = localDateKey(today);
     if (!activityDates.includes(todayString)) {
       activityDates.push(todayString);
       localStorage.setItem('userActivityDates', JSON.stringify(activityDates));
-
-    
     }
  
 
@@ -93,7 +104,7 @@ export default function StreakPage() {
     let checkDate = new Date(today);
 
     while (true) {
-      const dateString = checkDate.toISOString().split('T')[0];
+      const dateString = localDateKey(checkDate);
       if (activityDates.includes(dateString)) {
         consecutiveStreak++;
         checkDate.setDate(checkDate.getDate() - 1);
@@ -107,7 +118,7 @@ export default function StreakPage() {
     for (let i = 0; i <= todayDayOfWeek; i++) {
       const checkDay = new Date(today);
       checkDay.setDate(today.getDate() - (todayDayOfWeek - i));
-      const dateString = checkDay.toISOString().split('T')[0];
+      const dateString = localDateKey(checkDay);
       if (activityDates.includes(dateString)) {
         currentWeekActiveDays.push(i);
       }
@@ -121,20 +132,40 @@ export default function StreakPage() {
     const daily = loadDailyAnswers();
     const answers = daily.map(a => a.isCorrect);
     setAnswerResults(answers);
+
+     setActivitySet(new Set(activityDates));
+const cells: DateCell[] = [];
+    for (let offset = -3; offset <= 3; offset++) {
+      const d = addDays(today, offset);
+      cells.push({
+        key: dateKey(d),
+        label: formatDateIL(d),
+        offset,
+      });
+    }
+    setDateCells(cells);
   }, []);
 
   type StickerShare = {
     stickerPath: string;  
     message: string;
   };
+  function dateKey(d: Date) {
+  return localDateKey(d);
+}
+
+function addDays(base: Date, delta: number) {
+  const d = new Date(base);
+  d.setDate(d.getDate() + delta);
+  return d;
+}
+
+function formatDateIL(d: Date) {
+  // 21.1
+  return `${d.getDate()}.${d.getMonth() + 1}`;
+}
 
   function getStickerByStats(streak: number): StickerShare {
-    // if (correctCount === 0) {
-    //   return {
-    //     stickerPath:"/Stickers/sticker0_no_answers.png",
-    //     message: `אני צריך להתאמץ יותר בזיהוי הונאות רשת! הצטרפו אליי ללמוד איך להתחדד!`
-    //   };
-    // }
     if (streak >= 0 && streak <= 3) {
       return {
         stickerPath: "/Stickers/stickerday1_3.png",
@@ -202,19 +233,9 @@ export default function StreakPage() {
     router.back();
   };
 
-  const handleContinue = () => {
-    router.push('/');
-  };
 
-  const daysOfWeek = [
-    { label: 'א', value: 0 },
-    { label: 'ב', value: 1 },
-    { label: 'ג', value: 2 },
-    { label: 'ד', value: 3 },
-    { label: 'ה', value: 4 },
-    { label: 'ו', value: 5 },
-    { label: 'ש', value: 6 },
-  ];
+
+
 
   const getBadgeStatus = (days: number) => {
     return streak >= days;
@@ -252,6 +273,7 @@ export default function StreakPage() {
         {/* Main card with character and squares */}
         <div className={styles.mainCard}>
           {/* Character image */}
+                    {/* Character image */}
           <div className={styles.characterContainer}>
             <Image 
               src="/icons/saturday.svg"
@@ -262,7 +284,20 @@ export default function StreakPage() {
             />
           </div>
 
+          {/* Colored squares */}
+          {answerResults.length > 0 && (
+            <div className={styles.answersIndicator}>
+              {answerResults.map((isCorrect, index) => (
+                <div
+                  key={index}
+                  className={`${styles.answerSquare} ${isCorrect ? styles.correct : styles.wrong}`}
+                />
+              ))}
+            </div>
+          )}
 
+
+          
           {/* Share button */}
           <button className={styles.shareButton} onClick={handleShare}>
              <Image
@@ -279,25 +314,38 @@ export default function StreakPage() {
         {/* Weekly streak section with SVG squares */}
         <div className={styles.streakCard}>
           <p className={styles.streakTitle}>מתחדד כבר {streak} ימים ברצף!</p>
-          
           <div className={styles.daysContainer}>
-            {daysOfWeek.map((day) => {
-              const isActive = activeDays.includes(day.value);
-              const isPast = day.value <= today;
-              
-              return (
-                <div key={day.value} className={styles.dayItem}>
-                  <Image
-                        src={isActive && isPast ? "/icons/activeDay.svg" : "/icons/NotActiveDay.svg"}
-                        alt={isActive && isPast ? "יום פעיל" : "יום לא פעיל"}
-                        width={36}
-                        height={36}
-                        className={styles.daySquare}
-                      />
-                  <span className={styles.dayLabel}>{day.label}</span>
-                </div>
-              );
-            })}
+              {dateCells.map((cell) => {
+                const isToday = cell.offset === 0;
+                const didEnter = activitySet.has(cell.key);
+
+                const iconSrc =
+                  isToday
+                    ? "/icons/activeDay.svg"
+                    : didEnter
+                      ? "/icons/visited.svg"
+                      : "/icons/NotActiveDay.svg";
+
+                const iconAlt =
+                  isToday
+                    ? "היום"
+                    : didEnter
+                      ? "ביקור בעבר"
+                      : "לא פעיל";
+
+                return (
+                  <div key={cell.key} className={styles.dayItem}>
+                    <Image
+                      src={iconSrc}
+                      alt={iconAlt}
+                      width={36}
+                      height={36}
+                      className={styles.daySquare}
+                    />
+                    <span className={styles.dayLabel}>{cell.label}</span>
+                  </div>
+                );
+              })}
           </div>
         </div>
 

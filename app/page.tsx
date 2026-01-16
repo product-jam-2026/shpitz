@@ -76,7 +76,7 @@ import HomePage from "./home/HomePage";
 import styles from "./rootWithSplash.module.css";
 const GIF_DURATION_MS = 4500;   // כמה זמן הסיבוב בערך
 const FADE_MS = 500;            // משך fade
-const FADE_START_MS = GIF_DURATION_MS - 250; // מתחילים 250ms לפני הסוף
+const FADE_START_MS = GIF_DURATION_MS - 350; // מתחילים 250ms לפני הסוף
 export default function RootWithSplash() {
   const [showSplash, setShowSplash] = useState(true);
   const [isFading, setIsFading] = useState(false);

@@ -4,6 +4,24 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./homePage.module.css";
 import Image from "next/image";
+function localDateKey(d: Date) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`; // YYYY-MM-DD (LOCAL)
+}
+
+function addDays(base: Date, delta: number) {
+  const d = new Date(base);
+  d.setDate(d.getDate() + delta);
+  return d;
+}
+
+function formatDDMM(date: Date) {
+  const dd = String(date.getDate()).padStart(2, "0");
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  return `${dd}.${mm}`;
+}
 
 export default function HomePage(){
   const router = useRouter();
@@ -13,21 +31,21 @@ export default function HomePage(){
   const [isFirstVisit, setIsFirstVisit] = useState<boolean | null>(null);
   const [hasCompletedToday, setHasCompletedToday] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [dateCells, setDateCells] = useState<{ iso: string; label: string; offset: number }[]>([]);
 
   useEffect(() => {
     const today = new Date();
-    const todayDayOfWeek = today.getDay(); // 0..6
 
     // ✅ first visit
     const hasVisited = localStorage.getItem("hasVisitedBefore");
     setIsFirstVisit(!hasVisited);
 
-    // ✅ completed today
-    const todayKey = today.toISOString().split("T")[0]; // YYYY-MM-DD
+    // ✅ completed today (LOCAL date key)
+    const todayKey = localDateKey(today);
     const completedDate = localStorage.getItem("dailyCompletedDate");
     setHasCompletedToday(completedDate === todayKey);
 
-    // ✅ streak based on real dates (like your StreakPage)
+    // ✅ activity dates
     const activityDates: string[] = JSON.parse(
       localStorage.getItem("userActivityDates") || "[]"
     );
@@ -38,37 +56,41 @@ export default function HomePage(){
       localStorage.setItem("userActivityDates", JSON.stringify(activityDates));
     }
 
-    // calculate consecutive streak including today
+    // ✅ streak WITHOUT counting today
     let consecutiveStreak = 0;
-    const checkDate = new Date(today);
+    const checkDate = addDays(today, -1); // start from yesterday
 
     while (true) {
-      const dateString = checkDate.toISOString().split("T")[0];
+      const dateString = localDateKey(checkDate);
       if (activityDates.includes(dateString)) {
         consecutiveStreak++;
         checkDate.setDate(checkDate.getDate() - 1);
       } else {
         break;
       }
-      
     }
 
     setStreak(consecutiveStreak);
     localStorage.setItem("userStreak", consecutiveStreak.toString());
 
-    // ✅ active days for current week (only up to today)
-    const currentWeekActiveDays: string[] = [];
-    for (let i = 0; i <= todayDayOfWeek; i++) {
-      const d = new Date(today);
-      d.setDate(today.getDate() - (todayDayOfWeek - i));
-      const dStr = d.toISOString().split("T")[0]; // YYYY-MM-DD
-      if (activityDates.includes(dStr)) {
-        currentWeekActiveDays.push(dStr);
-      }
-    }
-    setActiveDays(currentWeekActiveDays);
+    // ✅ activeDays = all visited days (for visited.svg)
+    setActiveDays(activityDates);
 
+    // ✅ 7-date window (today in the middle)
+    const cells = [];
+    for (let offset = -3; offset <= 3; offset++) {
+      const d = addDays(today, offset);
+      cells.push({
+        iso: localDateKey(d),
+        label: formatDDMM(d),
+        offset,
+      });
+    }
+    setDateCells(cells);
+
+    setLoaded(true);
   }, []);
+
 
   const handleStart = () => {
     if (hasCompletedToday) {
@@ -85,7 +107,7 @@ export default function HomePage(){
 
 
   return (
-    <MobileContent activeDays={activeDays} streak={streak} onStart={handleStart} />
+    <MobileContent activeDays={activeDays} streak={streak} onStart={handleStart}  dateCells={dateCells}/>
   );
   }
 
@@ -93,33 +115,13 @@ function MobileContent({
   activeDays,
   streak,
   onStart,
+  dateCells,
 }: {
   activeDays: string[];
   streak: number;
   onStart: () => void;
+  dateCells: { iso: string; label: string; offset: number }[];
 }) {
-function formatDDMM(date: Date) {
-  const dd = String(date.getDate()).padStart(2, "0");
-  const mm = String(date.getMonth() + 1).padStart(2, "0");
-  return `${dd}.${mm}`;
-}
-
-function toISODate(date: Date) {
-  return date.toISOString().split("T")[0]; // YYYY-MM-DD
-}
-
-const today = new Date();
-const todayDayOfWeek = today.getDay();
-
-const weekDays = Array.from({ length: 7 }, (_, i) => {
-  const d = new Date(today);
-  d.setDate(today.getDate() - (todayDayOfWeek - i)); // מתחילת השבוע עד היום/שבת
-  return {
-    iso: toISODate(d),
-    label: formatDDMM(d), // DD-MM
-  };
-});
-
 
   return (
     <div className={styles.screen} dir="rtl">
@@ -143,41 +145,69 @@ const weekDays = Array.from({ length: 7 }, (_, i) => {
           </p>
 
           <div className={styles.daysContainer}>
-          {weekDays.map((day) => (
-            <DayIndicator
-              key={day.iso}
-              label={day.label}
-              filled={activeDays.includes(day.iso)}
-            />
-          ))}
+          {dateCells.map((day) => (
+          <DayIndicator
+            key={day.iso}
+            label={day.label}
+            isToday={day.offset === 0}
+            isVisited={activeDays.includes(day.iso)}
+          />
+        ))}
 
 
           </div>
         </div>
+        <div className={styles.startArea}>
+<div className={styles.partnerRow}>
+  <Image
+    src="/icons/InternetLogo.svg"
+    alt="איגוד האינטרנט הישראלי"
+    width={24}
+    height={24}
+    className={styles.partnerLogo}
+  />
 
-        <button 
-          className={styles.startButton} 
-          onClick={onStart}
-        >
-          <span className={styles.buttonText}>התחל</span>
-        </button>
+  <span className={styles.partnerText}>
+    בשיתוף איגוד האינטרנט הישראלי
+  </span>
+</div>
+
+<button className={styles.startButton} onClick={onStart}>
+  <span className={styles.buttonText}>התחל</span>
+</button>
+        </div>
       </div>
     </div>
   );
 }
 
-function DayIndicator({ label, filled }: { label: string; filled: boolean }) {
+function DayIndicator({
+  label,
+  isVisited,
+  isToday,
+}: {
+  label: string;
+  isVisited: boolean;
+  isToday: boolean;
+}) {
+  const iconSrc = isToday
+    ? "/icons/today.svg"
+    : isVisited
+      ? "/icons/visited.svg"
+      : "/icons/NotActiveDay.svg";
+
   return (
-    <div className={styles.dayItem} >
+    <div className={styles.dayItem}>
       <div className={styles.iconWrapper}>
-        <Image 
-          src={filled ? "/icons/starDaySvg.svg" : "/icons/NotActiveDay.svg"} 
-          alt="day status" 
-          width={28} 
-          height={28} 
-        />
+        <Image src={iconSrc} alt="day status" width={28} height={28} />
       </div>
-      <span className={styles.dayLetter}>{label}</span>
+              <span
+          className={`${styles.dayLetter} ${
+            isToday ? styles.todayDate : ""
+          }`}
+        >
+          {label}
+        </span>
     </div>
   );
 }
