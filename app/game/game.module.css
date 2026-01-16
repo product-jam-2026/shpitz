@@ -52,11 +52,14 @@
 /* --- פס התקדמות --- */
 .progressBar {
   display: flex;
-  width: 100%;
-  gap: 10px;
+  width: calc(100% - 4.25rem); /* 2.125rem מכל צד */
+  padding: 0 2.125rem;          /* 34px */
+  box-sizing: border-box;
+  gap: 0.625rem;                /* 10px */
   margin: 0;
-  height: 34px;
+  height: 2.125rem;             /* 34px */
 }
+
 .lottieOverlay {
   position: absolute;
   top: 0;
@@ -76,9 +79,9 @@
   align-items: center;
   background: #F3F3F3;
   color: #BFBFBF; /* CHANGED: gray for unanswered */
-  font-family: 'SouthFont';
+  font-family: "SimplerPro-Regular";
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .progressActive {
@@ -119,10 +122,12 @@
   margin-right: auto;
 }
 
+
 .messageHeader {
   background: #ffffff;      /* שינוי מאפור ללבן */
   padding: 1rem 1rem 0.5rem;
   display: flex;
+  color: #7B7B7B;
   flex-direction: column;
   align-items: center;
   border-bottom: none;
@@ -131,7 +136,7 @@
   margin: 0;
   font-size: 22px;
   font-weight: 400;
-  color: #000000;
+  color: inherit;
   font-family: 'Roboto', sans-serif;
   font-style: normal;
 }
@@ -161,7 +166,7 @@
 }
 
 .ownerText {
-  color: var(--Dark_blue_text, #114081);
+  color: #7B7B7B;
   text-align: center;
   font-family: 'Roboto', sans-serif; /* וודאי ש-Roboto טעון בפרויקט */
   font-size: 13.334px;
@@ -198,7 +203,7 @@
   right: 50%;
   margin-left: -50vw; /* CHANGED: דוחף לשמאל */
   margin-right: -50vw; /* CHANGED: דוחף לימין */
-  background-color: #65B1E2; /* צבע המעצבים */
+  background-color: #3BAFFA; /* צבע המעצבים */
   /* padding: 20px 0 35px;  */
   padding: 1.25rem;
   z-index: 10;
@@ -274,7 +279,7 @@
 .hintOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(17, 64, 129, 0.4);
+  background: rgba(16, 16, 18, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -283,8 +288,8 @@
 }
 .hintCard {
   width: 100%;
-  max-width: 500px; 
-  height: 496px;
+  max-width: 31.25rem; 
+  height: 31rem;
   background: var(--Light_blue_small_button, #C1E0F3);
   border-radius: 0 36px 0 0;
   display: flex;
@@ -298,6 +303,9 @@
   margin-right: auto;
   z-index: 1000;
   animation: slideUp 0.5s ease-out forwards;
+  padding: 1.25rem 2.125rem 1.25rem;
+  justify-content: flex-start; /* שלא יפזר רווחים */
+  gap: 1.25rem;
 }
 
 @keyframes slideUp {
@@ -318,7 +326,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 1rem;
 }
 
 .hintIconContainer {
@@ -326,19 +334,19 @@
   width: 100px;
   height: 100px;
   background: #FFF9EC;
-  border-radius: 50%;
+  border-radius: 90px;
   justify-content: center;
   align-items: center;
 }
 
-.hintIcon { width: 70px; height: auto; }
+.hintIcon { width: 50px; height: auto; }
 
 .hintText {
   color: #114081;
   text-align: center;
   font-family: "SimplerPro-Regular";
   font-size: 26px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 36px;
   letter-spacing: -0.78px;
   margin: 0;
@@ -346,10 +354,12 @@
 
 .backToGameBtn {
   display: flex;
-  width: 325px;
-  height: 63px;
+  width: 100%;
+  height: 4.6875rem;
+  padding: 0.625rem;
   justify-content: center;
   align-items: center;
+  gap: 0.625rem;
   background: #FFF9EC;
   border: none;
   border-right: 3px solid #000000;
@@ -359,13 +369,14 @@
   font-size: 2.5rem;
   font-weight: 500;
   cursor: pointer;
+  margin: 0;
 }
 
 /* --- כרטיס תוצאה Bottom Sheet --- */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(17, 64, 129, 0.4);
+  background: rgba(16, 16, 18, 0.85);
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -558,6 +569,7 @@
 .progressItem {
   position: relative;
   overflow: hidden;
+  color: #7B7B7B;
   --fill-color: transparent;
 }
 

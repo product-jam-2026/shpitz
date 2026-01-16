@@ -383,12 +383,10 @@ export default function Challenge() {
                 {isMessageMode ? (
                   <div className={styles.messageCard}>
                     <div className={styles.messageHeader}>
-                      <img src="icons/messageIcon.svg" alt="Message Icon" className={styles.headerIcon} />
                       <p dir="ltr" className={styles.ownerText}>
                         {current.Owner}
                       </p>
                     </div>
-                    <div className={styles.messageTimestamp}>היום 9:07</div>
                     <div className={styles.messageBubble}>
                       <p className={styles.messageText}>{current.content}</p>
                     </div>
@@ -411,12 +409,15 @@ export default function Challenge() {
         <div className={`${styles.actions} ${styles.actionsAnimating} ${actionsDown ? styles.actionsDown : ""}`}>
           <div className={styles.toolsRow}>
             <button className={styles.toolButton} onClick={() => setShowHint(true)} data-tutorial="hintButton">
-              <img src="/icons/hintIcon.svg" alt="Hint Icon" style={{ width: "35px", height: "35px" }} />
-              <span>רמז</span>
-            </button>
+  <span>רמז</span>
+  <img src="/icons/hintIcon.svg" alt="Hint Icon" style={{ width: "24px", height: "24px" }} />
+</button>
+
             <button className={styles.toolButton} onClick={startTutorial} data-tutorial="instructionsButton">
-            ? הוראות
-          </button>
+  <span>הוראות</span>
+  <img src="/icons/instruction_icon.svg" alt="Instructions Icon" style={{ width: "24px", height: "24px" }} />
+</button>
+
           </div>
           <div className={styles.mainRow}>
             <button
