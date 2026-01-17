@@ -132,7 +132,7 @@
 
   height: 2.375rem;        /* 38px */
   gap: 0.875rem;           /* 14px */
-  margin-top: -2.5rem;       /* הצמדה קרוב עוד יותר */
+  margin-top: -1rem;      /* spacing between text and boxes */
 }
 
 .answerSquare {

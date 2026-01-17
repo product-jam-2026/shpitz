@@ -192,7 +192,20 @@ export default function ReviewPage() {
                             >
                                 <div>
                                     <h3 className={`${styles.tipTitle} ${question.isCorrect ? styles.correctTitle : ''}`}>
-                                        שאלה #{index + 1}
+                                        {!question.isCorrect ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none" className={styles.xIcon}>
+                                                <rect x="2.99976" y="3" width="18" height="18" stroke="black" strokeWidth="2"/>
+                                                <line x1="6.15852" y1="5.86223" x2="18.1793" y2="17.883" stroke="#090000" strokeWidth="2"/>
+                                                <path d="M17.9333 5.91243L5.91253 17.9332" stroke="#090000" strokeWidth="2"/>
+                                            </svg>
+                                        ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20" fill="none" className={styles.xIcon}>
+                                                <rect x="1" y="1" width="18" height="18" stroke="black" strokeWidth="2"/>
+                                                <line x1="4.70711" y1="9.29289" x2="9.70711" y2="14.2929" stroke="black" strokeWidth="2"/>
+                                                <line x1="23.7071" y1="1.70711" x2="9.70711" y2="15.7071" stroke="black" strokeWidth="2"/>
+                                            </svg>
+                                        )}
+                                        שאלה {index + 1}
                                     </h3>
                                     <div className={styles.hintText}>
                                         {question?.tips ?? "אין רמז זמין"}
@@ -247,7 +260,7 @@ export default function ReviewPage() {
                             className={styles.understoodButton}
                             onClick={handleFinish}
                         >
-                            <span className={styles.buttonText}>הבנתי</span>
+                            <span className={styles.buttonText}>המשך</span>
                         </button>
                     </div>
                 </div>
