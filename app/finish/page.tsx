@@ -84,6 +84,11 @@ export default function StreakPage() {
    const [dateCells, setDateCells] = useState<DateCell[]>([]);
   const [activitySet, setActivitySet] = useState<Set<string>>(new Set());
 
+  // Handle intro animation - Lottie onComplete
+  useEffect(() => {
+    // This effect is just a dependency holder, actual logic is in Lottie onComplete
+  }, []);
+
   useEffect(() => {
     const today = new Date();
     const todayDayOfWeek = today.getDay();
@@ -249,14 +254,15 @@ function formatDateIL(d: Date) {
               {showIntro && (
           <div className={`${styles.introOverlay} ${fadeIntro ? styles.introFadeOut : ""}`}>
             <Lottie
-      animationData={introAnim}
-      loop={false}
-      onComplete={() => {
-        setFadeIntro(true);                 // מתחיל fade-out
-        setTimeout(() => setShowIntro(false), 500); // אחרי 500ms מוריד מה-DOM
-      }}
-      className={styles.introLottie}
-    />
+              animationData={introAnim}
+              loop={false}
+              autoplay
+              onComplete={() => {
+                setFadeIntro(true);
+                setTimeout(() => setShowIntro(false), 500);
+              }}
+              className={styles.introLottie}
+            />
           </div>
         )}
 
