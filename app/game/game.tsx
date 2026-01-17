@@ -400,7 +400,9 @@ export default function Challenge() {
         </div>
 
         <div className={styles.scrollableArea}>
-          <h2 className={styles.questionTitle}>מה דעתכם?</h2>
+  <h2 className={styles.questionTitle}>
+    {isMessageMode ? "ההודעה אמיתית או הונאה?" : "התמונה אמיתית או מזויפת?"}
+  </h2>
 
           {/* ✅ REPLACED: message swap animation */}
           <SwitchTransition>
@@ -462,13 +464,9 @@ export default function Challenge() {
             >
               אמיתית
             </button>
-            <button
-              className={`${styles.openBtn} ${tutorialActive && tutorialSteps[tutorialStep].target === "bottomButtons" ? styles.tutorialRaised : ""}`}
-              onClick={() => handleAnswer(false)}
-              data-tutorial="scamButton"
-            >
-              הונאה
-            </button>
+            <button className={styles.openBtn} onClick={() => handleAnswer(false)}>
+  {isMessageMode ? "הונאה" : "מזויפת"}
+</button>
           </div>
         </div>
 

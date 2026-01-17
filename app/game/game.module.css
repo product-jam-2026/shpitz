@@ -53,11 +53,11 @@
 .progressBar {
   display: flex;
   width: calc(100% - 4.25rem); /* 2.125rem מכל צד */
-  padding: 0 2.125rem;          /* 34px */
-  box-sizing: border-box;
-  gap: 0.625rem;                /* 10px */
-  margin: 0;
-  height: 2.125rem;             /* 34px */
+  padding: 0;            /* אפס פאדינג כדי שייצמד לקצוות ההודעה */
+  gap: 0.625rem;
+  margin-top: 0.5rem;  /* 18px רווח מלמעלה */
+  height: 1.8125rem;     /* 29px גובה הריבועים */
+  box-sizing: border-box;  
 }
 
 .lottieOverlay {
@@ -75,6 +75,7 @@
 .progressItem {
   flex: 1;
   display: flex;
+  padding: 0;
   justify-content: center;
   align-items: center;
   background: #F3F3F3;
@@ -100,7 +101,7 @@
 }
 /* --- כותרת השאלה --- */
 .questionTitle {
-  margin: 0 0 20px;
+  margin: 0 0 0.5rem;
   text-align: center;
   font-family: "SimplerPro-Bold";
   font-size: 1.625rem;
@@ -121,7 +122,24 @@
   margin-left: auto;         /* מירכוז הבועה */
   margin-right: auto;
 }
-
+.messageCard::after {
+  content: "";
+  position: absolute;
+  
+  /* מיקום: צד שמאל למטה */
+  bottom: -2px;      /* התאמה קלה כדי שיישב בול על הגבול */
+  left: -8px;        /* מוציא את השפיץ קצת שמאלה מחוץ לבועה */
+  
+  /* גודל: בדקי מה המידות של ה-SVG ששלחו לך, בדרך כלל זה אזור ה-15-20px */
+  width: 15px; 
+  height: 18px;
+  
+  /* חיבור הקובץ */
+  background: url('/icons/message-tail.svg') no-repeat center / contain;
+  
+  /* מניעת לחיצות על השפיץ עצמו */
+  pointer-events: none;
+}
 
 .messageHeader {
   background: #ffffff;      /* שינוי מאפור ללבן */
@@ -203,7 +221,9 @@
   right: 50%;
   margin-left: -50vw; /* CHANGED: דוחף לשמאל */
   margin-right: -50vw; /* CHANGED: דוחף לימין */
-  background-color: #3BAFFA; /* צבע המעצבים */
+  background-color: #3BAFFA;
+  /* ה-SVG החדש המעודכן */
+    background-image: url('/background/homeNoise.svg');
   /* padding: 20px 0 35px;  */
   padding: 1.25rem;
   z-index: 10;
@@ -289,7 +309,6 @@
 .hintCard {
   width: 100%;
   max-width: 31.25rem; 
-  height: 31rem;
   background: var(--Light_blue_small_button, #C1E0F3);
   border-radius: 0 36px 0 0;
   display: flex;
@@ -303,7 +322,7 @@
   margin-right: auto;
   z-index: 1000;
   animation: slideUp 0.5s ease-out forwards;
-  padding: 1.25rem 2.125rem 1.25rem;
+  padding: 1.25rem 1.25rem 1.25rem;
   justify-content: flex-start; /* שלא יפזר רווחים */
   gap: 1.25rem;
 }
@@ -343,7 +362,7 @@
 
 .hintText {
   color: #114081;
-  text-align: center;
+  text-align: right;
   font-family: "SimplerPro-Regular";
   font-size: 26px;
   font-weight: 400;
@@ -462,7 +481,7 @@
 
 .resultStatusTitle {
   display: block;
-  font-family: "SimplerPro-Bold";
+  font-family: "SimplerPro-Regular";
   font-size: 26px; /* גודל מודגש ובולט */
   font-weight: 700; /* הדגשה חזקה */
   margin-bottom: 8px;
@@ -666,7 +685,7 @@
 /* --- כרטיס תמונה --- */
 .photoCard {
   background: #ffffff;
-  border-radius: 18px;
+  border-radius: 0;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   margin-bottom: 20px;
