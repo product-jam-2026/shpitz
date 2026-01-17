@@ -174,25 +174,25 @@ function formatDateIL(d: Date) {
     if (streak >= 0 && streak <= 3) {
       return {
         stickerPath: "/Stickers/stickerday1_3.png",
-        message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+        message: `אני מתחדד כבר ${streak} ימים ברצף!`
       };
     }
     if (streak >= 4 && streak <= 7) {
       return {
         stickerPath: "/Stickers/stickerday3_7.png",
-        message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+        message: `אני מתחדד כבר ${streak} ימים ברצף!`
       };
     }
     if (streak >= 7 && streak <=14 ) {
       return {
         stickerPath: "/Stickers/stickerday7_14.png",
-        message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+        message: `אני מתחדד כבר ${streak} ימים ברצף!`
       };
     }
 
     return {
       stickerPath:  "/Stickers/stickerday7_14.png",
-      message: `אני מתחדד כבר ${streak} ימים ברצף! בואו גם אתם להתחדד בזיהוי הונאות רשת!`
+      message: `אני מתחדד כבר ${streak} ימים ברצף!`
     };
   }
 
