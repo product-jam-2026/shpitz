@@ -430,7 +430,6 @@
 
 .continueBtn {
   width: 100%;
-  max-width: 325px;
   height: 68px;
   align-self: center;
   flex-shrink: 0;
