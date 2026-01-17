@@ -19,7 +19,7 @@ export default function Page() {
   if (loading) {
     return (
       <main className="min-h-screen bg-[#F3F3F3] flex items-center justify-center">
-         <StartPage />
+         <StartPage isMessageMode={isMessageMode} />
       </main>
     );
   }
@@ -34,7 +34,7 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-[#F3F3F3]">
-      <StartPage />
+      <StartPage isMessageMode={isMessageMode} />
     </main>
   );
 }

@@ -4,7 +4,11 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image'; // ייבוא קומפוננטת תמונה
 import styles from "./startPage.module.css";
 
-export default function StartPage() {
+interface StartPageProps {
+  isMessageMode: boolean;
+}
+
+export default function StartPage({ isMessageMode }: StartPageProps) {
   const router = useRouter();
 
   // ברגע שתהיה לך תמונה, פשוט תשני את זה לכתובת הקובץ (למשל: "/images/hero.png")
@@ -37,9 +41,19 @@ export default function StartPage() {
            איך משחקים<span className={styles.qMark}>?</span>
     </h2>
           <p className={styles.description}>
-           יוצגו לפניכם הודעת טקסט או תמונה
-            <br />
-           לחצו האם הן אמיתיות או הונאה
+           {isMessageMode ? (
+             <>
+               יוצגו לפניכם הודעות טקסט
+               <br />
+               לחצו האם הן אמיתיות או הונאה
+             </>
+           ) : (
+             <>
+               יוצגו לפניכם תמונות
+               <br />
+               לחצו האם הן אמיתיות או מזויפות
+             </>
+           )}
           </p>
         </div>
 
