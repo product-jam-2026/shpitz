@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation";
 import ReviewButton from "@/lib/components/ReviewButton";
 import styles from "./page.module.css";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
+import lottie0 from "@/public/animation/preReview/score0.json";
 import lottie1 from "@/public/animation/preReview/score1.json";
 import lottie2 from "@/public/animation/preReview/score2.json";
 import lottie3 from "@/public/animation/preReview/score3.json";
 import lottie4 from "@/public/animation/preReview/score4.json";
+import lottie5 from "@/public/animation/preReview/score5.json";
 type DailyAnswer = {
   index: number;
   isCorrect: boolean;
@@ -31,12 +33,12 @@ type ScoreAssets = {
 
 // כרגע יש לך רק score=3. אם תוסיפי עוד קבצים, פשוט תרחיבי את המפה.
 const SCORE_ASSETS: Record<number, ScoreAssets> = {
-   0: { lottieData: lottie1 },
+   0: { lottieData: lottie0 },
   1: { lottieData: lottie1 },
   2: { lottieData: lottie2 },
   3: { lottieData: lottie3 },
   4: { lottieData: lottie4 },
-   5: { lottieData: lottie4 },
+   5: { lottieData: lottie5 },
 };
 
 // fallback בטוח: אם אין התאמה לציון, נשתמש בלוטי של 3 (או הראשון שיש)
