@@ -221,7 +221,9 @@
   right: 50%;
   margin-left: -50vw; /* CHANGED: דוחף לשמאל */
   margin-right: -50vw; /* CHANGED: דוחף לימין */
-  background-color: #3BAFFA; /* צבע המעצבים */
+  background-color: #3BAFFA;
+  /* ה-SVG החדש המעודכן */
+    background-image: url('/background/homeNoise.svg');
   /* padding: 20px 0 35px;  */
   padding: 1.25rem;
   z-index: 10;
