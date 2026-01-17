@@ -8,11 +8,18 @@ export const metadata: Metadata = {
   title: "Shpitz Game",
   description:
     "The app to teach oldies tech orianut",
+  themeColor: "#3BAFFA",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+  },
 };
 
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
+  themeColor: "#3BAFFA",
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -35,6 +42,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           href="/icons/icon-192.png"
         />
         <link rel="manifest" href="/manifest.json" />
+        {/* Theme Color for Safari and Android */}
+        <meta name="theme-color" content="#3BAFFA" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <script src="https://accounts.google.com/gsi/client" async></script>
       </head>
       <body>
