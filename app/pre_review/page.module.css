@@ -93,6 +93,7 @@
   height: 2.5rem; /* 40px */
   align-self: stretch;
   margin: 0;
+  margin-top: -1rem;
 }
 
 .mainText2 {
@@ -104,7 +105,7 @@
   letter-spacing: 1.8px;
   line-height: 1.2;
   margin: 0;
-  margin-top: 0;
+  margin-top: -1rem;
   letter-spacing: 0.03125rem; /* 0.5px */
 }
 
@@ -118,6 +119,7 @@
   font-weight: 700;
   line-height: 2rem;     /* 32px */
   margin: 0;
+  margin-top: -1rem;
   letter-spacing: 0;    /* בפיגמה אין letter-spacing */
 }
 
@@ -130,7 +132,7 @@
 
   height: 2.375rem;        /* 38px */
   gap: 0.875rem;           /* 14px */
-  margin-top: -2.5rem;     /* הצמדה קרוב יותר למטקסט */
+  margin-top: -2.5rem;       /* הצמדה קרוב עוד יותר */
 }
 
 .answerSquare {
