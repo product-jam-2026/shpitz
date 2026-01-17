@@ -98,11 +98,7 @@ export default function HomePage(){
       return;
     }
 
-    if (isFirstVisit) {
-      router.push("/explantion");
-    } else {
-      router.push("/startPage");
-    }
+    router.push("/startPage");
   };
 
 

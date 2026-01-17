@@ -177,7 +177,7 @@ export default function Challenge() {
   };
 
   localStorage.setItem("gameSnapshot", JSON.stringify(snapshot));
-  router.push("/explantion?from=game");
+  router.push("/startPage");
 };
 
   useEffect(() => {
