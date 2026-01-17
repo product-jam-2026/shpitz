@@ -38,7 +38,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 3.75rem 1.25rem 1.25rem 1.25rem; /* 60px 20px 20px 20px */
+  padding: 1rem 1.25rem 1.25rem 1.25rem; /* 16px 20px 20px 20px */
   gap: 1.25rem; /* 20px */
   position: relative;
   box-sizing: border-box;
@@ -60,7 +60,7 @@
 .imageContainer {
   position: relative;
   width: 70%;
-  margin-top: 4rem;
+  margin-top: 0;
   max-width: 21.875rem; /* 350px */
   aspect-ratio: 1 / 1;
   flex-shrink: 0;
@@ -109,15 +109,14 @@
 }
 
 .scoreText {
-  color: #111012;
+  color: rgba(17, 16, 18, 0.95);
   text-align: center;
 
   /* Running_text_bold */
-  font-family: 'SimplePro-Regular', sans-serif;
+  font-family: 'SimplePro-Regular';
   font-size: 1.625rem;   /* 26px */
   font-weight: 700;
   line-height: 2rem;     /* 32px */
-
   margin: 0;
   letter-spacing: 0;    /* בפיגמה אין letter-spacing */
 }
@@ -131,7 +130,7 @@
 
   height: 2.375rem;        /* 38px */
   gap: 0.875rem;           /* 14px */
-  margin-top: 0.1rem;     /* אפשר להשאיר / להסיר לפי פיגמה */
+  margin-top: -2.5rem;     /* הצמדה קרוב יותר למטקסט */
 }
 
 .answerSquare {
@@ -172,7 +171,7 @@
   display: flex;
   justify-content: center;
   flex-shrink: 0;
-  bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  bottom: calc(1.2rem + env(safe-area-inset-bottom));
   
 }
 
