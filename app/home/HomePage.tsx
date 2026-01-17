@@ -56,9 +56,9 @@ export default function HomePage(){
       localStorage.setItem("userActivityDates", JSON.stringify(activityDates));
     }
 
-    // ✅ streak WITHOUT counting today
+    // ✅ streak INCLUDING today
     let consecutiveStreak = 0;
-    const checkDate = addDays(today, -1); // start from yesterday
+    const checkDate = new Date(today); // start from today
 
     while (true) {
       const dateString = localDateKey(checkDate);
@@ -107,7 +107,7 @@ export default function HomePage(){
 
 
   return (
-    <MobileContent activeDays={activeDays} streak={streak} onStart={handleStart}  dateCells={dateCells}/>
+    <MobileContent activeDays={activeDays} streak={streak} onStart={handleStart} dateCells={dateCells} hasCompletedToday={hasCompletedToday}/>
   );
   }
 
@@ -116,11 +116,13 @@ function MobileContent({
   streak,
   onStart,
   dateCells,
+  hasCompletedToday,
 }: {
   activeDays: string[];
   streak: number;
   onStart: () => void;
   dateCells: { iso: string; label: string; offset: number }[];
+  hasCompletedToday: boolean;
 }) {
 
   return (
@@ -151,6 +153,7 @@ function MobileContent({
             label={day.label}
             isToday={day.offset === 0}
             isVisited={activeDays.includes(day.iso)}
+            isCompletedToday={day.offset === 0 && hasCompletedToday}
           />
         ))}
 
@@ -185,16 +188,20 @@ function DayIndicator({
   label,
   isVisited,
   isToday,
+  isCompletedToday,
 }: {
   label: string;
   isVisited: boolean;
   isToday: boolean;
+  isCompletedToday?: boolean;
 }) {
-  const iconSrc = isToday
-    ? "/icons/today.svg"
-    : isVisited
-      ? "/icons/visited.svg"
-      : "/icons/NotActiveDay.svg";
+  const iconSrc = isCompletedToday
+    ? "/icons/starDaySvg.svg"
+    : isToday
+      ? "/icons/today.svg"
+      : isVisited
+        ? "/icons/visited.svg"
+        : "/icons/NotActiveDay.svg";
 
   return (
     <div className={styles.dayItem}>

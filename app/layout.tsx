@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   title: "Shpitz Game",
   description:
     "The app to teach oldies tech orianut",
+  themeColor: "#3BAFFA",
+  
 };
 
 export const viewport = {
