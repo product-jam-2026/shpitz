@@ -65,6 +65,7 @@ export default function Challenge() {
   // Tutorial state
   const [tutorialActive, setTutorialActive] = useState(false);
   const [tutorialStep, setTutorialStep] = useState(0);
+  const [tutorialHighlightRect, setTutorialHighlightRect] = useState<DOMRect | null>(null);
 
   // Tutorial steps configuration - changes based on message/photo mode
   const tutorialSteps = [
@@ -94,7 +95,7 @@ export default function Challenge() {
     },
     {
       target: "instructionsButton",
-      text: "לחצו כאן כדי לקבל רמז שיעזור לכם להחליט",
+      text: "תוכלו תמיד לקחת רמז שיעזור לפתור את השאלה",
       position: "top"
     },
     {
@@ -109,6 +110,30 @@ export default function Challenge() {
       showIcon: true
     }
   ];
+
+  const updateTutorialHighlight = () => {
+    const currentTarget = tutorialSteps[tutorialStep]?.target;
+    if (!currentTarget || currentTarget === "none") {
+      setTutorialHighlightRect(null);
+      return;
+    }
+
+    const element = document.querySelector(`[data-tutorial="${currentTarget}"]`);
+    if (element) {
+      const rect = element.getBoundingClientRect();
+      // For messageCard, find the actual card element inside to get its exact bounds
+      if (currentTarget === "messageCard") {
+        const cardElement = element.querySelector(`.${styles.messageCard}, .${styles.photoCard}`);
+        if (cardElement) {
+          setTutorialHighlightRect(cardElement.getBoundingClientRect());
+        } else {
+          setTutorialHighlightRect(rect);
+        }
+      } else {
+        setTutorialHighlightRect(rect);
+      }
+    }
+  };
 
   const startTutorial = () => {
     setTutorialActive(true);
@@ -181,8 +206,8 @@ export default function Challenge() {
 
         localStorage.removeItem("gameSnapshot");
       }
-    } 
-      
+    }
+
       catch (err) {
         setError("שגיאה בטעינת השאלות");
         setLoading(false);
@@ -192,6 +217,16 @@ export default function Challenge() {
       setLoading(false);
     }
   }, []);
+
+  // Update tutorial highlight when step changes or when tutorialActive changes
+  useEffect(() => {
+    if (tutorialActive) {
+      // Small delay to ensure DOM is ready
+      const timer = setTimeout(updateTutorialHighlight, 100);
+      return () => clearTimeout(timer);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tutorialActive, tutorialStep]);
 
   const [step, setStep] = useState(1);
   const [result, setResult] = useState<ResultState>("none");
@@ -495,6 +530,16 @@ export default function Challenge() {
                 <div className={styles.tutorialHighlight} data-highlight="bottomButtons" />
                 <div className={styles.tutorialGapDarkener} />
               </>
+            ) : tutorialSteps[tutorialStep].target === "messageCard" && tutorialHighlightRect ? (
+              <div
+                className={styles.tutorialHighlightDynamic}
+                style={{
+                  top: `${tutorialHighlightRect.top}px`,
+                  left: `${tutorialHighlightRect.left}px`,
+                  width: `${tutorialHighlightRect.width}px`,
+                  height: `${tutorialHighlightRect.height}px`,
+                }}
+              />
             ) : (
               <div className={styles.tutorialHighlight} data-highlight={tutorialSteps[tutorialStep].target} />
             )}

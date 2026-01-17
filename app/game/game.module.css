@@ -759,6 +759,22 @@
   background: transparent;
 }
 
+/* Dynamic highlight that uses inline styles for positioning */
+.tutorialHighlightDynamic {
+  position: fixed;
+  pointer-events: none;
+  border: none;
+  border-radius: 1.125rem; /* 18px - matches messageCard and photoCard */
+  /* Create a "cut-out" effect - darken everything EXCEPT the highlighted area */
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
+  z-index: 100000;
+  transition: all 0.4s ease;
+  /* Make the highlighted area itself fully visible */
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
 /* Secondary highlight - used when we have multiple spotlights */
 .tutorialHighlightSecondary {
   position: absolute;
@@ -812,7 +828,21 @@
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 320px;
-  height: 300px;
+  min-height: 300px;
+  height: auto;
+  max-height: 520px;
+}
+
+.tutorialHighlight[data-highlight="photoCard"] {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 24px);
+  max-width: 100%;
+  min-height: 300px;
+  height: auto;
+  max-height: 520px;
+  border-radius: 18px;
 }
 
 .tutorialHighlight[data-highlight="hintButton"],
