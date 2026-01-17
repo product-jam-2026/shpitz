@@ -123,7 +123,7 @@ export default function PreReview() {
               </>
             ) : (
               <>
-                <p className={styles.mainText2}>לא נורא, פעם הבאה תבוא <br/> מחודד יותר!</p>
+                <p className={styles.mainText2}>פעם הבאה תבוא מחודד יותר!</p>
                 <p className={styles.scoreText}>
                   ענית נכון על {score}/{total} שאלות
                 </p>

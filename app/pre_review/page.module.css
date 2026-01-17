@@ -77,28 +77,28 @@
   flex-direction: column;
   font-family: 'SouthFont', -apple-system, BlinkMacSystemFont, sans-serif;
   align-items: center;
-  gap: 1rem; /* 16px */
+  gap: 2.25rem; /* 36px */
   text-align: center;
   flex-shrink: 0;
 }
 
 .mainText {
- color: #111012;
+  color: var(--Text, rgba(17, 16, 18, 0.95));
   text-align: center;
-  font-family: 'VC_Haim-Regular';
-  font-size: 4rem; /* 28px */
-  font-weight: 600;
-  letter-spacing: 1.8px;
-  line-height: 2;
+  font-family: SimplePro-Regular;
+  font-size: 2.5rem; /* 40px */
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.5rem; /* 40px */
+  height: 2.5rem; /* 40px */
+  align-self: stretch;
   margin: 0;
-  margin-top: -3.75rem;
-  letter-spacing: 0.03125rem; /* 0.5px */
 }
 
 .mainText2 {
  color: #111012;
   text-align: center;
-  font-family: 'VC_Haim-Regular';
+  font-family: SimplePro-Regular;
   font-size: 2.2rem; /* 28px */
   font-weight: 600;
   letter-spacing: 1.8px;
@@ -168,10 +168,12 @@
 /* Button wrapper - stays at bottom */
 .buttonWrapper {
   width: 100%;
+  position: sticky;
   display: flex;
   justify-content: center;
   flex-shrink: 0;
-  padding-bottom: env(safe-area-inset-bottom, 0);
+  bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  
 }
 
 .summaryButton {
@@ -210,11 +212,12 @@
 /* Responsive adjustments */
 @media (max-height: 43.75rem) { /* 700px */
   .container {
-    padding: 2.5rem 1.25rem 0.9375rem 1.25rem; /* 40px 20px 15px 20px */
+    padding: 2rem 1.25rem 0.9375rem 1.25rem; /* 40px 20px 15px 20px */
   }
 
   .imageContainer {
     max-width: 17.5rem; /* 280px */
+    margin-top: 0.75rem;
   }
 
   .mainText {
@@ -239,11 +242,12 @@
 
 @media (max-height: 37.5rem) { /* 600px */
   .container {
-    padding: 1.875rem 1.25rem 0.625rem 1.25rem; /* 30px 20px 10px 20px */
+    padding: 1.5rem 1.25rem 0.625rem 1.25rem; /* 30px 20px 10px 20px */
   }
 
   .imageContainer {
     max-width: 13.75rem; /* 220px */
+    margin-top: 0.5rem;
   }
 
   .contentWrapper {
@@ -309,9 +313,10 @@
 .imageContainer {
   position: relative;
 
-  /* 🎯 הגודל שאת ביקשת */
-  width: 315px;
-  height: 315px;
+  /* 🎯 הגודל שאת ביקשת - הוקטן כדי לתת מקום לכפתור */
+  width: 100%;
+  max-width: 280px;
+  height: 280px;
 
   display: flex;
   flex-direction: column;
@@ -319,12 +324,13 @@
   align-items: center;
   gap: 9.692px;
 
-  /* מיקום אנכי – שחקי רק עם זה */
-  margin-top: 4.5rem;
+  /* מיקום אנכי – הוקטן מ4.5rem ל1rem */
+  margin-top: 1rem;
 
   /* 🚫 מונע מהאנימציה לדחוף תוכן */
   overflow: hidden;
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-height: 0;
 }
 .imageContainer :global(svg) {
   width: 100%;
