@@ -223,14 +223,12 @@ export default function ReviewPage() {
                                                 <p>
                                                     {contentParts?.map((part, idx) =>
                                                         part.type === 'link' ? (
-                                                            <a
+                                                            <span
                                                                 key={idx}
-                                                                href={part.href}
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
+                                                                className={styles.linkText}
                                                             >
                                                                 {part.content}
-                                                            </a>
+                                                            </span>
                                                         ) : (
                                                             <span key={idx}>{part.content}</span>
                                                         )

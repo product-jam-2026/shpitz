@@ -92,7 +92,7 @@
 }
 
 .mainTitle {
-  font-family: 'SimplePro-Regular', 'Heebo', sans-serif;
+  font-family: 'SimplePro-Bold', 'SimplePro-Regular', 'Heebo', sans-serif;
   color: var(--Text, #111012);
   text-align: center;
   font-size: 2.5rem !important;
@@ -156,7 +156,7 @@
   align-items: center;
   gap: 1.5rem; /* 24px - spacing between hint and message/photo */
   margin-bottom: 1.875rem; /* 30px */
-  background: rgba(189, 216, 255, 0.822);
+  background: var(--Boxes, #C1E0F3);
   padding: 2rem 1.25rem; /* 15px */
   box-sizing: border-box;
 }
@@ -229,7 +229,7 @@
 .messageBubbleText {
   position: relative;
   color: #000;
-  font-family: Roboto, sans-serif;
+  font-family: 'SimplerPro-Regular', sans-serif;
   font-size: 1.375rem; /* 22px */
   font-weight: 400;
   font-style: normal;
@@ -246,7 +246,14 @@
 .messageBubbleText a {
   color: #1a73e8;
   text-decoration: underline;
-  font-family: Roboto, sans-serif;
+  font-family: 'SimplerPro-Regular', sans-serif;
+  display: inline;
+  word-break: break-all;
+}
+
+.linkText {
+  color: #1a73e8;
+  font-family: 'SimplerPro-Regular', sans-serif;
   display: inline;
   word-break: break-all;
 }
