@@ -423,8 +423,8 @@ function formatDateIL(d: Date) {
             <Image 
               src="/icons/finalLogo.svg" 
               alt="Character"
-              width={300}
-              height={300}
+              width={315}
+              height={315}
                
             />
          
