@@ -926,6 +926,12 @@
   gap: 15px;
 }
 
+/* Tutorial Text - Middle Position (for first and last steps) */
+.tutorialTextMiddle {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* Tutorial Progress Indicator */
 .tutorialProgress {
   display: flex;
