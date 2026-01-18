@@ -905,9 +905,9 @@
 /* Tutorial Text */
 .tutorialText {
   position: fixed;
-  top: 60%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   background: transparent;
   color: #C7EE26;
   padding: 20px 15px;
