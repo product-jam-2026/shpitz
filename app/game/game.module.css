@@ -407,7 +407,7 @@
 
 .resultCard {
   width: 100%; /* CHANGED: מלוא רוחב */
-  min-height: 237px;
+  /* min-height: 237px; */
   border-radius: 0 36px 0 0;
   padding: 1.875rem 2.1875rem;
   text-align: right;
