@@ -962,30 +962,3 @@
   object-fit: contain;
 }
 
-
-/* Specific positioning for each step */
-.tutorialText[data-position="progressBar"] {
-  top: 80px;
-}
-
-.tutorialText[data-position="messageCard"] {
-  bottom: 250px;
-}
-
-.tutorialText[data-position="hintButton"],
-.tutorialText[data-position="instructionsButton"],
-.tutorialText[data-position="realButton"],
-.tutorialText[data-position="scamButton"],
-.tutorialText[data-position="bottomButtons"] {
-  bottom: 260px;
-}
-
-/* Override for middle positioned items with none target */
-.tutorialTextMiddle[data-position="none"] {
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  bottom: auto !important;
-  right: auto !important;
-  transform: translate(-50%, -50%) !important;
-}

@@ -216,9 +216,7 @@ export default function Challenge() {
   // Update tutorial highlight when step changes or when tutorialActive changes
   useEffect(() => {
     if (tutorialActive) {
-      // Small delay to ensure DOM is ready
-      const timer = setTimeout(updateTutorialHighlight, 100);
-      return () => clearTimeout(timer);
+      updateTutorialHighlight();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tutorialActive, tutorialStep]);
