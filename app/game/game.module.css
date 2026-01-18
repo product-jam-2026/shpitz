@@ -777,7 +777,6 @@
   /* Create a "cut-out" effect - darken everything EXCEPT the highlighted area */
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
   z-index: 100000;
-  transition: all 0.4s ease;
   /* Make the highlighted area itself fully visible */
   background: transparent;
 }
@@ -791,7 +790,6 @@
   /* Create a "cut-out" effect - darken everything EXCEPT the highlighted area */
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
   z-index: 100000;
-  transition: all 0.4s ease;
   /* Make the highlighted area itself fully visible */
   background: transparent;
   margin: 0;
@@ -807,7 +805,6 @@
   /* No box-shadow - we'll clip it from the main highlight's shadow */
   box-shadow: none;
   z-index: 100000;
-  transition: all 0.4s ease;
   background: transparent;
 }
 
@@ -907,9 +904,10 @@
 
 /* Tutorial Text */
 .tutorialText {
-  position: absolute;
+  position: fixed;
+  top: 60%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   background: transparent;
   color: #C7EE26;
   padding: 20px 15px;
@@ -922,8 +920,6 @@
   width: 95%;
   z-index: 100001;
   line-height: 1.5;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-  animation: tutorialPulse 0.5s ease-out;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -966,53 +962,6 @@
   object-fit: contain;
 }
 
-@keyframes tutorialPulse {
-  0% {
-    transform: translateX(-50%) scale(0.9);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(-50%) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes tutorialPulseMiddle {
-  0% {
-    transform: translate(-50%, -50%) scale(0.9);
-    opacity: 0;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-}
-
-.tutorialTextBottom {
-  top: 80px;
-}
-
-.tutorialTextTop {
-  bottom: 250px;
-}
-
-.tutorialTextMiddle {
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  bottom: auto !important;
-  right: auto !important;
-  transform: translate(-50%, -50%) !important;
-  animation: tutorialPulseMiddle 0.5s ease-out;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  padding: 20px 15px;
-  max-height: 90vh;
-  overflow: visible;
-}
 
 /* Specific positioning for each step */
 .tutorialText[data-position="progressBar"] {

@@ -75,11 +75,6 @@ export default function Challenge() {
       position: "middle"
     },
     {
-      target: "progressBar",
-      text: "כאן תוכלו לראות את ההתקדמות שלכם במשחק - 5 שאלות בסך הכל",
-      position: "bottom"
-    },
-    {
       target: "messageCard",
       text: isMessageMode
         ? "תוצג לפניכם הודעת טקסט"
