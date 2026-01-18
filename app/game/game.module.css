@@ -118,13 +118,12 @@
   border-radius: 1.125rem;   /* 18px מהפיגמה */
   overflow: hidden;
   margin-bottom: 20px;
-  width: 100%;
-  max-width: 19.875rem;      /* 318px מהפיגמה */
+  width: calc(100% - 2.5rem); /* 4.25rem - 1.5rem (scrollableArea padding compensation) = 2.75rem, adjusted to 2.5rem */
   margin-left: auto;         /* מירכוז הבועה */
   margin-right: auto;
   position: relative;
   border-bottom-left-radius: 0;
-  
+
 }
 .messageCard::after {
   content: "";
