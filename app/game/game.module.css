@@ -177,6 +177,7 @@
   letter-spacing: 1.32px;
   text-align: right;
   margin: 0;
+  word-break: break-word;
 }
 .headerIcon {
   width:70px;            /* שנוי לפי הגודל המתאים לך */
