@@ -60,7 +60,7 @@
 /* Main title */
 .mainTitle {
   color: #111012;
-  font-family: 'SimplePro-Regular';
+  font-family: 'SimplePro-Bold';
   font-size: 1rem;
   font-weight: 700;
   line-height: 2.5rem;
@@ -192,7 +192,6 @@
   color: #111012;
   font-family: 'SimplePro-Regular';
   font-size: 1.625rem;
-  font-weight: 700;
   line-height: 2rem;
   margin: 0;
   text-align: center;
@@ -242,10 +241,9 @@
 .badgesTitle {
   color: #111012;
   text-align: center;
-  font-family: 'SimplePro-Bold';
+  font-family: 'SimplePro-Regular';
   font-size: 1.625rem;
   font-style: normal;
-  font-weight: 700;
   line-height: 2rem;
   margin: 0 0 1rem 0;
 }
@@ -342,7 +340,7 @@
   width: 100vw;
   height: 100vh;
   height: 100dvh;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .introFadeOut {
@@ -371,7 +369,7 @@
   }
 
   .mainTitle {
-    font-size: 3.75rem;
+    font-size: 2.5rem;
   }
 
   .mainCard {
@@ -394,7 +392,7 @@
 
 @media (max-height: 43.75rem) {
   .mainTitle {
-    font-size: 3.75rem;
+    font-size: 2.5rem;
   }
 
   .characterContainer {
@@ -410,7 +408,7 @@
 
 @media (max-width: 25rem) {
   .mainTitle {
-    font-size: 3.75rem;
+    font-size: 2.5rem;
   }
 
   .shareText {
