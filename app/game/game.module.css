@@ -121,24 +121,24 @@
   max-width: 19.875rem;      /* 318px מהפיגמה */
   margin-left: auto;         /* מירכוז הבועה */
   margin-right: auto;
+  position: relative;
+  border-bottom-left-radius: 0;
+  
 }
 .messageCard::after {
   content: "";
   position: absolute;
-  
-  /* מיקום: צד שמאל למטה */
-  bottom: -2px;      /* התאמה קלה כדי שיישב בול על הגבול */
-  left: -8px;        /* מוציא את השפיץ קצת שמאלה מחוץ לבועה */
-  
-  /* גודל: בדקי מה המידות של ה-SVG ששלחו לך, בדרך כלל זה אזור ה-15-20px */
-  width: 15px; 
-  height: 18px;
-  
+  bottom: 0;      /* התאמה קלה כדי שיישב בול על הגבול */
+  left: 0;        /* מוציא את השפיץ קצת שמאלה מחוץ לבועה */
+  transform: translateX(-80%); 
+  width: 20px; 
+  height: 20px;
   /* חיבור הקובץ */
   background: url('/icons/message-tail.svg') no-repeat center / contain;
   
   /* מניעת לחיצות על השפיץ עצמו */
   pointer-events: none;
+  z-index: 2;
 }
 
 .messageHeader {
