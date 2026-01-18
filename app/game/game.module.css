@@ -365,12 +365,12 @@
 
 .hintText {
   color: #000000;
-  align-self: right;
+  text-align: right;
   font-family: "SimplerPro-Regular";
   font-size: 26px;
   font-weight: 400;
   line-height: 36px;
-  letter-spacing: -0.78px;
+  /* letter-spacing: -0.78px; */
 }
 
 .backToGameBtn {
