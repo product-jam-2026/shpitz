@@ -13,7 +13,7 @@ export default function StartPage({ isMessageMode }: StartPageProps) {
 
   // ברגע שתהיה לך תמונה, פשוט תשני את זה לכתובת הקובץ (למשל: "/images/hero.png")
   // כרגע זה null ולכן יוצג ה-Placeholder
-  const imageUrl = "icons/gotItIcon.svg"; 
+  const imageUrl = "icons/how_to_play.svg"; 
 
   const handleFinish = () => {
     localStorage.setItem('hasVisitedBefore', 'true');
@@ -38,7 +38,7 @@ export default function StartPage({ isMessageMode }: StartPageProps) {
         {/* טקסט ההסבר */}
         <div className={styles.contentWrapper}>
          <h2 className={styles.subTitle}>
-           איך משחקים<span className={styles.qMark}>?</span>
+          <span className={styles.qMark}>איך משחקים?</span>
     </h2>
           <p className={styles.description}>
            {isMessageMode ? (
