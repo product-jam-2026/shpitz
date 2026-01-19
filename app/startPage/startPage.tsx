@@ -28,7 +28,7 @@ export default function StartPage({ isMessageMode }: StartPageProps) {
             <Image 
               src={imageUrl} 
               alt="הסבר האתגר" 
-              fill 
+              fill
               className={styles.mainImage}
               priority
             />

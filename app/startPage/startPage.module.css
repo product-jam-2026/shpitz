@@ -35,15 +35,13 @@
 
 .illustrationBox {
   position: relative;
-
-  width: 100%;
-  max-width: 18.75rem;   /* 300px */
-  aspect-ratio: 1 / 1;
-
-  
-
   width: 10.375rem;      /* 166px */
   height: 10.375rem;     /* 166px */
+  flex-shrink: 0;        /* Prevents shrinking on smaller screens */
+}
+
+.mainImage {
+  object-fit: contain;   /* Ensures the icon maintains aspect ratio and fits within the box */
 }
 
 .contentWrapper {
