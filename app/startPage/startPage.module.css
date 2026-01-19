@@ -70,9 +70,8 @@
 }
 
 .qMark {
-  /* עיצוב סימן השאלה לפי פיגמה */
   color: #111012;
-  font-family: 'SimplePro-Regular';
+  font-family: 'SimplePro-Bold';
   font-size: 2.5rem;    /* 60px / 16 */
   font-weight: 500;
   line-height: 2.5rem;    /* 40px / 16 */
