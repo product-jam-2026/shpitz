@@ -482,9 +482,8 @@
 
 .resultStatusTitle {
   display: block;
-  font-family: "SimplerPro-Regular";
-  font-size: 26px; /* גודל מודגש ובולט */
-  font-weight: 700; /* הדגשה חזקה */
+  font-family: "SimplerPro-Bold";
+  font-size: 26px; 
   margin-bottom: 14px;
   text-align: right;
   width: 100%;
