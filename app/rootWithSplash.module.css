@@ -9,53 +9,42 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-
-  /* fade */
-  opacity: 1;
-  transition: opacity 0.7s ease;
-
-   background-color: #3BAFFA;
-  /* ה-SVG החדש המעודכן */
-  background-image: url('/background/homeNoise.svg');
-  background-position: center;
-  overflow: hidden;
-
-  /* כמו אצלך בבית */
-  filter: saturate(0.8) brightness(1.05);
-}
-
-/* כשמתחילים fade */
-.fadeOut {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* הוידאו ממלא מסך */
-.video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* אם את רוצה בלי חיתוך: contain */
-}
-
-.splash {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #3BAFFA; /* או מה שאת רוצה כרקע */
+  background: #3BAFFA;
+  background-image: url('/background/homeNoise.svg');
+  background-position: center;
+  overflow: hidden;
+  filter: saturate(0.8) brightness(1.05);
+  
+  /* האנימציה הראשית - רצה פעם אחת בדיוק ואז עוזבת עם fade */
+  animation: splashFade 7s ease-out forwards;
+  animation-iteration-count: 1;
 }
 
+/* אנימציה שלהפעם הראשונה בלבד */
+@keyframes splashFade {
+  0% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* הוידאו/ה-GIF ממלא מסך */
 .gif {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
+/* כשמתחילים fade (לא בשימוש אבל שם אם צריך לתמיכה אחורה) */
 .fadeOut {
   opacity: 0;
-  transition: opacity 0.7s ease;
   pointer-events: none;
 }
