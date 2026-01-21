@@ -122,7 +122,6 @@
   margin-left: auto;         /* מירכוז הבועה */
   margin-right: auto;
   position: relative;
-  border-bottom-left-radius: 0;
 
 }
 .messageCard::after {
