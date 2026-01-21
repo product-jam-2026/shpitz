@@ -50,7 +50,7 @@
   justify-content: flex-start;
   flex: 1;
   width: 100%;
-  gap: 0.5rem; 
+  gap: 1.5rem; 
   min-height: 0; 
   margin-top: -1rem;
 }
@@ -68,6 +68,10 @@
 /* Image styling - replaces inline styles */
 .scoreImage {
   object-fit: contain;
+}
+
+.lottieAnimation {
+  transform: translateY(-0.5rem);
 }
 
 /* Text Content */

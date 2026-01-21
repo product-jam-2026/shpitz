@@ -59,6 +59,7 @@ function LottieFreeze({ score, alt }: { score: number; alt: string }) {
     <div className={styles.imageContainer} aria-label={alt}>
       <Lottie
         lottieRef={lottieRef}
+        className={styles.lottieAnimation}
         animationData={lottieData}
         loop={false}
         autoplay
