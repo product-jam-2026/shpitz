@@ -93,7 +93,7 @@ export default function ChallengeBase() {
             </div>
 
                 {/* 2. כותרת השאלה */}
-                <h2 className={styles.questionTitle}>מה דעתכם על ההודעה?</h2>
+                <h2 className={styles.questionTitle}>מה דעתכם?</h2>
 
                 {/* 3. כרטיס ההודעה */}
                 <div className={styles.messageCard}>
