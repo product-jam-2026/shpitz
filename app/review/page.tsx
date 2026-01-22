@@ -62,7 +62,8 @@ export default function ReviewPage() {
 
         // Load the mode (messages or photos)
         const savedMode = localStorage.getItem('dailyQuestionMode');
-        setIsMessageMode(savedMode === 'messages');
+        // Default to messages if not set, otherwise check if it's NOT 'photos'
+        setIsMessageMode(savedMode !== 'photos');
 
         // Load all questions and results from localStorage
         const dailyResultsStr = localStorage.getItem('dailyResults');

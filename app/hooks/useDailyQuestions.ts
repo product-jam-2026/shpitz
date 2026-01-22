@@ -46,12 +46,9 @@ function getDailySeed() {
 // Helper function to determine if today should show photos or messages
 // Based on the daily seed, returns true for messages, false for photos
 export function shouldShowMessages() {
-  // 🔧 Force messages mode (original behavior)
-  return true; // Set to true for messages, false for photos
-
-  // Uncomment below to enable date-based switching:
-  // const seed = getDailySeed();
-  // return seed % 2 === 0; // Even = messages, Odd = photos
+  // Date-based switching: Even days = messages, Odd days = photos
+  const seed = getDailySeed();
+  return seed % 2 === 0; // Even = messages, Odd = photos
 }
 
 // 2. A seeded random generator (Linear Congruential Generator)
@@ -117,10 +114,14 @@ export function useDailyQuestions() {
         const seed = getDailySeed(); // Get today's unique number
         const rng = seededRandom(seed); // Create a random generator locked to today
 
-        // Shuffle the array using our daily seed
-        const shuffled = [...data].sort(() => rng() - 0.5);
+        // Fisher-Yates shuffle using our seeded random function
+        const shuffled = [...data];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
 
-        // Take the first 5
+        // Take the first 5 (guaranteed to be unique)
         setQuestions(shuffled.slice(0, 5) as DailyQuestion[]);
 
       } catch (err: any) {
