@@ -119,9 +119,7 @@
   font-family: 'SimplePro-Regular';
   font-size: 1.625rem;   /* 26px */
   line-height: 2rem;     /* 32px */
-  /* margin: 0; */
-  /* margin-top: -1rem; */
-  letter-spacing: 0;    /* בפיגמה אין letter-spacing */
+  letter-spacing: 0;   
 }
 
 
@@ -194,8 +192,8 @@
   border-right: 0.1875rem solid #111012;  /* 3px */
   border-bottom: 0.1875rem solid #111012; /* 3px */
 
-  color: #111012;             /* אם זה טקסט כהה בפיגמה */
-  font-family: 'VC_Haim-Regular', sans-serif;  /* או מה שאת משתמשת */
+  color: #111012;             
+  font-family: 'VC_Haim-Regular', sans-serif;  
   font-weight: 700;
 
   cursor: pointer;
@@ -306,17 +304,11 @@
   }
 }
 
-/* .lottieOverlay {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-} */
+
 
 .imageContainer {
   position: relative;
 
-  /* 🎯 הגודל שאת ביקשת - הוקטן כדי לתת מקום לכפתור */
   width: 100%;
   max-width: 280px;
   height: 280px;
@@ -327,10 +319,10 @@
   align-items: center;
   gap: 9.692px;
 
-  /* מיקום אנכי – הוקטן מ4.5rem ל1rem */
+
   margin-top: 0;
 
-  /* 🚫 מונע מהאנימציה לדחוף תוכן */
+
   overflow: hidden;
   flex-shrink: 1;
   min-height: 0;
@@ -354,8 +346,8 @@
   justify-content: center;
 }
 
-/* 👇 שליטה בגודל האנימציה */
+
 .lottieOverlay > div {
-  width: 70%;     /* 🔥 שחקי עם זה: 50%–80% */
+  width: 70%;     
   height: 70%;
 }

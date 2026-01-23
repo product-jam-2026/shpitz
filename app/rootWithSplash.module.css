@@ -4,7 +4,7 @@
   height: 100%;
 }
 
-/* שכבת הספלאש מעל הכל */
+
 .splash {
   position: fixed;
   inset: 0;
@@ -18,12 +18,12 @@
   overflow: hidden;
   filter: saturate(0.8) brightness(1.05);
   
-  /* האנימציה הראשית - רצה פעם אחת בדיוק ואז עוזבת עם fade */
+
   animation: splashFade 7s ease-out forwards;
   animation-iteration-count: 1;
 }
 
-/* אנימציה שלהפעם הראשונה בלבד */
+
 @keyframes splashFade {
   0% {
     opacity: 1;
@@ -36,14 +36,13 @@
   }
 }
 
-/* הוידאו/ה-GIF ממלא מסך */
+
 .gif {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* כשמתחילים fade (לא בשימוש אבל שם אם צריך לתמיכה אחורה) */
 .fadeOut {
   opacity: 0;
   pointer-events: none;

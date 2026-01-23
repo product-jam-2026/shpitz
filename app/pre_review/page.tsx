@@ -31,7 +31,7 @@ type ScoreAssets = {
   lottieData: object;
 };
 
-// כרגע יש לך רק score=3. אם תוסיפי עוד קבצים, פשוט תרחיבי את המפה.
+
 const SCORE_ASSETS: Record<number, ScoreAssets> = {
    0: { lottieData: lottie0 },
   1: { lottieData: lottie1 },
@@ -41,7 +41,7 @@ const SCORE_ASSETS: Record<number, ScoreAssets> = {
    5: { lottieData: lottie5 },
 };
 
-// fallback בטוח: אם אין התאמה לציון, נשתמש בלוטי של 3 (או הראשון שיש)
+
 function getAssetsByScore(score: number): ScoreAssets {
   return SCORE_ASSETS[score] ?? SCORE_ASSETS[3];
 }
@@ -51,7 +51,6 @@ function LottieFreeze({ score, alt }: { score: number; alt: string }) {
   const lottieRef = useRef<LottieRefCurrentProps | null>(null);
 
   useEffect(() => {
-    // מתחיל מחדש כש-score משתנה
     lottieRef.current?.goToAndPlay(0, true);
   }, [score]);
 
@@ -64,7 +63,7 @@ function LottieFreeze({ score, alt }: { score: number; alt: string }) {
         loop={false}
         autoplay
         onComplete={() => {
-          // Freeze אמיתי על הפריים האחרון
+
           const frames = lottieRef.current?.getDuration(true); // frames count
           if (!frames) return;
           lottieRef.current?.goToAndStop(frames - 1, true);
@@ -112,7 +111,7 @@ export default function PreReview() {
     <div className={styles.screen} dir="rtl">
       <div className={styles.container}>
         <div className={styles.contentWrapper}>
-          {/* ✅ Lottie only, freezes on last frame */}
+          {/* Lottie only, freezes on last frame */}
           <LottieFreeze score={score} alt={isGoodScore ? "Success" : "Try again"} />
 
           {/* Text Content */}

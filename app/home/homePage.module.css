@@ -8,15 +8,13 @@
   height: 100%;
   width: 100%;
   background-color: #3BAFFA;
-  /* ה-SVG החדש המעודכן */
-    background-image: url('/background/homeNoise.svg');
+  background-image: url('/background/homeNoise.svg');
   background-size: cover;
   background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-  /* שמירה על הפילטרים הקודמים לשיפור הצבעים */
   filter: saturate(0.8) brightness(1.05);
 }
 .container {
@@ -30,7 +28,7 @@
   justify-content: flex-start; 
   gap: 2rem;
 }
-/* הגדרות ברירת מחדל למסכים גדולים */
+
 .logoContainer {
   margin-top: clamp(2rem, 10vh, 6rem); 
   flex: none;
@@ -44,7 +42,7 @@
   margin-right: 1.875rem;
 }
 .mainIcon {
-  transform: scale(1.5); /* נסי 1.1 / 1.25 / 1.3 */
+  transform: scale(1.5); 
   transform-origin: center;
 }
 
@@ -86,22 +84,22 @@
 
 .dayItem {
   display: flex;
-  flex-direction: column; /* גורם לאות להיות מתחת לכוכב */
-  align-items: center;    /* ממרכז את האות בדיוק מתחת לכוכב */
+  flex-direction: column; 
+  align-items: center;   
   gap: 0.25rem;           
-  min-width: 2.5rem;      /* עוזר לשמור על רווח שווה */
+  min-width: 2.5rem;     
 }
 .dayLetter {
   color: #111012;
   font-family: 'SimplePro-Regular';
   font-size: 1rem;
   font-weight: 500;
-  text-align: center;     /* מוודא שהטקסט ממורכז בתוך עצמו */
-  margin: 0;              /* מאפס מרווחים שעלולים להסיט את האות */
+  text-align: center;    
+  margin: 0;              
 }
 .todayDate {
   color: #C7EE26;
-  font-weight: 500; /* אופציונלי – נותן הדגשה יפה */
+  font-weight: 500; 
 }
 .partnerRow {
   display: flex;
@@ -109,14 +107,14 @@
   justify-content: center;
   gap: 8px;
 
-  margin-bottom: 8px; /* רווח מעל כפתור התחל */
+  margin-bottom: 8px; 
 }
 
 .partnerText {
   font-family: 'SimplePro-Regular';
   font-size: 1rem;
   font-weight: 400;
-  color: rgba(17, 16, 18, 0.95); /* אפור רגוע */
+  color: rgba(17, 16, 18, 0.95);
   white-space: nowrap;
 }
 
@@ -131,7 +129,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px; /* ← בדיוק 8px */
+  gap: 8px;
   z-index: 10;
 }
 
@@ -139,7 +137,7 @@
 
 
 .startButton {
-  position: static; /* ⬅️ חשוב */
+  position: static; 
   margin: 0;
 
   width: min(20.3125rem, calc(100vw - 3rem));
@@ -156,7 +154,7 @@
   font-size: 4rem;
   color: #111012;
   font-family: "VC_Haim-Regular";
-  font-size: 4rem;      /* 36px – תואם תחושת כפתור ראשי */
+  font-size: 4rem;     
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0.125rem;
@@ -166,21 +164,21 @@
 }
 
 
-/* אפקט לחיצה */
+
 .startButton:active {
   border-right-width: 1px;
   border-bottom-width: 1px;
-  /* הוספת ה-translateX כדי שהמרכוז לא יישבר בלחיצה */ 
+
 }
-/* 📱 התיקון הקריטי למסך SE - חייב להיות בסוף הקובץ! */
+
 @media screen and (max-height: 670px) {
   .logoContainer {
-    margin-top: 2rem; /* מצמצם את הרווח העליון ב-SE */
+    margin-top: 2rem; 
   }
 
   .mainTitle {
-    margin-top: 1.5rem; /* מצמצם את המרחק מהלוגו */
-    font-size: 1.3rem; /* מקטין את הכותרת */
+    margin-top: 1.5rem; 
+    font-size: 1.3rem; 
     line-height: 1.6rem;
   }
 
@@ -193,6 +191,6 @@
   }
 
   .startButton {
-    height: 7rem; /* מקטין את הכפתור ב-SE כדי שלא יסתיר תוכן */
+    height: 7rem; 
   }
 }

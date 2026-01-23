@@ -4,27 +4,27 @@ import { useEffect, useState } from "react";
 import HomePage from "./home/HomePage";
 import styles from "./rootWithSplash.module.css";
 
-const ANIMATION_DURATION_MS = 7099; // משך הספלאש כולו עם fade (6s animation + buffer)
+const ANIMATION_DURATION_MS = 7099; 
 
 export default function RootWithSplash() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    // אחרי שהאנימציה מסתיימת, מסירים את הספלאש
+
     const timer = window.setTimeout(() => {
       setShowSplash(false);
     }, ANIMATION_DURATION_MS);
 
-    // ניקוי הטיימר אם הקומפוננט יורד
+
     return () => window.clearTimeout(timer);
   }, []);
 
   return (
     <div className={styles.root} dir="rtl">
-      {/* הבית תמיד נטען מאחורה */}
+    
       <HomePage />
 
-      {/* הספלאש מעל הבית */}
+      {/* splash on the screen*/}
       {showSplash && (
         <div className={styles.splash}>
           <img

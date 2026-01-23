@@ -36,16 +36,16 @@ export default function HomePage(){
   useEffect(() => {
     const today = new Date();
 
-    // ✅ first visit
+    // first visit
     const hasVisited = localStorage.getItem("hasVisitedBefore");
     setIsFirstVisit(!hasVisited);
 
-    // ✅ completed today (LOCAL date key)
+    // completed today (LOCAL date key)
     const todayKey = localDateKey(today);
     const completedDate = localStorage.getItem("dailyCompletedDate");
     setHasCompletedToday(completedDate === todayKey);
 
-    // ✅ activity dates
+    // activity dates
     const activityDates: string[] = JSON.parse(
       localStorage.getItem("userActivityDates") || "[]"
     );
@@ -56,7 +56,7 @@ export default function HomePage(){
       localStorage.setItem("userActivityDates", JSON.stringify(activityDates));
     }
 
-    // ✅ streak INCLUDING today
+    // streak INCLUDING today
     let consecutiveStreak = 0;
     const checkDate = new Date(today); // start from today
 
@@ -73,10 +73,10 @@ export default function HomePage(){
     setStreak(consecutiveStreak);
     localStorage.setItem("userStreak", consecutiveStreak.toString());
 
-    // ✅ activeDays = all visited days (for visited.svg)
+    // activeDays = all visited days (for visited.svg)
     setActiveDays(activityDates);
 
-    // ✅ 7-date window (today in the middle)
+    // 7-date window (today in the middle)
     const cells = [];
     for (let offset = -3; offset <= 3; offset++) {
       const d = addDays(today, offset);

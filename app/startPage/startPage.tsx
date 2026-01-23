@@ -116,7 +116,7 @@ export default function StartPage({ isMessageMode }: StartPageProps) {
           </svg>
         </div>
 
-        {/* טקסט ההסבר */}
+        {/* explanation text*/}
         <div className={styles.contentWrapper}>
          <h2 className={styles.subTitle}>
           <span className={styles.qMark}>איך משחקים?</span>
