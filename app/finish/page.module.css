@@ -318,11 +318,11 @@
   text-align: center;
 }
 .badgeLabelActive {
-  color: #111012; /* כהה / פעיל */
+  color: #111012; 
 }
 
 .badgeLabelInactive {
-  color: #BFBFBF; /* אפור / לא פעיל */
+  color: #BFBFBF; 
 }
 .introOverlay {
   position: fixed;
@@ -348,7 +348,7 @@
   opacity: 0;
   pointer-events: none;
 }
-/* אופציונלי: לנעול גלילה/לחיצות בזמן אינטרו */
+
 .locked {
   height: 100vh;
   overflow: hidden;

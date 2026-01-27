@@ -7,9 +7,9 @@ export default function ExplanationPage() {
   const router = useRouter();
 
   const handleFinish = () => {
-    // סימון שהמשתמש ראה את ההסבר
+   
     localStorage.setItem('hasVisitedBefore', 'true');
-    // ניווט חזרה לדף הבית או ישירות לאתגר
+  
     router.push('/'); 
   };
 
@@ -17,7 +17,7 @@ export default function ExplanationPage() {
     <div className="min-h-screen bg-[#F3F3F3] flex flex-col items-center justify-center p-6" dir="rtl">
       <div className={styles.container}>
         
-        {/* איור / Placeholder לתמונה */}
+        
         <div className={styles.illustrationBox}>
           <div className={styles.crossContainer}>
             <svg className={styles.crossLines} viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -28,14 +28,14 @@ export default function ExplanationPage() {
           </div>
         </div>
 
-        {/* טקסט ההסבר */}
+        
         <div className={styles.contentWrapper}>
           <p className={styles.description}>
             תוצג לפניכם הודעת טקסט, חשבו האם היא <span className={styles.highlight}>תקינה</span> או <span className={styles.highlight}>חשודה</span> ובחרו את האופציה המתאימה.
           </p>
         </div>
 
-        {/* כפתור אישור */}
+        
         <button className={styles.understandButton} onClick={handleFinish}>
           הבנתי
         </button>

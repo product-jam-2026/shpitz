@@ -119,7 +119,7 @@
   overflow: hidden;
   margin-bottom: 20px;
   width: calc(100% - 2.5rem); /* 4.25rem - 1.5rem (scrollableArea padding compensation) = 2.75rem, adjusted to 2.5rem */
-  margin-left: auto;         /* מירכוז הבועה */
+  margin-left: auto;        
   margin-right: auto;
   position: relative;
 
@@ -127,21 +127,21 @@
 .messageCard::after {
   content: "";
   position: absolute;
-  bottom: 0;      /* התאמה קלה כדי שיישב בול על הגבול */
-  left: 0;        /* מוציא את השפיץ קצת שמאלה מחוץ לבועה */
+  bottom: 0;      
+  left: 0;        
   transform: translateX(-80%); 
   width: 20px; 
   height: 20px;
-  /* חיבור הקובץ */
+
   background: url('/icons/message-tail.svg') no-repeat center / contain;
   
-  /* מניעת לחיצות על השפיץ עצמו */
+
   pointer-events: none;
   z-index: 2;
 }
 
 .messageHeader {
-  background: #ffffff;      /* שינוי מאפור ללבן */
+  background: #ffffff;     
   padding: 1rem 1rem 0.5rem;
   display: flex;
   color: #7B7B7B;
@@ -161,8 +161,8 @@
 .messageBubble {
   margin: 0;
   width: 100%;
-  background: #ffffff;      /* הכל לבן ורציף */
-  padding: 0 1.5rem 1.5rem; /* רווחים פנימיים לטקסט */
+  background: #ffffff;      
+  padding: 0 1.5rem 1.5rem; 
   text-align: center;
 }
 
@@ -178,7 +178,7 @@
   word-break: break-word;
 }
 .headerIcon {
-  width:70px;            /* שנוי לפי הגודל המתאים לך */
+  width:70px;           
   height: 70px;
   object-fit: contain;
 }
@@ -186,13 +186,13 @@
 .ownerText {
   color: #7B7B7B;
   text-align: center;
-  font-family: 'Roboto', sans-serif; /* וודאי ש-Roboto טעון בפרויקט */
+  font-family: 'Roboto', sans-serif; 
   font-size: 13.334px;
   font-style: normal;
   font-weight: 400;
   line-height: 30.002px; /* 225% */
   letter-spacing: 0.8px;
-  display: block; /* מבטיח שה-text-align: center יעבוד */
+  display: block; 
 }
 .messageTimestamp{
   color: #BFBFBF;
@@ -206,23 +206,23 @@
     line-height: 18px; /* 128.571% */
     letter-spacing: 0.84px;
 }
-/* --- אזור התוכן הנגלל --- */
+
 .scrollableArea {
-  flex: 1; /* דוחף את ה-actions הכחול למטה */
+  flex: 1; 
   overflow-y: auto;
-  padding: 20px 12px; /* CHANGED: הוספת padding רק לתוכן */
+  padding: 20px 12px; 
   -webkit-overflow-scrolling: touch;
 }
-/* --- כפתורי עזר והכרעה (הפס הכחול המקובע) --- */
+
 .actions {
-  width: 100vw; /* CHANGED: מלוא רוחב המסך */
+  width: 100vw; 
   position: relative;
   left: 50%;
   right: 50%;
-  margin-left: -50vw; /* CHANGED: דוחף לשמאל */
-  margin-right: -50vw; /* CHANGED: דוחף לימין */
+  margin-left: -50vw; 
+  margin-right: -50vw; 
   background-color: #3BAFFA;
-  /* ה-SVG החדש המעודכן */
+
     background-image: url('/background/homeNoise.svg');
   /* padding: 20px 0 35px;  */
   padding: 1.25rem;
@@ -234,15 +234,15 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.875rem; 
-  /* עדכון: רווח של 14 פיקסלים מתחת לשורה */
+ 
   margin-bottom: 0.875rem;
-  padding: 0 12px; /* רווח מהצדדים בתוך הפס הכחול */
+  padding: 0 12px; 
 }
 
 .toolButton {
   height: 51px;
   border: 1px solid #000000;
-  border-top: none;      /* מבטל מסגרת למעלה */
+  border-top: none;      
   border-left: none;
   border-right: 3px solid var(--Dark_blue_text, #000000);
   border-bottom: 3px solid var(--Dark_blue_text, #000000);
@@ -258,12 +258,11 @@
   gap: 0.625rem;
 }
 
-/* --- כפתורי הכרעה --- */
 .mainRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  padding: 0 12px; /* רווח מהצדדים בתוך הפס הכחול */
+  padding: 0 12px; 
 }
 
 .openBtn, .reportBtn {
@@ -295,7 +294,7 @@
   border-radius: 0 0 0;
 }
 
-/* --- פופ-אפ רמז --- */
+
 .hintOverlay {
   position: fixed;
   inset: 0;
@@ -323,7 +322,7 @@
   z-index: 1000;
   animation: slideUp 0.5s ease-out forwards;
   padding: 1.875rem 2.1875rem;
-  justify-content: flex-start; /* שלא יפזר רווחים */
+  justify-content: flex-start; 
   gap: 1.25rem;
 }
 
@@ -392,7 +391,7 @@
   margin: 0;
 }
 
-/* --- כרטיס תוצאה Bottom Sheet --- */
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -404,7 +403,7 @@
 }
 
 .resultCard {
-  width: 100%; /* CHANGED: מלוא רוחב */
+  width: 100%; 
   /* min-height: 237px; */
   border-radius: 0 36px 0 0;
   padding: 1.875rem 2.1875rem;
@@ -460,7 +459,7 @@
 }
 
 .tipIcon {
-  width: 40px; /* הגדירי לפי הגודל הרצוי */
+  width: 40px; 
   height: auto;
 }
 .tipWrapper {
@@ -473,8 +472,8 @@
 
 .failContainer {
   display: flex;
-  flex-direction: column; /* מסדר את הכותרת מעל השורה של האייקון */
-  align-items: flex-start; /* מצמיד הכל לימין (בגלל ה-RTL) */
+  flex-direction: column; 
+  align-items: flex-start; 
   direction: rtl; 
   width: 100%;
 }
@@ -488,7 +487,7 @@
   width: 100%;
 }
 
-/* הטקסט המשתנה בכרטיס הצלחה (משפטי השפיץ) */
+
 .resultFeedbackText {
   margin: 0;
   font-family: "SimplerPro-Regular";
@@ -498,13 +497,13 @@
   text-align: right;
   width: 100%;
 }
-/* עוטף ההודעה כדי לאפשר “שתי הודעות” אחת מעל השנייה בזמן מעבר */
+
 .messageStage {
   position: relative;
-  overflow: hidden; /* חשוב כדי שלא יראו את ההודעה נכנסת מבחוץ */
+  overflow: hidden; 
 }
 
-/* שכבות הודעה בזמן אנימציה */
+
 .messageLayer {
   position: absolute;
   left: 0;
@@ -512,12 +511,11 @@
   top: 0;
 }
 
-/* ההודעה הרגילה (כשאין מעבר) */
 .messageStatic {
   position: relative;
 }
 
-/* אנימציות החלקה */
+
 .slideOutRight {
   animation: slideOutRight 1500ms cubic-bezier(.15, .85, .2, 1) forwards;
   will-change: transform, opacity;
@@ -538,7 +536,7 @@
   to   { transform: translateX(0); opacity: 1; }
 }
 
-/* הפס הכחול יורד למטה */
+
 .actionsAnimating {
   will-change: transform;
   transition: transform 260ms ease;
@@ -547,12 +545,12 @@
   transform: translateY(105%);
 }
 
-/* נגישות: לכבד prefers-reduced-motion */
+
 @media (prefers-reduced-motion: reduce) {
   .slideOutRight, .slideInLeft { animation: none !important; }
   .actionsAnimating { transition: none !important; }
 }
-/* הודעה חדשה נכנסת משמאל */
+
 .msgEnter {
   transform: translateX(-110%);
   opacity: 0;
@@ -563,7 +561,7 @@
   transition: transform 600ms cubic-bezier(0.175, 0.885, 0.32, 1.1), opacity 300ms ease-out;
 }
 
-/* הודעה קיימת יוצאת ימינה */
+
 .msgExit {
   transform: translateX(0);
   opacity: 1;
@@ -583,7 +581,6 @@
   top: 0;
 }
 
-/* מאפשר מילוי “להיכנס” בלי ליצור גלילה */
 .progressItem {
   position: relative;
   overflow: hidden;
@@ -595,14 +592,13 @@
 .progressSuccess { --fill-color: #C7EE26; }
 .progressFail { --fill-color: #FF706E; }
 
-/* חשוב: שיהיה אפשר לחתוך את ההחלקה */
+
 .progressItem {
   position: relative;
   overflow: hidden;
 }
 
-/* שכבת "כיסוי" אפורה שמחליקה שמאלה וחושפת את הצבע מתחת */
-/* שכבת היילייט שמחליקה מימין לשמאל - בלי לכסות את הצבע */
+
 .progressFillAnim::after {
   content: "";
   position: absolute;
@@ -610,7 +606,7 @@
   pointer-events: none;
   z-index: 2;
 
-  /* היילייט לבן-שקוף שמרגיש כמו מילוי */
+
   background: linear-gradient(
     90deg,
     rgba(255,255,255,0) 0%,
@@ -618,7 +614,7 @@
     rgba(255,255,255,0) 100%
   );
 
-  /* מתחיל מחוץ למסגרת מימין ומחליק שמאלה */
+
   transform: translateX(110%);
   animation: sweepRTL 1500ms cubic-bezier(0.30, 0.00, 0.10, 1) forwards;
   will-change: transform;
@@ -629,7 +625,7 @@
 }
 
 
-/* הקלאס שכבר יש: highlight שמחליק */
+
 .progressFillAnim::after {
   content: "";
   position: absolute;
@@ -649,14 +645,13 @@
   will-change: transform;
 }
 
-/* ✅ NEW: המחדד עצמו — צמוד לקצה ומוביל את התנועה */
 .progressFillAnim::before {
   content: "";
   position: absolute;
   top: 50%;
-  transform: translate(110%, -50%) rotate(-90deg); /* התחלה מחוץ למסגרת */
-  width: 45px;       /* אפשר לשנות */
-  height: 45px;      /* אפשר לשנות */
+  transform: translate(110%, -50%) rotate(-90deg); 
+  width: 45px;      
+  height: 45px;     
   background: url("/icons/sharp1.svg") no-repeat center / contain;
   pointer-events: none;
   z-index: 3;
@@ -665,12 +660,12 @@
   will-change: transform;
 }
 
-/* תנועת ההיילייט */
+
 @keyframes sweepRTL {
   to { transform: translateX(-110%); }
 }
 
-/* תנועת המחדד — אותו כיוון, אבל נשאר צמוד לקצה */
+
 @keyframes sharpSweepRTL {
   0%   { transform: translate(110%, -45%) rotate(-90deg); opacity: 1; }
   80%  { transform: translate(-110%, -45%) rotate(-90deg); opacity: 1; }
@@ -681,7 +676,6 @@
   min-height: 240px;
 }
 
-/* --- כרטיס תמונה --- */
 .photoCard {
   background: #ffffff;
   border-radius: 0;
@@ -689,8 +683,8 @@
   overflow: hidden;
   margin-bottom: 20px;
   display: flex;
-  width: calc(100% - 66px); /* 100% רוחב פחות 33px מכל צד */
-  margin-left: auto;        /* מירכוז */
+  width: calc(100% - 66px); 
+  margin-left: auto;      
   margin-right: auto;
   justify-content: center;
   align-items: center;
@@ -711,8 +705,8 @@
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  background-color: #3BAFFA; /* הצבע שביקשת */
-  height: 4rem; /* 64px ב-REM */
+  background-color: #3BAFFA; 
+  height: 4rem; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -965,14 +959,14 @@
   height: 100%;
   object-fit: contain;
 }
-/* מוסיף תנועה חלקה לכל הכפתורים */
+
 .toolButton, .openBtn, .reportBtn, .backToGameBtn {
     transition: all 0.1s ease;
 }
 
-/* אפקט הלחיצה המדויק מהקוד של ה-startButton */
+
 .toolButton:active, .openBtn:active, .reportBtn:active, .backToGameBtn:active {
-    /* 1. מקטין את עובי המסגרת */
+
     border-right-width: 1px !important;
     border-bottom-width: 1px !important;
 }
