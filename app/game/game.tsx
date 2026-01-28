@@ -4,7 +4,7 @@ import { useMemo, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./game.module.css";
 import Lottie from "lottie-react";
-import ConfettiEffect from "../ConfettiEffect";
+
 
 import confettiAnimation from "@/public/animation/confettiAnimation.json";
 import successAnimation from "@/public/animation/success.json";
