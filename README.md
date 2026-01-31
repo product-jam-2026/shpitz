@@ -1,20 +1,19 @@
-# Starter Kit
+# Shpitz
 
-This is a Starter Kit for the Digital Product Jam course. It provides a
-configuration of the [Next.js](https://nextjs.org/) framework, and a number of
-examples of common patterns and components.
+Shpitz is a mobile first, Hebrew language game that helps people get better at spotting online scams and misleading content. Each day users get five quick challenges and decide whether a message or image is real or fake. The experience gives immediate feedback, a short tip, and builds a streak so users keep training their “scam radar.”
 
-## How to use the Starter Kit
+## The Idea
+Online scams are getting smarter and more visual. Shpitz turns awareness into a daily habit:
+- short, daily practice (5 questions)
+- two modes: text messages and images
+- hints, explanations, and review of wrong answers
+- streaks and badges to keep users engaged
+- easy sharing of results to invite friends
 
-First up, you should be using GitHub's template functionality to create your own
-code repository using this repository as a starting point.
-[See ther GitHub documentation on creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+The goal is to reduce falls for phishing and social engineering by making detection skills feel simple and fun.
 
-Once you have created your own repository from this template, you can use Git to
-clone the repository to your local machine.
-
-When you have a local copy of your repository, you can proceed with the next
-steps in this document.
+## Who It’s For
+Older adults are the primary audience. Many didn’t grow up with the internet or smartphones, so their scam detection instincts are less developed. Because online platforms and tactics change quickly, the pace of change makes it harder to keep up, which increases vulnerability when a scam appears. Shpitz bridges that gap with short, low-pressure practice that builds confidence over time.
 
 ## Getting Started
 

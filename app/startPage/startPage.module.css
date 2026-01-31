@@ -55,7 +55,6 @@
 }
 
 .subTitle {
-  /* מיקום ויישור */
   display: flex;
   justify-content: center;
   align-items: baseline;

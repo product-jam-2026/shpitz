@@ -44,7 +44,7 @@ function upsertDailyAnswer(answer: DailyAnswer) {
   localStorage.setItem(dailyAnswersKey(), JSON.stringify(filtered));
 }
 
-// מערך המשפטים החדש לפי הוראות הפיגמה
+
 const successMessages = [
   "יפה, החושים מתחדדים!",
   "זיהוי כזה? עליתם על המסלול להיות חדים כמו שפיץ!",
@@ -368,7 +368,7 @@ export default function Challenge() {
           </div>
         )}
 
-        {/* ✅ השינוי: הוספת הבר הכחול העליון מקובע מחוץ לאזור הנגלל */}
+
         <div className={styles.topHeader}>
           <div className={styles.progressBar} data-tutorial="progressBar">
             {[1, 2, 3, 4, 5].map(n => {
