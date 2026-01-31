@@ -7,7 +7,7 @@ import Footer from "@/lib/components/Footer";
 export const metadata: Metadata = {
   title: "Shpitz Game",
   description:
-    "The app to teach oldies tech orianut",
+    "Short daily challenges to recognize fake messages and photos.",
   themeColor: "#3BAFFA",
   appleWebApp: {
     capable: true,
